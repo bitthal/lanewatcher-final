@@ -26,7 +26,7 @@ export default function Header2({ show, setShow }) {
               placeholder="Enter Montainer/Lane ID:"
               type="text"
             />
-            <i class="fa-solid fa-magnifying-glass" />
+            <i className="fa-solid fa-magnifying-glass" />
 
             <i className="fa-solid fa-filter" />
           </div>

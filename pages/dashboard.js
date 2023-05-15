@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Leftbar from "@/components/Leftbar";
 import Header from "@/components/Header";
 import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
-export default function Index() {
+import axios from "axios";
+
+export default function Index({ Alldata }) {
   const [show, setShow] = useState(false);
+
+  console.log("Alldatas", Alldata);
+
   return (
     <>
       <Head>
@@ -24,11 +29,42 @@ export default function Index() {
           </div>
 
           <div className={`flex flex-col gap-8 mt-5  min-w-[650px] w-full`}>
-            <View show={show} />
-            <View show={show} />
+            {Alldata?.lanes?.map((data, index) => {
+              return (
+                <div className="" key={index}>
+                  <View show={show} data={data} />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
     </>
   );
+}
+
+const fetchData = async () => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, {
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Replace with the appropriate origin
+        // Add other headers if needed
+      },
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export async function getServerSideProps() {
+  const Alldata = await fetchData();
+
+  return {
+    props: {
+      Alldata,
+    },
+  };
 }

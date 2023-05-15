@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function PlanogramView() {
+export default function PlanogramView({ data }) {
+
   return (
     <div className="bg-white rounded-xl p-5 flex flex-col gap-8 justify-between w-80 h-96">
       <div className="flex gap-4 justify-between items-center w-full">
@@ -23,55 +24,45 @@ export default function PlanogramView() {
       </div>
 
       <div className="flex justify-between gap-4 items-center w-full">
-        <span className="text-black font-bold">Lane 1</span>
-        <span className="text-black font-bold">Toronto</span>
+        <span className="text-black font-bold">Lane {data?.lane_number}</span>
+        <span className="text-black font-bold">{data?.lane_name}</span>
 
         <div className="relative ">
           <i className="fa-solid fa-bell text-2xl " />
-          <span class=" flex h-3 w-3 absolute top-0 translate-x-1/2 right-0">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+          <span className=" flex h-3 w-3 absolute top-0 translate-x-1/2 right-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
           </span>
         </div>
       </div>
 
       <div className="flex gap-4 justify-between items-center w-full">
-
-
         <div className="h-20 w-20 border rounded-md border-[#001CFF] py-auto">
           <div className="mt-3 text-[#001CFF] font-bold">
-            <p className="text-center">12</p>
+            <p className="text-center">{data?.planogram?.in_stage}</p>
             <p className="text-center">In&nbsp;Stage</p>
           </div>
         </div>
 
-
         <div className="h-20 w-20 border rounded-md border-[#001CFF] py-auto">
           <div className="mt-3 text-[#001CFF] font-bold">
-            <p className="text-center">12</p>
+            <p className="text-center">{data?.planogram?.mapped}</p>
             <p className="text-center">Mapped</p>
           </div>
         </div>
 
-
         <div className="h-20 w-20 border rounded-md border-[#001CFF] py-auto">
           <div className="mt-3 text-[#001CFF] font-bold">
-            <p className="text-center">12</p>
+            <p className="text-center">{data?.planogram?.missing}</p>
             <p className="text-center">Missing</p>
           </div>
         </div>
-
-
-
-
       </div>
 
-
-
       <div className="flex justify-center">
-
-<button className="bg-[#001CFF] w-1/2 py-3 rounded-lg text-white font-bold">Total 36</button>
-
+        <button className="bg-[#001CFF] w-1/2 py-3 rounded-lg text-white font-bold">
+          Total {data?.planogram?.total}
+        </button>
       </div>
     </div>
   );
