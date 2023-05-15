@@ -65,3 +65,6 @@ body::-webkit-scrollbar-thumb {
 }
 /* ------------------------------------------------------------- */
 
+.ReactModal__Overlay{
+  background-color: rgba(0, 0, 0, 0.658) !important;
+}
