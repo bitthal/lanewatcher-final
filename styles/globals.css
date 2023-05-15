@@ -68,3 +68,10 @@ body::-webkit-scrollbar-thumb {
 .ReactModal__Overlay{
   background-color: rgba(0, 0, 0, 0.658) !important;
 }
+
+
+#nprogress .bar {
+  background: #ff0101 !important;
+  z-index: 5000 !important;
+
+}
