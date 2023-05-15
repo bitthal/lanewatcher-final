@@ -25,7 +25,7 @@ export default function View({ show,data }) {
           <p>Trucks Required- {data?.processed?.trucks_required}</p>
 
           <p>Trucks Ordered- {data?.processed?.trucks_ordered}</p>
-          <p>Trucks Monotainers- {data?.processed?.total_monotainers}</p>
+      
         
         </div>
       </div>
