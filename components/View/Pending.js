@@ -37,7 +37,7 @@ export default function Pending({ show, data }) {
       <div className={`${show ? "h-96" : "h-auto"}  bg-white rounded-xl p-5`}>
         {!show ? (
           <div className="flex flex-col items-center text-center gap-5">
-            <p className="font-bold text-[#001CFF]">Pending</p>
+            <p className="font-bold text-primary">Pending</p>
 
             <svg
               width="16"
@@ -70,7 +70,7 @@ export default function Pending({ show, data }) {
                   fill="#FF0000"
                 />
               </svg>
-              <p className="font-bold text-[#001CFF]">Pending</p>
+              <p className="font-bold text-primary">Pending</p>
 
               <p className="font-bold text-red-700">
                 {data?.pending?.total_monotainers}

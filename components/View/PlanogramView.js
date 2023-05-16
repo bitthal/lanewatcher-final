@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PlanogramView({ data }) {
   return (
-    <div className="bg-white rounded-xl p-5 flex flex-col gap-8 justify-between  h-96 ">
+    <div className="bg-white rounded-xl p-5 flex flex-col gap-8 justify-between  h-96 ml-5">
       <div className="flex gap-4 justify-between items-center w-full">
         <svg
           width="30"

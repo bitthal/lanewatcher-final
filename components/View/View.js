@@ -7,18 +7,22 @@ import Processed from "./Processed";
 
 export default function View({ show,data }) {
   return (
-    <div className="bg-[#F4F3F8] rounded-xl p-5 w-full overflow-auto max-w-[90vw]">
-      <div className="flex items-center overflow-auto">
+    <div className="   ">
+      <div className="flex  overflow-ellipsis">
        
-      
-        <Pending show={show} data={data}/>
+      <div className="bg-[#F4F3F8]  flex items-center  p-5 rounded-xl ">
+      <Pending show={show} data={data}/>
         <Arrow />
         <RealTimeView data={data}/>
         <Arrow />
         <Processed show={show} data={data}/>
         {/* <Arrow /> */}
-        <div className="w-5"></div>
+        
         <PlanogramView data={data}/>
+
+
+      </div>
+      
       </div>
 
 
