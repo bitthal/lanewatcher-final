@@ -5,7 +5,7 @@ export default function Leftbar({ show }) {
   return (
     <div
       className={`min-h-[96vh] duration-300 ${
-        show ? "w-auto" : "w-20"
+        !show ? "w-auto" : "w-20"
       } border rounded-r-xl shadow-xl pt-5`}
     >
       <div className="flex justify-center gap-2">
@@ -38,7 +38,7 @@ export default function Leftbar({ show }) {
               />
             </svg>
 
-            {show && <span className="text-primary font-bold">Dashboard</span>}
+            {!show && <span className="text-primary font-bold">Dashboard</span>}
           </div>
 
           <div className="flex items-center gap-2 p-5 cursor-pointer">
@@ -55,7 +55,7 @@ export default function Leftbar({ show }) {
               />
             </svg>
 
-            {show && <span className="text-primary font-bold">Shipment</span>}
+            {!show && <span className="text-primary font-bold">Shipment</span>}
           </div>
 
           <div className=" cursor-pointer flex items-center bg-green-500 min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1">
@@ -72,7 +72,7 @@ export default function Leftbar({ show }) {
               />
             </svg>
 
-            {show && <span className="text-white font-bold ">Tracker</span>}
+            {!show && <span className="text-white font-bold ">Tracker</span>}
           </div>
 
           <div className="flex items-center gap-2 p-5 cursor-pointer">
@@ -89,7 +89,7 @@ export default function Leftbar({ show }) {
               />
             </svg>
 
-            {show && <span className="text-primary font-bold">Messages</span>}
+            {!show && <span className="text-primary font-bold">Messages</span>}
           </div>
 
           <div className="flex items-center gap-2 p-5 cursor-pointer">
@@ -106,7 +106,7 @@ export default function Leftbar({ show }) {
               />
             </svg>
 
-            {show && <span className="text-primary font-bold">Analysis</span>}
+            {!show && <span className="text-primary font-bold">Analysis</span>}
           </div>
         </div>
 
@@ -125,7 +125,7 @@ export default function Leftbar({ show }) {
               />
             </svg>
 
-            {show && <span className="text-primary font-bold">Support</span>}
+            {!show && <span className="text-primary font-bold">Support</span>}
           </div>
 
           <div className="flex items-center gap-2 p-5 cursor-pointer ">
@@ -144,7 +144,7 @@ export default function Leftbar({ show }) {
               />
             </svg>
 
-            {show && <span className="text-primary font-bold">Logout</span>}
+            {!show && <span className="text-primary font-bold">Logout</span>}
           </div>
         </div>
       </div>
