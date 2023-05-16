@@ -62,7 +62,7 @@ export default function Pending({ show, data }) {
                   ?.slice((page - 1) * dataPerPage, page * dataPerPage)
                   .map((data1, index) => (
                     <button
-                      className="text-green-700 border px-3 py-2 border-green-700 rounded-lg"
+                      className="text-green-700 border w-[90px] py-1 break-all border-green-700 rounded-lg"
                       key={index}
                     >
                       {data1?.monotainer_id}

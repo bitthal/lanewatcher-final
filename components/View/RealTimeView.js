@@ -11,7 +11,7 @@ export default function RealTimeView({ data }) {
       <div className="flex gap-3">
         {data?.real_time_positions?.map((data, index) => {
            return (
-            <button className="text-primary font-bold border px-3 py-2 border-primary rounded-lg w-28 break-all" key={index}>
+            <button className="text-primary font-bold border  p-2 border-primary rounded-lg w-[90px] break-all text-sm" key={index}>
             Position&nbsp;{data?.position}
           </button>
           
@@ -32,7 +32,7 @@ export default function RealTimeView({ data }) {
 
         {data?.real_time_positions?.map((data, index) => {
            return (
-            <button className={`${data?.upper?.monotainer_id == "NA" ? "text-gray-300 " : "text-white bg-green-500"} font-bold border px-3 py-2  shadow-sm hover:shadow-lg rounded-lg w-28 break-all`} key={index}>
+            <button className={`${data?.upper?.monotainer_id == "NA" ? "text-gray-300 " : "text-white bg-green-500"} font-bold border  p-2  shadow-sm hover:shadow-lg rounded-lg w-[90px] break-all`} key={index}>
             {data?.upper?.monotainer_id}
           </button>
           
@@ -45,7 +45,7 @@ export default function RealTimeView({ data }) {
         <div className="flex gap-3">
         {data?.real_time_positions?.map((data, index) => {
            return (
-            <button className={`${data?.lower?.monotainer_id == "NA" ? "text-gray-300 " : "text-white bg-green-500"} font-bold border px-3 py-2  shadow-sm hover:shadow-lg rounded-lg w-28 break-all`} key={index}>
+            <button className={`${data?.lower?.monotainer_id == "NA" ? "text-gray-300 " : "text-white bg-green-500"} font-bold border  p-2  shadow-sm hover:shadow-lg rounded-lg w-[90px] break-all`} key={index}>
             {data?.lower?.monotainer_id}
           </button>
           

@@ -1,9 +1,8 @@
 import React from "react";
 
 export default function PlanogramView({ data }) {
-
   return (
-    <div className="bg-white rounded-xl p-5 flex flex-col gap-8 justify-between w-80 h-96">
+    <div className="bg-white rounded-xl p-5 flex flex-col gap-8 justify-between  h-96">
       <div className="flex gap-4 justify-between items-center w-full">
         <svg
           width="30"
@@ -59,10 +58,16 @@ export default function PlanogramView({ data }) {
         </div>
       </div>
 
-      <div className="flex justify-center">
-        <button className="bg-[#001CFF] w-1/2 py-3 rounded-lg text-white font-bold">
-          Total {data?.planogram?.total}
-        </button>
+      <div>
+        <p className="text-sm text-gray-600">Trucks Required- {data?.processed?.trucks_required}</p>
+
+        <p className="text-sm mb-5 text-gray-600" >Trucks Ordered- {data?.processed?.trucks_ordered}</p>
+        <div className="flex justify-center">
+          {" "}
+          <button className="bg-[#001CFF] w-1/2 py-3 rounded-lg text-white font-bold">
+            Total {data?.planogram?.total}
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -58,7 +58,7 @@ export default function Leftbar({ show }) {
             {show && <span className="text-primary font-bold">Shipment</span>}
           </div>
 
-          <div className=" cursor-pointer flex items-center bg-green-400 min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1">
+          <div className=" cursor-pointer flex items-center bg-green-500 min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1">
             <svg
               width="18"
               height="22"
