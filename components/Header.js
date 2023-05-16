@@ -27,7 +27,7 @@ export default function Header() {
         </div>
 
         <div className="flex gap-4 items-center">
-          <p className="w-fit font-bold text-primary">Hello, Captain</p>
+          <p className="w-fit font-bold text-primary">Hello, TestUser</p>
           <i className=" text-2xl  fa-solid fa-user"></i>
         </div>
       </div>
