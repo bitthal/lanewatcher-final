@@ -21,9 +21,7 @@ export default function RealTimeView({ data }) {
 
       <div className="flex justify-between gap-3 font-bold text-gray-400 text-xs">
         <span>Lane In</span>
-        <span>
-          Lane {data?.lane_number}/{data?.lane_name}
-        </span>
+      
         <span>Lane Out</span>
       </div>
 

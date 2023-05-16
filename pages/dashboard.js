@@ -7,7 +7,7 @@ import View from "@/components/View/View";
 import axios from "axios";
 
 export default function Index({ Alldata }) {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   console.log("Alldatas", Alldata);
 

@@ -32,9 +32,9 @@ export default function Pending({ show, data }) {
 
   return (
     <>
-      <div className={`${show ? "h-96" : "h-auto"}  bg-white rounded-xl p-5`}>
+      <div className={`${show ? "h-96" : "h-96"}  bg-white rounded-xl p-5`}>
         {!show ? (
-          <div className="flex flex-col items-center text-center gap-5">
+          <div className="flex flex-col items-center justify-center h-full text-center gap-5">
             <p className="font-bold text-primary">Processed</p>
 
             <i className="fa-solid fa-cart-shopping text-primary" />
