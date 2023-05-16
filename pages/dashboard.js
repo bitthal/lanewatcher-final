@@ -6,10 +6,42 @@ import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
 import axios from "axios";
 
-export default function Index({ Alldata }) {
+export default function Index({ Alldata2 }) {
   const [show, setShow] = useState(true);
+  const [Alldata, setAlldata] = useState(Alldata2);
 
-  console.log("Alldatas", Alldata);
+ 
+
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
+        setAlldata(response.data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 3000);
+
+    return () => {
+      // Clean up the interval when the component is unmounted
+      clearInterval(interval);
+    };
+  }, []);
+
+
+console.log(Alldata)
+
+
+
+
+
 
   return (
     <>
@@ -60,11 +92,11 @@ const fetchData = async () => {
 };
 
 export async function getServerSideProps() {
-  const Alldata = await fetchData();
+  const Alldata2 = await fetchData();
 
   return {
     props: {
-      Alldata,
+      Alldata2,
     },
   };
 }
