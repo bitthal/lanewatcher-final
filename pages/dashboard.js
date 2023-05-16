@@ -10,18 +10,13 @@ export default function Index({ Alldata2 }) {
   const [show, setShow] = useState(true);
   const [Alldata, setAlldata] = useState(Alldata2);
 
- 
-
-
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
         setAlldata(response.data);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
@@ -35,13 +30,7 @@ export default function Index({ Alldata2 }) {
     };
   }, []);
 
-
-console.log(Alldata)
-
-
-
-
-
+  console.log(Alldata);
 
   return (
     <>
