@@ -27,7 +27,7 @@ export default function Index({ Alldata2 }) {
 
     const interval = setInterval(() => {
       fetchData();
-    }, 3000);
+    }, 1500);
 
     return () => {
       // Clean up the interval when the component is unmounted
