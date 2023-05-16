@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PlanogramView({ data }) {
   return (
-    <div className="bg-white rounded-xl p-5 flex flex-col gap-8 justify-between  h-96">
+    <div className="bg-white rounded-xl p-5 flex flex-col gap-8 justify-between  h-96 ">
       <div className="flex gap-4 justify-between items-center w-full">
         <svg
           width="30"
@@ -35,23 +35,23 @@ export default function PlanogramView({ data }) {
         </div>
       </div>
 
-      <div className="flex gap-4 justify-between items-center w-full">
-        <div className="h-20 w-20 border rounded-md border-[#001CFF] py-auto">
-          <div className="mt-3 text-[#001CFF] font-bold">
+      <div className="flex gap-4 justify-between items-center w-full text-xs">
+        <div className="p-2 border rounded-md border-[#001CFF] py-auto">
+          <div className=" text-[#001CFF] font-bold">
             <p className="text-center">{data?.planogram?.in_stage}</p>
             <p className="text-center">In&nbsp;Stage</p>
           </div>
         </div>
 
-        <div className="h-20 w-20 border rounded-md border-[#001CFF] py-auto">
-          <div className="mt-3 text-[#001CFF] font-bold">
+        <div className="p-2 border rounded-md border-[#001CFF] py-auto">
+          <div className=" text-[#001CFF] font-bold">
             <p className="text-center">{data?.planogram?.mapped}</p>
             <p className="text-center">Mapped</p>
           </div>
         </div>
 
-        <div className="h-20 w-20 border rounded-md border-[#001CFF] py-auto">
-          <div className="mt-3 text-[#001CFF] font-bold">
+        <div className="p-2 border rounded-md border-[#001CFF] py-auto">
+          <div className=" text-[#001CFF] font-bold">
             <p className="text-center">{data?.planogram?.missing}</p>
             <p className="text-center">Missing</p>
           </div>
@@ -64,7 +64,7 @@ export default function PlanogramView({ data }) {
         <p className="text-sm mb-5 text-gray-600" >Trucks Ordered- {data?.processed?.trucks_ordered}</p>
         <div className="flex justify-center">
           {" "}
-          <button className="bg-[#001CFF] w-1/2 py-3 rounded-lg text-white font-bold">
+          <button className="bg-[#001CFF] w-1/2 py-3 rounded-lg text-white font-bold text-xs">
             Total {data?.planogram?.total}
           </button>
         </div>

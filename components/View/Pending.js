@@ -84,7 +84,7 @@ export default function Pending({ show, data }) {
                   ?.slice((page - 1) * dataPerPage, page * dataPerPage)
                   .map((data1, index) => (
                     <button
-                      className="text-red-700 border w-[90px] py-1 break-all border-red-700 rounded-lg"
+                      className="text-red-700 border w-[90px] py-2 break-all text-xs border-red-700 rounded-lg"
                       key={index}
                     >
                       {data1?.monotainer_id}
@@ -122,7 +122,7 @@ export default function Pending({ show, data }) {
               </div>
 
               <button
-                className="bg-[#001CFF] rounded-md px-2 py-1 text-white text-sm font-bold"
+                className="bg-[#001CFF] rounded-md px-2 py-1 text-white text-sm font-bold text-xs"
                 onClick={openModal}
               >
                 See&nbsp;All
