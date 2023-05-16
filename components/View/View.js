@@ -16,7 +16,8 @@ export default function View({ show,data }) {
         <RealTimeView data={data}/>
         <Arrow />
         <Processed show={show} data={data}/>
-        <Arrow />
+        {/* <Arrow /> */}
+        <div className="w-5"></div>
         <PlanogramView data={data}/>
       </div>
 
