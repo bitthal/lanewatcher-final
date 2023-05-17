@@ -76,7 +76,7 @@ export default function Pending({ show, data }) {
                 <div
                   className="w-6 h-6 rounded-full border bg-gray-200 cursor-pointer"
                   onClick={() => {
-                    if (page > 2) {
+                    if (page > 1) {
                       setPage(page - 1);
                     }
                   }}
