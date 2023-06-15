@@ -90,7 +90,7 @@ export default function Pending({ show, data }) {
             </div>
 
             <div className="flex gap-3 flex-col">
-              {" "}
+              {data?.pending?.monotainers}
               <div className="grid grid-cols-2 gap-3">
                 {data?.pending?.monotainers
                   ?.slice((page - 1) * dataPerPage, page * dataPerPage)

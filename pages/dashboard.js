@@ -6,33 +6,60 @@ import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
 import axios from "axios";
 
-export default function Index({ Alldata2 }) {
+
+
+export default function Dashboard({Alldata2,showDatePicker,showRealTimeView }) {
   const [show, setShow] = useState(true);
+  const [date, setDate] = useState(new Date());
   const [Alldata, setAlldata] = useState(Alldata2);
+  const [newValue, setState] = useState('');
+  const [selectedValue,setOptionVal] = useState('');
+  // const [showDatePicker, setshowDatePicker] = useState(false);
+  //  const {Alldata1} = Alldata2;
+
+  console.log(showRealTimeView,'showRealTimeView',showDatePicker)
+  function setRangeFilter(date){
+    console.log(date);
+    setDate(date);
+    handleSubmit(date);
+  }
+   function handleState(newValue) {
+      console.log(newValue,'state')
+      setState(newValue);
+      handleSubmit(newValue);
+  }
+
+  function handleOption(selectedValue){
+    console.log(selectedValue);
+    setOptionVal(selectedValue);
+    handleSubmit(selectedValue);
+  }
+  const handleSubmit = (payload) => {
+    const userData = {
+      payload
+    };
+    axios.post(`${process.env.NEXT_PUBLIC_API_URL}`, userData).then((response) => {
+      setAlldata(Object.values(response.data));
+      console.log(response.data);
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
-        setAlldata(response.data);
+        console.log(response.data,'res',Alldata2,'AL');
+        setAlldata(response.data.lanes);
       } catch (error) {
         console.error("Error:", error);
       }
     };
-
-    const interval = setInterval(() => {
+    return ()=>{
       fetchData();
-    }, 1500);
-
-    return () => {
-      // Clean up the interval when the component is unmounted
-      clearInterval(interval);
     };
-  }, []);
+  }, [Alldata2]);
 
-  console.log(Alldata);
-
-  return (
+   return (
     <>
       <Head>
         <title>Lanewatcher</title>
@@ -46,14 +73,14 @@ export default function Index({ Alldata2 }) {
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
             <Header />
-            <Header2 setShow={setShow} show={show} />
+            <Header2 setShow={setShow} show={show} setUpdated = {handleState} setRangeFilter={setRangeFilter} date={date} selectedValue={selectedValue} setOptionVal={handleOption} newValue={newValue} showDatePicker={showDatePicker ? showDatePicker : false} />
           </div>
-
+          
           <div className={`flex flex-col gap-8 mt-5  min-w-[650px] w-full`}>
-            {Alldata?.lanes?.map((data, index) => {
+            {Alldata?.map((data, index) => {
               return (
                 <div className="" key={index}>
-                  <View show={show} data={data} />
+                  <View show={show} data={data} showRealTimeView={showRealTimeView ? false : true}/>
                 </div>
               );
             })}
@@ -64,6 +91,7 @@ export default function Index({ Alldata2 }) {
   );
 }
 
+
 const fetchData = async () => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, {
@@ -72,20 +100,28 @@ const fetchData = async () => {
         // Add other headers if needed
       },
     });
-
-    const data = await response.json();
+    response.setHeader(
+      'Cache-Control',
+      'public, s-maxage=10, stale-while-revalidate=59'
+    )
+    const data = await response.data.json();
+    console.log(data,'dat')
     return data;
   } catch (error) {
     return null;
   }
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { params, req, res} = context;
   const Alldata2 = await fetchData();
-
+  console.log(
+    Alldata2)
   return {
     props: {
-      Alldata2,
+      Alldata2:Alldata2
     },
   };
 }
+
+

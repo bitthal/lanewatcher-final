@@ -1,7 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 export default function Leftbar({ show }) {
+  const router = useRouter();
+  console.log(router.pathname,'router.query.slug')
   return (
     <div
       className={`min-h-[96vh] duration-300 ${
@@ -22,10 +26,11 @@ export default function Leftbar({ show }) {
         className="object-contain w-full  mt-5"
       />
 
-      <div className="h-[80vh] flex flex-col justify-between  ">
+      <div className="h-[80vh] flex flex-col justify-between inline">
         <div className="flex flex-col mt-10">
-          <div className="flex items-center gap-2 p-5 cursor-pointer">
-            <svg
+          <div className={router.pathname == '/dashboard' ? "flex items-center gap-2 p-5 cursor-pointer inline  bg-green-500" : "flex items-center gap-2 p-5 cursor-pointer inline"}>
+            <Link href="/dashboard"><svg
+              className="inline"
               width="18"
               height="18"
               viewBox="0 0 18 18"
@@ -36,13 +41,13 @@ export default function Leftbar({ show }) {
                 d="M1 10H7C7.26522 10 7.51957 9.89464 7.70711 9.70711C7.89464 9.51957 8 9.26522 8 9V1C8 0.734784 7.89464 0.48043 7.70711 0.292893C7.51957 0.105357 7.26522 0 7 0H1C0.734784 0 0.48043 0.105357 0.292893 0.292893C0.105357 0.48043 0 0.734784 0 1V9C0 9.26522 0.105357 9.51957 0.292893 9.70711C0.48043 9.89464 0.734784 10 1 10ZM0 17C0 17.2652 0.105357 17.5196 0.292893 17.7071C0.48043 17.8946 0.734784 18 1 18H7C7.26522 18 7.51957 17.8946 7.70711 17.7071C7.89464 17.5196 8 17.2652 8 17V13C8 12.7348 7.89464 12.4804 7.70711 12.2929C7.51957 12.1054 7.26522 12 7 12H1C0.734784 12 0.48043 12.1054 0.292893 12.2929C0.105357 12.4804 0 12.7348 0 13V17ZM10 17C10 17.2652 10.1054 17.5196 10.2929 17.7071C10.4804 17.8946 10.7348 18 11 18H17C17.2652 18 17.5196 17.8946 17.7071 17.7071C17.8946 17.5196 18 17.2652 18 17V10C18 9.73478 17.8946 9.48043 17.7071 9.29289C17.5196 9.10536 17.2652 9 17 9H11C10.7348 9 10.4804 9.10536 10.2929 9.29289C10.1054 9.48043 10 9.73478 10 10V17ZM11 7H17C17.2652 7 17.5196 6.89464 17.7071 6.70711C17.8946 6.51957 18 6.26522 18 6V1C18 0.734784 17.8946 0.48043 17.7071 0.292893C17.5196 0.105357 17.2652 0 17 0H11C10.7348 0 10.4804 0.105357 10.2929 0.292893C10.1054 0.48043 10 0.734784 10 1V6C10 6.26522 10.1054 6.51957 10.2929 6.70711C10.4804 6.89464 10.7348 7 11 7Z"
                 fill="#3D7C7B"
               />
-            </svg>
-
-            {!show && <span className="text-primary font-bold">Dashboard</span>}
+            </svg>{!show && <span className="text-primary font-bold p-0.5">Dashboard</span>}</Link>
+            
           </div>
 
-          <div className="flex items-center gap-2 p-5 cursor-pointer">
-            <svg
+          <div className={router.pathname == '/shipment' ? "flex items-center gap-2 p-5 cursor-pointer inline" : "flex items-center gap-2 p-5 cursor-pointer inline"}>
+            <Link href="/shipment"><svg
+              className="inline"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -53,12 +58,12 @@ export default function Leftbar({ show }) {
                 d="M15.615 0.359975L22.6815 4.52097C23.4975 4.99497 23.9985 5.86648 24 6.80997V14.325C24 14.7896 23.8781 15.246 23.6465 15.6487C23.4148 16.0515 23.0816 16.3864 22.68 16.62L11.0505 23.4015L11.0475 23.403C10.6432 23.6373 10.1843 23.7606 9.717 23.7606C9.24975 23.7606 8.79078 23.6373 8.3865 23.403L1.3095 19.275C0.910493 19.042 0.579579 18.7084 0.349797 18.3075C0.120015 17.9067 -0.000596847 17.4525 2.22079e-06 16.9905V9.43797C2.22079e-06 8.98197 0.117002 8.54097 0.330002 8.15547L0.336002 8.14797L0.351002 8.11948C0.576002 7.72648 0.904502 7.39047 1.311 7.15497L12.9615 0.358475C13.3633 0.124182 13.8201 0.000732422 14.2853 0.000732422C14.7504 0.000732422 15.2072 0.124182 15.609 0.358475L15.612 0.359975H15.615ZM14.0955 2.30097L3.3405 8.57397L9.5145 12.156C9.57589 12.1912 9.64545 12.2098 9.71625 12.2098C9.78705 12.2098 9.85661 12.1912 9.918 12.156L20.646 5.93397L14.4735 2.30097C14.416 2.2678 14.3509 2.25033 14.2845 2.25033C14.2181 2.25033 14.153 2.2678 14.0955 2.30097ZM2.4435 17.331L8.5935 20.9205V14.211C8.52298 14.178 8.45392 14.1419 8.3865 14.103L2.25 10.5435V16.9905C2.25 17.133 2.325 17.262 2.4435 17.331ZM15.3435 18.294L17.625 16.9635V10.2885L15.3435 11.6115V18.294ZM11.0475 14.103H11.049C10.983 14.142 10.914 14.1765 10.845 14.2095V20.9175L13.095 19.605V12.915L11.0475 14.103ZM19.875 15.651L21.5475 14.676H21.5505C21.6114 14.6406 21.6619 14.5898 21.697 14.5288C21.732 14.4677 21.7503 14.3984 21.75 14.328V7.89598L19.875 8.98347V15.651Z"
                 fill="#3D7C7B"
               />
-            </svg>
-
-            {!show && <span className="text-primary font-bold">Shipment</span>}
+            </svg>{!show && <span className="text-primary font-bold p-0.5">Shipment</span>}</Link>
           </div>
 
-          <div className=" cursor-pointer flex items-center bg-green-500 min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1">
+          <div className={router.pathname == '/tracker' ? "cursor-pointer flex bg-green-500 items-center min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1 inline" : "cursor-pointer flex items-center min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1 inline"}>
+            
+            <Link href="/tracker">
             <svg
               width="18"
               height="22"
@@ -68,15 +73,15 @@ export default function Leftbar({ show }) {
             >
               <path
                 d="M15.75 19.625H12.0684C12.5541 19.1562 13.0763 18.6209 13.5994 18.0191C16.2328 14.9909 17.625 11.7847 17.625 8.75C17.625 6.46251 16.7163 4.26871 15.0988 2.6512C13.4813 1.0337 11.2875 0.125 9 0.125C6.71251 0.125 4.51871 1.0337 2.9012 2.6512C1.2837 4.26871 0.375 6.46251 0.375 8.75C0.375 13.4375 3.57375 17.3694 5.92313 19.625H2.25C1.95163 19.625 1.66548 19.7435 1.4545 19.9545C1.24353 20.1655 1.125 20.4516 1.125 20.75C1.125 21.0484 1.24353 21.3345 1.4545 21.5455C1.66548 21.7565 1.95163 21.875 2.25 21.875H15.75C16.0484 21.875 16.3345 21.7565 16.5455 21.5455C16.7565 21.3345 16.875 21.0484 16.875 20.75C16.875 20.4516 16.7565 20.1655 16.5455 19.9545C16.3345 19.7435 16.0484 19.625 15.75 19.625ZM2.625 8.75C2.625 7.05925 3.29665 5.43774 4.49219 4.24219C5.68774 3.04665 7.30925 2.375 9 2.375C10.6908 2.375 12.3123 3.04665 13.5078 4.24219C14.7034 5.43774 15.375 7.05925 15.375 8.75C15.375 11.8728 13.5 14.6909 11.9344 16.5041C11.0405 17.5308 10.0586 18.4776 9 19.3334C7.94136 18.4776 6.9595 17.5308 6.06562 16.5041C4.5 14.6909 2.625 11.8728 2.625 8.75ZM9 12.875C9.81585 12.875 10.6134 12.6331 11.2917 12.1798C11.9701 11.7266 12.4988 11.0823 12.811 10.3286C13.1232 9.57482 13.2049 8.74542 13.0457 7.94525C12.8866 7.14508 12.4937 6.41008 11.9168 5.83318C11.3399 5.25629 10.6049 4.86342 9.80475 4.70426C9.00458 4.5451 8.17518 4.62679 7.42143 4.939C6.66769 5.25121 6.02345 5.77992 5.57019 6.45827C5.11693 7.13663 4.875 7.93415 4.875 8.75C4.87624 9.84364 5.31124 10.8921 6.08455 11.6654C6.85787 12.4388 7.90636 12.8738 9 12.875ZM9 6.875C9.37084 6.875 9.73335 6.98497 10.0417 7.19099C10.35 7.39702 10.5904 7.68986 10.7323 8.03247C10.8742 8.37508 10.9113 8.75208 10.839 9.1158C10.7666 9.47951 10.588 9.8136 10.3258 10.0758C10.0636 10.338 9.72951 10.5166 9.3658 10.589C9.00208 10.6613 8.62508 10.6242 8.28247 10.4823C7.93986 10.3404 7.64702 10.1 7.44099 9.79169C7.23497 9.48335 7.125 9.12084 7.125 8.75C7.125 8.25272 7.32254 7.77581 7.67417 7.42417C8.02581 7.07254 8.50272 6.875 9 6.875Z"
-                fill="white"
+                fill="#3D7C7B"
               />
             </svg>
-
-            {!show && <span className="text-white font-bold ">Tracker</span>}
+            {!show && <span className="text-primary font-bold p-0.5">Tracker</span>}</Link>
           </div>
 
-          <div className="flex items-center gap-2 p-5 cursor-pointer">
-            <svg
+          <div className={router.pathname == '/messages' ? "flex items-center bg-green-500 gap-2 p-5 cursor-pointer inline" :"flex items-center gap-2 p-5 cursor-pointer inline"}>            
+            <Link href="/messages"><svg
+              className="inline"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -87,13 +92,13 @@ export default function Leftbar({ show }) {
                 d="M12 0C8.8174 0 5.76515 1.26428 3.51472 3.51472C1.26428 5.76515 0 8.8174 0 12C0 15.1826 1.26428 18.2348 3.51472 20.4853C5.76515 22.7357 8.8174 24 12 24C15.1826 24 18.2348 22.7357 20.4853 20.4853C22.7357 18.2348 24 15.1826 24 12C24 8.8174 22.7357 5.76515 20.4853 3.51472C18.2348 1.26428 15.1826 0 12 0ZM4.911 7.089H16.367C16.9429 7.09739 17.4925 7.33159 17.8974 7.7412C18.3023 8.1508 18.5302 8.70303 18.532 9.279V15.142C18.523 15.7167 18.2908 16.2653 17.8845 16.6718C17.4782 17.0782 16.9297 17.3107 16.355 17.32H8.04C6.866 17.32 6 16.33 6 15.142V10.503L4.503 7.905C4.193 7.485 4.453 7.089 4.911 7.089ZM8.326 9.279C7.979 9.279 7.646 9.489 7.646 9.823C7.646 10.157 7.979 10.367 8.326 10.367H16.231C16.577 10.367 16.911 10.157 16.911 9.823C16.911 9.489 16.577 9.278 16.231 9.278L8.326 9.279ZM8.326 11.456C7.979 11.456 7.646 11.666 7.646 12C7.646 12.334 7.979 12.544 8.326 12.544H16.231C16.577 12.544 16.911 12.334 16.911 12C16.911 11.666 16.577 11.456 16.231 11.456H8.326ZM8.313 13.646C7.967 13.646 7.633 13.856 7.633 14.19C7.633 14.524 7.967 14.734 8.313 14.734H14.041C14.388 14.734 14.721 14.524 14.721 14.19C14.721 13.856 14.388 13.645 14.041 13.645L8.313 13.646Z"
                 fill="#3D7C7B"
               />
-            </svg>
-
-            {!show && <span className="text-primary font-bold">Messages</span>}
+            </svg>{!show && <span className="text-primary font-bold p-0.5">Messages</span>}</Link>
+            
           </div>
 
-          <div className="flex items-center gap-2 p-5 cursor-pointer">
-            <svg
+          <div className={router.pathname == '/analysis' ? "flex items-center bg-green-500 gap-2 p-5 cursor-pointer inline" : "flex items-center gap-2 p-5 cursor-pointer inline"}>
+          <Link href="/analysis"> <svg
+              className="inline"
               width="24"
               height="20"
               viewBox="0 0 24 20"
@@ -105,14 +110,17 @@ export default function Leftbar({ show }) {
                 fill="#3D7C7B"
               />
             </svg>
-
-            {!show && <span className="text-primary font-bold">Analysis</span>}
+            {!show && <span className="text-primary font-bold p-0.5">Analysis</span>}
+            </Link>
+                      
           </div>
         </div>
 
         <div className="">
-          <div className="flex items-center gap-2 p-5 cursor-pointer">
-            <svg
+          <div className= {router.pathname == '/support'? "flex items-center bg-green-500  gap-2 p-5 cursor-pointer inline" : "flex items-center gap-2 p-5 cursor-pointer inline"}>
+            
+            <Link href="/support"><svg
+              className="inline"
               width="16"
               height="20"
               viewBox="0 0 16 20"
@@ -124,12 +132,14 @@ export default function Leftbar({ show }) {
                 fill="#3D7C7B"
               />
             </svg>
-
-            {!show && <span className="text-primary font-bold">Support</span>}
+            {!show && <span className="text-primary font-bold p-0.5">Support</span>}</Link>
+            
           </div>
 
-          <div className="flex items-center gap-2 p-5 cursor-pointer ">
-            <svg
+          <div className="flex items-center gap-2 p-5 cursor-pointer inline">
+            
+            <Link href="/logout"><svg
+              className="inline"
               width="19"
               height="20"
               viewBox="0 0 19 20"
@@ -137,14 +147,14 @@ export default function Leftbar({ show }) {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M3 0C2.20435 0 1.44129 0.316071 0.87868 0.87868C0.316071 1.44129 0 2.20435 0 3V17C0 17.7956 0.316071 18.5587 0.87868 19.1213C1.44129 19.6839 2.20435 20 3 20H9C9.79565 20 10.5587 19.6839 11.1213 19.1213C11.6839 18.5587 12 17.7956 12 17V3C12 2.20435 11.6839 1.44129 11.1213 0.87868C10.5587 0.316071 9.79565 0 9 0H3ZM13.293 5.293C13.4805 5.10553 13.7348 5.00021 14 5.00021C14.2652 5.00021 14.5195 5.10553 14.707 5.293L18.707 9.293C18.8945 9.48053 18.9998 9.73484 18.9998 10C18.9998 10.2652 18.8945 10.5195 18.707 10.707L14.707 14.707C14.5184 14.8892 14.2658 14.99 14.0036 14.9877C13.7414 14.9854 13.4906 14.8802 13.3052 14.6948C13.1198 14.5094 13.0146 14.2586 13.0123 13.9964C13.01 13.7342 13.1108 13.4816 13.293 13.293L15.586 11H7C6.73478 11 6.48043 10.8946 6.29289 10.7071C6.10536 10.5196 6 10.2652 6 10C6 9.73478 6.10536 9.48043 6.29289 9.29289C6.48043 9.10536 6.73478 9 7 9H15.586L13.293 6.707C13.1055 6.51947 13.0002 6.26516 13.0002 6C13.0002 5.73484 13.1055 5.48053 13.293 5.293Z"
                 fill="#3D7C7B"
               />
-            </svg>
+            </svg >{!show && <span className="text-primary font-bold p-0.5">Logout</span>}</Link>
 
-            {!show && <span className="text-primary font-bold">Logout</span>}
+            
           </div>
         </div>
       </div>
