@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 
+div#DateRangePickerChildren {
+  display: flex;
+}
+div#daterangepicker {
+  right: 0!important;
+  left: auto;
+}
 /* -------container size------------- */
 .container-sk {
     padding-right: 15px;

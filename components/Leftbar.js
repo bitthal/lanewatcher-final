@@ -78,6 +78,18 @@ export default function Leftbar({ show }) {
             </svg>
             {!show && <span className="text-primary font-bold p-0.5">Tracker</span>}</Link>
           </div>
+          <div className={router.pathname == '/alerts' ? "cursor-pointer flex bg-green-500 items-center min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1 inline" : "cursor-pointer flex items-center min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1 inline"}>
+            
+            <Link href="/alerts">
+                    <svg width="24"
+              height="22"
+              viewBox="0 0 18 22"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" fill="#3D7C7B"></path>
+        </svg>
+            {!show && <span className="text-primary font-bold p-0.5">Alerts</span>}</Link>
+          </div>
 
           <div className={router.pathname == '/messages' ? "flex items-center bg-green-500 gap-2 p-5 cursor-pointer inline" :"flex items-center gap-2 p-5 cursor-pointer inline"}>            
             <Link href="/messages"><svg

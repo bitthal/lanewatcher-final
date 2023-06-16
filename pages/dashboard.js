@@ -67,7 +67,7 @@ export default function Dashboard({Alldata2,showDatePicker,showRealTimeView }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="flex gap-4  my-3 mr-3   min-h-[750px] ">
+      <div className="flex gap-4  my-3 mr-3   min-h-[850px] ">
         <Leftbar show={show} />
 
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
