@@ -1,11 +1,8 @@
 import React, { Fragment } from "react";
-import Head from "next/head";
-import Dashboard from "./dashboard";
+import dynamic from 'next/dynamic'
 
-
-
-export default function Tracker(props) {
-    console.log(props,'props')
+export default function Tracker() {
+  const Dashboard = dynamic(() => import("./dashboard"), { ssr: false })
    return (
     <Fragment>
        <Dashboard showDatePicker={true} showRealTimeView={true}/>

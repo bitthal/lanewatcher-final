@@ -112,14 +112,13 @@ const fetchData = async () => {
   }
 };
 
-export async function getServerSideProps(context) {
-  const { params, req, res} = context;
+export async function getStaticProps(context) {
   const Alldata2 = await fetchData();
   console.log(
     Alldata2)
   return {
     props: {
-      Alldata2:Alldata2
+      Alldata2
     },
   };
 }
