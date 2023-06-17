@@ -59,9 +59,13 @@ export default function PlanogramView({ data }) {
       </div>
 
       <div>
-        <p className="text-sm text-gray-600">Trucks Required- {data?.planogram?.trucks_required}</p>
+        <p className="text-sm text-gray-600">
+          Trucks Required- {data?.planogram?.trucks_required}
+        </p>
 
-        <p className="text-sm mb-5 text-gray-600" >Trucks Ordered- {data?.planogram?.trucks_ordered}</p>
+        <p className="text-sm mb-5 text-gray-600">
+          Trucks Ordered- {data?.planogram?.trucks_ordered}
+        </p>
         <div className="flex justify-center">
           {" "}
           <button className="bg-[#001CFF] w-1/2 py-3 rounded-lg text-white font-bold text-xs">

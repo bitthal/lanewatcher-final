@@ -12,11 +12,10 @@ const customStyles = {
   },
 };
 
-export default function Pending({ show, data }) {
+export default function Processed({ show, data }) {
   const dataPerPage = 6;
   const totalData = data?.processed?.monotainers?.length;
   const totalPages = Math.ceil(totalData / dataPerPage);
-  console.log(totalPages);
 
   const [page, setPage] = useState(1);
 
@@ -166,7 +165,9 @@ export default function Pending({ show, data }) {
         </button>
         <div className="max-w-[700px] max-h-[500px] overflow-y-auto m-10">
           <h5 className="text-center font-bold text-xl mb-1">History</h5>
-          <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary font-bold">{tempName}</h6>
+          <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary font-bold">
+            {tempName}
+          </h6>
           <p>
             1. Timestamp: 2023-05-10 08:00:00, Location: Vancouver, BC, Event:
             Parcel received at origin facility.

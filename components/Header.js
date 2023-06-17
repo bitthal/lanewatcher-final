@@ -4,9 +4,7 @@ export default function Header() {
   return (
     <div className="w-full rounded-xl shadow-md  p-5 flex justify-between items-center overflow-hidden">
       <div className="flex gap-16 items-center">
-        <p className="w-fit text-center font-bold">
-          UST Canada Post
-        </p>
+        <p className="w-fit text-center font-bold">UST Canada Post</p>
         <p className="w-fit  font-bold text-primary">Tracker</p>
       </div>
 

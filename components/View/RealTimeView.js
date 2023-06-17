@@ -55,7 +55,10 @@ export default function RealTimeView({ data }) {
             {data?.real_time_positions?.map((data, index) => {
               return (
                 <button
-                onClick={()=>{ data?.upper?.monotainer_id !== "NA" && setIsOpen2(true);setTempName(data?.upper?.monotainer_id)} }
+                  onClick={() => {
+                    data?.upper?.monotainer_id !== "NA" && setIsOpen2(true);
+                    setTempName(data?.upper?.monotainer_id);
+                  }}
                   className={`${
                     data?.upper?.monotainer_id == "NA"
                       ? "text-gray-300 "
@@ -73,8 +76,10 @@ export default function RealTimeView({ data }) {
             {data?.real_time_positions?.map((data, index) => {
               return (
                 <button
-
-                onClick={()=>{ data?.lower?.monotainer_id !== "NA" && setIsOpen2(true) ;setTempName(data?.lower?.monotainer_id)}}
+                  onClick={() => {
+                    data?.lower?.monotainer_id !== "NA" && setIsOpen2(true);
+                    setTempName(data?.lower?.monotainer_id);
+                  }}
                   className={`${
                     data?.lower?.monotainer_id == "NA"
                       ? "text-gray-300 "
@@ -104,7 +109,9 @@ export default function RealTimeView({ data }) {
         </button>
         <div className="max-w-[700px] max-h-[500px] overflow-y-auto m-10">
           <h5 className="text-center font-bold text-xl mb-2">History</h5>
-          <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary font-bold">{tempName}</h6>
+          <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary font-bold">
+            {tempName}
+          </h6>
           <p>
             1. Timestamp: 2023-05-10 08:00:00, Location: Vancouver, BC, Event:
             Parcel received at origin facility.

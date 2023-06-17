@@ -14,17 +14,13 @@ export default function Dashboard({Alldata2,showDatePicker,showRealTimeView }) {
   const [Alldata, setAlldata] = useState(Alldata2);
   const [newValue, setState] = useState('');
   const [selectedValue,setOptionVal] = useState('');
-  // const [showDatePicker, setshowDatePicker] = useState(false);
-  //  const {Alldata1} = Alldata2;
 
-  console.log(showRealTimeView,'showRealTimeView',showDatePicker)
+
   function setRangeFilter(date){
-    console.log(date);
     setDate(date);
     handleSubmit(date);
   }
    function handleState(newValue) {
-      console.log(newValue,'state')
       setState(newValue);
       handleSubmit(newValue);
   }
@@ -40,7 +36,6 @@ export default function Dashboard({Alldata2,showDatePicker,showRealTimeView }) {
     };
     axios.post(`${process.env.NEXT_PUBLIC_API_URL}`, userData).then((response) => {
       setAlldata(Object.values(response.data));
-      console.log(response.data);
     });
   };
 
@@ -48,7 +43,6 @@ export default function Dashboard({Alldata2,showDatePicker,showRealTimeView }) {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
-        console.log(response.data,'res',Alldata2,'AL');
         setAlldata(response.data.lanes);
       } catch (error) {
         console.error("Error:", error);
@@ -67,7 +61,7 @@ export default function Dashboard({Alldata2,showDatePicker,showRealTimeView }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="flex gap-4  my-3 mr-3   min-h-[850px] ">
+      <div className="flex gap-4  my-3 mr-3   min-h-[950px] ">
         <Leftbar show={show} />
 
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
@@ -91,36 +85,5 @@ export default function Dashboard({Alldata2,showDatePicker,showRealTimeView }) {
   );
 }
 
-
-const fetchData = async () => {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`, {
-      headers: {
-        "Access-Control-Allow-Origin": "*", // Replace with the appropriate origin
-        // Add other headers if needed
-      },
-    });
-    response.setHeader(
-      'Cache-Control',
-      'public, s-maxage=10, stale-while-revalidate=59'
-    )
-    const data = await response.data.json();
-    console.log(data,'dat')
-    return data;
-  } catch (error) {
-    return null;
-  }
-};
-
-export async function getStaticProps(context) {
-  const Alldata2 = await fetchData();
-  console.log(
-    Alldata2)
-  return {
-    props: {
-      Alldata2
-    },
-  };
-}
 
 
