@@ -2,12 +2,26 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Leftbar from "@/components/Leftbar";
 import Header from "@/components/Header";
-
+import axios from "axios";
 
 export default function Alert() {
   
   const [show, setShow] = useState(true);
 
+  const handleClaim = () => {
+    const key_str = 9;
+    const username = 'l7yhyjg';
+    axios
+      .post(`${process.env.NEXT_PUBLIC_CLAIMNOW_API_URL}`, null, {
+        params: {
+          key_str,
+          username
+        },  
+      })
+      .then((response) => {
+       console.log(response)
+      });
+  };
 
   return (
     <>
@@ -55,6 +69,12 @@ export default function Alert() {
                         >
                           Claimed status
                         </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                        >
+                          Claim Action
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
@@ -71,7 +91,9 @@ export default function Alert() {
                         <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
                             Claimed status
                         </td>
-                       
+                        <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
+                            <button className="bg-transparent hover:bg-yellow-200 text-yellow-700 font-semibold hover:text-white py-2 px-4 border border-yellow-500 hover:border-transparent rounded" onClick={handleClaim}>Claim Now</button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
