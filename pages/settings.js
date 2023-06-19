@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react";
 import Leftbar from "@/components/Leftbar";
 import Header from "@/components/Header";
+import Header2 from "@/components/Header2";
 import axios from "axios";
 
 export default function Settings({ }) {
@@ -101,12 +102,13 @@ export default function Settings({ }) {
   }, []);
   return (
     <>
-      <div className="flex gap-4  my-3 mr-3   min-h-[950px] ">
+      <div className="flex gap-4  my-3 mr-3 h-auto">
         <Leftbar show={show} />
 
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
             <Header />
+            <Header2 setShow={setShow} show={show} showSearchBar={false} showDatePicker={false} />
           </div>
           <div className="relative lg:max-w-sm mt-10 mb-10 mr-20 ">
             <label> <h1>Select Site ID's</h1></label>
@@ -197,6 +199,7 @@ export default function Settings({ }) {
                 <form onSubmit={submit}>
                   {inputFields.map((input, index) => {
                     return (
+                      <div><h1 className="text-sm font-medium text-gray-800 whitespace-nowrap">Add new email :  </h1>
                       <div key={index} className="inline-flex">
                         <input
                           className="w-128 pr-4 py-2 block border-gray-400 border-opacity-100 border-gray-400 border px-2 focus-visible:none"
@@ -208,7 +211,7 @@ export default function Settings({ }) {
                         />
                         <button className="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border hover:border-transparent" type="submit">Submit</button>
                       </div>
-                      
+                      </div>
                     );
                   })}
                   

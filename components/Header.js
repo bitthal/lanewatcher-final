@@ -1,6 +1,13 @@
 import React from "react";
 
 export default function Header() {
+
+  const siteOptions = [
+    { id:0, site_name:'Select Sites' },
+    { id:1, site_name:'CNP1' },
+    { id:2, site_name:'CNP2' },
+    { id:3, site_name:'CNP3' }];
+
   return (
     <div className="w-full rounded-xl shadow-md  p-5 flex justify-between items-center overflow-hidden">
       <div className="flex gap-16 items-center">
@@ -10,8 +17,11 @@ export default function Header() {
 
       <div className="flex items-center gap-6">
         <select name="cars" id="cars" className="border-b focus:outline-none">
-          <option value="volvo">Select Sites</option>
-          <option value="saab">Canada Sites</option>
+        {siteOptions.map((option, index) => (
+                <option key={option.id} value={index}>
+                  {option.site_name}
+                </option>
+              ))}
         </select>
 
         <i className="text-2xl fa-solid fa-gear text-primary" />

@@ -9,6 +9,7 @@ export default function Header2({
   setUpdated,
   showDatePicker,
   setRangeFilter,
+  showSearchBar
 }) {
   const inputRef = useRef("");
   const handleClick = () => {
@@ -87,7 +88,7 @@ export default function Header2({
               }`}
             />
           </div>
-          <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded">
+          { showSearchBar && <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded">
             <input
               className="w-128 h-full pr-4 py-2 focus:outline-none block"
               placeholder="Enter Montainer/Lane ID:"
@@ -100,7 +101,7 @@ export default function Header2({
             <button type="submit" onClick={handleClick}>
               <i className="px-4  fa-solid fa-magnifying-glass" />{" "}
             </button>
-          </div>
+          </div>}
           
         </div>
         {showDatePicker && (

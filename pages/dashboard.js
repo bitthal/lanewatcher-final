@@ -61,13 +61,13 @@ export default function Dashboard({Alldata2,showDatePicker,showRealTimeView }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="flex gap-4  my-3 mr-3   min-h-[950px] ">
+      <div className="flex gap-4 my-3 mr-3 h-auto">
         <Leftbar show={show} />
 
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
             <Header />
-            <Header2 setShow={setShow} show={show} setUpdated = {handleState} setRangeFilter={setRangeFilter} date={date} selectedValue={selectedValue} setOptionVal={handleOption} newValue={newValue} showDatePicker={showDatePicker ? showDatePicker : false} />
+            <Header2 setShow={setShow} show={show} setUpdated = {handleState} setRangeFilter={setRangeFilter} date={date} showSearchBar={true} selectedValue={selectedValue} setOptionVal={handleOption} newValue={newValue} showDatePicker={showDatePicker ? showDatePicker : false} />
           </div>
           
           <div className={`flex flex-col gap-8 mt-5  min-w-[650px] w-full`}>

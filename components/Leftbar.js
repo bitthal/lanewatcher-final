@@ -7,7 +7,7 @@ export default function Leftbar({ show }) {
   const router = useRouter();
   return (
     <div
-      className={`min-h-[96vh] duration-300 ${
+      className={`h-auto duration-300 ${
         !show ? "w-auto" : "w-20"
       } border rounded-r-xl shadow-xl pt-5`}
     >
@@ -37,9 +37,9 @@ export default function Leftbar({ show }) {
             <Link href="/dashboard" className={`${!show ? "w-32" : "w-auto"}`}>
               <svg
                 className="inline"
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
+                width="22"
+                height="22"
+                viewBox="0 0 22 22"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -54,7 +54,7 @@ export default function Leftbar({ show }) {
             </Link>
           </div>
 
-          <div
+          {/* <div
             className={
               router.pathname == "/shipment"
                 ? "flex items-center gap-2 p-5 cursor-pointer inline"
@@ -79,7 +79,7 @@ export default function Leftbar({ show }) {
                 <span className="text-primary font-bold p-0.5 m-2">Shipment</span>
               )}
             </Link>
-          </div>
+          </div> */}
 
           <div
             className={
@@ -91,9 +91,9 @@ export default function Leftbar({ show }) {
             <Link href="/tracker" className={`${!show ? "w-32" : "w-auto"}`}>
               <svg
                 className="inline"
-                width="18"
+                width="22"
                 height="22"
-                viewBox="0 0 18 22"
+                viewBox="0 0 22 22"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -119,9 +119,9 @@ export default function Leftbar({ show }) {
                 className="inline"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                width="18"
+                width="22"
                 height="22"
-                viewBox="0 0 18 22"
+                viewBox="0 0 22 22"
               >
                 <path
                   strokeLinecap="round"
@@ -151,9 +151,9 @@ export default function Leftbar({ show }) {
             <Link href="/alerts" className={`${!show ? "w-32" : "w-auto"}`}>
               <svg
                 className="inline"
-                width="24"
+                width="22"
                 height="22"
-                viewBox="0 0 18 22"
+                viewBox="0 0 22 22"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -169,7 +169,7 @@ export default function Leftbar({ show }) {
               )}
             </Link>
           </div>
-          <div
+          {/* <div
             className={
               router.pathname == "/messages"
                 ? "flex items-center bg-green-500 gap-2 p-5 cursor-pointer inline"
@@ -194,9 +194,9 @@ export default function Leftbar({ show }) {
                 <span className="text-primary font-bold p-0.5 m-2">Messages</span>
               )}
             </Link>
-          </div>
+          </div> */}
 
-          <div
+          {/* <div
             className={
               router.pathname == "/analysis"
                 ? "flex items-center bg-green-500 gap-2 p-5 cursor-pointer inline"
@@ -221,9 +221,9 @@ export default function Leftbar({ show }) {
                 <span className="text-primary font-bold p-0.5 m-2">Analysis</span>
               )}
             </Link>
-          </div>
-        </div>
-          <div
+          </div> */}
+        
+          {/* <div
             className={
               router.pathname == "/support"
                 ? "flex items-center bg-green-500  gap-2 p-5 cursor-pointer inline"
@@ -248,9 +248,9 @@ export default function Leftbar({ show }) {
                 <span className="text-primary font-bold p-0.5 m-2">Support</span>
               )}
             </Link>
-          </div>
+          </div> */}
 
-          <div className="flex items-center gap-2 p-5 cursor-pointer inline">
+          {/* <div className="flex items-center gap-2 p-5 cursor-pointer inline">
             <Link href="/logout" className={`${!show ? "w-32" : "w-auto"}`}>
               <svg
                 className="inline"
@@ -271,7 +271,8 @@ export default function Leftbar({ show }) {
                 <span className="text-primary font-bold p-0.5 m-2">Logout</span>
               )}
             </Link>
-          </div>
+          </div> */}
+       </div>
       </div>
     </div>
   );
