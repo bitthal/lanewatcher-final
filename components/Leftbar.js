@@ -7,8 +7,8 @@ export default function Leftbar({ show }) {
   const router = useRouter();
   return (
     <div
-      className={`h-auto duration-300 ${
-        !show ? "w-auto" : "w-20"
+      className={`h-auto ease-in-out duration-300 ${
+        !show ? "translate-x-0 w-auto" : "translate-x-.5 w-20"
       } border rounded-r-xl shadow-xl pt-5`}
     >
       <div className="flex justify-center gap-2">
@@ -25,13 +25,13 @@ export default function Leftbar({ show }) {
         className="object-contain w-full  mt-5"
       />
 
-      <div className="h-[80vh] flex flex-col justify-between inline">
+      <div className="h-auto flex flex-col justify-between inline">
         <div className="flex flex-col mt-10">
           <div
             className={
               router.pathname == "/dashboard"
-                ? "flex items-center gap-2 p-5 cursor-pointer inline  bg-green-500"
-                : "flex items-center gap-2 p-5 cursor-pointer inline"
+              ? "cursor-pointer flex bg-green-500 items-center p-5 rounded-xl gap-2 m-1 inline"
+              : "cursor-pointer flex items-center p-5 rounded-xl gap-2 m-1 inline"
             }
           >
             <Link href="/dashboard" className={`${!show ? "w-32" : "w-auto"}`}>
@@ -84,8 +84,8 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/tracker"
-                ? "cursor-pointer flex bg-green-500 items-center min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1 inline"
-                : "cursor-pointer flex items-center min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1 inline"
+                ? "cursor-pointer flex bg-green-500 items-center p-5 rounded-xl gap-2 m-1 inline"
+                : "cursor-pointer flex items-center p-5 rounded-xl gap-2 m-1 inline"
             }
           >
             <Link href="/tracker" className={`${!show ? "w-32" : "w-auto"}`}>
@@ -110,8 +110,8 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/settings"
-                ? "cursor-pointer flex bg-green-500 items-center min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1 inline"
-                : "cursor-pointer flex items-center min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1 inline"
+                ? "cursor-pointer flex bg-green-500 items-center p-5 rounded-xl gap-2 m-1 inline"
+                : "cursor-pointer flex items-center p-5 rounded-xl gap-2 m-1 inline"
             }
           >
             <Link href="/settings" className={`${!show ? "w-auto" : "w-32"}`}>
@@ -144,8 +144,8 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/alerts"
-                ? "cursor-pointer flex bg-green-500 items-center min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1 inline"
-                : "cursor-pointer flex items-center min-h-8 min-w-[46px] p-5 rounded-xl gap-2 m-1 inline"
+                ? "cursor-pointer flex bg-green-500 items-center p-5 rounded-xl gap-2 m-1 inline"
+                : "cursor-pointer flex items-center p-5 rounded-xl gap-2 m-1 inline"
             }
           >
             <Link href="/alerts" className={`${!show ? "w-32" : "w-auto"}`}>
