@@ -57,8 +57,8 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/shipment"
-                ? "flex items-center gap-2 p-5 cursor-pointer inline"
-                : "flex items-center gap-2 p-5 cursor-pointer inline"
+                ? "flex items-center gap-2 p-5 cursor-not-allowed inline"
+                : "flex items-center gap-2 p-5 cursor-not-allowed inline"
             }
           >
             {/* <Link href="/shipment"> */}
@@ -172,8 +172,8 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/messages"
-                ? "flex items-center bg-red-300 gap-2 p-5 cursor-pointer inline"
-                : "flex items-center gap-2 p-5 cursor-pointer inline"
+                ? "flex items-center bg-red-300 gap-2 p-5 cursor-not-allowed inline"
+                : "flex items-center gap-2 p-5 cursor-not-allowed inline"
             }
           >
             {/* <Link href="/messages" className={`${!show ? "w-32" : "w-auto"}`}> */}
@@ -199,8 +199,8 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/analysis"
-                ? "flex items-center bg-red-300 gap-2 p-5 cursor-pointer inline"
-                : "flex items-center gap-2 p-5 cursor-pointer inline"
+                ? "flex items-center bg-red-300 gap-2 p-5 cursor-not-allowed inline"
+                : "flex items-center gap-2 p-5 cursor-not-allowed inline"
             }
           >
             {/* <Link href="/analysis" className={`${!show ? "w-32" : "w-auto"}`}> */}
@@ -226,8 +226,8 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/support"
-                ? "flex items-center bg-red-300  gap-2 p-5 cursor-pointer inline"
-                : "flex items-center gap-2 p-5 cursor-pointer inline"
+                ? "flex items-center bg-red-300  gap-2 p-5 cursor-not-allowed inline"
+                : "flex items-center gap-2 p-5 cursor-not-allowed inline"
             }
           >
             {/* <Link href="/support" className={`${!show ? "w-32" : "w-auto"}`}> */}
@@ -250,7 +250,7 @@ export default function Leftbar({ show }) {
             {/* </Link> */}
           </div>
 
-          <div className="flex items-center gap-2 p-5 cursor-pointer inline">
+          <div className="flex items-center gap-2 p-5 cursor-not-allowed inline">
             {/* <Link href="/logout" className={`${!show ? "w-32" : "w-auto"}`}> */}
               <svg
                 className="inline"

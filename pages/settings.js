@@ -98,8 +98,6 @@ export default function Settings({}) {
   };
 
   useEffect(() => {
-
-    
     const fetchData = async () => {
       try {
          await getEmailListHandler();

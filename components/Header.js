@@ -2,7 +2,7 @@ import React,{useEffect, useState} from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-export default function Header( {setSiteOptions}
+export default function Header( {setSiteOptions,setSelectedSiteOption}
   ) {
   const router = useRouter().pathname.replace(/\//,'').charAt(0).toUpperCase() + useRouter().pathname.replace(/\//,'').slice(1);
 
@@ -13,7 +13,8 @@ export default function Header( {setSiteOptions}
           const response = await axios.get(`${process.env.NEXT_PUBLIC_SITEID_API_URL}`);
           console.log(response.data.result,'res')
           setSiteID(response.data.result);
-          setSiteOptions(response.data.result);
+          let selectOptions = response.data.result
+          setSiteOptions(selectOptions);
         } catch (error) {
           console.error("Error:", error);
         }
@@ -24,7 +25,7 @@ export default function Header( {setSiteOptions}
     }, []);
     
     const handleChange = (event) =>{
-      
+      setSelectedSiteOption(siteId[event.target.value])
       console.log(event.target.value,siteId[event.target.value])
     }
     
