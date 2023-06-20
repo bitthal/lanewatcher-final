@@ -1,28 +1,48 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 
-export default function Header() {
+export default function Header( {setSiteOptions}
+  ) {
+  const router = useRouter().pathname.replace(/\//,'').charAt(0).toUpperCase() + useRouter().pathname.replace(/\//,'').slice(1);
 
-  const siteOptions = [
-    { id:0, site_name:'Select Sites' },
-    { id:1, site_name:'CNP1' },
-    { id:2, site_name:'CNP2' },
-    { id:3, site_name:'CNP3' }];
-
+  const [siteId, setSiteID] = useState();
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`${process.env.NEXT_PUBLIC_SITEID_API_URL}`);
+          console.log(response.data.result,'res')
+          setSiteID(response.data.result);
+          setSiteOptions(response.data.result);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+      return ()=>{
+        fetchData();
+      };
+    }, []);
+    
+    const handleChange = (event) =>{
+      
+      console.log(event.target.value,siteId[event.target.value])
+    }
+    
   return (
     <div className="w-full rounded-xl shadow-md  p-5 flex justify-between items-center overflow-hidden">
       <div className="flex gap-16 items-center">
         <p className="w-fit text-center font-bold">UST Canada Post</p>
-        <p className="w-fit  font-bold text-primary">Tracker</p>
+        <p className="w-fit  font-bold text-primary">{router}</p>
       </div>
 
       <div className="flex items-center gap-6">
-        <select name="cars" id="cars" className="border-b focus:outline-none">
-        {siteOptions.map((option, index) => (
-                <option key={option.id} value={index}>
-                  {option.site_name}
+       {siteId && <select name="cars" id="cars" className="border-b focus:outline-none" onChange={handleChange}>
+        {siteId.map((option,index) => (
+                <option key={option.camera_id} value={index}>
+                  {option.site_id}
                 </option>
               ))}
-        </select>
+        </select>}
 
         <i className="text-2xl fa-solid fa-gear text-primary" />
 

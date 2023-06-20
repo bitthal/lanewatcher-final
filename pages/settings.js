@@ -4,28 +4,32 @@ import Header from "@/components/Header";
 import Header2 from "@/components/Header2";
 import axios from "axios";
 
-export default function Settings({ }) {
-  const options = [
-    { site_id: "9", camera_id: "l7yhyjg" },
-    { site_id: "13", camera_id: "f332sd#341" },
-    { site_id: "14", camera_id: "f332sd#343" },
-    { site_id: "15", camera_id: "f332sd#344" },
-  ];    
+export default function Settings({}) {
+
   const [show, setShow] = useState(true);
   const [showAddField, setShowAddField] = useState(false);
-  const [siteId, setSiteId] = useState("");
+  const [siteIds, setSiteId] = useState("");
+  const [selectedSiteId, setSelectedSiteId] = useState('');
   const [tableData, setTableDate] = useState("");
   const [inputFields, setInputFields] = useState([{ email: "" }]);
 
-  function handleChange(e) {
-    setSiteId(options[e.target.value]);
-    getEmailListHandler(options[e.target.value]);
+  const setSiteOptions = (siteIds) => {
+    console.log(siteIds,'sit');
+    setSiteId(siteIds)
+    getEmailListHandler(siteIds);
+  }
+  function handleChange(event) {
+    setSelectedSiteId(siteIds[event.target.value])
+    let payloadValue = siteIds[event.target.value]
+    getEmailListHandler(payloadValue);
   }
 
+  
   const getEmailListHandler = (payload) => {
-    const site_id = payload ? payload.site_id : options[0].site_id;
-    const camera_id = payload ? payload.camera_id : options[0].camera_id;
-    axios
+    if(payload){
+      const site_id = payload.length >= 1 ? payload[0].site_id : payload.site_id;
+      const camera_id =payload.length >= 1 ? Object.values(payload[0].camera_id).toString() : Object.values(payload.camera_id).toString();
+      axios
       .post(`${process.env.NEXT_PUBLIC_GETEMAILS_API_URL}`, null, {
         params: {
           site_id,
@@ -35,7 +39,10 @@ export default function Settings({ }) {
       .then((response) => {
         setTableDate(response.data.result);
       });
+    }
+    
   };
+  
   const deleteEmailHandler = (emailId) => {
     const site_id = emailId.site_id;
     const camera_id = emailId.camera_id;
@@ -52,8 +59,8 @@ export default function Settings({ }) {
       });
   };
   const AddEmailHandler = (emailId) => {
-    const site_id = 9;
-    const camera_id = 'l7yhyjg';
+    const site_id = selectedSiteId.length && selectedSiteId.site_id ? selectedSiteId.site_id : siteIds[0].site_id;
+    const camera_id = selectedSiteId.length && Object.values(selectedSiteId.camera_id).toString() ? Object.values(selectedSiteId.camera_id).toString() : Object.values(siteIds[0].camera_id).toString();
     const email = emailId
     axios
       .post(`${process.env.NEXT_PUBLIC_ADDEMAIL_API_URL}`, null, {
@@ -66,6 +73,7 @@ export default function Settings({ }) {
       .then((response) => {
         setTableDate([...tableData,{id:tableData.length,site_id:site_id,camera_id:camera_id,Email:emailId}]);
       });
+
   };
   const handleFormChange = (index, event) => {
     let data = [...inputFields];
@@ -88,7 +96,10 @@ export default function Settings({ }) {
     setTableDate(data);
     deleteEmailHandler(data[index-1])
   };
+
   useEffect(() => {
+
+    
     const fetchData = async () => {
       try {
          await getEmailListHandler();
@@ -99,7 +110,8 @@ export default function Settings({ }) {
     return ()=>{
       fetchData();
     };
-  }, []);
+  }, [siteIds]);
+ 
   return (
     <>
       <div className="flex gap-4  my-3 mr-3 h-auto">
@@ -107,22 +119,22 @@ export default function Settings({ }) {
 
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
-            <Header />
+            <Header setSiteOptions={setSiteOptions}/>
             <Header2 setShow={setShow} show={show} showSearchBar={false} showDatePicker={false} />
           </div>
-          <div className="relative lg:max-w-sm mt-10 mb-10 mr-20 ">
-            <label> <h1>Select Site ID's</h1></label>
+          {siteIds && <div className="relative lg:max-w-sm mt-10 mb-10 mr-20 ">
+            <label> <h1>Select Site ID's <span>(Settings)</span>:</h1></label>
             <select
               className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm  appearance-none focus:border-indigo-600 cursor-pointer"
               onChange={handleChange}
             >
-              {options.map((option, index) => (
+             {siteIds.map((option,index) => (
                 <option key={option.camera_id} value={index}>
-                  {option.camera_id}
+                  {option.site_id}
                 </option>
               ))}
             </select>
-          </div>
+          </div>}
           <div>
             <div className="flex flex-col">
               <div className="overflow-x-auto">
