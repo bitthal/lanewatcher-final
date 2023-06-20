@@ -28,6 +28,7 @@ export default function Alert() {
       fetchData();
     };
   }, []);
+  
   function getAlertHandler (payload){
     if(payload){
       axios
