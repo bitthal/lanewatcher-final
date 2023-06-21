@@ -30,11 +30,11 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/dashboard"
-              ? "cursor-pointer flex bg-red-300 items-center p-5 rounded-xl gap-2 m-1 inline"
-              : "cursor-pointer flex items-center p-5 rounded-xl gap-2 m-1 inline"
+              ? "cursor-not-allowed flex bg-red-300 items-center p-5 rounded-xl gap-2 m-1 inline"
+              : "cursor-not-allowed flex items-center p-5 rounded-xl gap-2 m-1 inline"
             }
           >
-            <Link href="/dashboard" className={`${!show ? "w-32" : "w-auto"}`}>
+            {/* <Link href="/dashboard" className={`${!show ? "w-32" : "w-auto"}`}> */}
               <svg
                 className="inline"
                 width="22"
@@ -51,7 +51,7 @@ export default function Leftbar({ show }) {
               {!show && (
                 <span className="text-primary font-bold p-0.5 m-2">Dashboard</span>
               )}
-            </Link>
+            {/* </Link> */}
           </div>
 
           <div
