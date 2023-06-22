@@ -12,7 +12,7 @@ const customStyles = {
   },
 };
 
-export default function Processed({ show, data }) {
+export default function Processed({ show, data,showDashboardView }) {
   const dataPerPage = 6;
   const totalData = data?.processed?.monotainers?.length;
   const totalPages = Math.ceil(totalData / dataPerPage);
@@ -41,12 +41,12 @@ export default function Processed({ show, data }) {
 
   return (
     <>
-      <div className={`${show ? "h-96" : "h-96"}  bg-white rounded-xl p-5`}>
-        {!show ? (
+      <div className={`${show ? "h-96" : "h-96"}  bg-green-100 rounded-xl p-5`}>
+        {!show && !showDashboardView ? (
           <div className="flex flex-col items-center justify-center h-full text-center gap-5">
-            <p className="font-bold text-primary">Processed</p>
+            <p className="font-bold text-primary2">Processed</p>
 
-            <i className="fa-solid fa-cart-shopping text-primary" />
+            <i className="fa-solid fa-cart-shopping text-primary2" />
             <p className="font-bold text-green-700">
               {" "}
               {data?.processed?.total_monotainers}
@@ -55,8 +55,8 @@ export default function Processed({ show, data }) {
         ) : (
           <div className="flex flex-col  items-center text-center h-full justify-between gap-5">
             <div className="flex  items-center text-center justify-between gap-4">
-              <i className="fa-solid fa-cart-shopping text-primary" />
-              <p className="font-bold text-primary">Processed</p>
+              <i className="fa-solid fa-cart-shopping text-primary2" />
+              <p className="font-bold text-primary2">Processed</p>
 
               <p className="font-bold text-green-700">
                 {" "}
@@ -165,7 +165,7 @@ export default function Processed({ show, data }) {
         </button>
         <div className="max-w-[700px] max-h-[500px] overflow-y-auto m-10">
           <h5 className="text-center font-bold text-xl mb-1">History</h5>
-          <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary font-bold">
+          <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary2 font-bold">
             {tempName}
           </h6>
           <p>

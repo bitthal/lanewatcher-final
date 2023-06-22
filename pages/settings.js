@@ -1,10 +1,12 @@
-import { useState,useEffect } from "react";
+import React,{ useState,useEffect,useContext } from "react";
 import Leftbar from "@/components/Leftbar";
-import Header from "@/components/Header";
 import Header2 from "@/components/Header2";
 import axios from "axios";
+import { value_data } from "@/context/context";
 
 export default function Settings({}) {
+
+
 
   const [show, setShow] = useState(true);
   const [showAddField, setShowAddField] = useState(false);
@@ -13,23 +15,20 @@ export default function Settings({}) {
   const [tableData, setTableDate] = useState("");
   const [inputFields, setInputFields] = useState([{ email: "" }]);
 
-  const setSiteOptions = (siteIds) => {
-    console.log(siteIds,'sit');
-    setSiteId(siteIds)
-    getEmailListHandler(siteIds);
-  }
   function handleChange(event) {
     setSelectedSiteId(siteIds[event.target.value])
     let payloadValue = siteIds[event.target.value]
     getEmailListHandler(payloadValue);
   }
+  // const { value } = useContext(value_data);
+  const { drpdwnVaue } = useContext(value_data);
+  console.log(drpdwnVaue,'settings')
 
-  
-  const getEmailListHandler = (payload) => {
-    if(payload){
-      const site_id = payload.length >= 1 ? payload[0].site_id : payload.site_id;
-      const camera_id =payload.length >= 1 ? Object.values(payload[0].camera_id).toString() : Object.values(payload.camera_id).toString();
-      axios
+  async function getEmailListHandler (payload) {
+      console.log(payload,'pa')
+      const site_id = payload ? payload.site_id : drpdwnVaue ? drpdwnVaue[0].site_id : '';
+      const camera_id =payload ? Object.values(payload.camera_id).toString() : drpdwnVaue ? Object.values(drpdwnVaue[0].camera_id).toString() : '';
+      await axios
       .post(`${process.env.NEXT_PUBLIC_GETEMAILS_API_URL}`, null, {
         params: {
           site_id,
@@ -39,7 +38,7 @@ export default function Settings({}) {
       .then((response) => {
         setTableDate(response.data.result);
       });
-    }
+    
     
   };
   
@@ -56,11 +55,12 @@ export default function Settings({}) {
         },
       })
       .then((response) => {
+        
       });
   };
   const AddEmailHandler = (emailId) => {
-    const site_id = selectedSiteId.length && selectedSiteId.site_id ? selectedSiteId.site_id : siteIds[0].site_id;
-    const camera_id = selectedSiteId.length && Object.values(selectedSiteId.camera_id).toString() ? Object.values(selectedSiteId.camera_id).toString() : Object.values(siteIds[0].camera_id).toString();
+    const site_id = selectedSiteId && selectedSiteId.site_id ? selectedSiteId.site_id : drpdwnVaue[0].site_id;
+    const camera_id = selectedSiteId && Object.values(selectedSiteId.camera_id).toString() ? Object.values(selectedSiteId.camera_id).toString() : Object.values(drpdwnVaue[0].camera_id).toString();
     const email = emailId
     axios
       .post(`${process.env.NEXT_PUBLIC_ADDEMAIL_API_URL}`, null, {
@@ -98,35 +98,36 @@ export default function Settings({}) {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-         await getEmailListHandler();
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    return ()=>{
-      fetchData();
-    };
-  }, [siteIds]);
+    console.log(drpdwnVaue,'dr')
+      const fetchData = async () => {
+        try {
+           await getEmailListHandler();
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+      return ()=>{
+        fetchData();
+      };
+    
+    
+  }, [drpdwnVaue]);
  
   return (
     <>
-      <div className="flex gap-4  my-3 mr-3 h-auto">
+      <div className="flex gap-4 my-3 mr-3 h-auto bg-blue-100">
         <Leftbar show={show} />
-
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
-            <Header setSiteOptions={setSiteOptions}/>
             <Header2 setShow={setShow} show={show} showSearchBar={false} showDatePicker={false} />
           </div>
-          {siteIds && <div className="relative lg:max-w-sm mt-10 mb-10 mr-20 ">
+          {drpdwnVaue && <div className="relative lg:max-w-sm mt-10 mb-10 mr-20 ">
             <label> <h1>Select Site ID's <span>(Settings)</span>:</h1></label>
             <select
               className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm  appearance-none focus:border-indigo-600 cursor-pointer"
               onChange={handleChange}
             >
-             {siteIds.map((option,index) => (
+             {drpdwnVaue.map((option,index) => (
                 <option key={option.camera_id} value={index}>
                   {option.site_id}
                 </option>
@@ -139,8 +140,8 @@ export default function Settings({}) {
                 <div className="p-1.5 w-full inline-block align-middle">
                   <div className="overflow-hidden border rounded-lg">
                     <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
-                        <tr>
+                      <thead className="bg-blue-200">
+                        <tr className="">
                           <th
                             scope="col"
                             className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "

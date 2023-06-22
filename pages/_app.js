@@ -2,6 +2,8 @@ import "@/styles/globals.css";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import Router from "next/router";
+import Layout from "@/components/layout";
+import Context from "../context/context"
 
 
 export default function App({ Component, pageProps,router }) {
@@ -21,7 +23,11 @@ export default function App({ Component, pageProps,router }) {
   // console.error = function () {};
   return (
     <>
+      <Context>
+      <Layout>
       <Component {...pageProps} />
+      </Layout>
+      </Context>
     </>
   );
 }

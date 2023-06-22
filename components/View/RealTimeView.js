@@ -12,6 +12,33 @@ export default function RealTimeView({ data }) {
       transform: "translate(-50%, -50%)",
     },
   };
+  const dummyData = [
+    {
+      timestamp: "2023-05-10 10:30:00",
+      location: "Vancouver, BC,",
+      eventData: "Parcel received at origin facility",
+    },
+    {
+      timestamp: "2023-05-10 10:30:00",
+      location: "Vancouver, BC,",
+      eventData: "Parcel received at origin facility",
+    },
+    {
+      timestamp: "2023-05-10 10:30:00",
+      location: "Vancouver, BC,",
+      eventData: "Parcel received at origin facility",
+    },
+    {
+      timestamp: "2023-05-10 10:30:00",
+      location: "Vancouver, BC,",
+      eventData: "Parcel received at origin facility",
+    },
+    {
+      timestamp: "2023-05-10 10:30:00",
+      location: "Vancouver, BC,",
+      eventData: "Parcel received at origin facility",
+    },
+  ];
 
   const [modalIsOpen2, setIsOpen2] = React.useState(false);
 
@@ -26,8 +53,8 @@ export default function RealTimeView({ data }) {
 
   return (
     <>
-      <div className="h-96 p-5 bg-white rounded-xl flex flex-col justify-between">
-        <h1 className="text-center font-bold text-lg text-primary">
+      <div className="h-96 p-5 bg-blue-200 rounded-xl flex flex-col justify-between">
+        <h1 className="text-center font-bold text-lg text-primary2">
           Real Time View
         </h1>
 
@@ -35,7 +62,7 @@ export default function RealTimeView({ data }) {
           {data?.real_time_positions?.map((data, index) => {
             return (
               <button
-                className="text-primary font-bold border  p-2 border-primary rounded-lg text-xs w-[90px] break-all "
+                className="text-primary2 font-bold border  p-2 border-primary rounded-lg text-xs w-[90px] break-all "
                 key={index}
               >
                 Position&nbsp;{data?.position}
@@ -109,73 +136,60 @@ export default function RealTimeView({ data }) {
         </button>
         <div className="max-w-[700px] max-h-[500px] overflow-y-auto m-10">
           <h5 className="text-center font-bold text-xl mb-2">History</h5>
-          <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary font-bold">
+          <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary2 font-bold">
             {tempName}
           </h6>
-          <p>
-            1. Timestamp: 2023-05-10 08:00:00, Location: Vancouver, BC, Event:
-            Parcel received at origin facility.
-          </p>
-          <p>
-            2. Timestamp: 2023-05-10 10:30:00, Location: Vancouver, BC, Event:
-            Parcel scanned and loaded for transit.
-          </p>
-          <p>
-            3. Timestamp: 2023-05-10 19:00:00, Location: Kamloops, BC, Event:
-            Parcel arrived at sorting facility.
-          </p>
-          <p>
-            4. Timestamp: 2023-05-11 09:00:00, Location: Kamloops, BC, Event:
-            Parcel scanned and loaded for transit.
-          </p>
-          <p>
-            5. Timestamp: 2023-05-11 20:00:00, Location: Calgary, AB, Event:
-            Parcel arrived at sorting facility.
-          </p>
-          <p>
-            6. Timestamp: 2023-05-12 08:00:00, Location: Calgary, AB, Event:
-            Parcel scanned and loaded for transit.
-          </p>
-          <p>
-            7. Timestamp: 2023-05-12 18:30:00, Location: Regina, SK, Event:
-            Parcel arrived at sorting facility.
-          </p>
-          <p>
-            8. Timestamp: 2023-05-13 07:00:00, Location: Regina, SK, Event:
-            Parcel scanned and loaded for transit.
-          </p>
-          <p>
-            9. Timestamp: 2023-05-13 20:00:00, Location: Winnipeg, MB, Event:
-            Parcel arrived at sorting facility.
-          </p>
-          <p>
-            10. Timestamp: 2023-05-14 08:00:00, Location: Winnipeg, MB, Event:
-            Parcel scanned and loaded for transit.
-          </p>
-          <p>
-            11. Timestamp: 2023-05-14 22:00:00, Location: Thunder Bay, ON,
-            Event: Parcel arrived at sorting facility.
-          </p>
-          <p>
-            12. Timestamp: 2023-05-15 08:00:00, Location: Thunder Bay, ON,
-            Event: Parcel scanned and loaded for transit.
-          </p>
-          <p>
-            13. Timestamp: 2023-05-15 21:30:00, Location: Toronto, ON, Event:
-            Parcel arrived at sorting facility.
-          </p>
-          <p>
-            14. Timestamp: 2023-05-16 07:00:00, Location: Toronto, ON, Event:
-            Parcel scanned and loaded for delivery.
-          </p>
-          <p>
-            15. Timestamp: 2023-05-16 14:30:00, Location: Toronto, ON, Event:
-            Parcel out for delivery.
-          </p>
-          <p>
-            16. Timestamp: 2023-05-16 16:00:00, Location: Toronto, ON, Event:
-            Parcel delivered to recipient.
-          </p>
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-blue-200">
+              <tr className="">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                >
+                  ID
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                >
+                  Time stamp
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                >
+                  Location
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                >
+                  Event
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {dummyData &&
+                dummyData?.map((data, index) => {
+                  return (
+                    <tr>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
+                        {index}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
+                        {data.timestamp}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                        {data.location}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
+                        {data.eventData}
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
         </div>
       </Modal>
     </>

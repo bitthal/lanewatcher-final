@@ -6,7 +6,7 @@ import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
 import axios from "axios";
 
-export default function Tracker({showDatePicker,showRealTimeView }) {
+export default function Tracker({showDatePicker,showRealTimeView,showDashboardView }) {
   const [show, setShow] = useState(true);
   const [date, setDate] = useState(new Date());
   const [Alldata, setAlldata] = useState();
@@ -57,18 +57,10 @@ export default function Tracker({showDatePicker,showRealTimeView }) {
   }
    return (
     <>
-      <Head>
-        <title>Lanewatcher</title>
-        <meta name="description" content="LaneWatcher" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-
       <div className="flex gap-4 my-3 mr-3 h-auto">
         <Leftbar show={show} />
-
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
-            <Header />
             <Header2 setShow={setShow} show={show} setUpdated = {handleState} setRangeFilter={setRangeFilter} date={date} showSearchBar={true} selectedValue={selectedValue} setOptionVal={handleOption} newValue={newValue} showDatePicker={showDatePicker ? showDatePicker : false} />
           </div>
           
@@ -76,7 +68,7 @@ export default function Tracker({showDatePicker,showRealTimeView }) {
             {Alldata?.map((data, index) => {
               return (
                 <div className="" key={index}>
-                  <View show={show} data={data} showRealTimeView={showRealTimeView ? false : true}/>
+                  <View showDashboardView={showDashboardView ? false : true} show={show} data={data} showRealTimeView={showRealTimeView ? false : true}/>
                 </div>
               );
             })}

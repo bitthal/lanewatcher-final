@@ -1,22 +1,16 @@
-import React, { useState,useEffect } from "react";
-import Head from "next/head";
+import React, { useState,useEffect,useContext } from "react";
 import Leftbar from "@/components/Leftbar";
-import Header from "@/components/Header";
 import Header2 from "@/components/Header2";
 import axios from "axios";
+import { value_data } from "@/context/context";
 
 export default function Alert() {
   
+  const { value } = useContext(value_data);
+  console.log(value,'value')
   const [show, setShow] = useState(true);
   const [alertList, setAlerts] = useState('');
-  const setSiteOptions = (siteIds) =>{
-    getAlertHandler(siteIds);
-  }
-  const setSelectedSiteOption = (siteIds) => {
-    console.log(siteIds,'sit');
-    getAlertHandler(siteIds);
-  }
-  useEffect(() => {
+  useEffect(() => { 
     const fetchData = async () => {
       try {
          await getAlertHandler();
@@ -27,30 +21,30 @@ export default function Alert() {
     return ()=>{
       fetchData();
     };
-  }, []);
-  
-  function getAlertHandler (payload){
-    if(payload){
-      axios
+  }, [value]);
+
+
+  async function getAlertHandler (payload){
+    console.log(value,'siteDropDownSelectedValue')
+      await axios
       .post(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, null, {
         params:{
-        site_id: payload.length ? payload[0].site_id  : payload.site_id,
-        camera_id:payload.length ? Object.values(payload[0].camera_id).toString()  :  Object.values(payload.camera_id).toString()
+        site_id:  payload ? payload.site_id  : value ? value.site_id : '',
+        camera_id: payload ? Object.values(payload.camera_id).toString()  : value ?  Object.values(value.camera_id).toString() : ''
         }
       })
       .then((response) => {
         const mapped = response.data.dlist.flatMap(({alerts,key_str,sorting_timestamp,id}) =>
-        alerts.map(alerts => ({alerts,key_str,sorting_timestamp,id}))).filter((res)=>{
-          return res.alerts.claimed_status === false;
-        });
+        alerts.map(alerts => ({alerts,key_str,sorting_timestamp,id})))
         console.log(mapped)
         setAlerts(mapped)
       });
-    } 
+    
   }
 
-  const handleClaim = (payload) => {
-    const key_str = payload.key_str;
+  const handleClaim = (payload,index) => {
+    if(payload.alerts.claimed_status === false){
+      const key_str = payload.key_str;
     const username = 'l7yhyjg';
     axios
       .post(`${process.env.NEXT_PUBLIC_CLAIMNOW_API_URL}`, null, {
@@ -60,24 +54,19 @@ export default function Alert() {
         },  
       })
       .then((response) => {
-       console.log(response)
+        let data = [...alertList];
+        data.splice(index, 1);
+        setAlerts(data);
+       console.log(response);
       });
+    }
   };
 
   return (
-    <>
-      <Head>
-        <title>Lanewatcher</title>
-        <meta name="description" content="LaneWatcher" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-
-      <div className="flex gap-4 my-3 mr-3 h-auto">
+      <div className="flex gap-4 my-3 mr-3 h-auto bg-blue-100">
         <Leftbar show={show} />
-
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
-            <Header setSiteOptions={setSiteOptions} setSelectedSiteOption={setSelectedSiteOption}/>
             <Header2 setShow={setShow} show={show} showSearchBar={false} showDatePicker={false} />
           </div>
           <div className="flex flex-col">
@@ -85,13 +74,19 @@ export default function Alert() {
               <div className="p-1.5 w-full inline-block align-middle">
                 <div className="overflow-hidden border rounded-lg">
                   {alertList.length > 0 && <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-blue-100">
                       <tr>
                         <th
                           scope="col"
                           className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                         >
                           ID
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                        >
+                          Monotaine ID
                         </th>
                         <th
                           scope="col"
@@ -124,7 +119,10 @@ export default function Alert() {
                               return (
                                 <tr>
                                 <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap" >
-                                  {data.id}
+                                  {index}
+                              </td>
+                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap" >
+                                  {data.key_str.slice(0,data.key_str.indexOf('#'))}
                               </td>
                               <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap" >
                                   {data.sorting_timestamp}
@@ -136,32 +134,14 @@ export default function Alert() {
                                   {data?.alerts?.claimed_status === true? 'True' : 'False'}   
                               </td>
                               <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap" >
-                            <button className="bg-transparent hover:bg-yellow-200 text-yellow-700 font-semibold hover:text-white py-2 px-4 border border-yellow-500 hover:border-transparent rounded"onClick={() => handleClaim(data)}>Claim Now</button>
+                            <button className={`${data?.alerts?.claimed_status === true ? "bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-l cursor-not-allowed" : "bg-transparent hover:bg-gray-400 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded"}`}onClick={() => handleClaim(data,index)}>
+                              {data?.alerts?.claimed_status === true ? "Claimed" : "Claim Now"}</button>
                             </td>
                               </tr>
                               )
                             })
                             }                                                 
                       </tbody>
-                    {/* <tbody className="divide-y divide-gray-200">
-                      <tr>
-                        <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                          Id
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                          22-June-2023
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                          Alert type
-                        </td>
-                        <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
-                            Claimed status
-                        </td>
-                        <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
-                            <button className="bg-transparent hover:bg-yellow-200 text-yellow-700 font-semibold hover:text-white py-2 px-4 border border-yellow-500 hover:border-transparent rounded" onClick={handleClaim}>Claim Now</button>
-                        </td>
-                      </tr>
-                    </tbody> */}
                   </table>}
                   {alertList.length < 1 && <p className="text-center">No data available!!</p>}
                 </div>
@@ -171,6 +151,5 @@ export default function Alert() {
         </div>
         
       </div>
-    </>
   );
 }

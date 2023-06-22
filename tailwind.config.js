@@ -2,39 +2,33 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
-    './src/**/*.{js,jsx,ts,tsx}',
-    './node_modules/react-tailwindcss-datetimepicker/dist/react-tailwindcss-datetimepicker.js'
-    
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/react-tailwindcss-datetimepicker/dist/react-tailwindcss-datetimepicker.js",
   ],
-  
+
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Noto Sans", "sans-serif"],
-        display: ["Playfair Display", "serif"],
-
+        'sans': ['-apple-system', 'BlinkMacSystemFont'],
+        'serif': ['Georgia', 'Cambria'],
+        'mono': ['SFMono-Regular', 'Menlo'],
+        'body': ['Open Sans'],
       },
       colors: {
-     
-        primary: "#ca261a",
+        primary: "#fff",
         primary2: "#ad1f15",
-
-   
-       
-       
       },
       spacing: {
         7: "1.75rem",
         9: "2.25rem",
         28: "7rem",
-        30:"14rem",
+        30: "14rem",
         80: "20rem",
         96: "24rem",
         128: "32rem",
         136: "36rem",
         140: "40rem",
       },
-
 
       height: {
         "1/2": "50%",
@@ -70,16 +64,13 @@ module.exports = {
         "4xl": "0px 8px 25px rgba(0, 0, 0, 0.04);",
         "5xl": "0px 8px 25px rgba(0, 0, 0, 0.12)",
         "6xl": "0px 8px 25px rgba(0, 0, 0, 0.20)",
-        custom1:"0px 4px 16px 10px rgba(0, 0, 0, 0.1)",
-        custom2:"8px 2px 5px -3px rgba(0,0,0,0.15)",
-        custom3:"-1px 0px 5px 2px rgba(0,0,0,0.05)",
         outline: "0 0 0 3px rgba(101, 31, 255, 0.4)",
       },
     },
   },
   variants: {
     scale: ["responsive", "hover", "focus", "group-hover"],
-    textDecoration: ['responsive', 'hover', 'focus', 'focus-visible'],    
+    textDecoration: ["responsive", "hover", "focus", "focus-visible"],
     textColor: ["responsive", "hover", "focus", "group-hover"],
     opacity: ["responsive", "hover", "focus", "group-hover"],
     backgroundColor: ["responsive", "hover", "focus", "group-hover"],
@@ -89,5 +80,4 @@ module.exports = {
       backgroundColor: ["odd"],
     },
   },
-
 };

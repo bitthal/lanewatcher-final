@@ -1,16 +1,9 @@
-import React, { useState } from "react";
-import Head from "next/head";
+import React, { Fragment } from "react";
 import Link from "next/link";
-import Header from "@/components/Header";
+
 export default function Index() {
   return (
-    <>
-      <Head>
-        <title>Lanewatcher</title>
-        <meta name="description" content="LaneWatcher" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <Header />
+    <Fragment>
       <div className="">
         <section className="bg-gray-50 ">
           <div className="flex flex-col items-center  px-6 py-8 mx-auto md:min-h-[90vh] lg:py-0">
@@ -88,7 +81,7 @@ export default function Index() {
                   </div>
                   <Link
                     href="/tracker"
-                    className="bg-primary w-full flex justify-center mt-10 text-white  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    className="bg-red-500 w-full flex justify-center mt-10 text-white  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                   >
                     Sign in
                   </Link>
@@ -107,6 +100,6 @@ export default function Index() {
           </div>
         </section>
       </div>
-    </>
+    </Fragment>
   );
 }

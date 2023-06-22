@@ -5,7 +5,7 @@ export default function Dashboard() {
   const Tracker = dynamic(() => import("./tracker"), { ssr: false })
    return (
     <Fragment>
-       <Tracker showDatePicker={true} showSearchBar={true} showRealTimeView={true}/>
+       <Tracker showDashboardView={false} showDatePicker={true} showSearchBar={true} showRealTimeView={true}/>
     </Fragment>
   );
 }

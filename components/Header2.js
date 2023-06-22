@@ -105,7 +105,7 @@ export default function Header2({
           
         </div>
         {showDatePicker && (
-          <div className="flex border-solid border-2 rounded-md shadow-lg box-border ">
+          <div className="flex border-groove border-2">
             <DateTimePicker
               ranges={ranges}
               start={range.start}
