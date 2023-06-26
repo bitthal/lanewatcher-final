@@ -131,7 +131,7 @@ export default function Alert({}) {
                                   {data?.alerts?.claimed_status === true? 'True' : 'False'}   
                               </td>
                               <td className="px-6 py-4 text-sm font-medium text-center whitespace-nowrap" >
-                            <button className={`${data?.alerts?.claimed_status === true ? "bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-l cursor-not-allowed" : "bg-transparent hover:bg-red-800 border-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded"}`}onClick={() => handleClaim(data,index)}>
+                            <button className={`${data?.alerts?.claimed_status === true ? "bg-indigo-800 text-white font-bold py-2 px-4 rounded-l cursor-not-allowed" : "bg-transparent hover:bg-red-800 border-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded"}`}onClick={() => handleClaim(data,index)}>
                               {data?.alerts?.claimed_status === true ? "Claimed" : "Claim Now"}</button>
                             </td>
                               </tr>

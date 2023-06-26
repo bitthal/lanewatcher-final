@@ -269,13 +269,13 @@ export default function Settings({}) {
                                     </p>
                                   )}
                                   <button
-                                    className="w-3/6 bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border hover:border-transparent animate-pulse"
+                                    className="w-3/6 my-1 bg-transparent text-blue-800 border-blue-800 hover:bg-indigo-800 hover:text-white bg-indigo-800 font-semibold py-2 px-4 border hover:border-transparent"
                                     type="submit"
                                   >
                                     Submit
                                   </button>
                                   <button
-                                    className="w-3/6 bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border hover:border-transparent animate-pulse"
+                                    className="w-3/6 my-1 bg-transparent text-red-800 border-red-800 hover:bg-red-800 hover:text-white font-semibold py-2 px-4 border hover:border-transparent"
                                     type="reset"
                                     onClick={cancelHandler}
                                   >
