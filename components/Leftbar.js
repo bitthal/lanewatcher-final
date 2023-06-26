@@ -65,7 +65,7 @@ export default function Leftbar({ show }) {
             }
           >
             <Tooltip message="Shipment">
-            <Link href="/shipment" className="cursor-not-allowed">
+            <Link href="/shipment" className="">
               <svg
                 className="inline disabled"
                 width="24"
@@ -184,12 +184,12 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/messages"
-              ? "cursor-not-allowed flex bg-indigo-800 items-center p-5 gap-2 inline"
-              : "cursor-not-allowed flex items-center p-5 gap-2 inline"
+              ? " flex bg-indigo-800 items-center p-5 gap-2 inline"
+              : " flex items-center p-5 gap-2 inline"
             }
           >
             <Tooltip message="Messages" >
-            <Link href="/messages" className={`${!show ? "w-32 cursor-not-allowed" : "w-auto cursor-not-allowed"}`}>
+            <Link href="/messages" className={`${!show ? "w-32 " : "w-auto "}`}>
               <svg
                 className="inline"
                 width="24"
@@ -213,12 +213,12 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/analysis"
-              ? "cursor-not-allowed flex bg-indigo-800 items-center p-5 gap-2 inline"
-              : "cursor-not-allowed flex items-center p-5 gap-2 inline"
+              ? " flex bg-indigo-800 items-center p-5 gap-2 inline"
+              : " flex items-center p-5 gap-2 inline"
             }
           >
             <Tooltip message="Analysis">
-            <Link href="/analysis" className={`${!show ? "w-32 cursor-not-allowed" : "w-auto cursor-not-allowed"}`}>
+            <Link href="/analysis" className={`${!show ? "w-32 " : "w-auto "}`}>
               <svg
                 className="inline"
                 width="24"
@@ -242,12 +242,12 @@ export default function Leftbar({ show }) {
           <div
             className={
               router.pathname == "/support"
-              ? "cursor-not-allowed flex bg-indigo-800 items-center p-5 gap-2 inline"
-              : "cursor-not-allowed flex items-center p-5 gap-2 inline"
+              ? " flex bg-indigo-800 items-center p-5 gap-2 inline"
+              : " flex items-center p-5 gap-2 inline"
             }
           >
             <Tooltip message="Support">
-            <Link href="/support" className={`${!show ? "w-32 cursor-not-allowed" : "w-auto cursor-not-allowed"}`}>
+            <Link href="/support" className={`${!show ? "w-32 " : "w-auto "}`}>
               <svg
                 className="inline"
                 width="24"
@@ -270,11 +270,11 @@ export default function Leftbar({ show }) {
 
           <div className={
               router.pathname == "/logout"
-              ? "cursor-not-allowed flex bg-indigo-800 items-center p-5 gap-2 inline"
-              : "cursor-not-allowed flex items-center p-5 gap-2 inline"
+              ? " flex bg-indigo-800 items-center p-5 gap-2 inline"
+              : " flex items-center p-5 gap-2 inline"
             }>
           <Tooltip message="Logout">
-            <Link href="/logout" className={`${!show ? "w-32 cursor-not-allowed" : "w-auto cursor-not-allowed"}`}>
+            <Link href="/logout" className={`${!show ? "w-32 " : "w-auto "}`}>
               <svg
                 className="inline"
                 width="24"

@@ -68,7 +68,7 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
             {Alldata?.map((data, index) => {
               return (
                 <div className="" key={index}>
-                  <View showPieChart={showPieChart ? false : true} showDashboardView={showDashboardView ? false : true} show={show} data={data} showRealTimeView={showRealTimeView ? false : true}/>
+                  <View showPieChart={showPieChart ? true : false} showDashboardView={showDashboardView ? false : true} show={show} data={data} showRealTimeView={showRealTimeView ? false : true}/>
                 </div>
               );
             })}

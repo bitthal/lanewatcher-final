@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-key */
 import React, { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
@@ -23,9 +24,8 @@ export default function Header( ) {
   const [modalState,setModalOpen] = useState(false)
   
   const router =
-    useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
+   useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
     useRouter().pathname.replace(/\//, "").slice(1);
-  console.log(router,'router')
   const [siteId, setSiteID] = useState();
   useEffect(() => {
     const fetchData = async () => {
@@ -82,7 +82,7 @@ export default function Header( ) {
         <Link href="/tracker">
         <p className="w-fit text-center text-red-800 font-bold">UST Canada Post</p>
         </Link>
-        <p className="w-fit  font-bold text-red-800">{router}</p>
+       { router !== '404' && <p className="w-fit  font-bold text-red-800">{router}</p>}
       </div>
 
       {(router !== '') && <div className="flex items-center gap-6">

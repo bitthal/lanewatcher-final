@@ -55,7 +55,7 @@ export default function Processed({ show, data,showDashboardView }) {
         ) : (
           <div className="flex flex-col  items-center text-center h-full justify-between gap-5">
             <div className="flex  items-center text-center justify-between gap-4">
-              <i className="fa-solid fa-cart-shopping text-primary2" />
+              <i className="fa-solid fa-cart-shopping text-indigo-800" />
               <p className="font-bold text-primary2">Processed</p>
 
               <p className="font-bold text-green-700">

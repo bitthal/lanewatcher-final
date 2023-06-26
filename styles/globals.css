@@ -2,12 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.react-modal {
-  overflow-y: scroll;
-}
-.ReactModal__Content.ReactModal__Content--after-open{
-  overflow: scroll;
-}
+
 div#DateRangePickerChildren {
   display: flex;
 }
