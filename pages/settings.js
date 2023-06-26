@@ -177,29 +177,29 @@ export default function Settings({}) {
                 <div className="p-1.5 w-full inline-block align-middle">
                   <div className="overflow-hidden border rounded-lg">
                     <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-red-100">
+                      <thead className="bg-indigo-800">
                         <tr className="">
                           <th
                             scope="col"
-                            className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
+                            className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                           >
                             ID
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
+                            className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                           >
                             SITE ID
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
+                            className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                           >
                             Email
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
+                            className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                           >
                             Action
                           </th>

@@ -71,41 +71,41 @@ export default function Alert({}) {
               <div className="p-1.5 w-full inline-block align-middle">
                 <div className="overflow-hidden border rounded-lg">
                   {alertList.length > 0 && <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-red-100">
+                    <thead className="bg-indigo-800">
                       <tr>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                         >
                           ID
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                         >
                           Monotaine ID
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                         >
                           Timestamp
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                         >
                           Type
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                         >
                           Claimed status
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                         >
                           Claim Action
                         </th>
