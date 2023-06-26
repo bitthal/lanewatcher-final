@@ -9,13 +9,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['-apple-system', 'BlinkMacSystemFont'],
-        'serif': ['Georgia', 'Cambria'],
-        'mono': ['SFMono-Regular', 'Menlo'],
-        'body': ['Open Sans'],
+        sans: ["Noto Sans", "sans-serif"],
       },
       colors: {
-        primary: "#fff",
+        primary: "#A30000",
         primary2: "#ad1f15",
       },
       spacing: {

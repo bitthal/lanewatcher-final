@@ -6,7 +6,7 @@ import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
 import axios from "axios";
 
-export default function Tracker({showDatePicker,showRealTimeView,showDashboardView }) {
+export default function Tracker({showDatePicker,showRealTimeView,showDashboardView, showPieChart }) {
   const [show, setShow] = useState(true);
   const [date, setDate] = useState(new Date());
   const [Alldata, setAlldata] = useState();
@@ -50,11 +50,11 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
     };
   }, []);
 
-  if(!Alldata){
-    return (
-      <p>No data found!</p>
-    )
-  }
+  // if(!Alldata){
+  //   return (
+  //     <p>Loading!</p>
+  //   )
+  // }
    return (
     <>
       <div className="flex gap-4 my-3 mr-3 h-auto">
@@ -68,7 +68,7 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
             {Alldata?.map((data, index) => {
               return (
                 <div className="" key={index}>
-                  <View showDashboardView={showDashboardView ? false : true} show={show} data={data} showRealTimeView={showRealTimeView ? false : true}/>
+                  <View showPieChart={showPieChart ? false : true} showDashboardView={showDashboardView ? false : true} show={show} data={data} showRealTimeView={showRealTimeView ? false : true}/>
                 </div>
               );
             })}

@@ -1,13 +1,13 @@
+/* eslint-disable react/jsx-key */
 import React, { useState,useEffect,useContext } from "react";
 import Leftbar from "@/components/Leftbar";
 import Header2 from "@/components/Header2";
 import axios from "axios";
 import { value_data } from "@/context/context";
 
-export default function Alert() {
+export default function Alert({}) {
   
   const { value } = useContext(value_data);
-  console.log(value,'value')
   const [show, setShow] = useState(true);
   const [alertList, setAlerts] = useState('');
   useEffect(() => { 
@@ -25,7 +25,6 @@ export default function Alert() {
 
 
   async function getAlertHandler (payload){
-    console.log(value,'siteDropDownSelectedValue')
       await axios
       .post(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, null, {
         params:{
@@ -36,7 +35,6 @@ export default function Alert() {
       .then((response) => {
         const mapped = response.data.dlist.flatMap(({alerts,key_str,sorting_timestamp,id}) =>
         alerts.map(alerts => ({alerts,key_str,sorting_timestamp,id})))
-        console.log(mapped)
         setAlerts(mapped)
       });
     
@@ -44,7 +42,7 @@ export default function Alert() {
 
   const handleClaim = (payload,index) => {
     if(payload.alerts.claimed_status === false){
-      const key_str = payload.key_str;
+    const key_str = payload.key_str;
     const username = 'l7yhyjg';
     axios
       .post(`${process.env.NEXT_PUBLIC_CLAIMNOW_API_URL}`, null, {
@@ -57,13 +55,12 @@ export default function Alert() {
         let data = [...alertList];
         data.splice(index, 1);
         setAlerts(data);
-       console.log(response);
       });
     }
   };
 
   return (
-      <div className="flex gap-4 my-3 mr-3 h-auto bg-blue-100">
+      <div className="flex gap-4 my-3 mr-3 h-auto">
         <Leftbar show={show} />
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
@@ -74,67 +71,67 @@ export default function Alert() {
               <div className="p-1.5 w-full inline-block align-middle">
                 <div className="overflow-hidden border rounded-lg">
                   {alertList.length > 0 && <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-blue-100">
+                    <thead className="bg-red-100">
                       <tr>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
                         >
                           ID
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
                         >
                           Monotaine ID
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
                         >
                           Timestamp
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
                         >
                           Type
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
                         >
                           Claimed status
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          className="px-6 py-3 text-xs font-bold text-center text-black-800 uppercase "
                         >
                           Claim Action
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200">
+                    <tbody className="divide-y divide-gray-200 bg-white-100">
                     {alertList && alertList?.map((data, index) => {
                               return (
                                 <tr>
-                                <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap" >
+                                <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
                                   {index}
                               </td>
-                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap" >
+                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
                                   {data.key_str.slice(0,data.key_str.indexOf('#'))}
                               </td>
-                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap" >
+                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
                                   {data.sorting_timestamp}
                               </td>
-                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap" >
+                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
                                   {data?.alerts?.type}
                               </td>
-                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap" >
+                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
                                   {data?.alerts?.claimed_status === true? 'True' : 'False'}   
                               </td>
-                              <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap" >
-                            <button className={`${data?.alerts?.claimed_status === true ? "bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-l cursor-not-allowed" : "bg-transparent hover:bg-gray-400 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded"}`}onClick={() => handleClaim(data,index)}>
+                              <td className="px-6 py-4 text-sm font-medium text-center whitespace-nowrap" >
+                            <button className={`${data?.alerts?.claimed_status === true ? "bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-l cursor-not-allowed" : "bg-transparent hover:bg-red-800 border-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded"}`}onClick={() => handleClaim(data,index)}>
                               {data?.alerts?.claimed_status === true ? "Claimed" : "Claim Now"}</button>
                             </td>
                               </tr>
@@ -143,7 +140,7 @@ export default function Alert() {
                             }                                                 
                       </tbody>
                   </table>}
-                  {alertList.length < 1 && <p className="text-center">No data available!!</p>}
+                  {/* {alertList.length < 1 && <p className="text-center">No data available!!</p>} */}
                 </div>
               </div>
             </div>

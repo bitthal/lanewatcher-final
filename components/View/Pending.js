@@ -69,7 +69,7 @@ export default function Pending({ show, data,showDashboardView }) {
 
   return (
     <>
-      <div className={`${show ? "h-96" : "h-96"}  bg-yellow-100 rounded-xl p-5`}>
+      <div className={`${show ? "h-96" : "h-96"} bg-white rounded-xl p-5`}>
         {!show && !showDashboardView ? (
           <div className="flex flex-col items-center justify-center h-full text-center gap-5">
             <p className="font-bold text-primary2">Pending</p>
@@ -162,7 +162,7 @@ export default function Pending({ show, data,showDashboardView }) {
               </div>
 
               <button
-                className="bg-[#001CFF] rounded-md px-2 py-1 text-white text-sm font-bold text-xs"
+                className="bg-[#434190] rounded-md px-2 py-1 text-white text-sm font-bold text-xs"
                 onClick={openModal}
               >
                 See&nbsp;All
@@ -181,6 +181,7 @@ export default function Pending({ show, data,showDashboardView }) {
           className="text-red-700 font-bold absolute top-0 right-0 p-2 "
           onClick={closeModal}
         >
+          <i class="fa fa-window-close" aria-hidden="true"></i>
           Close
         </button>
         <div className="max-w-[700px] h-auto p-10">

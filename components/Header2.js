@@ -65,7 +65,7 @@ export default function Header2({
     apply: "Apply",
     cancel: "Cancel",
   };
-  const maxDate = moment(start).add(24, "hour");
+  const maxDate = moment(start).add(12, "hour");
   function handleApply(startDate, endDate) {
     setRange({ start: startDate, end: endDate });
     setRangeFilter({ start: startDate, end: endDate });
@@ -99,7 +99,7 @@ export default function Header2({
               defaultValue={``}
             />
             <button type="submit" onClick={handleClick}>
-              <i className="px-4  fa-solid fa-magnifying-glass" />{" "}
+              <i className="px-4 fa-solid fa-magnifying-glass" />{" "}
             </button>
           </div>}
           
@@ -107,6 +107,7 @@ export default function Header2({
         {showDatePicker && (
           <div className="flex border-groove border-2">
             <DateTimePicker
+              primaryColor="fuchsia"
               ranges={ranges}
               start={range.start}
               end={range.end}
@@ -135,6 +136,7 @@ export default function Header2({
                   "DD-MM-YYYY(HH:mm)"
                 )} - ${range.end.format("DD-MM-YYYY(HH:mm)")}`}
                 className="w-80 h-full py-2 focus:outline-none block border-solid px-5 cursor-pointer focus:pointer-events-none"
+                disabled
               />
             </DateTimePicker>
           </div>

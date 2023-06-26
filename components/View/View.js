@@ -4,8 +4,9 @@ import Arrow from "./Arrow";
 import Pending from "./Pending";
 import RealTimeView from "./RealTimeView";
 import Processed from "./Processed";
-
-export default function View({ show, data, showRealTimeView,showDashboardView }) {
+import PieChart from "./PieChart";
+export default function View({ show, data, showRealTimeView,showDashboardView,showPieChart }) {
+  
   return (
     <div className="   ">
       <div className="flex overflow-ellipsis">
@@ -17,6 +18,7 @@ export default function View({ show, data, showRealTimeView,showDashboardView })
           <Processed showDashboardView={showDashboardView}  show={show} data={data} />
           <Arrow />
           <PlanogramView data={data} />
+          {showPieChart && <PieChart ></PieChart>}
         </div>
       </div>
     </div>

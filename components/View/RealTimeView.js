@@ -53,7 +53,7 @@ export default function RealTimeView({ data }) {
 
   return (
     <>
-      <div className="h-96 p-5 bg-blue-200 rounded-xl flex flex-col justify-between">
+      <div className="h-96 p-5 bg-white rounded-xl flex flex-col justify-between">
         <h1 className="text-center font-bold text-lg text-primary2">
           Real Time View
         </h1>
@@ -89,7 +89,7 @@ export default function RealTimeView({ data }) {
                   className={`${
                     data?.upper?.monotainer_id == "NA"
                       ? "text-gray-300 "
-                      : "text-white bg-green-500"
+                      : "text-white bg-green-700"
                   } font-bold border  p-2 text-xs shadow-sm hover:shadow-lg rounded-lg w-[90px] break-all`}
                   key={index}
                 >
@@ -110,7 +110,7 @@ export default function RealTimeView({ data }) {
                   className={`${
                     data?.lower?.monotainer_id == "NA"
                       ? "text-gray-300 "
-                      : "text-white bg-green-500"
+                      : "text-white bg-green-700"
                   } font-bold border text-xs p-2  shadow-sm hover:shadow-lg rounded-lg w-[90px] break-all`}
                   key={index}
                 >
@@ -132,7 +132,7 @@ export default function RealTimeView({ data }) {
           className="text-red-700 font-bold absolute top-0 right-0 p-2 "
           onClick={closeModal2}
         >
-          Close
+        <i class="fa fa-window-close" aria-hidden="true"></i>
         </button>
         <div className="max-w-[700px] max-h-[500px] overflow-y-auto m-10">
           <h5 className="text-center font-bold text-xl mb-2">History</h5>

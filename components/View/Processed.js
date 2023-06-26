@@ -41,7 +41,7 @@ export default function Processed({ show, data,showDashboardView }) {
 
   return (
     <>
-      <div className={`${show ? "h-96" : "h-96"}  bg-green-100 rounded-xl p-5`}>
+      <div className={`${show ? "h-96" : "h-96"} bg-white rounded-xl p-5`}>
         {!show && !showDashboardView ? (
           <div className="flex flex-col items-center justify-center h-full text-center gap-5">
             <p className="font-bold text-primary2">Processed</p>
@@ -113,7 +113,7 @@ export default function Processed({ show, data,showDashboardView }) {
               </div>
 
               <button
-                className="bg-[#001CFF] rounded-md px-2 py-1 text-white text-xs font-bold "
+                className="bg-[#434190] rounded-md px-2 py-1 text-white text-xs font-bold "
                 onClick={openModal}
               >
                 See&nbsp;All
