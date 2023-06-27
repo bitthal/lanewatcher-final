@@ -12,7 +12,7 @@ export default function Layout({ children }) {
       </Head>
       <main>
         <Header />
-      <div class="relative top-24">
+      <div class="relative top-24 bg-[#F4F3F8]">
       {children}
       </div>
       </main>
