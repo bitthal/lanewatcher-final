@@ -12,7 +12,7 @@ export default function Leftbar({ show }) {
         !show ? "w-auto" : "translate-x-.5 w-20"
       } border rounded-r-xl shadow-xl pt-5`}
     >
-      <div className="flex absolute top-28 left-4 justify-center gap-2">
+      <div className="flex absolute top-5 left-4 justify-center gap-2">
         <div className="w-2 h-2 rounded-full bg-red-800"></div>
         <div className="w-2 h-2 rounded-full bg-green-700"></div>
         <div className="w-2 h-2 rounded-full bg-indigo-800"></div>
