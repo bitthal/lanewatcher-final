@@ -12,6 +12,7 @@ export default function ModalPopUp({alertList,modalState,closeModalPopUp}) {
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
+      height:"100%",
       transform: "translate(-50%, -50%)",
       overflow: 'scroll',
       WebkitOverflowScrolling: 'touch',
