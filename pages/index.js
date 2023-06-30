@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 export default function Index() {
   return (
     <Fragment>
@@ -11,7 +11,7 @@ export default function Index() {
               href="#"
               className="flex items-center mb-6 text-2xl font-semibold text-gray-900 "
             >
-              <img
+              <Image
                 src="/logo.png"
                 className="object-contain w-40 h-40"
                 alt="logo"
