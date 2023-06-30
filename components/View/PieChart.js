@@ -12,14 +12,14 @@ export const data = {
     {
       data: [30, 40, 30],
       backgroundColor: [
-        '#742a2a',
-        '#276749',
-        '#434190',
+        '#9ae6b4',
+        '#63b3ed',
+        '#e53e3e',
       ],
       borderColor: [
-        '#742a2a',
-        '#276749',
-        '#434190',
+        '#9ae6b4',
+        '#63b3ed',
+        '#e53e3e',
       ],
       borderWidth: 1,
     },
