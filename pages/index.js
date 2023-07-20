@@ -1,28 +1,17 @@
-import React ,{useState,useEffect, Fragment } from "react";
-import { signIn } from 'next-auth/react';
+import React ,{useState, Fragment } from "react";
 import axios from "axios";
 import Image from "next/image";
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import Logo from  './../public/Logo.png';
 export default function Index() {
 
-  const logo = '/public/fav.png'
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginScreen, showLoginScreen] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   // useEffect to retrieve and auto-populate saved credentials from cookies on initial render
-  // useEffect(() => {
-  //   const savedEmail = Cookies.get('savedEmail');
-  //   const savedRememberMe = Cookies.get('savedRememberMe');
-
-  //   if (savedRememberMe === 'true' && savedEmail) {
-  //     setEmail(savedEmail);
-  //     setRememberMe(true);
-  //   }
-  // }, []);
-
+  
   const handleRegister = async (e) => {
     e.preventDefault();
     console.log(username,email,password)
@@ -56,14 +45,13 @@ export default function Index() {
     }
     
   }
+  
 
   return (
     <Fragment>
-      <div className="">
-        <section className="bg-gray-50 ">
-          <div className="flex flex-col items-center  px-6 py-8 mx-auto md:min-h-[90vh] lg:py-0">
-            <a
-              href="#"
+        <div className="bg-gray-50 ">
+          <div className="flex flex-col items-center px-6 py-8 mx-auto md:min-h-[90vh] lg:py-0">
+            <div
               className="flex items-center mb-6 text-2xl font-semibold text-gray-900 "
             >
               <Image
@@ -73,7 +61,7 @@ export default function Index() {
                 width={35}
                 height={35}
               />
-            </a>
+            </div>
             {!loginScreen && <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0  ">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
@@ -161,7 +149,7 @@ export default function Index() {
                   > */}
                      <button type="submit" className="bg-red-500 w-full flex justify-center mt-10 text-white  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Register</button>
                   {/* </Link> */}
-                  <p className="text-sm font-light text-gray-500 ">
+                  <div className="text-sm font-light text-gray-500 ">
                     Already have an account ?
                     <p
                       onClick={(e) => (showLoginScreen(true))}
@@ -169,7 +157,7 @@ export default function Index() {
                     >
                       Log In
                     </p>
-                  </p>
+                  </div>
                 </form>
               </div>
             </div>}
@@ -256,8 +244,7 @@ export default function Index() {
               </div>
             </div>}
           </div>
-        </section>
-      </div>
+        </div>
     </Fragment>
   );
 }

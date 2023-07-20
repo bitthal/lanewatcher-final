@@ -41,12 +41,21 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
         setAlldata(response.data.lanes);
+        
       } catch (error) {
         console.error("Error:", error);
       }
     };
     return ()=>{
       fetchData();
+      const intervalId = setInterval(() => {
+        fetchData();
+      }, 5000); // 5 seconds interval
+  
+      // Clean up the interval on component unmount to prevent memory leaks
+      return () => {
+        clearInterval(intervalId);
+      };
     };
   }, []);
 
