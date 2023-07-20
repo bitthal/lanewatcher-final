@@ -75,10 +75,10 @@ export default function Processed({ show, data,showDashboardView }) {
                       key={index}
                       onClick={() => {
                         setIsOpen2(true);
-                        setTempName(data1?.monotainer_id);
+                        setTempName(data1);
                       }}
                     >
-                      {data1?.monotainer_id}
+                      {data1}
                     </button>
                   ))}
               </div>

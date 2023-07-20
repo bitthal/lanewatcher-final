@@ -57,14 +57,14 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
   // }
    return (
     <>
-      <div className="flex gap-4 my-3 mr-3 h-auto">
+      <div className="flex gap-5 my-3 mr-3 h-auto">
         <Leftbar show={show} />
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
-          <div className={` w-full`}>
+          <div className={`w-full`}>
             <Header2 setShow={setShow} show={show} setUpdated = {handleState} setRangeFilter={setRangeFilter} date={date} showSearchBar={true} selectedValue={selectedValue} setOptionVal={handleOption} newValue={newValue} showDatePicker={showDatePicker ? showDatePicker : false} />
           </div>
           
-          <div className={`flex flex-col gap-8 mt-5  min-w-[650px] w-full`}>
+          <div className={`flex flex-col gap-8 mt-5 w-full`}>
             {Alldata?.map((data, index) => {
               return (
                 <div className="" key={index}>

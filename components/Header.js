@@ -46,6 +46,7 @@ export default function Header( ) {
   }, [setdrpdwnVaue]);
 
   async function getAlertHandler() {
+    console.log(value,'value')
     setModalOpen(true);
     await axios
       .post(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, null, {
@@ -77,7 +78,7 @@ export default function Header( ) {
   }
   return (
     <>
-      <div className="w-full rounded-xl shadow-md  p-5 flex justify-between items-center overflow-hidden fixed">
+      <div className="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed "> 
       <div className="flex gap-16 items-center">
         <Link href="/tracker">
         <p className="w-fit text-center text-red-800 font-bold">UST Canada Post</p>

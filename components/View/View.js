@@ -8,9 +8,8 @@ import PieChart from "./PieChart";
 export default function View({ show, data, showRealTimeView,showDashboardView,showPieChart }) {
   
   return (
-    <div className="   ">
       <div className="flex overflow-ellipsis">
-        <div className="bg-[#F4F3F8]  flex items-center  p-5 rounded-xl ">
+        <div className="bg-[#F4F3F8] flex items-center p-5 rounded-xl">
           <Pending showDashboardView={showDashboardView} show={show} data={data} />
           <Arrow />
           {showRealTimeView && <RealTimeView data={data} />}
@@ -21,6 +20,5 @@ export default function View({ show, data, showRealTimeView,showDashboardView,sh
           {showPieChart && <PieChart ></PieChart>}
         </div>
       </div>
-    </div>
   );
 }

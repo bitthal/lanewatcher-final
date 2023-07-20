@@ -4,9 +4,11 @@ import "nprogress/nprogress.css";
 import Router from "next/router";
 import Layout from "@/components/layout";
 import Context from "../context/context"
+import { SessionProvider } from "next-auth/react"
 
-
-export default function App({ Component, pageProps,router }) {
+export default function App({ Component, 
+  pageProps: { session, ...pageProps},
+  router }) {
 
 
   NProgress.configure({ showSpinner: false });
@@ -23,11 +25,13 @@ export default function App({ Component, pageProps,router }) {
   // console.error = function () {};
   return (
     <>
+     <SessionProvider session={session}>
       <Context>
       <Layout>
       <Component {...pageProps} />
       </Layout>
       </Context>
+      </SessionProvider>
     </>
   );
 }

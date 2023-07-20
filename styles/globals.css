@@ -10,6 +10,9 @@ div#daterangepicker {
   right: 0!important;
   left: auto;
 }
+.realTimeView{
+  width: 1000px;
+}
 /* -------container size------------- */
 .container-sk {
     padding-right: 15px;

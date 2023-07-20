@@ -114,7 +114,7 @@ export default function Pending({ show, data,showDashboardView }) {
             </div>
 
             <div className="flex gap-3 flex-col">
-              {data?.pending?.monotainers}
+              {/* {data?.pending?.monotainers} */}
               <div className="grid grid-cols-2 gap-3">
                 {data?.pending?.monotainers
                   ?.slice((page - 1) * dataPerPage, page * dataPerPage)
@@ -122,12 +122,12 @@ export default function Pending({ show, data,showDashboardView }) {
                     <button
                       onClick={() => {
                         setIsOpen2(true);
-                        setTempName(data1?.monotainer_id);
+                        setTempName(data1);
                       }}
                       className="text-red-800 border w-[90px] py-2 break-all text-xs border-red-800 rounded-lg"
                       key={index}
                     >
-                      {data1?.monotainer_id}
+                      {data1}
                     </button>
                   ))}
               </div>
@@ -194,7 +194,7 @@ export default function Pending({ show, data,showDashboardView }) {
                   className="text-red-700 border px-3 py-2 border-red-700 rounded-lg"
                   key={index}
                 >
-                  {data1?.monotainer_id}
+                  {data1}
                 </button>
               );
             })}

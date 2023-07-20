@@ -36,7 +36,7 @@ export default function Leftbar({ show }) {
             }
           >
             <Tooltip message="Dashboard">
-            <Link href="/dashboard" className={`${!show ? "w-32" : "w-auto"}`}>
+            <Link href="/dashboard" className={`${!show ? "w-32" : ""}`}>
               <svg
                 className="inline"
                 width="24"
