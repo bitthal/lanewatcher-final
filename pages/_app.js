@@ -4,7 +4,7 @@ import "nprogress/nprogress.css";
 import Router from "next/router";
 import Layout from "@/components/layout";
 import Context from "../context/context"
-// import { SessionProvider } from "next-auth/react"
+
 
 export default function App({ Component, 
   pageProps,

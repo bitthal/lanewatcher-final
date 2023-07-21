@@ -56,22 +56,25 @@ body{
 
 
 body::-webkit-scrollbar-track {
+  width: 3px;
   background-color: #FCF9F1 !important;
- 
+  cursor: pointer!important;
 }
 
-body::-webkit-scrollbar {
-  
+::-webkit-scrollbar {
   width: 12px;
-  background-color: #676907 !important;
+  background-color:#cacaca !important;
+  border-radius: 12px;
+  cursor: pointer!important;
 }
 
 
 
-body::-webkit-scrollbar-thumb {
-  background-color:#676907 !important;
-
- 
+::-webkit-scrollbar-thumb {
+  width: 12px;
+  background-color:#cacaca !important;
+  border-radius: 12px;
+  cursor: pointer!important;
 }
 /* ------------------------------------------------------------- */
 
