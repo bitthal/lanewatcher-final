@@ -75,18 +75,16 @@ export default function RealTimeView({ data }) {
         <h1 className="text-center font-bold text-lg text-primary2 justify-between">
           <span>Real Time View</span>
           <span className="text-lg font-bold text-green-600">
-            {" "}
             &nbsp;&nbsp;{data?.real_time_positions?.length}
           </span>
-        </h1>
-        <div className="flex justify-between gap-1">
-          <span className="text-black font-bold">
+          <p className="text-black font-bold">
             Lane :&nbsp;&nbsp;{capitalizeFirstLetter(data.lane_name)}
-          </span>
-          <span className="text-black font-bold">
+          </p>
+          <p className="text-black font-bold">
             Camera :&nbsp;&nbsp;{data.camera_id}
-          </span>
-        </div>
+          </p>
+        </h1>
+          
           {/* <div className="flex flex-row justify-content">
           </div> */}
           <div className="grid grid-cols-8 gap-4">
