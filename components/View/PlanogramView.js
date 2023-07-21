@@ -115,7 +115,7 @@ export default function PlanogramView({ data }) {
       </div>
     </div>
     {modalState && <ModalPopUp
-      alertList={alertList}
+      tableData={alertList}
       modalState={modalState}
       closeModalPopUp={closeModalPopUp}>
       </ModalPopUp>}

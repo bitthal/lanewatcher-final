@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Tracker({showDatePicker,showRealTimeView,showDashboardView, showPieChart }) {
   const [show, setShow] = useState(true);
@@ -12,8 +13,10 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
   const [Alldata, setAlldata] = useState();
   const [newValue, setState] = useState('');
   const [selectedValue,setOptionVal] = useState('');
-
-  function setRangeFilter(date){
+  const router =
+    useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
+    useRouter().pathname.replace(/\//, "").slice(1);
+      function setRangeFilter(date){
     setDate(date);
     handleSubmit(date);
   }
@@ -47,7 +50,8 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
       }
     };
     return ()=>{
-      fetchData();
+      if(router !== ""){
+        fetchData();
       const intervalId = setInterval(() => {
         fetchData();
       }, 5000); // 5 seconds interval
@@ -56,6 +60,8 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
       return () => {
         clearInterval(intervalId);
       };
+      }
+      
     };
   }, []);
 

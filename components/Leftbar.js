@@ -6,6 +6,10 @@ import { useRouter } from "next/router";
 
 export default function Leftbar({ show }) {
   const router = useRouter();
+  const handleLogout=() =>{
+    localStorage.clear();
+    router.push('/');
+  }
   return (
     <div
       className={`duration-300 border rounded-r-xl shadow-xl pt-5 ${
@@ -274,7 +278,7 @@ export default function Leftbar({ show }) {
               : " flex items-center p-5 gap-2 inline"
             }>
           <Tooltip message="Logout">
-            <Link href="/logout" className={`${!show ? "w-32 " : "w-auto "}`}>
+            <Link href="/" className={`${!show ? "w-32 " : "w-auto "}`} onClick={handleLogout}>
               <svg
                 className="inline"
                 width="24"
@@ -291,7 +295,7 @@ export default function Leftbar({ show }) {
                 />
               </svg>
               {!show && (
-                <span className={router.pathname == "/logout" ? "text-white font-bold p-0.5 m-2" : "text-red-800 font-bold p-0.5 m-2"}>Logout</span>
+                <span className={router.pathname == "/" ? "text-white font-bold p-0.5 m-2" : "text-red-800 font-bold p-0.5 m-2"}>Logout</span>
               )}
             </Link>
             </Tooltip>

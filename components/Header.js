@@ -23,12 +23,14 @@ export default function Header() {
   const [alertList, setAlerts] = useState("");
   const [modalState, setModalOpen] = useState(false);
   const [apiCalled, setApiCalled] = useState(false);
+  const [UserData,setUserData] = useState([]);
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
     useRouter().pathname.replace(/\//, "").slice(1);
   const [siteId, setSiteID] = useState();
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -42,6 +44,11 @@ export default function Header() {
       }
     };
     return () => {
+      if (typeof window !== 'undefined' && router !== "" && localStorage.getItem('userData')) {
+        const arrayData = [];
+        arrayData.push(JSON.parse(localStorage.getItem('userData')));
+        setUserData(arrayData[0].username ? arrayData[0].username : arrayData[0].email);  
+      }
       if (!apiCalled && router !== "") {
         fetchData();
         setApiCalled(true);
@@ -122,7 +129,7 @@ export default function Header() {
             </div>
 
             <div className="flex gap-4 items-center">
-              <p className="w-fit font-bold text-red-800">Welcome, User!</p>
+              <p className="w-fit font-bold text-red-800">Welcome,{UserData}!</p>
               <i className=" text-2xl  fa-solid fa-user"></i>
             </div>
           </div>
@@ -130,7 +137,7 @@ export default function Header() {
       </div>
       {modalState && (
         <ModalPopUp
-          alertList={alertList}
+        tableData={alertList}
           modalState={modalState}
           closeModalPopUp={closeModalPopUp}
         ></ModalPopUp>

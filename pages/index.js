@@ -3,15 +3,17 @@ import axios from "axios";
 import Image from "next/image";
 // import Cookies from 'js-cookie';
 import Logo from  './../public/logo.png';
-export default function Index() {
+import { useRouter } from 'next/router';
 
+export default function Index() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginScreen, showLoginScreen] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [userDataRegister,setuserDataRegister] = useState('');
   // useEffect to retrieve and auto-populate saved credentials from cookies on initial render
-  
+  const router = useRouter();
   const handleRegister = async (e) => {
     e.preventDefault();
     console.log(username,email,password)
@@ -30,18 +32,23 @@ export default function Index() {
     //   Cookies.remove('savedRememberMe');
     // }
     if(loginScreen){
-      localStorage.setItem('userData', JSON.stringify(userData));
+      // localStorage.setItem('userData', JSON.stringify(userData));
     axios.post(`${process.env.NEXT_PUBLIC_API_URL_LOGIN}`, {email,password}).then((response) => {
-      setuserDataRegister({email,password});
-      localStorage.setItem('userData', JSON.stringify(userData));
+      setuserDataRegister(JSON.stringify(response.data));
+      localStorage.setItem('userData',JSON.stringify(response.data) );
+      router.push('/tracker');
     });
+    
     }
     else{
-      localStorage.setItem('userData', JSON.stringify(userData));
     axios.post(`${process.env.NEXT_PUBLIC_API_URL_REGISTER}`, userData).then((response) => {
-      setuserDataRegister(userData);
-      localStorage.setItem('userData', JSON.stringify(userData));
+      console.log(response.data,'respo')
+      setuserDataRegister(JSON.stringify(response.data));
+      localStorage.setItem('userData',JSON.stringify(response.data) );
+      // localStorage.setItem('userData', JSON.stringify(userData));
+      router.push('/tracker');
     });
+    
     }
     
   }

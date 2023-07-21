@@ -17,7 +17,7 @@ export default function View({ show, data, showRealTimeView,showDashboardView,sh
           <Processed showDashboardView={showDashboardView}  show={show} data={data} />
           <Arrow />
           <PlanogramView data={data} />
-          {showPieChart && <PieChart ></PieChart>}
+          {showPieChart && <PieChart res={data}></PieChart>}
         </div>
       </div>
   );

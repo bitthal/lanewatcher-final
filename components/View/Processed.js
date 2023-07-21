@@ -144,7 +144,7 @@ export default function Processed({ show, data,showDashboardView }) {
                   className="text-green-700 border px-3 py-2 border-green-700 rounded-lg"
                   key={index}
                 >
-                  {data1?.monotainer_id}
+                  {data1}
                 </button>
               );
             })}

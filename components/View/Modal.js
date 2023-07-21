@@ -4,7 +4,8 @@ import React, { Fragment,useState } from "react";
 import Modal from "react-modal";
 
 
-export default function ModalPopUp({alertList,modalState,closeModalPopUp}) {
+export default function ModalPopUp({tableData,modalState,closeModalPopUp,listData,tableData1}) {
+  
   const customStyles = {
     content: {
       top: "50%",
@@ -43,10 +44,10 @@ export default function ModalPopUp({alertList,modalState,closeModalPopUp}) {
         >
           <i class="fa fa-window-close" aria-hidden="true"></i>
         </button>
-        <div className="max-w-[700px] max-h-[500px] overflow-y-auto m-10">
+        {tableData && <div className="max-w-[700px] max-h-[500px] overflow-y-auto m-10">
           <h5 className="text-center font-bold text-xl mb-2">Active Alerts</h5>
           <div className="overflow-hidden border rounded-lg">
-            {alertList.length > 0 && (
+            {data.length > 0 && (
               <table className="min-w-full divide-y divide-gray-200">
                 <thead>
                   <tr>
@@ -111,7 +112,21 @@ export default function ModalPopUp({alertList,modalState,closeModalPopUp}) {
               </table>
             )}
           </div>
-        </div>
+        </div>}
+        {listData && <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
+            {listData?.real_time_positions?.map((data1, index) => {
+              return (
+                <button
+                  className="text-red-700 border px-3 py-2 border-red-700 rounded-lg"
+                  key={index}
+                >
+                  {data1.monotainer_id}
+                </button>
+              );
+            })}
+          </div>
+          }
+          
       </Modal>
     </Fragment>
   );
