@@ -73,7 +73,7 @@ export default function ModalPopUp({
           className="text-red-700 font-bold absolute top-0 right-0 p-2 "
           onClick={closeModal2}
         >
-          <i class="fa fa-window-close" aria-hidden="true"></i>
+          <i className="fa fa-window-close" aria-hidden="true"></i>
         </button>
         {alertsTableData && (
           <div className="max-w-[700px] max-h-[500px] overflow-y-auto m-10">

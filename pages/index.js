@@ -81,6 +81,7 @@ export default function Index() {
               alt="logo"
               width={35}
               height={35}
+              priority
             />
           </div>
           {!loginScreen && (
@@ -101,6 +102,7 @@ export default function Index() {
                       Your Name
                     </label>
                     <input
+                      autoComplete="true"
                       type="text"
                       name="username"
                       id="username"
@@ -118,6 +120,7 @@ export default function Index() {
                       Your email
                     </label>
                     <input
+                      autoComplete="true"
                       type="email"
                       name="email"
                       id="email"
@@ -135,6 +138,7 @@ export default function Index() {
                       Password
                     </label>
                     <input
+                      autoComplete="true"
                       type="password"
                       name="password"
                       id="password"
@@ -148,6 +152,7 @@ export default function Index() {
                     <div className="flex items-start">
                       <div className="flex items-center h-5">
                         <input
+                          autoComplete="true"
                           id="remember"
                           aria-describedby="remember"
                           type="checkbox"
@@ -167,7 +172,7 @@ export default function Index() {
                       </div>
                     </div>
                     <a
-                      href="#"
+                      href="/"
                       className="text-sm font-medium text-white text-primary-600 hover:underline "
                     >
                       Forgot password?
@@ -215,6 +220,7 @@ export default function Index() {
                       Your email
                     </label>
                     <input
+                      autoComplete="true"
                       type="email"
                       name="email"
                       id="email"
@@ -234,6 +240,7 @@ export default function Index() {
                     </label>
                     <div className="flex">
                     <input
+                      autoComplete="true"
                       type={showPassword ?"text" : "password"}
                       name="password"
                       id="password"
@@ -258,6 +265,7 @@ export default function Index() {
                     <div className="flex items-start">
                       <div className="flex items-center h-5">
                         <input
+                          autoComplete="true"
                           id="remember"
                           aria-describedby="remember"
                           type="checkbox"
@@ -272,7 +280,7 @@ export default function Index() {
                       </div>
                     </div>
                     <a
-                      href="#"
+                      href="/"
                       className="text-sm font-medium text-white text-primary-600 hover:underline "
                     >
                       Forgot password?

@@ -122,7 +122,7 @@ export default function Header2({
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                class="w-6 ml-px mt-px cursor-pointer"
+                className="w-6 ml-px mt-px cursor-pointer"
               >
                 <path
                   strokeLinecap="round"
