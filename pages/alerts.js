@@ -7,7 +7,7 @@ import { value_data } from "@/context/context";
 import withAuth from "@/utils/withAuth";
 
 function Alert({}) {
-  
+  const {drpdwnVaue} = useContext(value_data);
   const { value } = useContext(value_data);
   const [show, setShow] = useState(true);
   const [alertList, setAlerts] = useState('');
@@ -25,12 +25,13 @@ function Alert({}) {
   }, [value]);
 
 
-  async function getAlertHandler (payload){
+  async function getAlertHandler (){
+      console.log(value,'value',drpdwnVaue)
       await axios
-      .post(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, null, {
+      .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params:{
-        site_id:  payload ? payload.site_id  : value ? value.site_id : '',
-        camera_id: payload ? Object.values(payload.camera_id).toString()  : value ?  Object.values(value.camera_id).toString() : ''
+        site_id: value ? value.site_id : drpdwnVaue[0].site_id,
+        // camera_id: payload ? Object.values(payload.camera_id).toString()  : value ?  Object.values(value.camera_id).toString() : ''
         }
       })
       .then((response) => {

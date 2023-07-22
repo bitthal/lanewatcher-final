@@ -10,15 +10,15 @@ import { value_data } from "@/context/context";
 export default function Header() {
   const { value, setValue } = useContext(value_data);
   const { drpdwnVaue, setdrpdwnVaue } = useContext(value_data);
-  const  {loginData}  = useContext(value_data);
+  const { loginData } = useContext(value_data);
   const [alertList, setAlerts] = useState("");
   const [modalState, setModalOpen] = useState(false);
   const [apiCalled, setApiCalled] = useState(false);
+  const [siteId, setSiteID] = useState();
+  const [userName, setUserName] = useState("");
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
     useRouter().pathname.replace(/\//, "").slice(1);
-  const [siteId, setSiteID] = useState();
-  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +26,7 @@ export default function Header() {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_SITEID_API_URL}`
         );
+        console.log(response.data,'res')
         setSiteID(response.data.result);
         setdrpdwnVaue(response.data.result);
       } catch (error) {
@@ -33,18 +34,31 @@ export default function Header() {
       }
     };
     return () => {
-        setUserName(JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData'))?.email : loginData?.email);  
+      if (
+        typeof window !== "undefined" &&
+        router !== "" &&
+        localStorage.getItem("userData")
+      ) {
+        setUserName(
+          JSON.parse(localStorage.getItem("userData"))
+            ? JSON.parse(localStorage.getItem("userData"))?.email
+            : loginData?.email
+        );
+      }
+      if (!apiCalled && router !== "") {
         fetchData();
         setApiCalled(true);
+      }
     };
-  }, []);
+  }, [setdrpdwnVaue]);
 
   async function getAlertHandler() {
+    console.log(value,'value',drpdwnVaue,drpdwnVaue[0].site_id);
     setModalOpen(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, null, {
+      .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params: {
-          site_id: value ? value.site_id : drpdwnVaue[0].site_id
+          site_id: value ? value.site_id : drpdwnVaue[0].site_id,
           // camera_id: value
           //   ? value.site_id
           //   : Object.values(drpdwnVaue[0].camera_id).toString(),
@@ -52,13 +66,12 @@ export default function Header() {
       })
       .then((response) => {
         const mapped = response.data.dlist
-          .flatMap(({ alerts, key_str, sorting_timestamp, id }) =>
-            alerts.map((alerts) => ({ alerts, key_str, sorting_timestamp, id }))
+          .flatMap(({ alerts, key_str,camera_id, sorting_timestamp, site_id }) =>
+            alerts.map((alerts) => ({ alerts, key_str,camera_id, sorting_timestamp, site_id }))
           )
           .filter((data) => {
             return data.alerts.claimed_status === true;
           });
-        console.log(mapped);
         setAlerts(mapped);
       });
   }
@@ -73,9 +86,12 @@ export default function Header() {
     <Fragment>
       <div className="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed ">
         <div className="flex gap-16 items-center">
-          <Link href="/tracker" className="w-fit text-center text-red-800 font-bold">
+          <Link
+            href="/tracker"
+            className="w-fit text-center text-red-800 font-bold"
+          >
             {/* <p > */}
-              UST Canada Post
+            UST Canada Post
             {/* </p> */}
           </Link>
           {router !== "404" && (
@@ -111,8 +127,9 @@ export default function Header() {
             </div>
 
             <div className="flex gap-4 items-center">
-              <p className="w-fit font-bold text-red-800">Welcome 
-              <span className="text-indigo-900">&nbsp;&nbsp;{userName}</span>
+              <p className="w-fit font-bold text-red-800">
+                Welcome
+                <span className="text-indigo-900">&nbsp;&nbsp;{userName}</span>
               </p>
               <i className=" text-2xl  fa-solid fa-user"></i>
             </div>
@@ -121,7 +138,7 @@ export default function Header() {
       </div>
       {modalState && (
         <ModalPopUp
-        alertsTableData={alertList}
+          alertsTableData={alertList}
           modalState={modalState}
           closeModalPopUp={closeModalPopUp}
         ></ModalPopUp>

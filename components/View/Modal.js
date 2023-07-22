@@ -81,8 +81,7 @@ export default function ModalPopUp({
               Active Alerts
             </h5>
             <div className="overflow-hidden border rounded-lg">
-              {data.length > 0 && (
-                <table className="min-w-full divide-y divide-gray-200">
+                {alertsTableData && <table className="min-w-full divide-y divide-gray-200">
                   <thead>
                     <tr>
                       <th
@@ -118,8 +117,8 @@ export default function ModalPopUp({
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {alertList &&
-                      alertList?.map((data, index) => {
+                    {alertsTableData &&
+                      alertsTableData?.map((data, index) => {
                         return (
                           <tr>
                             <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
@@ -143,8 +142,8 @@ export default function ModalPopUp({
                         );
                       })}
                   </tbody>
-                </table>
-              )}
+                </table>}
+              
             </div>
           </div>
         )}
