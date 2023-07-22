@@ -137,7 +137,7 @@ function Settings({}) {
         fetchData();
       };
     }
-  }, [drpdwnVaue]);
+  }, []);
 
   return (
     <>

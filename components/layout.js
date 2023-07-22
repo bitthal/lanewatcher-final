@@ -1,8 +1,12 @@
 import Header from './Header'
-import Head  from 'next/head'
+import Head  from 'next/head';
+import { useRouter } from 'next/router';
 
 export default function Layout({ children }) {
-
+  const router = useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
+  useRouter().pathname.replace(/\//, "").slice(1);
+  const showHeader = router == '' ? false : true; // Hide header on the login page
+  console.log(showHeader,router,'index')
   return (
     <> 
       <Head>
@@ -11,8 +15,8 @@ export default function Layout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
-        <Header/>
-      <div className="relative top-24 bg-[#fff]">
+      {showHeader && <Header />}
+      <div className={`${showHeader ? "relative top-24 bg-[#fff]" : ""}`}>
       {children}
       </div>
       </main>

@@ -21,12 +21,17 @@ export default function Header() {
     useRouter().pathname.replace(/\//, "").slice(1);
 
   useEffect(() => {
+    console.log("useEffect triggered");
+    console.log("router:", router);
+    console.log("localStorage:", localStorage.getItem("userData"));
+    console.log("apiCalled:", apiCalled);
+    console.log("siteId:", siteId);
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_SITEID_API_URL}`
         );
-        console.log(response.data,'res')
+        console.log(response.data, "res");
         setSiteID(response.data.result);
         setdrpdwnVaue(response.data.result);
       } catch (error) {
@@ -45,15 +50,15 @@ export default function Header() {
             : loginData?.email
         );
       }
-      if (!apiCalled && router !== "") {
+      if (!apiCalled) {
         fetchData();
         setApiCalled(true);
       }
     };
-  }, [setdrpdwnVaue]);
+  }, []);
 
   async function getAlertHandler() {
-    console.log(value,'value',drpdwnVaue,drpdwnVaue[0].site_id);
+    console.log(value, "value", drpdwnVaue, drpdwnVaue[0].site_id);
     setModalOpen(true);
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
@@ -66,11 +71,18 @@ export default function Header() {
       })
       .then((response) => {
         const mapped = response.data.dlist
-          .flatMap(({ alerts, key_str,camera_id, sorting_timestamp, site_id }) =>
-            alerts.map((alerts) => ({ alerts, key_str,camera_id, sorting_timestamp, site_id }))
+          .flatMap(
+            ({ alerts, key_str, camera_id, sorting_timestamp, site_id }) =>
+              alerts.map((alerts) => ({
+                alerts,
+                key_str,
+                camera_id,
+                sorting_timestamp,
+                site_id,
+              }))
           )
           .filter((data) => {
-            return data.alerts.claimed_status === true;
+            return data.alerts.claimed_status === false;
           });
         setAlerts(mapped);
       });

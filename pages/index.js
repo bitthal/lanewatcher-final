@@ -72,7 +72,12 @@ export default function Index() {
 
   return (
     <Fragment>
-      <div className="bg-gray-50 ">
+      <div className="w-full shadow-md p-5 flex justify-between items-center overflow-hidden absolute top-0">
+        <div className="w-fit text-center text-red-800 font-bold">
+            UST Canada Post
+        </div>
+      </div>
+      <div className="bg-gray-50 relative top-14">
         <div className="flex flex-col items-center px-6 py-8 mx-auto md:min-h-[90vh] lg:py-0">
           <div className="flex items-center mb-6 text-2xl font-semibold text-gray-900 ">
             <Image
@@ -309,5 +314,6 @@ export default function Index() {
       </div>
       <Toaster message={error} onClose={handleCloseToaster}/>
     </Fragment>
+    
   );
 }
