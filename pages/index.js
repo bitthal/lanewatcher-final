@@ -81,7 +81,6 @@ export default function Index() {
               alt="logo"
               width={35}
               height={35}
-              priority
             />
           </div>
           {!loginScreen && (
