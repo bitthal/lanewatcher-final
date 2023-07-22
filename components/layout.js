@@ -1,8 +1,8 @@
 import Header from './Header'
 import Head  from 'next/head'
 
-
 export default function Layout({ children }) {
+
   return (
     <> 
       <Head>
@@ -11,7 +11,7 @@ export default function Layout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
-        <Header />
+        <Header/>
       <div class="relative top-24 bg-[#fff]">
       {children}
       </div>

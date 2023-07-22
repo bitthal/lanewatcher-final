@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import dynamic from 'next/dynamic'
+import withAuth from "@/utils/withAuth";
 
-export default function Dashboard() {
-
+ function Dashboard() {
+  
   const Tracker = dynamic(() => import("./tracker"), { ssr: false })
    return (
     <Fragment>
@@ -10,6 +11,7 @@ export default function Dashboard() {
     </Fragment>
   );
 }
+export default withAuth(Dashboard);
 
 
 

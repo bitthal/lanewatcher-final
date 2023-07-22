@@ -3,40 +3,29 @@
 import React, { useEffect, useState, useContext, Fragment } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { value_data } from "@/context/context";
 import Link from "next/link";
-// import Modal from "react-modal";
 import ModalPopUp from "./View/Modal";
+import { value_data } from "@/context/context";
+
 export default function Header() {
-  // const customStyles = {
-  //   content: {
-  //     top: "50%",
-  //     left: "50%",
-  //     right: "auto",
-  //     bottom: "auto",
-  //     marginRight: "-50%",
-  //     transform: "translate(-50%, -50%)",
-  //   },
-  // };
   const { value, setValue } = useContext(value_data);
   const { drpdwnVaue, setdrpdwnVaue } = useContext(value_data);
+  const  {loginData}  = useContext(value_data);
   const [alertList, setAlerts] = useState("");
   const [modalState, setModalOpen] = useState(false);
   const [apiCalled, setApiCalled] = useState(false);
-  const [UserData,setUserData] = useState([]);
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
     useRouter().pathname.replace(/\//, "").slice(1);
   const [siteId, setSiteID] = useState();
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_SITEID_API_URL}`
         );
-        console.log(response.data.result, "res");
         setSiteID(response.data.result);
         setdrpdwnVaue(response.data.result);
       } catch (error) {
@@ -44,28 +33,21 @@ export default function Header() {
       }
     };
     return () => {
-      if (typeof window !== 'undefined' && router !== "" && localStorage.getItem('userData')) {
-        const arrayData = [];
-        arrayData.push(JSON.parse(localStorage.getItem('userData')));
-        setUserData(arrayData[0].username ? arrayData[0].username : arrayData[0].email);  
-      }
-      if (!apiCalled && router !== "") {
+        setUserName(JSON.parse(localStorage.getItem('userData')) ? JSON.parse(localStorage.getItem('userData'))?.email : loginData?.email);  
         fetchData();
         setApiCalled(true);
-      }
     };
-  }, [setdrpdwnVaue]);
+  }, []);
 
   async function getAlertHandler() {
-    console.log(value, "value");
     setModalOpen(true);
     await axios
-      .post(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, null, {
+      .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, null, {
         params: {
-          site_id: value ? value.site_id : drpdwnVaue[0].site_id,
-          camera_id: value
-            ? value.site_id
-            : Object.values(drpdwnVaue[0].camera_id).toString(),
+          site_id: value ? value.site_id : drpdwnVaue[0].site_id
+          // camera_id: value
+          //   ? value.site_id
+          //   : Object.values(drpdwnVaue[0].camera_id).toString(),
         },
       })
       .then((response) => {
@@ -129,7 +111,9 @@ export default function Header() {
             </div>
 
             <div className="flex gap-4 items-center">
-              <p className="w-fit font-bold text-red-800">Welcome,{UserData}!</p>
+              <p className="w-fit font-bold text-red-800">Welcome 
+              <span className="text-indigo-900">&nbsp;&nbsp;{userName}</span>
+              </p>
               <i className=" text-2xl  fa-solid fa-user"></i>
             </div>
           </div>
@@ -137,7 +121,7 @@ export default function Header() {
       </div>
       {modalState && (
         <ModalPopUp
-        tableData={alertList}
+        alertsTableData={alertList}
           modalState={modalState}
           closeModalPopUp={closeModalPopUp}
         ></ModalPopUp>

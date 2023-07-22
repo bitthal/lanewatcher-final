@@ -4,8 +4,9 @@ import Leftbar from "@/components/Leftbar";
 import Header2 from "@/components/Header2";
 import axios from "axios";
 import { value_data } from "@/context/context";
+import withAuth from "@/utils/withAuth";
 
-export default function Alert({}) {
+function Alert({}) {
   
   const { value } = useContext(value_data);
   const [show, setShow] = useState(true);
@@ -150,3 +151,5 @@ export default function Alert({}) {
       </div>
   );
 }
+
+export default withAuth(Alert);

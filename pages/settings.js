@@ -5,8 +5,9 @@ import Header2 from "@/components/Header2";
 import axios from "axios";
 import { value_data } from "@/context/context";
 import { useForm } from "react-hook-form";
+import withAuth from "@/utils/withAuth";
 
-export default function Settings({}) {
+function Settings({}) {
   const {
     register,
     handleSubmit,
@@ -298,3 +299,5 @@ export default function Settings({}) {
     </>
   );
 }
+
+export default withAuth(Settings);

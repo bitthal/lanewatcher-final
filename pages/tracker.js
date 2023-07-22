@@ -6,8 +6,9 @@ import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
 import axios from "axios";
 import { useRouter } from "next/router";
+import withAuth from "@/utils/withAuth";
 
-export default function Tracker({showDatePicker,showRealTimeView,showDashboardView, showPieChart }) {
+function Tracker({showDatePicker,showRealTimeView,showDashboardView, showPieChart }) {
   const [show, setShow] = useState(true);
   const [date, setDate] = useState(new Date());
   const [Alldata, setAlldata] = useState();
@@ -38,7 +39,7 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
       setAlldata(Object.values(response.data));
     });
   };
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,7 +51,8 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
       }
     };
     return ()=>{
-      if(router !== ""){
+      if(router == "Tracker" || router == "Dashboard"){
+        
         fetchData();
       const intervalId = setInterval(() => {
         fetchData();
@@ -93,6 +95,8 @@ export default function Tracker({showDatePicker,showRealTimeView,showDashboardVi
     </>
   );
 }
+
+export default withAuth(Tracker);
 
 
 
