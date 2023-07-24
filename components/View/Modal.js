@@ -290,51 +290,36 @@ export default function ModalPopUp({
             </h5>
 
             <div className="overflow-x-auto">
-              <table className="min-w-full">
-                <thead className="bg-gray-200 border border-black-800">
-                  <tr>
-                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
-                      Pending
-                    </th>
-                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
-                      Real Time
-                    </th>
-                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
-                      Processed
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="">
-                  {Array.from({
-                    length: Math.max(
-                      AggregatePendingData.length,
-                      AggregateRealTimeData.length,
-                      AggregateProcessedData.length
-                    ),
-                  }).map((_, index) => (
-                    <tr key={index}>
-                      {/* Render the cell for AggregatePendingData if it exists */}
-                      <td className="border border-gray-800 px-4 py-2">
-                        {index < AggregatePendingData.length
-                          ? AggregatePendingData[index]
-                          : ""}
-                      </td>
-                      {/* Render the cell for AggregateRealTimeData if it exists */}
-                      <td className="border border-gray-800 px-6 py-2">
-                        {index < AggregateRealTimeData.length
-                          ? AggregateRealTimeData[index]
-                          : ""}
-                      </td>
-                      {/* Render the cell for AggregateProcessedData if it exists */}
-                      <td className="border border-gray-800 px-6 py-2">
-                        {index < AggregateProcessedData.length
-                          ? AggregateProcessedData[index]
-                          : ""}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <table className="min-w-full divide-y divide-gray-200">
+      <thead className="bg-blue-200 custom-thead"> {/* Add custom-thead class here */}
+        <tr>
+          <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+            Pending
+          </th>
+          <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+            Real Time
+          </th>
+          <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+            Processed
+          </th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-gray-200">
+        {Array.from({ length: Math.max(AggregatePendingData.length, AggregateRealTimeData.length, AggregateProcessedData.length) }).map((_, index) => (
+          <tr key={index}>
+            <td className="border border-gray-800 px-4 py-2">
+              {AggregatePendingData[index]}
+            </td>
+            <td className="border border-gray-800 px-6 py-2">
+              {AggregateRealTimeData[index]}
+            </td>
+            <td className="border border-gray-800 px-6 py-2">
+              {AggregateProcessedData[index]}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
             </div>
           </div>
         )}
