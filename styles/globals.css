@@ -13,6 +13,17 @@
   }
 }
 
+.mt-6rem{
+  margin-top: 50px;
+  height: 200px;
+}
+.mt-7rem{
+  margin-top: 47px;
+  height: 220px;
+}
+/* .mt-3rem{
+  margin-top: 3rem;
+} */
 div#DateRangePickerChildren {
   display: flex;
 }

@@ -24,7 +24,7 @@ export default function Processed({ show, data,showDashboardView }) {
     <>
       <div className={`${show ? "h-96" : "h-96"} bg-white rounded-xl p-5`}>
         {!show && !showDashboardView ? (
-          <div className="flex flex-col items-center justify-center h-full text-center gap-5">
+          <div className="flex flex-col items-center text-center gap-5 mt-55">
             <p className="font-bold text-primary2">Processed</p>
 
             <i className="fa-solid fa-cart-shopping text-primary2" />
@@ -33,7 +33,7 @@ export default function Processed({ show, data,showDashboardView }) {
             </p>
           </div>
         ) : (
-          <div className="flex flex-col  items-center text-center h-full justify-between gap-5">
+          <div className="flex flex-col  items-center text-center  gap-5">
             <div className="flex  items-center text-center justify-between gap-4">
               <i className="fa-solid fa-cart-shopping text-indigo-800" />
               <p className="font-bold text-primary2">Processed</p>
@@ -43,7 +43,7 @@ export default function Processed({ show, data,showDashboardView }) {
               </p>
             </div>
 
-            <div className="flex gap-3 flex-col">
+            <div className="flex gap-3 flex-col mt-6rem">
               <div className="grid grid-cols-2 gap-3">
                 {data?.processed?.monotainers
                   ?.slice((page - 1) * dataPerPage, page * dataPerPage)

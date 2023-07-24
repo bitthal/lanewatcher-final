@@ -28,7 +28,7 @@ export default function PlanogramView({ data }) {
             alerts.map((alerts) => ({ alerts, key_str, sorting_timestamp, id }))
           )
           .filter((data) => {
-            return data.alerts.claimed_status === true;
+            return data.alerts.claimed_status === false;
           });
         console.log(mapped);
         setAlerts(mapped);
@@ -45,7 +45,7 @@ export default function PlanogramView({ data }) {
   };
   return (
     <Fragment>
-      <div className="bg-white rounded-xl p-5 flex flex-col gap-8 justify-between h-96 ">
+      <div className="bg-white rounded-xl p-5 flex flex-col gap-8 h-96 ">
         <div className="flex gap-4 justify-between items-center w-full">
           <svg
             width="30"
@@ -123,7 +123,7 @@ export default function PlanogramView({ data }) {
       </div>
       {modalState && (
         <ModalPopUp
-          tableData={alertList}
+        alertsTableData={alertList}
           modalState={modalState}
           closeModalPopUp={closeModalPopUp}
         ></ModalPopUp>
