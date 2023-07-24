@@ -1,7 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* styles.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
+/* Add custom transition properties */
+@layer utilities {
+  .transition {
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0ms;
+  }
+}
 
 div#DateRangePickerChildren {
   display: flex;

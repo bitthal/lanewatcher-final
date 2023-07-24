@@ -13,7 +13,11 @@ export default function ModalPopUp({
   openTableModalBox,
   realTimeDataData,
   pendingData,
-  processedData
+  processedData,
+  AllData,
+  AggregatePendingData,
+  AggregateRealTimeData,
+  AggregateProcessedData,
 }) {
   const customStyles = {
     content: {
@@ -52,7 +56,6 @@ export default function ModalPopUp({
       eventData: "Parcel received at origin facility",
     },
   ];
-
   function closeModal2() {
     closeModalPopUp(false);
   }
@@ -81,7 +84,8 @@ export default function ModalPopUp({
               Active Alerts
             </h5>
             <div className="overflow-hidden border rounded-lg">
-                {alertsTableData && <table className="min-w-full divide-y divide-gray-200">
+              {alertsTableData && (
+                <table className="min-w-full divide-y divide-gray-200">
                   <thead>
                     <tr>
                       <th
@@ -142,84 +146,82 @@ export default function ModalPopUp({
                         );
                       })}
                   </tbody>
-                </table>}
-              
+                </table>
+              )}
             </div>
           </div>
         )}
         {realTimeDataData && (
-          
           <div className="flex flex-col ">
             <div>
-            <h5 className="text-center font-bold text-xl">Monotainer ID's</h5>
+              <h5 className="text-center font-bold text-xl">Monotainer ID's</h5>
             </div>
-            <div className='grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5'>
-            {listData?.real_time_positions?.map((data1, index) => {
-              return (
-                <button
-                  className={`${
-                    data1.misplaced === 1
-                      ? "text-green-700 border-green-700"
-                      : "text-red-700 border-red-700"
-                  } border px-3 py-2  rounded-lg`}
-                  key={index}
-                  onClick={() => {
-                    openTableModal(data1.monotainer_id);
-                    // closeModal2();
-                  }}
-                >
-                  {data1.monotainer_id}
-                </button>
-              );
-            })}
+            <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
+              {listData?.real_time_positions?.map((data1, index) => {
+                return (
+                  <button
+                    className={`${
+                      data1.misplaced === 1
+                        ? "text-green-700 border-green-700"
+                        : "text-red-700 border-red-700"
+                    } border px-3 py-2  rounded-lg`}
+                    key={index}
+                    onClick={() => {
+                      openTableModal(data1.monotainer_id);
+                      // closeModal2();
+                    }}
+                  >
+                    {data1.monotainer_id}
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}
         {pendingData && (
           <div className="flex flex-col ">
-          <div>
-          <h5 className="text-center font-bold text-xl">Monotainer ID's</h5>
-          </div>
-          <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
-            
-            {listData?.pending?.monotainers?.map((data1, index) => {
-              return (
-                <button
-                  className="text-green-700 border-green-700 text-red-700 border-red-700 border px-3 py-2  rounded-lg"
-                  key={index}
-                  onClick={() => {
-                    openTableModal(data1);
-                    // closeModal2();
-                  }}
-                >
-                  {data1}
-                </button>
-              );
-            })}
-          </div>
+            <div>
+              <h5 className="text-center font-bold text-xl">Monotainer ID's</h5>
+            </div>
+            <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
+              {listData?.pending?.monotainers?.map((data1, index) => {
+                return (
+                  <button
+                    className="text-green-700 border-green-700 text-red-700 border-red-700 border px-3 py-2  rounded-lg"
+                    key={index}
+                    onClick={() => {
+                      openTableModal(data1);
+                      // closeModal2();
+                    }}
+                  >
+                    {data1}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
         {processedData && (
           <div className="flex flex-col ">
-          <div>
-          <h5 className="text-center font-bold text-xl">Monotainer ID's</h5>
-          </div>
-          <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
-            {listData?.processed?.monotainers?.map((data1, index) => {
-              return (
-                <button
-                  className="text-green-700 border-green-700 text-red-700 border-red-700 border px-3 py-2  rounded-lg"
-                  key={index}
-                  onClick={() => {
-                    openTableModal(data1);
-                    // closeModal2();
-                  }}
-                >
-                  {data1}
-                </button>
-              );
-            })}
-          </div>
+            <div>
+              <h5 className="text-center font-bold text-xl">Monotainer ID's</h5>
+            </div>
+            <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
+              {listData?.processed?.monotainers?.map((data1, index) => {
+                return (
+                  <button
+                    className="text-green-700 border-green-700 text-red-700 border-red-700 border px-3 py-2  rounded-lg"
+                    key={index}
+                    onClick={() => {
+                      openTableModal(data1);
+                      // closeModal2();
+                    }}
+                  >
+                    {data1}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
         {tableData && (
@@ -279,6 +281,61 @@ export default function ModalPopUp({
                   })}
               </tbody>
             </table>
+          </div>
+        )}
+        {AllData && (
+          <div className="max-w-[700px] max-h-[500px]">
+            <h5 className="text-center font-bold text-xl mb-2">
+              Total Aggregate ID'S
+            </h5>
+
+            <div className="overflow-x-auto">
+              <table className="min-w-full">
+                <thead className="bg-gray-200 border border-black-800">
+                  <tr>
+                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+                      Pending
+                    </th>
+                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+                      Real Time
+                    </th>
+                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+                      Processed
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="">
+                  {Array.from({
+                    length: Math.max(
+                      AggregatePendingData.length,
+                      AggregateRealTimeData.length,
+                      AggregateProcessedData.length
+                    ),
+                  }).map((_, index) => (
+                    <tr key={index}>
+                      {/* Render the cell for AggregatePendingData if it exists */}
+                      <td className="border border-gray-800 px-4 py-2">
+                        {index < AggregatePendingData.length
+                          ? AggregatePendingData[index]
+                          : ""}
+                      </td>
+                      {/* Render the cell for AggregateRealTimeData if it exists */}
+                      <td className="border border-gray-800 px-6 py-2">
+                        {index < AggregateRealTimeData.length
+                          ? AggregateRealTimeData[index]
+                          : ""}
+                      </td>
+                      {/* Render the cell for AggregateProcessedData if it exists */}
+                      <td className="border border-gray-800 px-6 py-2">
+                        {index < AggregateProcessedData.length
+                          ? AggregateProcessedData[index]
+                          : ""}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </Modal>
