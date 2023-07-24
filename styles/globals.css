@@ -15,8 +15,12 @@ div#daterangepicker {
 }
 .toggle-password-button{
   position: absolute;
-  left: 63%;
-  top: 64%;
+  top: 50%;
+  cursor: pointer;
+}
+.sign-in-toggle-password-button{
+  position: absolute;
+  top: 60%;
   cursor: pointer;
 }
 /* -------container size------------- */

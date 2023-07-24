@@ -15,7 +15,7 @@ export default function PlanogramView({ data }) {
   async function getAlertHandler() {
     setModalOpen(true);
     await axios
-      .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, null, {
+      .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params: {
           site_id: value ? value.site_id : drpdwnVaue[0].site_id
           // camera_id: value
