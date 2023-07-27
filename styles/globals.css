@@ -24,9 +24,43 @@
 /* .mt-3rem{
   margin-top: 3rem;
 } */
+.disabled {
+  /* opacity: 0.5; Reduce opacity to visually indicate the button is disabled */
+  pointer-events: none; /* Disable mouse events to prevent interactions */
+  /* Add any other styles you want to apply when the button is disabled */
+}
 div#DateRangePickerChildren {
   display: flex;
 }
+
+/* @keyframes buttonAnimation {
+  0% {
+    transform: perspective(500px) rotateX(-5deg) rotateY(0) translateZ(0);
+  }
+  50% {
+    transform: perspective(500px) rotateX(-5deg) rotateY(-30deg) translateZ(10px);
+  }
+  100% {
+    transform: perspective(500px) rotateX(-5deg) rotateY(5deg) translateZ(0);
+  }
+}
+
+.button-3d {
+  cursor: pointer;
+  /* transition: transform 0.3s ease; */
+  /* animation: buttonAnimation 2s infinite; */
+  /* transform-style: preserve-3d; Ensure 3D transformations are preserved */
+  /* transition: transform 0.3s ease;
+  transform: rotateX(-30deg) rotateY(10deg) scale(1.1);
+} */
+
+
+
+/* .button-3d:hover {
+  transform: rotateX(30deg) rotateY(10deg) scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+/* }   */
+
 div#daterangepicker {
   right: 0!important;
   left: auto;

@@ -55,7 +55,7 @@ export default function Header() {
         setApiCalled(true);
       }
     };
-  }, []);
+  }, [value]);
 
   async function getAlertHandler() {
     console.log(value, "value", drpdwnVaue, drpdwnVaue[0].site_id);

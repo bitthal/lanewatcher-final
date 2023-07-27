@@ -6,6 +6,7 @@ function Context({ children }) {
     const [value, setValue] = useState('');
     const [drpdwnVaue, setdrpdwnVaue] = useState('');
     const [loginData,setLoginData] = useState({});
+    console.log("value_data context value:", value);
     return (
       <value_data.Provider value={{ value, setValue,drpdwnVaue, setdrpdwnVaue,loginData,setLoginData}}>
         {children}

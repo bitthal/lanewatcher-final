@@ -4,25 +4,23 @@ import Leftbar from "@/components/Leftbar";
 import Header2 from "@/components/Header2";
 import axios from "axios";
 import { value_data } from "@/context/context";
-import withAuth from "@/utils/withAuth";
+// import withAuth from "@/utils/withAuth";
 
 function Alert({}) {
   const {drpdwnVaue} = useContext(value_data);
   const { value } = useContext(value_data);
   const [show, setShow] = useState(true);
   const [alertList, setAlerts] = useState('');
+  const fetchData = async () => {
+    try {
+       await getAlertHandler();
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   useEffect(() => { 
-    const fetchData = async () => {
-      try {
-         await getAlertHandler();
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    return ()=>{
-      fetchData();
-    };
-  }, [value]);
+    fetchData();
+  }, [drpdwnVaue]);
 
 
   async function getAlertHandler (){
@@ -153,4 +151,5 @@ function Alert({}) {
   );
 }
 
-export default withAuth(Alert);
+// export default withAuth(Alert);
+export default Alert;

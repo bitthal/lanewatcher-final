@@ -49,7 +49,7 @@ export default function Processed({ show, data,showDashboardView }) {
                   ?.slice((page - 1) * dataPerPage, page * dataPerPage)
                   .map((data1, index) => (
                     <button
-                      className="text-green-700 border w-[90px] py-2 break-all border-green-700 rounded-lg"
+                      className="text-green-700 border w-[90px] py-2 break-all border-green-700 rounded-lg button-3d"
                       key={index}
                       onClick={() => {
                         setDataModalOpen(true);
@@ -91,7 +91,9 @@ export default function Processed({ show, data,showDashboardView }) {
               </div>
 
               <button
-                className="bg-[#434190] rounded-md px-2 py-1 text-white text-xs font-bold "
+                className={`${totalPages === 0 ? 'disabled cursor-not-allowed' : ''}
+                bg-[#434190] rounded-md px-2 py-1 text-white text-sm font-bold text-xs
+                `}
                 onClick={() => {
                   setListModalOpen(true);
                 }}

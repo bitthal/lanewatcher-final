@@ -71,7 +71,7 @@ export default function Leftbar({ show }) {
             <Tooltip message="Shipment">
             <Link href="/shipment" className="">
               <svg
-                className="inline disabled"
+                className="inline"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"

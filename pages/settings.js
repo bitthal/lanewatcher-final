@@ -5,7 +5,7 @@ import Header2 from "@/components/Header2";
 import axios from "axios";
 import { value_data } from "@/context/context";
 import { useForm } from "react-hook-form";
-import withAuth from "@/utils/withAuth";
+// import withAuth from "@/utils/withAuth";
 
 function Settings({}) {
   const {
@@ -20,6 +20,7 @@ function Settings({}) {
     }
   });
 
+  const { drpdwnVaue } = useContext(value_data);
   const [show, setShow] = useState(true);
   const [showAddField, setShowAddField] = useState(false);
   const [selectedSiteId, setSelectedSiteId] = useState("");
@@ -31,8 +32,6 @@ function Settings({}) {
     let payloadValue = drpdwnVaue[event.target.value];
     getEmailListHandler(payloadValue);
   }
-  const { drpdwnVaue } = useContext(value_data);
-
   async function getEmailListHandler(payload) {
     const site_id = payload
       ? payload.site_id
@@ -124,20 +123,19 @@ function Settings({}) {
     deleteEmailHandler(data[index - 1]);
   };
 
+  const fetchData = async () => {
+    try {
+      await getEmailListHandler();
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   useEffect(() => {
     if (drpdwnVaue.length > 0) {
-      const fetchData = async () => {
-        try {
-          await getEmailListHandler();
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      };
-      return () => {
-        fetchData();
-      };
+      fetchData();
     }
-  }, []);
+  }, [drpdwnVaue]);
 
   return (
     <>
@@ -300,4 +298,6 @@ function Settings({}) {
   );
 }
 
-export default withAuth(Settings);
+// export default withAuth(Settings);
+
+export default Settings;

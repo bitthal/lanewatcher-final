@@ -6,7 +6,7 @@ import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
 import axios from "axios";
 import { useRouter } from "next/router";
-import withAuth from "@/utils/withAuth";
+// import withAuth from "@/utils/withAuth";
 
 function Tracker({showDatePicker,showRealTimeView,showDashboardView, showPieChart }) {
   const [show, setShow] = useState(true);
@@ -96,7 +96,9 @@ function Tracker({showDatePicker,showRealTimeView,showDashboardView, showPieChar
   );
 }
 
-export default withAuth(Tracker);
+// export default withAuth(Tracker);
+
+export default Tracker;
 
 
 

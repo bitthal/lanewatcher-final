@@ -113,7 +113,9 @@ export default function Pending({ show, data,showDashboardView }) {
               </div>
 
               <button
-                className="bg-[#434190] rounded-md px-2 py-1 text-white text-sm font-bold text-xs"
+                className={`${totalPages === 0 ? 'disabled cursor-not-allowed' : ''}
+                bg-[#434190] rounded-md px-2 py-1 text-white text-sm font-bold text-xs
+                `}
                 onClick={() => {
                   setListModalOpen(true);
                 }}

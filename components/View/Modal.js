@@ -83,38 +83,38 @@ export default function ModalPopUp({
             <h5 className="text-center font-bold text-xl mb-2">
               Active Alerts
             </h5>
-            <div className="overflow-hidden border rounded-lg">
+            <div className="overflow-hidden border">
               {alertsTableData && (
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead>
+                <table className="min-w-full divide-y divide-gray-200 border-collapse border border-black">
+                  <thead className="bg-indigo-900">
                     <tr>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-gray-800 uppercase "
+                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                       >
                         ID
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-gray-800 uppercase "
+                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                       >
                         Monotaine ID
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-gray-800 uppercase "
+                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                       >
                         Timestamp
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-gray-800 uppercase "
+                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                       >
                         Type
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-gray-800 uppercase "
+                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                       >
                         Claimed status
                       </th>
@@ -230,30 +230,30 @@ export default function ModalPopUp({
             <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary2 font-bold">
               {tempName}
             </h6>
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-blue-200">
-                <tr className="">
+            <table className="min-w-full border-collapse border border-black">
+              <thead className="bg-indigo-900">
+                <tr>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
                   >
                     ID
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
                   >
                     Time stamp
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
                   >
                     Location
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
                   >
                     Event
                   </th>
@@ -261,19 +261,22 @@ export default function ModalPopUp({
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {dummyData &&
-                  dummyData?.map((data, index) => {
+                  dummyData.map((data, index) => {
                     return (
-                      <tr>
-                        <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                          {index}
+                      <tr
+                        className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
+                        key={index}
+                      >
+                        <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
+                          {index + 1}
                         </td>
-                        <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
+                        <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
                           {data.timestamp}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
                           {data.location}
                         </td>
-                        <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap">
+                        <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                           {data.eventData}
                         </td>
                       </tr>
@@ -290,36 +293,44 @@ export default function ModalPopUp({
             </h5>
 
             <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-      <thead className="bg-blue-200 custom-thead"> {/* Add custom-thead class here */}
-        <tr>
-          <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
-            Pending
-          </th>
-          <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
-            Real Time
-          </th>
-          <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
-            Processed
-          </th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-gray-200">
-        {Array.from({ length: Math.max(AggregatePendingData.length, AggregateRealTimeData.length, AggregateProcessedData.length) }).map((_, index) => (
-          <tr key={index}>
-            <td className="border border-gray-800 px-4 py-2">
-              {AggregatePendingData[index]}
-            </td>
-            <td className="border border-gray-800 px-6 py-2">
-              {AggregateRealTimeData[index]}
-            </td>
-            <td className="border border-gray-800 px-6 py-2">
-              {AggregateProcessedData[index]}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-blue-200 custom-thead">
+                  {" "}
+                  {/* Add custom-thead class here */}
+                  <tr>
+                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+                      Pending
+                    </th>
+                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+                      Real Time
+                    </th>
+                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+                      Processed
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {Array.from({
+                    length: Math.max(
+                      AggregatePendingData.length,
+                      AggregateRealTimeData.length,
+                      AggregateProcessedData.length
+                    ),
+                  }).map((_, index) => (
+                    <tr key={index}>
+                      <td className="border border-gray-800 px-4 py-2">
+                        {AggregatePendingData[index]}
+                      </td>
+                      <td className="border border-gray-800 px-6 py-2">
+                        {AggregateRealTimeData[index]}
+                      </td>
+                      <td className="border border-gray-800 px-6 py-2">
+                        {AggregateProcessedData[index]}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}
