@@ -29,6 +29,9 @@
   pointer-events: none; /* Disable mouse events to prevent interactions */
   /* Add any other styles you want to apply when the button is disabled */
 }
+.lane-1{
+  float: left;
+}
 div#DateRangePickerChildren {
   display: flex;
 }

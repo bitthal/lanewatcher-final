@@ -6,7 +6,6 @@ export default function Layout({ children }) {
   const router = useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
   useRouter().pathname.replace(/\//, "").slice(1);
   const showHeader = router == '' ? false : true; // Hide header on the login page
-  console.log(showHeader,router,'index')
   return (
     <> 
       <Head>

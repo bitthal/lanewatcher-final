@@ -30,7 +30,7 @@ export default function RealTimeView({ data }) {
             <p className="text-indigo-800 font-bold underline">
               Lane :&nbsp;&nbsp;{capitalizeFirstLetter(data.lane_name)}
             </p>
-            <span className="font-bold text-gray-400 text-xs justify-between">
+            <span className="font-bold text-gray-400 text-xs justify-between lane-1">
               Lane In
             </span>
           </div>
