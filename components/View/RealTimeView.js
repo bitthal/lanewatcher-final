@@ -5,9 +5,9 @@ export default function RealTimeView({ data }) {
   const [tempName, setTempName] = React.useState("");
   const [dataModalOpen, setDataModalOpen] = useState(false);
   const [listModalOpen, setListModalOpen] = useState(false);
-  const dataPerPage = 24;
+  const dataPerPage = 32;
   const totalData = data?.real_time_positions?.length;
-  const totalPages = Math.ceil(totalData / dataPerPage);
+  const totalPages = Math.ceil(totalData / dataPerPage);  
 
   const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -48,14 +48,14 @@ export default function RealTimeView({ data }) {
           </div>
         </div>
         <div className="flex gap-3 flex-col mt-7rem">
-          <div className="grid grid-cols-8 gap-4">
+          <div className="grid grid-cols-8 gap-2">
             {data?.real_time_positions?.map((data1, index) => (
               <button
                 className={`${
-                  data1.misplaced === 1
-                    ? "text-green-700 border-green-700"
-                    : "text-red-700 border-red-700"
-                } border px-3 py-2 rounded-lg`}
+                  data1.misplaced === 0 && data1.untagged === 0
+                    ? "text-green-700 border-green-700" 
+                    : data1.untagged === 1 && (data1.misplaced === 1 || data1.misplaced === 0) ? "text-yellow-700 border-yellow-700" :"text-red-700 border-red-700"
+                } border px-2 py-2 rounded-lg h-10`}
                 key={index}
                 onClick={() => {
                   setDataModalOpen(true);

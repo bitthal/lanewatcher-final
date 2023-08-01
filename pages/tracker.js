@@ -6,64 +6,68 @@ import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
 import axios from "axios";
 import { useRouter } from "next/router";
-// import withAuth from "@/utils/withAuth";
+import withAuth from "@/utils/withAuth";
 
-function Tracker({showDatePicker,showRealTimeView,showDashboardView, showPieChart }) {
+function Tracker({
+  showDatePicker,
+  showRealTimeView,
+  showDashboardView,
+  showPieChart,
+}) {
   const [show, setShow] = useState(true);
   const [date, setDate] = useState(new Date());
   const [Alldata, setAlldata] = useState();
-  const [newValue, setState] = useState('');
-  const [selectedValue,setOptionVal] = useState('');
+  const [newValue, setState] = useState("");
+  const [selectedValue, setOptionVal] = useState("");
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
     useRouter().pathname.replace(/\//, "").slice(1);
-      function setRangeFilter(date){
+  function setRangeFilter(date) {
     setDate(date);
     handleSubmit(date);
   }
-   function handleState(newValue) {
-      setState(newValue);
-      handleSubmit(newValue);
+  function handleState(newValue) {
+    // setState(newValue);
+    // handleSubmit(newValue);
   }
 
-  function handleOption(selectedValue){
-    console.log(selectedValue);
+  function handleOption(selectedValue) {
     setOptionVal(selectedValue);
     handleSubmit(selectedValue);
   }
+
   const handleSubmit = (payload) => {
     const userData = {
-      payload
+      payload,
     };
-    axios.post(`${process.env.NEXT_PUBLIC_API_URL}`, userData).then((response) => {
-      setAlldata(Object.values(response.data));
-    });
+    axios
+      .post(`${process.env.NEXT_PUBLIC_API_URL}`, userData)
+      .then((response) => {
+        setAlldata(Object.values(response.data));
+      });
   };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
         setAlldata(response.data.lanes);
-        
       } catch (error) {
         console.error("Error:", error);
       }
     };
-    return ()=>{
-      if(router == "Tracker" || router == "Dashboard"){
-        
+    return () => {
+      if (router == "Tracker" || router == "Dashboard") {
         fetchData();
-      const intervalId = setInterval(() => {
-        fetchData();
-      }, 5000); // 5 seconds interval
-  
-      // Clean up the interval on component unmount to prevent memory leaks
-      return () => {
-        clearInterval(intervalId);
-      };
+        const intervalId = setInterval(() => {
+          fetchData();
+        }, 5000); // 5 seconds interval
+
+        // Clean up the interval on component unmount to prevent memory leaks
+        return () => {
+          clearInterval(intervalId);
+        };
       }
-      
     };
   }, []);
 
@@ -72,20 +76,37 @@ function Tracker({showDatePicker,showRealTimeView,showDashboardView, showPieChar
   //     <p>Loading!</p>
   //   )
   // }
-   return (
+  return (
     <>
       <div className="flex gap-5 my-3 mr-3 h-auto">
         <Leftbar show={show} />
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={`w-full`}>
-            <Header2 setShow={setShow} show={show} setUpdated = {handleState} setRangeFilter={setRangeFilter} date={date} showSearchBar={true} selectedValue={selectedValue} setOptionVal={handleOption} newValue={newValue} showDatePicker={showDatePicker ? showDatePicker : false} />
+            <Header2
+              setShow={setShow}
+              show={show}
+              setUpdated={handleState}
+              setRangeFilter={setRangeFilter}
+              date={date}
+              showSearchBar={true}
+              selectedValue={selectedValue}
+              setOptionVal={handleOption}
+              newValue={newValue}
+              showDatePicker={showDatePicker ? showDatePicker : false}
+            />
           </div>
-          
+
           <div className={`flex flex-col gap-8 mt-5 w-full`}>
             {Alldata?.map((data, index) => {
               return (
                 <div className="" key={index}>
-                  <View showPieChart={showPieChart ? true : false} showDashboardView={showDashboardView ? false : true} show={show} data={data} showRealTimeView={showRealTimeView ? false : true}/>
+                  <View
+                    showPieChart={showPieChart ? true : false}
+                    showDashboardView={showDashboardView ? false : true}
+                    show={show}
+                    data={data}
+                    showRealTimeView={showRealTimeView ? false : true}
+                  />
                 </div>
               );
             })}
@@ -96,9 +117,4 @@ function Tracker({showDatePicker,showRealTimeView,showDashboardView, showPieChar
   );
 }
 
-// export default withAuth(Tracker);
-
-export default Tracker;
-
-
-
+export default withAuth(Tracker);

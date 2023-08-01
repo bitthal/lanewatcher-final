@@ -8,6 +8,7 @@ import { value_data } from "@/context/context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Toaster from "@/components/Toaster";
+
 export default function Index() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

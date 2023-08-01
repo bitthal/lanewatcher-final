@@ -295,7 +295,7 @@ export default function ModalPopUp({
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-blue-200 custom-thead">
-                  {" "}
+                  
                   {/* Add custom-thead class here */}
                   <tr>
                     <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">

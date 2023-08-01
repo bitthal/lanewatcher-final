@@ -4,7 +4,7 @@ import Leftbar from "@/components/Leftbar";
 import Header2 from "@/components/Header2";
 import axios from "axios";
 import { value_data } from "@/context/context";
-// import withAuth from "@/utils/withAuth";
+import withAuth from "@/utils/withAuth";
 
 function Alert({}) {
   const {drpdwnVaue} = useContext(value_data);
@@ -24,7 +24,6 @@ function Alert({}) {
 
 
   async function getAlertHandler (){
-      console.log(value,'value',drpdwnVaue)
       await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params:{
@@ -151,5 +150,4 @@ function Alert({}) {
   );
 }
 
-// export default withAuth(Alert);
-export default Alert;
+export default withAuth(Alert);

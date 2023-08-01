@@ -21,17 +21,11 @@ export default function Header() {
     useRouter().pathname.replace(/\//, "").slice(1);
 
   useEffect(() => {
-    console.log("useEffect triggered");
-    console.log("router:", router);
-    console.log("localStorage:", localStorage.getItem("userData"));
-    console.log("apiCalled:", apiCalled);
-    console.log("siteId:", siteId);
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_SITEID_API_URL}`
         );
-        console.log(response.data, "res");
         setSiteID(response.data.result);
         setdrpdwnVaue(response.data.result);
       } catch (error) {
@@ -58,7 +52,6 @@ export default function Header() {
   }, [value]);
 
   async function getAlertHandler() {
-    console.log(value, "value", drpdwnVaue, drpdwnVaue[0].site_id);
     setModalOpen(true);
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
@@ -89,7 +82,6 @@ export default function Header() {
   }
   const handleChange = (event) => {
     setValue(siteId[event.target.value]);
-    console.log(event.target.value, siteId[event.target.value]);
   };
   const closeModalPopUp = (data) => {
     setModalOpen(data);

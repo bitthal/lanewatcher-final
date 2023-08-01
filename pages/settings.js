@@ -5,7 +5,7 @@ import Header2 from "@/components/Header2";
 import axios from "axios";
 import { value_data } from "@/context/context";
 import { useForm } from "react-hook-form";
-// import withAuth from "@/utils/withAuth";
+import withAuth from "@/utils/withAuth";
 
 function Settings({}) {
   const {
@@ -16,17 +16,20 @@ function Settings({}) {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      email: ""
-    }
+      email: "",
+    },
   });
-
   const { drpdwnVaue } = useContext(value_data);
   const [show, setShow] = useState(true);
   const [showAddField, setShowAddField] = useState(false);
   const [selectedSiteId, setSelectedSiteId] = useState("");
   const [tableData, setTableDate] = useState("");
   const [inputFields, setInputFields] = useState([{ email: " " }]);
-
+  function convertToCSV(data) {
+    const csv = Papa.unparse(data);
+    return csv;
+  }
+  
   function handleChange(event) {
     setSelectedSiteId(drpdwnVaue[event.target.value]);
     let payloadValue = drpdwnVaue[event.target.value];
@@ -101,7 +104,6 @@ function Settings({}) {
   };
 
   const addFields = () => {
-    
     setShowAddField(true);
     let newfield = { email: "" };
     setInputFields([newfield]);
@@ -110,7 +112,7 @@ function Settings({}) {
   const cancelHandler = () => {
     reset();
     setShowAddField(false);
-  }
+  };
   const onSubmit = (data) => {
     AddEmailHandler(data.email);
     setShowAddField(false);
@@ -151,9 +153,9 @@ function Settings({}) {
             />
           </div>
           {drpdwnVaue && (
-            <div className="relative lg:max-w-sm mt-10 mb-10 mr-20 ">
+            <div className="relative 2xl:max-w-sm mt-10 mb-10 mr-20 justify-between flex">
+              <div>
               <label>
-                {" "}
                 <h1>
                   Select Site ID's <span>(Settings)</span>:
                 </h1>
@@ -168,6 +170,7 @@ function Settings({}) {
                   </option>
                 ))}
               </select>
+              </div>
             </div>
           )}
           <div>
@@ -238,7 +241,7 @@ function Settings({}) {
                       onClick={addFields}
                     >
                       Add
-                    </button>
+                    </button>              
                     {showAddField && (
                       <div className="my-5 mx-5">
                         <form onSubmit={handleSubmit(onSubmit)}>
@@ -246,13 +249,12 @@ function Settings({}) {
                             return (
                               <div>
                                 <h1 className="text-sm font-medium text-gray-800 whitespace-nowrap">
-                                  Add new email :{" "}
+                                  Add new email :
                                 </h1>
                                 <div key={index}>
                                   <input
                                     className="w-128 pr-4 py-2 block border-gray-400 border-opacity-100 border-gray-400 border px-2 focus-visible:none"
                                     placeholder="Email"
-                                    
                                     {...register("email", {
                                       required: "Email is required",
                                       pattern: {
@@ -298,6 +300,4 @@ function Settings({}) {
   );
 }
 
-// export default withAuth(Settings);
-
-export default Settings;
+export default withAuth(Settings);

@@ -9,13 +9,22 @@ export default function Header2({
   setUpdated,
   showDatePicker,
   setRangeFilter,
-  showSearchBar
+  showSearchBar,
+  // onSearch
 }) {
   const inputRef = useRef("");
-  const handleClick = () => {
-    console.log(inputRef.current.value);
-    let newValue = inputRef.current.value;
+  // const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
+
+  const setSearchTerm = () => {
+    const newValue = inputRef.current.value;
     setUpdated(newValue);
+    // onSearch(newValue); 
+  };
+
+  const handleCancel = () => {
+    inputRef.current.value = "";
+    setSearchTerm(""); // Clear the search term
+    // onSearch(""); // Call the onSearch callback with an empty string to reset the search
   };
   const now = new Date();
   const start = moment(
@@ -65,7 +74,7 @@ export default function Header2({
     apply: "Apply",
     cancel: "Cancel",
   };
-  const maxDate = moment(start).add(12, "hour");
+  const maxDate = moment(start).add(24, "hour");
   function handleApply(startDate, endDate) {
     setRange({ start: startDate, end: endDate });
     setRangeFilter({ start: startDate, end: endDate });
@@ -88,18 +97,24 @@ export default function Header2({
               }`}
             />
           </div>
-          { showSearchBar && <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded">
-            <input
-              className="w-128 h-full pr-4 py-2 focus:outline-none block"
-              placeholder="Enter Montainer/Lane ID:"
-              type="text"
-              id="message"
-              name="message"
-              ref={inputRef}
-              defaultValue={``}
-            />
-            <button type="submit" onClick={handleClick}>
-              <i className="px-4 fa-solid fa-magnifying-glass" />{" "}
+          { showSearchBar && <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded w-128">
+          <input
+                className="flex-1 h-full pr-4 py-2 focus:outline-none block"
+                placeholder="Enter Montainer/Lane ID:"
+                type="text"
+                id="message"
+                name="message"
+                ref={inputRef}
+                // value={inputRef} // Set the value to the searchTerm state
+                onChange={(e) => setSearchTerm(e.target.value)} // Handle input change to update the searchTerm state
+              />
+              {inputRef.current.value != "" && ( // Display the cancel button when searchTerm is not empty
+                <button type="button" onClick={handleCancel}>
+                  <i className="px-4 fa-solid fa-times" />
+                </button>
+              )}
+            <button type="submit" onClick={setSearchTerm}>
+              <i className="px-4 fa-solid fa-magnifying-glass" />
             </button>
           </div>}
           
@@ -135,8 +150,8 @@ export default function Header2({
                 value={`${range.start.format(
                   "DD-MM-YYYY(HH:mm)"
                 )} - ${range.end.format("DD-MM-YYYY(HH:mm)")}`}
-                className="w-80 h-full py-2 focus:outline-none block border-solid px-5 cursor-pointer focus:pointer-events-none"
-                disabled
+                className="w-80 h-full py-2 block border-solid px-5 cursor-pointer"
+                
               />
             </DateTimePicker>
           </div>

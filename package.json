@@ -25,6 +25,7 @@
     "next": "^13.4.10",
     "next-auth": "^4.22.3",
     "nprogress": "^0.2.0",
+    "papaparse": "^5.4.1",
     "postcss-focus-visible": "^8.0.2",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -32,7 +33,7 @@
     "react-hook-form": "^7.40.0",
     "react-icons": "^4.10.1",
     "react-modal": "^3.16.1",
-    "react-tailwindcss-datetimepicker": "^1.0.5",
+    "react-tailwindcss-datetimepicker": "^1.0.6",
     "text-encoding": "^0.7.0",
     "tsparticles": "^2.9.3",
     "yup": "^1.2.0"

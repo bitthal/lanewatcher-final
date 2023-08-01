@@ -76,7 +76,7 @@ export default function Pending({ show, data,showDashboardView }) {
                       setDataModalOpen(true);
                       setTempName(data1);
                     }}
-                      className="text-red-800 border w-[90px] py-2 break-all border-red-800 rounded-lg"
+                      className="text-red-800 border w-[90px] px-2 py-2 break-all border-red-800 rounded-lg"
                       key={index}
                     >
                       {data1}

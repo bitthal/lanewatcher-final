@@ -30,7 +30,6 @@ export default function PlanogramView({ data }) {
           .filter((data) => {
             return data.alerts.claimed_status === false;
           });
-        console.log(mapped);
         setAlerts(mapped);
       });
   }
@@ -40,7 +39,6 @@ export default function PlanogramView({ data }) {
   };
 
   const showAggregateIds = () => {
-    console.log([data], "dat");
     setAggregateResult(true);
   };
   return (

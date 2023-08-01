@@ -187,13 +187,13 @@ export default function Leftbar({ show }) {
           </div>
           <div
             className={
-              router.pathname == "/messages"
+              router.pathname == "/monotainers"
               ? " flex bg-indigo-800 items-center p-5 gap-2 inline"
               : " flex items-center p-5 gap-2 inline"
             }
           >
-            <Tooltip message="Messages" >
-            <Link href="/messages" className={`${!show ? "w-32 " : "w-auto "}`}>
+            <Tooltip message="Monotainers" >
+            <Link href="/monotainers" className={`${!show ? "w-32 " : "w-auto "}`}>
               <svg
                 className="inline"
                 width="24"
@@ -204,11 +204,11 @@ export default function Leftbar({ show }) {
               >
                 <path
                   d="M12 0C8.8174 0 5.76515 1.26428 3.51472 3.51472C1.26428 5.76515 0 8.8174 0 12C0 15.1826 1.26428 18.2348 3.51472 20.4853C5.76515 22.7357 8.8174 24 12 24C15.1826 24 18.2348 22.7357 20.4853 20.4853C22.7357 18.2348 24 15.1826 24 12C24 8.8174 22.7357 5.76515 20.4853 3.51472C18.2348 1.26428 15.1826 0 12 0ZM4.911 7.089H16.367C16.9429 7.09739 17.4925 7.33159 17.8974 7.7412C18.3023 8.1508 18.5302 8.70303 18.532 9.279V15.142C18.523 15.7167 18.2908 16.2653 17.8845 16.6718C17.4782 17.0782 16.9297 17.3107 16.355 17.32H8.04C6.866 17.32 6 16.33 6 15.142V10.503L4.503 7.905C4.193 7.485 4.453 7.089 4.911 7.089ZM8.326 9.279C7.979 9.279 7.646 9.489 7.646 9.823C7.646 10.157 7.979 10.367 8.326 10.367H16.231C16.577 10.367 16.911 10.157 16.911 9.823C16.911 9.489 16.577 9.278 16.231 9.278L8.326 9.279ZM8.326 11.456C7.979 11.456 7.646 11.666 7.646 12C7.646 12.334 7.979 12.544 8.326 12.544H16.231C16.577 12.544 16.911 12.334 16.911 12C16.911 11.666 16.577 11.456 16.231 11.456H8.326ZM8.313 13.646C7.967 13.646 7.633 13.856 7.633 14.19C7.633 14.524 7.967 14.734 8.313 14.734H14.041C14.388 14.734 14.721 14.524 14.721 14.19C14.721 13.856 14.388 13.645 14.041 13.645L8.313 13.646Z"
-                  fill={router.pathname == "/messages" ? "#fff" : "#9b2c2c"}
+                  fill={router.pathname == "/monotainers" ? "#fff" : "#9b2c2c"}
                 />
               </svg>
               {!show && (
-                <span className={router.pathname == "/messages" ? "text-white font-bold p-0.5 m-2" : "text-red-800 font-bold p-0.5 m-2"}>Messages</span>
+                <span className={router.pathname == "/monotainers" ? "text-white font-bold p-0.5 m-2" : "text-red-800 font-bold p-0.5 m-2"}>Monotainers</span>
               )}
             </Link>
             </Tooltip>
