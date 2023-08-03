@@ -68,7 +68,7 @@ export default function RealTimeView({ data }) {
           </div>
         </div>
 
-        <div className="flex justify-between items-center gap-3 mt-3rem">
+        <div className="flex justify-between items-center gap-3">
           <div className="flex gap-1 items-center">
             <div
               className="w-6 h-6 rounded-full border bg-gray-200 cursor-pointer"

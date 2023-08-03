@@ -32,8 +32,8 @@ function Alert({}) {
         }
       })
       .then((response) => {
-        const mapped = response.data.dlist.flatMap(({alerts,key_str,sorting_timestamp,id}) =>
-        alerts.map(alerts => ({alerts,key_str,sorting_timestamp,id})))
+        const mapped = response.data.dlist.flatMap(({alerts,key_str,sorting_timestamp,id,description}) =>
+        alerts.map(alerts => ({alerts,key_str,sorting_timestamp,id,description})))
         setAlerts(mapped)
       });
     
@@ -100,7 +100,13 @@ function Alert({}) {
                           scope="col"
                           className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                         >
-                          Claimed status
+                          Description
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                        >
+                          Claim Status
                         </th>
                         <th
                           scope="col"
@@ -125,6 +131,9 @@ function Alert({}) {
                               </td>
                               <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
                                   {data?.alerts?.type}
+                              </td>
+                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
+                                  {data?.alerts?.description}
                               </td>
                               <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
                                   {data?.alerts?.claimed_status === true? 'True' : 'False'}   

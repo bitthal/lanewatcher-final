@@ -7,6 +7,11 @@ import { value_data } from "@/context/context";
 import { useForm } from "react-hook-form";
 import withAuth from "@/utils/withAuth";
 
+// Create a Skeleton component
+const Skeleton = () => (
+  <div className="animate-pulse bg-gray-200 h-8 rounded-md m-4 "></div>
+);
+
 function Settings({}) {
   const {
     register,
@@ -25,6 +30,7 @@ function Settings({}) {
   const [selectedSiteId, setSelectedSiteId] = useState("");
   const [tableData, setTableDate] = useState("");
   const [inputFields, setInputFields] = useState([{ email: " " }]);
+  const [resetloading, setLoading] = useState(false);
   function convertToCSV(data) {
     const csv = Papa.unparse(data);
     return csv;
@@ -109,6 +115,19 @@ function Settings({}) {
     setInputFields([newfield]);
   };
 
+  const resetHandler = () => {
+    setLoading(true);
+    const site_id = drpdwnVaue[0].site_id
+      axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL_RESET}`, {
+        params: {
+          site_id
+        },
+      })
+      .then((response) => {
+        setLoading(false);
+      });
+  }
   const cancelHandler = () => {
     reset();
     setShowAddField(false);
@@ -124,6 +143,8 @@ function Settings({}) {
     setTableDate(data);
     deleteEmailHandler(data[index - 1]);
   };
+
+ 
 
   const fetchData = async () => {
     try {
@@ -141,7 +162,9 @@ function Settings({}) {
 
   return (
     <>
-      <div className="flex gap-4 my-3 mr-3 h-auto">
+
+      
+    <div className="flex gap-4 my-3 mr-3 h-auto">
         <Leftbar show={show} />
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
@@ -171,6 +194,10 @@ function Settings({}) {
                 ))}
               </select>
               </div>
+              <button
+      className="mt-3 bg-transparent hover:bg-indigo-800 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded h-10"
+      onClick={() => resetHandler()}
+    >Reset</button>
             </div>
           )}
           <div>
@@ -178,6 +205,12 @@ function Settings({}) {
               <div className="overflow-x-auto">
                 <div className="p-1.5 w-full inline-block align-middle">
                   <div className="overflow-hidden border rounded-lg">
+                  {resetloading ? (
+            // Skeleton Loader while resetting
+            <div>
+              <Skeleton />  
+            </div>
+          ) : 
                     <table className="min-w-full divide-y divide-gray-200">
                       <thead className="bg-indigo-800">
                         <tr className="">
@@ -233,7 +266,7 @@ function Settings({}) {
                             );
                           })}
                       </tbody>
-                    </table>
+                    </table>}
                   </div>
                   <div className="flex">
                     <button
