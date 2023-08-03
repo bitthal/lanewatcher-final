@@ -54,7 +54,7 @@ export default function RealTimeView({ data }) {
                 className={`${
                   data1.misplaced === 0 && data1.untagged === 0
                     ? "text-green-700 border-green-700" 
-                    : data1.untagged === 1 && (data1.misplaced === 1 || data1.misplaced === 0) ? "text-yellow-700 border-yellow-700" :"text-red-700 border-red-700"
+                    : data1.untagged === 1 && (data1.misplaced === 1 || data1.misplaced === 0) ? "text-yellow-500 border-yellow-500" :"text-red-700 border-red-700"
                 } border px-2 py-2 rounded-lg h-10`}
                 key={index}
                 onClick={() => {
