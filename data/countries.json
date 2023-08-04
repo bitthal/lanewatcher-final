@@ -1,0 +1,62 @@
+[
+    {
+      "code": "us",
+      "name": "United States",
+      "phoneCode": "+1",
+      "flag": "https://restcountries.com/data/usa.svg"
+    },
+    {
+      "code": "ca",
+      "name": "Canada",
+      "phoneCode": "+1",
+      "flag": "https://restcountries.com/data/can.svg"
+    },
+    {
+      "code": "mx",
+      "name": "Mexico",
+      "phoneCode": "+52",
+      "flag": "https://restcountries.com/data/mex.svg"
+    },
+    {
+      "code": "us",
+      "name": "United States",
+      "phoneCode": "+1",
+      "flag": "https://restcountries.com/data/usa.svg"
+    },
+    {
+      "code": "ca",
+      "name": "Canada",
+      "phoneCode": "+1",
+      "flag": "https://restcountries.com/data/can.svg"
+    },
+    {
+      "code": "mx",
+      "name": "Mexico",
+      "phoneCode": "+52",
+      "flag": "https://restcountries.com/data/mex.svg"
+    },
+    {
+      "code": "jp",
+      "name": "Japan",
+      "phoneCode": "+81",
+      "flag": "https://restcountries.com/data/jpn.svg"
+    },
+    {
+      "code": "kr",
+      "name": "South Korea",
+      "phoneCode": "+82",
+      "flag": "https://restcountries.com/data/kor.svg"
+    },
+    {
+      "code": "cn",
+      "name": "China",
+      "phoneCode": "+86",
+      "flag": "https://restcountries.com/data/chn.svg"
+    },
+    {
+      "code": "in",
+      "name": "India",
+      "phoneCode": "+91",
+      "flag": "https://restcountries.com/data/ind.svg"
+    }  ]
+  

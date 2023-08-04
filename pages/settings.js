@@ -6,7 +6,7 @@ import axios from "axios";
 import { value_data } from "@/context/context";
 import { useForm } from "react-hook-form";
 import withAuth from "@/utils/withAuth";
-
+import countries from "data/countries.json";
 // Create a Skeleton component
 const Skeleton = () => (
   <div className="animate-pulse bg-gray-200 h-8 rounded-md m-4 "></div>
@@ -35,7 +35,7 @@ function Settings({}) {
     const csv = Papa.unparse(data);
     return csv;
   }
-  
+
   function handleChange(event) {
     setSelectedSiteId(drpdwnVaue[event.target.value]);
     let payloadValue = drpdwnVaue[event.target.value];
@@ -117,23 +117,27 @@ function Settings({}) {
 
   const resetHandler = () => {
     setLoading(true);
-    const site_id = drpdwnVaue[0].site_id
-      axios
+    const site_id = drpdwnVaue[0].site_id;
+    axios
       .get(`${process.env.NEXT_PUBLIC_API_URL_RESET}`, {
         params: {
-          site_id
+          site_id,
         },
       })
       .then((response) => {
         setLoading(false);
       });
-  }
+  };
   const cancelHandler = () => {
     reset();
     setShowAddField(false);
   };
   const onSubmit = (data) => {
-    AddEmailHandler(data.email);
+    const email = data.email;
+    const phone = data.phone;
+    const combinedValue = `${email}, ${phone}`;
+    // Call your AddEmailHandler function with the combined value
+    AddEmailHandler(combinedValue);
     setShowAddField(false);
     reset();
   };
@@ -143,8 +147,6 @@ function Settings({}) {
     setTableDate(data);
     deleteEmailHandler(data[index - 1]);
   };
-
- 
 
   const fetchData = async () => {
     try {
@@ -162,9 +164,7 @@ function Settings({}) {
 
   return (
     <>
-
-      
-    <div className="flex gap-4 my-3 mr-3 h-auto">
+      <div className="flex gap-4 my-3 mr-3 h-auto">
         <Leftbar show={show} />
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
@@ -178,26 +178,28 @@ function Settings({}) {
           {drpdwnVaue && (
             <div className="relative 2xl:max-w-sm mt-10 mb-10 mr-20 justify-between flex">
               <div>
-              <label>
-                <h1>
-                  Select Site ID's <span>(Settings)</span>:
-                </h1>
-              </label>
-              <select
-                className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm  appearance-none focus:border-indigo-600 cursor-pointer"
-                onChange={handleChange}
-              >
-                {drpdwnVaue.map((option, index) => (
-                  <option key={option.camera_id} value={index}>
-                    {option.site_id}
-                  </option>
-                ))}
-              </select>
+                <label>
+                  <h1>
+                    Select Site ID's <span>(Settings)</span>:
+                  </h1>
+                </label>
+                <select
+                  className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm  appearance-none focus:border-indigo-600 cursor-pointer"
+                  onChange={handleChange}
+                >
+                  {drpdwnVaue.map((option, index) => (
+                    <option key={option.camera_id} value={index}>
+                      {option.site_id}
+                    </option>
+                  ))}
+                </select>
               </div>
               <button
-      className="mt-3 bg-transparent hover:bg-indigo-800 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded h-10"
-      onClick={() => resetHandler()}
-    >Reset</button>
+                className="mt-3 bg-transparent hover:bg-green-800 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded h-10"
+                onClick={() => resetHandler()}
+              >
+                Reset
+              </button>
             </div>
           )}
           <div>
@@ -205,68 +207,78 @@ function Settings({}) {
               <div className="overflow-x-auto">
                 <div className="p-1.5 w-full inline-block align-middle">
                   <div className="overflow-hidden border rounded-lg">
-                  {resetloading ? (
-            // Skeleton Loader while resetting
-            <div>
-              <Skeleton />  
-            </div>
-          ) : 
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-indigo-800">
-                        <tr className="">
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
-                          >
-                            ID
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
-                          >
-                            SITE ID
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
-                          >
-                            Email
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
-                          >
-                            Action
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-200 bg-white-100">
-                        {tableData &&
-                          tableData?.map((data, index) => {
-                            return (
-                              <tr>
-                                <td className="px-6 py-4 text-sm text-center font-medium text-gray-800 whitespace-nowrap">
-                                  {index}
-                                </td>
-                                <td className="px-6 py-4 text-sm text-center font-medium text-gray-800 whitespace-nowrap">
-                                  {data.site_id}
-                                </td>
-                                <td className="px-6 py-4 text-sm text-center text-gray-800 whitespace-nowrap">
-                                  {data.Email}
-                                </td>
-                                <td className="px-6 py-4 text-sm text-center font-medium text-left whitespace-nowrap">
-                                  <button
-                                    className="bg-transparent hover:bg-red-800 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
-                                    onClick={() => removeFields(index)}
-                                  >
-                                    Delete
-                                  </button>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                      </tbody>
-                    </table>}
+                    {resetloading ? (
+                      // Skeleton Loader while resetting
+                      <div>
+                        <Skeleton />
+                      </div>
+                    ) : (
+                      <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-indigo-800">
+                          <tr className="">
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                            >
+                              ID
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                            >
+                              SITE ID
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                            >
+                              Email
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                            >
+                              Phone
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                            >
+                              Action
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200 bg-white-100">
+                          {tableData &&
+                            tableData?.map((data, index) => {
+                              return (
+                                <tr>
+                                  <td className="px-6 py-4 text-sm text-center font-medium text-gray-800 whitespace-nowrap">
+                                    {index}
+                                  </td>
+                                  <td className="px-6 py-4 text-sm text-center font-medium text-gray-800 whitespace-nowrap">
+                                    {data.site_id}
+                                  </td>
+                                  <td className="px-6 py-4 text-sm text-center text-gray-800 whitespace-nowrap">
+                                    {data.Email.split(",")[0].trim()}
+                                  </td>
+                                  <td className="px-6 py-4 text-sm text-center text-gray-800 whitespace-nowrap">
+                                    {data.Email.split(",")[1]?.trim()}
+                                  </td>
+                                  <td className="px-6 py-4 text-sm text-center font-medium text-left whitespace-nowrap">
+                                    <button
+                                      className="bg-transparent hover:bg-red-800 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+                                      onClick={() => removeFields(index)}
+                                    >
+                                      Delete
+                                    </button>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                        </tbody>
+                      </table>
+                    )}
                   </div>
                   <div className="flex">
                     <button
@@ -274,16 +286,16 @@ function Settings({}) {
                       onClick={addFields}
                     >
                       Add
-                    </button>              
+                    </button>
                     {showAddField && (
                       <div className="my-5 mx-5">
                         <form onSubmit={handleSubmit(onSubmit)}>
                           {inputFields.map((input, index) => {
                             return (
                               <div>
-                                <h1 className="text-sm font-medium text-gray-800 whitespace-nowrap">
+                                {/* <h1 className="text-sm font-medium text-gray-800 whitespace-nowrap">
                                   Add new email :
-                                </h1>
+                                </h1> */}
                                 <div key={index}>
                                   <input
                                     className="w-128 pr-4 py-2 block border-gray-400 border-opacity-100 border-gray-400 border px-2 focus-visible:none"
@@ -300,6 +312,59 @@ function Settings({}) {
                                   {errors.email && (
                                     <p className="text-xs italic text-red-500">
                                       {errors.email.message}
+                                    </p>
+                                  )}
+                                  <div className="flex mt-4 mb-4 border border-gray-400 border-opacity-100">
+                                    <div className="">
+                                      <select
+                                        className="p-1 text-gray-500 bg-white border shadow-sm appearance-none focus:border-indigo-600 cursor-pointer pr-4 py-2"
+                                        {...register("country", {
+                                          required: "Country is required",
+                                        })}
+                                      >
+                                        <option value="" disabled>
+                                          Select Country
+                                        </option>
+                                        {countries.map((country) => (
+                                          <option
+                                            key={country.phoneCode}
+                                            value={country.phoneCode}
+                                          >
+                                            <span className="flex items-center">
+                                              <img
+                                                className="w-5 h-5 mr-2"
+                                                src={country.flag}
+                                                alt={`${country.name} Flag`}
+                                              />
+                                              {country.phoneCode} -{" "}
+                                              {country.name}
+                                            </span>
+                                          </option>
+                                        ))}
+                                      </select>
+                                      {errors.country && (
+                                        <p className="text-xs italic text-red-500">
+                                          {errors.country.message}
+                                        </p>
+                                      )}
+                                    </div>
+                                    <input
+                                      className="flex-grow px-2  border pr-4 py-2 focus:ring-indigo-600 focus:border-indigo-600"
+                                      placeholder="Phone"
+                                      {...register("phone", {
+                                        required: "Phone is required",
+                                        // Add your phone number validation pattern here
+                                      })}
+                                    />
+                                  </div>
+                                  {errors.country && (
+                                    <p className="text-xs italic text-red-500">
+                                      {errors.country.message}
+                                    </p>
+                                  )}
+                                  {errors.phone && (
+                                    <p className="text-xs italic text-red-500">
+                                      {errors.phone.message}
                                     </p>
                                   )}
                                   <button

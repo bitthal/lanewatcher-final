@@ -15,7 +15,7 @@ export default function Layout({ children }) {
       </Head>
       <main>
       {showHeader && <Header />}
-      <div className={`${showHeader ? "relative top-24 bg-[#fff]" : ""}`}>
+      <div className={`${showHeader ? "bg-[#fff]" : ""}`}>
       {children}
       </div>
       </main>
