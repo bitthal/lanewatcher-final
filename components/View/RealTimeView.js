@@ -5,6 +5,8 @@ export default function RealTimeView({ data }) {
   const [tempName, setTempName] = React.useState("");
   const [dataModalOpen, setDataModalOpen] = useState(false);
   const [listModalOpen, setListModalOpen] = useState(false);
+  const [history, showHistory] = useState('');
+
   const dataPerPage = 32;
   const totalData = data?.real_time_positions?.length;
   const totalPages = Math.ceil(totalData / dataPerPage);  
@@ -21,7 +23,21 @@ export default function RealTimeView({ data }) {
     setListModalOpen(false);
     setTempName(params);
     setDataModalOpen(true);
+    historyHandler(params);
   };
+  const historyHandler = (data) =>{
+    const monoid = data;
+     axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL_HISTORY}`, {
+        params: {
+          monoid
+        },
+      })
+      .then((response) => {
+        console.log(response.data.result,'response.data.result')
+        showHistory(response.data.result)        
+      });
+  }
   return (
     <>
       <div className="p-5 bg-white rounded-xl h-96 realTimeView">
@@ -60,6 +76,8 @@ export default function RealTimeView({ data }) {
                 onClick={() => {
                   setDataModalOpen(true);
                   setTempName(data1.monotainer_id);
+                  historyHandler(data1);
+
                 }}
               >
                 {data1.monotainer_id}
@@ -123,7 +141,7 @@ export default function RealTimeView({ data }) {
       )}
       {dataModalOpen && (
         <ModalPopUp
-          tableData={true}
+          tableData={history}
           tempName={tempName}
           modalState={dataModalOpen}
           closeModalPopUp={closeModalPopUp}

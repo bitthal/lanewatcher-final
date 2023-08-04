@@ -21,12 +21,14 @@ export default function ModalPopUp({
 }) {
   const customStyles = {
     content: {
-      top: "50%",
+      top: "55%",
       left: "50%",
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
+      zIndex:99999,
+      innerHeight
     },
   };
   const dummyData = [
@@ -67,7 +69,14 @@ export default function ModalPopUp({
       <Modal
         isOpen={modalState}
         onRequestClose={closeModal2}
-        style={customStyles}
+        style={{
+          content: {
+            ...customStyles.content,
+            maxWidth: "80%", // Adjust the width as needed
+            maxHeight: "80%", // Adjust the height as needed
+          },
+          overlay: customStyles.overlay,
+        }}
         contentLabel="Example Modal"
         ariaHideApp={false}
         shouldCloseOnOverlayClick={false}
@@ -79,7 +88,7 @@ export default function ModalPopUp({
           <i className="fa fa-window-close" aria-hidden="true"></i>
         </button>
         {alertsTableData && (
-          <div className="max-w-[700px] max-h-[500px] overflow-y-auto m-10">
+          <div className="overflow-y-auto m-10">
             <h5 className="text-center font-bold text-xl mb-2">
               Active Alerts
             </h5>
@@ -113,6 +122,12 @@ export default function ModalPopUp({
                         Type
                       </th>
                       <th
+                          scope="col"
+                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                        >
+                          Description
+                        </th>
+                      <th
                         scope="col"
                         className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                       >
@@ -137,6 +152,9 @@ export default function ModalPopUp({
                             <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
                               {data?.alerts?.type}
                             </td>
+                            <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
+                                  {data?.alerts?.description}
+                              </td>
                             <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
                               {data?.alerts?.claimed_status === true
                                 ? "True"
@@ -237,47 +255,56 @@ export default function ModalPopUp({
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
                   >
-                    ID
+                   Camera ID
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
                   >
-                    Time stamp
+                    Lane Name
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
                   >
-                    Location
+                    Processed Timestamp
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
                   >
-                    Event
+                    Sorting Timestamp
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                  >
+                    Staged Timestamp
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {dummyData &&
-                  dummyData.map((data, index) => {
+                {tableData &&
+                  tableData.map((data, index) => {
                     return (
                       <tr
                         className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
                         key={index}
                       >
                         <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                          {index + 1}
-                        </td>
-                        <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                          {data.timestamp}
+                          {data.camera_id}
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
-                          {data.location}
+                          {data.lane_name}
                         </td>
                         <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
-                          {data.eventData}
+                          {data.processed_timestamp}
+                        </td>
+                        <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                          {data.sorting_timestamp}
+                        </td>
+                        <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                          {data.staged_timestamp}
                         </td>
                       </tr>
                     );

@@ -3,6 +3,7 @@ import Leftbar from "@/components/Leftbar";
 import Header2 from "@/components/Header2";
 import { value_data } from "@/context/context";
 import ModalPopUp from "./../components/View/Modal";
+import axios from "axios";
 
 const ITEMS_PER_PAGE_INCREMENT = 20;
 
@@ -12,7 +13,7 @@ function Monotainers() {
   const [searchTerm, setSearchTerm] = useState("");
   const [dataModalOpen, setDataModalOpen] = useState(false);
   const [tempName, setTempName] = useState("");
-
+  const [history, showHistory] = useState('');
   // Function to fetch all the monotainer data from the API at once
   const fetchAllMonotainers = async () => {
     try {
@@ -48,7 +49,19 @@ function Monotainers() {
   const closeModalPopUp = () => {
     setDataModalOpen(false);
   };
-  
+  const historyHandler = (data) =>{
+    const monoid = data;
+     axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL_HISTORY}`, {
+        params: {
+          monoid
+        },
+      })
+      .then((response) => {
+        console.log(response.data.result,'response.data.result')
+        showHistory(response.data.result)        
+      });
+  }
   return (
     <div className={`flex gap-4 my-3 mr-3 h-auto `}>
       <Leftbar show={show} />
@@ -73,6 +86,7 @@ function Monotainers() {
                   onClick={() => {
                     setDataModalOpen(true);
                     setTempName(monotainer);
+                    historyHandler(monotainer);
                   }}
                 >
                   {monotainer}
@@ -84,7 +98,7 @@ function Monotainers() {
       </div>
       {dataModalOpen && (
         <ModalPopUp
-          tableData={true}
+          tableData={history}
           tempName={tempName}
           modalState={dataModalOpen}
           closeModalPopUp={closeModalPopUp}

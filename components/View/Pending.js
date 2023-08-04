@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ModalPopUp from "./Modal";
+import axios from "axios";
 
 export default function Pending({ show, data,showDashboardView }) {
   
@@ -11,16 +12,30 @@ export default function Pending({ show, data,showDashboardView }) {
   const [tempName, setTempName] = useState("");
   const [dataModalOpen, setDataModalOpen] = useState(false);
   const [listModalOpen, setListModalOpen] = useState(false);
-  
+  const [history, showHistory] = useState('');
   const openTableModalBox = (params) => {
     setListModalOpen(false);
     setTempName(params);
     setDataModalOpen(true);
+    historyHandler(params);
   }
   const closeModalPopUp = () => {
     setDataModalOpen(false);
     setListModalOpen(false);
   };
+  const historyHandler = (data) =>{
+    const monoid = data;
+     axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL_HISTORY}`, {
+        params: {
+          monoid
+        },
+      })
+      .then((response) => {
+        console.log(response.data.result,'response.data.result')
+        showHistory(response.data.result)        
+      });
+  }
   return (
     <>
       <div className={`${show ? "h-96" : "h-96"} bg-white rounded-xl p-5`}>
@@ -75,6 +90,7 @@ export default function Pending({ show, data,showDashboardView }) {
                     onClick={() => {
                       setDataModalOpen(true);
                       setTempName(data1);
+                      historyHandler(data1);
                     }}
                       className="text-red-800 border w-[90px] px-2 py-2 break-all border-red-800 rounded-lg"
                       key={index}
@@ -134,7 +150,7 @@ export default function Pending({ show, data,showDashboardView }) {
                     closeModalPopUp={closeModalPopUp}>
         </ModalPopUp>}
         {dataModalOpen && <ModalPopUp
-                    tableData={true}
+                    tableData={history}
                     tempName={tempName}
                     modalState={dataModalOpen}
                     closeModalPopUp={closeModalPopUp}>

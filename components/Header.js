@@ -88,7 +88,7 @@ export default function Header() {
   };
   return (
     <Fragment>
-      <div className="w-full shadow-md p-5 flex justify-between items-center overflow-hidden sticky top-0 z-10 opacity-95 bg-gray-100">
+      <div className="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed top-0 z-10  bg-gradient-to-l from-gray-200 to-gray-100">
         <div className="flex gap-16 items-center">
           <Link
             href="/tracker"

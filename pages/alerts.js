@@ -11,6 +11,46 @@ function Alert({}) {
   const { value } = useContext(value_data);
   const [show, setShow] = useState(true);
   const [alertList, setAlerts] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Number of items to display per page
+  const maxDisplayedPages = 5; // Number of page numbers to display in the pagination bar
+  const maxDisplayedPagesWithEllipsis = maxDisplayedPages + 2; // Add 2 for the ellipsis
+
+  const totalItems = alertList.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentAlerts = alertList.slice(startIndex, endIndex);
+  const goToPage = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
+  };
+  const getPageNumbers = () => {
+    let startPage, endPage;
+
+    if (totalPages <= maxDisplayedPagesWithEllipsis) {
+      // Display all page numbers
+      startPage = 1;
+      endPage = totalPages;
+    } else {
+      if (currentPage <= Math.ceil(maxDisplayedPagesWithEllipsis / 2)) {
+        // Display first few pages and ellipsis
+        startPage = 1;
+        endPage = maxDisplayedPages;
+      } else if (currentPage > totalPages - Math.floor(maxDisplayedPagesWithEllipsis / 2)) {
+        // Display last few pages and ellipsis
+        startPage = totalPages - maxDisplayedPages + 1;
+        endPage = totalPages;
+      } else {
+        // Display pages around the current page and ellipsis on both sides
+        startPage = currentPage - Math.floor(maxDisplayedPagesWithEllipsis / 2);
+        endPage = currentPage + Math.floor(maxDisplayedPagesWithEllipsis / 2);
+      }
+    }
+
+    return Array.from({ length: endPage - startPage + 1 }, (_, pageNum) => startPage + pageNum);
+  };
   const fetchData = async () => {
     try {
        await getAlertHandler();
@@ -117,7 +157,7 @@ function Alert({}) {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white-100">
-                    {alertList && alertList?.map((data, index) => {
+                    {currentAlerts && currentAlerts?.map((data, index) => {
                               return (
                                 <tr>
                                 <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
@@ -150,6 +190,62 @@ function Alert({}) {
                   </table>}
                   {/* {alertList.length < 1 && <p className="text-center">No data available!!</p>} */}
                 </div>
+                <div className="flex justify-center mt-4">
+          <button
+            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(1)}
+          >
+            <i className="fa fa-step-backward"></i>
+          </button>
+          <button
+            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            <i className="fa fa-chevron-left"></i>
+          </button>
+          {/* Render page numbers */}
+          {Array.from({ length: totalPages }).map((_, index) => {
+            if (index === 0 || index === totalPages - 1 || Math.abs(index - currentPage + 1) <= 2) {
+              // Display first, last, and nearby page numbers
+              return (
+                <button
+                  key={index}
+                  className={`mx-1 p-2 ${
+                    currentPage === index + 1
+                      ? "bg-indigo-800 text-white"
+                      : "bg-gray-300 hover:bg-indigo-800 hover:text-white"
+                  } rounded-md`}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              );
+            } else if (
+              (currentPage <= 3 && index === 3) ||
+              (currentPage >= totalPages - 3 && index === totalPages - 4)
+            ) {
+              // Display ... when near the beginning or end
+              return <span key={index} className="mx-1 p-2">...</span>;
+            }
+            return null;
+          })}
+          <button
+            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            <i className="fa fa-chevron-right"></i>
+          </button>
+          <button
+            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(totalPages)}
+          >
+            <i className="fa fa-step-forward"></i>
+          </button>
+        </div>
               </div>
             </div>
           </div>

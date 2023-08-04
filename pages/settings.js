@@ -195,11 +195,12 @@ function Settings({}) {
                 </select>
               </div>
               <button
-                className="mt-3 bg-transparent hover:bg-green-800 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded h-10"
-                onClick={() => resetHandler()}
-              >
-                Reset
-              </button>
+  className="mt-3 bg-gradient-to-l from-red-500 to-red-800 hover:from-red-500 hover:to-red-700 text-white font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded h-10 flex items-center gap-2"
+  onClick={() => resetHandler()}
+>Reset
+<i className="fas fa-sync-alt text-white"></i>
+  
+</button>
             </div>
           )}
           <div>
