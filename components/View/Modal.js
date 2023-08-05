@@ -284,7 +284,7 @@ export default function ModalPopUp({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {tableData &&
+                {tableData.length > 0 &&
                   tableData.map((data, index) => {
                     return (
                       <tr
@@ -309,6 +309,17 @@ export default function ModalPopUp({
                       </tr>
                     );
                   })}
+                  {tableData.length == 0 && 
+                      <tr
+                        className="bg-gray-100"
+                      >
+                        <td 
+                        colSpan="5"
+                        className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black text-center">
+                         <p> No data available </p>
+                        </td>
+                      </tr>
+                  }
               </tbody>
             </table>
           </div>

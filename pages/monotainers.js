@@ -58,6 +58,7 @@ function Monotainers() {
         },
       })
       .then((response) => {
+        setDataModalOpen(true);
         console.log(response.data.result,'response.data.result')
         showHistory(response.data.result)        
       });
@@ -84,7 +85,6 @@ function Monotainers() {
                   className={`text-green-700 border-green-700 border px-3 py-2 rounded-lg`}
                   key={index}
                   onClick={() => {
-                    setDataModalOpen(true);
                     setTempName(monotainer);
                     historyHandler(monotainer);
                   }}
