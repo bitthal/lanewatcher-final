@@ -38,6 +38,15 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 // }
 
 const PieChart = ({ res }) => {
+  // if (res.planogram.total === 0) {
+  //   // If 'res' or 'res.planogram' is not available, show the "No data available" message
+  //   return (
+  //     <div className="mx-10">
+  //        <img src="/unknown-mail.png" alt="No Data Available" style={{ width: 'auto', height: 'auto' }} />
+  //       <p className="no-data-message text-center text-gray-600">No data available!!</p>
+  //     </div>
+  //   );
+  // }
   const chartData = {
     labels: ["In Stage", "Mapped", "Missing"],
     datasets: [

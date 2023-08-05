@@ -208,7 +208,7 @@ export default function Leftbar({ show }) {
                 />
               </svg>
               {!show && (
-                <span className={router.pathname == "/monotainers" ? "text-white font-bold p-0.5 m-2" : "text-red-800 font-bold p-0.5 m-2"}>Monotainers</span>
+                <span className={router.pathname == "/monotainers" ? "text-white font-bold p-0.5 m-2" : "text-red-800 font-bold p-0.5 m-2"}>Monotaine</span>
               )}
             </Link>
             </Tooltip>

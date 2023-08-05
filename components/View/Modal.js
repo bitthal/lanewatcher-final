@@ -31,39 +31,21 @@ export default function ModalPopUp({
       innerHeight
     },
   };
-  const dummyData = [
-    {
-      timestamp: "2023-05-10 10:30:00",
-      location: "Vancouver, BC,",
-      eventData: "Parcel received at origin facility",
-    },
-    {
-      timestamp: "2023-05-10 10:30:00",
-      location: "Vancouver, BC,",
-      eventData: "Parcel received at origin facility",
-    },
-    {
-      timestamp: "2023-05-10 10:30:00",
-      location: "Vancouver, BC,",
-      eventData: "Parcel received at origin facility",
-    },
-    {
-      timestamp: "2023-05-10 10:30:00",
-      location: "Vancouver, BC,",
-      eventData: "Parcel received at origin facility",
-    },
-    {
-      timestamp: "2023-05-10 10:30:00",
-      location: "Vancouver, BC,",
-      eventData: "Parcel received at origin facility",
-    },
-  ];
+
   function closeModal2() {
     closeModalPopUp(false);
   }
   function openTableModal(params) {
     openTableModalBox(params);
   }
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Number of items to display per page
+  const totalItems = alertsTableData.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentAlerts = alertsTableData.slice(startIndex, endIndex);
   return (
     <Fragment>
       <Modal
@@ -137,7 +119,7 @@ export default function ModalPopUp({
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {alertsTableData &&
-                      alertsTableData?.map((data, index) => {
+                      currentAlerts?.map((data, index) => {
                         return (
                           <tr>
                             <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
@@ -165,7 +147,64 @@ export default function ModalPopUp({
                       })}
                   </tbody>
                 </table>
+                
               )}
+                  <div className="flex justify-center mt-4">
+          <button
+            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(1)}
+          >
+            <i className="fa fa-step-backward"></i>
+          </button>
+          <button
+            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            <i className="fa fa-chevron-left"></i>
+          </button>
+          {/* Render page numbers */}
+          {Array.from({ length: totalPages }).map((_, index) => {
+            if (index === 0 || index === totalPages - 1 || Math.abs(index - currentPage + 1) <= 2) {
+              // Display first, last, and nearby page numbers
+              return (
+                <button
+                  key={index}
+                  className={`mx-1 p-2 ${
+                    currentPage === index + 1
+                      ? "bg-indigo-800 text-white"
+                      : "bg-gray-300 hover:bg-indigo-800 hover:text-white"
+                  } rounded-md`}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              );
+            } else if (
+              (currentPage <= 3 && index === 3) ||
+              (currentPage >= totalPages - 3 && index === totalPages - 4)
+            ) {
+              // Display ... when near the beginning or end
+              return <span key={index} className="mx-1 p-2">...</span>;
+            }
+            return null;
+          })}
+          <button
+            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            <i className="fa fa-chevron-right"></i>
+          </button>
+          <button
+            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(totalPages)}
+          >
+            <i className="fa fa-step-forward"></i>
+          </button>
+        </div>
             </div>
           </div>
         )}

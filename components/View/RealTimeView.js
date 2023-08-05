@@ -42,7 +42,7 @@ export default function RealTimeView({ data }) {
     <>
       <div className="p-5 bg-white rounded-xl h-96 realTimeView">
         <div className="flex items-center text-center justify-between">
-          <div>
+          <div style={{ lineHeight: 1,fontSize: '12px' }}>
             <p className="text-indigo-800 font-bold underline">
               Lane :&nbsp;&nbsp;{capitalizeFirstLetter(data.lane_name)}
             </p>
@@ -51,13 +51,13 @@ export default function RealTimeView({ data }) {
             </span>
           </div>
 
-          <p className="font-bold text-lg text-primary2">
+          <p className="font-bold text-primary2">
             Real Time View
             <span className="text-lg font-bold text-green-600">
               &nbsp;&nbsp;{data?.real_time_positions?.length}
             </span>
           </p>
-          <div>
+          <div  style={{ lineHeight: 1,fontSize: '12px' }}>
             <p className="text-indigo-800 font-bold underline">
               Camera ID:&nbsp;&nbsp;{data.camera_id}
             </p>
