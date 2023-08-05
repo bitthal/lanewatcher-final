@@ -61,7 +61,7 @@ export default function ModalPopUp({
         }}
         contentLabel="Example Modal"
         ariaHideApp={false}
-        shouldCloseOnOverlayClick={false}
+        shouldCloseOnOverlayClick={true}
       >
         <button
           className="text-red-700 font-bold absolute top-0 right-0 p-2 "
