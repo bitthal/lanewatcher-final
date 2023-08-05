@@ -134,7 +134,7 @@ function Settings({}) {
   };
   const onSubmit = (data) => {
     const email = data.email;
-    const phone = data.phone;
+    const phone = data.country + "-" + data.phone;
     const combinedValue = `${email}, ${phone}`;
     // Call your AddEmailHandler function with the combined value
     AddEmailHandler(combinedValue);
@@ -352,6 +352,7 @@ function Settings({}) {
                                     <input
                                       className="flex-grow px-2  border pr-4 py-2 focus:ring-indigo-600 focus:border-indigo-600"
                                       placeholder="Phone"
+                                      type="number"
                                       {...register("phone", {
                                         required: "Phone is required",
                                         // Add your phone number validation pattern here
