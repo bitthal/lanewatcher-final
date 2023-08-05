@@ -39,6 +39,7 @@ export default function PlanogramView({ data }) {
   };
 
   const showAggregateIds = () => {
+    console.log(data.pending.monotainers,'jj')
     setAggregateResult(true);
   };
   return (
@@ -112,7 +113,8 @@ export default function PlanogramView({ data }) {
           <div className="flex justify-center">
             <button
               onClick={showAggregateIds}
-              className="bg-[#434190] w-1/2 py-3 rounded-lg text-white font-bold text-xs"
+              className={`${data?.planogram?.total > 0 ? '': ''}
+              bg-[#434190] w-1/2 py-3 rounded-lg text-white font-bold text-xs`}
             >
               Total {data?.planogram?.total}
             </button>
@@ -129,11 +131,9 @@ export default function PlanogramView({ data }) {
       {aggregateResult && (
         <ModalPopUp
           AllData={[data]}
-          AggregatePendingData={data.pending.monotainers}
-          AggregateRealTimeData={data.real_time_positions.map((x) => {
-            return x.monotainer_id;
-          })}
-          AggregateProcessedData={data.processed.monotainers}
+          AggregatePendingData={data.pending?.monotainers}
+          AggregateRealTimeData={data.real_time_positions?.monotainers}
+          AggregateProcessedData={data.processed?.monotainers}
           modalState={aggregateResult}
           closeModalPopUp={closeModalPopUp}
         ></ModalPopUp>

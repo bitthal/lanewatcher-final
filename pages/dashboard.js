@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import dynamic from 'next/dynamic'
-// import withAuth from "@/utils/withAuth";
+import withAuth from "@/utils/withAuth";
 
  function Dashboard() {
   
@@ -11,9 +11,8 @@ import dynamic from 'next/dynamic'
     </Fragment>
   );
 }
-// export default withAuth(Dashboard);
 
-export default Dashboard;
+export default withAuth(Dashboard);
 
 
 

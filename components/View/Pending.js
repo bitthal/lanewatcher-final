@@ -12,10 +12,11 @@ export default function Pending({ show, data,showDashboardView }) {
   const [tempName, setTempName] = useState("");
   const [dataModalOpen, setDataModalOpen] = useState(false);
   const [listModalOpen, setListModalOpen] = useState(false);
-  const [history, showHistory] = useState('');
+  const [history, showHistory] = useState([]);
   const openTableModalBox = (params) => {
+    console.log(params,'p')
     setListModalOpen(false);
-    setTempName(params);
+    setTempName(params.monotainer_id);
     setDataModalOpen(true);
     historyHandler(params);
   }
@@ -24,7 +25,7 @@ export default function Pending({ show, data,showDashboardView }) {
     setListModalOpen(false);
   };
   const historyHandler = (data) =>{
-    const monoid = data;
+    const monoid = data.monotainer_id;
      axios
       .get(`${process.env.NEXT_PUBLIC_API_URL_HISTORY}`, {
         params: {
@@ -32,8 +33,9 @@ export default function Pending({ show, data,showDashboardView }) {
         },
       })
       .then((response) => {
-        console.log(response.data.result,'response.data.result')
-        showHistory(response.data.result)        
+        setDataModalOpen(true);
+        console.log(response.data.result,'response.data.result-pending')
+        showHistory(response?.data?.result)        
       });
   }
   return (
@@ -55,9 +57,9 @@ export default function Pending({ show, data,showDashboardView }) {
                 fill="#FF0000"
               />
             </svg>
-            <p className="font-bold text-red-700">
+            {/* <p className="font-bold text-red-700">
               {data?.pending?.total_monotainers}
-            </p>
+            </p> */}
           </div>
         ) 
         : (
@@ -77,7 +79,7 @@ export default function Pending({ show, data,showDashboardView }) {
               </svg>
               <p className="font-bold text-primary2">Pending</p>
 
-              <p className="font-bold text-green-700">
+              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-6 h-6 flex items-center justify-center text-white font-bold">
                 {data?.pending?.total_monotainers}
               </p>
             </div>
@@ -88,14 +90,18 @@ export default function Pending({ show, data,showDashboardView }) {
                   .map((data1, index) => (
                     <button
                     onClick={() => {
-                      setDataModalOpen(true);
-                      setTempName(data1);
+                      setTempName(data1.monotainer_id);
                       historyHandler(data1);
                     }}
-                      className="text-red-800 border w-[90px] px-2 py-2 break-all border-red-800 rounded-lg"
-                      key={index}
+                    className={`${
+                         data1.ifmisplaced
+                        ? "text-red-800 border-red-800" 
+                        : data1.ifuntagged ? "text-yellow-500 border-yellow-500" 
+                        : " text-green-700 border-green-700"
+                    } border px-2 py-2 rounded-lg h-10 `}
+                      key={data1.index}
                     >
-                      {data1}
+                      {data1.monotainer_id}
                     </button>
                   ))}
               </div>

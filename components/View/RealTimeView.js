@@ -8,7 +8,7 @@ export default function RealTimeView({ data }) {
   const [history, showHistory] = useState('');
 
   const dataPerPage = 32;
-  const totalData = data?.real_time_positions?.length;
+  const totalData = data?.real_time_positions?.total_monotainers;
   const totalPages = Math.ceil(totalData / dataPerPage);  
 
   const capitalizeFirstLetter = (str) => {
@@ -21,12 +21,12 @@ export default function RealTimeView({ data }) {
   };
   const openTableModalBox = (params) => {
     setListModalOpen(false);
-    setTempName(params);
+    setTempName(params.monotainer_id);
     setDataModalOpen(true);
     historyHandler(params);
   };
   const historyHandler = (data) =>{
-    const monoid = data;
+    const monoid = data.monotainer_id;
      axios
       .get(`${process.env.NEXT_PUBLIC_API_URL_HISTORY}`, {
         params: {
@@ -51,10 +51,10 @@ export default function RealTimeView({ data }) {
             </span>
           </div>
 
-          <p className="font-bold text-primary2">
+          <p className="font-bold text-primary2 flex justify-content">
             Real Time View
-            <span className="text-lg font-bold text-green-600">
-              &nbsp;&nbsp;{data?.real_time_positions?.length}
+            <span className="ml-2 rounded-full border border-indigo-900 bg-indigo-900 w-6 h-6 flex items-center justify-center text-white font-bold">
+              {data?.real_time_positions?.total_monotainers}
             </span>
           </p>
           <div  style={{ lineHeight: 1,fontSize: '12px' }}>
@@ -65,14 +65,15 @@ export default function RealTimeView({ data }) {
         </div>
         <div className="flex gap-3 flex-col mt-7rem">
           <div className="grid grid-cols-8 gap-2">
-            {data?.real_time_positions?.map((data1, index) => (
+            {data?.real_time_positions?.monotainers?.map((data1, index) => (
               <button
-                className={`${
-                  data1.misplaced === 0 && data1.untagged === 0
-                    ? "text-green-700 border-green-700" 
-                    : data1.untagged === 1 && (data1.misplaced === 1 || data1.misplaced === 0) ? "text-yellow-500 border-yellow-500" :"text-red-700 border-red-700"
-                } border px-2 py-2 rounded-lg h-10`}
-                key={index}
+              className={`${
+                data1.ifmisplaced
+               ? "text-red-800 border-red-800" 
+               : data1.ifuntagged ? "text-yellow-500 border-yellow-500" 
+               : " text-green-700 border-green-700"
+           } border px-2 py-2 rounded-lg h-10 `}
+             key={data1.index}
                 onClick={() => {
                   setDataModalOpen(true);
                   setTempName(data1.monotainer_id);

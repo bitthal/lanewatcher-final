@@ -14,7 +14,7 @@ export default function Processed({ show, data,showDashboardView }) {
 
   const openTableModalBox = (params) => {
     setListModalOpen(false);
-    setTempName(params);
+    setTempName(params.monotainer_id);
     setDataModalOpen(true);
   }
   const closeModalPopUp = () => {
@@ -22,7 +22,7 @@ export default function Processed({ show, data,showDashboardView }) {
     setListModalOpen(false);
   };
   const historyHandler = (data) =>{
-    const monoid = data;
+    const monoid = data.monotainer_id;
      axios
       .get(`${process.env.NEXT_PUBLIC_API_URL_HISTORY}`, {
         params: {
@@ -52,7 +52,7 @@ export default function Processed({ show, data,showDashboardView }) {
               <i className="fa-solid fa-cart-shopping text-indigo-800" />
               <p className="font-bold text-primary2">Processed</p>
 
-              <p className="font-bold text-green-700">
+              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-6 h-6 flex items-center justify-center text-white font-bold">
                 {data?.processed?.total_monotainers}
               </p>
             </div>
@@ -63,15 +63,20 @@ export default function Processed({ show, data,showDashboardView }) {
                   ?.slice((page - 1) * dataPerPage, page * dataPerPage)
                   .map((data1, index) => (
                     <button
-                      className="text-green-700 border w-[90px] py-2 break-all border-green-700 rounded-lg button-3d"
-                      key={index}
+                    className={`${
+                      data1.ifmisplaced
+                     ? "text-red-800 border-red-800" 
+                     : data1.ifuntagged ? "text-yellow-500 border-yellow-500" 
+                     : " text-green-700 border-green-700"
+                 } border px-2 py-2 rounded-lg h-10 `}
+                   key={data1.index}
                       onClick={() => {
                         setDataModalOpen(true);
-                        setTempName(data1);
+                        setTempName(data1.monotainer_id);
                         historyHandler(data1);
                       }}
                     >
-                      {data1}
+                      {data1.monotainer_id}
                     </button>
                   ))}
               </div>

@@ -27,8 +27,8 @@ export default function ModalPopUp({
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      zIndex:99999,
-      innerHeight
+      zIndex: 99999,
+      innerHeight,
     },
   };
 
@@ -41,11 +41,12 @@ export default function ModalPopUp({
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // Number of items to display per page
-  const totalItems = alertsTableData && alertsTableData.length;
+  const totalItems = alertsTableData && alertsTableData?.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentAlerts = alertsTableData && alertsTableData.slice(startIndex, endIndex);
+  const currentAlerts =
+    alertsTableData && alertsTableData?.slice(startIndex, endIndex);
   return (
     <Fragment>
       <Modal
@@ -104,11 +105,11 @@ export default function ModalPopUp({
                         Type
                       </th>
                       <th
-                          scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
-                        >
-                          Description
-                        </th>
+                        scope="col"
+                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                      >
+                        Description
+                      </th>
                       <th
                         scope="col"
                         className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
@@ -134,9 +135,9 @@ export default function ModalPopUp({
                             <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
                               {data?.alerts?.type}
                             </td>
-                            <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
-                                  {data?.alerts?.description}
-                              </td>
+                            <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center">
+                              {data?.alerts?.description}
+                            </td>
                             <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
                               {data?.alerts?.claimed_status === true
                                 ? "True"
@@ -147,64 +148,71 @@ export default function ModalPopUp({
                       })}
                   </tbody>
                 </table>
-                
               )}
-                  <div className="flex justify-center mt-4">
-          <button
-            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage(1)}
-          >
-            <i className="fa fa-step-backward"></i>
-          </button>
-          <button
-            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage(currentPage - 1)}
-          >
-            <i className="fa fa-chevron-left"></i>
-          </button>
-          {/* Render page numbers */}
-          {Array.from({ length: totalPages }).map((_, index) => {
-            if (index === 0 || index === totalPages - 1 || Math.abs(index - currentPage + 1) <= 2) {
-              // Display first, last, and nearby page numbers
-              return (
+              <div className="flex justify-center mt-4">
                 <button
-                  key={index}
-                  className={`mx-1 p-2 ${
-                    currentPage === index + 1
-                      ? "bg-indigo-800 text-white"
-                      : "bg-gray-300 hover:bg-indigo-800 hover:text-white"
-                  } rounded-md`}
-                  onClick={() => setCurrentPage(index + 1)}
+                  className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage(1)}
                 >
-                  {index + 1}
+                  <i className="fa fa-step-backward"></i>
                 </button>
-              );
-            } else if (
-              (currentPage <= 3 && index === 3) ||
-              (currentPage >= totalPages - 3 && index === totalPages - 4)
-            ) {
-              // Display ... when near the beginning or end
-              return <span key={index} className="mx-1 p-2">...</span>;
-            }
-            return null;
-          })}
-          <button
-            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            <i className="fa fa-chevron-right"></i>
-          </button>
-          <button
-            className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage(totalPages)}
-          >
-            <i className="fa fa-step-forward"></i>
-          </button>
-        </div>
+                <button
+                  className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                >
+                  <i className="fa fa-chevron-left"></i>
+                </button>
+                {/* Render page numbers */}
+                {Array.from({ length: totalPages }).map((_, index) => {
+                  if (
+                    index === 0 ||
+                    index === totalPages - 1 ||
+                    Math.abs(index - currentPage + 1) <= 2
+                  ) {
+                    // Display first, last, and nearby page numbers
+                    return (
+                      <button
+                        key={index}
+                        className={`mx-1 p-2 ${
+                          currentPage === index + 1
+                            ? "bg-indigo-800 text-white"
+                            : "bg-gray-300 hover:bg-indigo-800 hover:text-white"
+                        } rounded-md`}
+                        onClick={() => setCurrentPage(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    );
+                  } else if (
+                    (currentPage <= 3 && index === 3) ||
+                    (currentPage >= totalPages - 3 && index === totalPages - 4)
+                  ) {
+                    // Display ... when near the beginning or end
+                    return (
+                      <span key={index} className="mx-1 p-2">
+                        ...
+                      </span>
+                    );
+                  }
+                  return null;
+                })}
+                <button
+                  className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                >
+                  <i className="fa fa-chevron-right"></i>
+                </button>
+                <button
+                  className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage(totalPages)}
+                >
+                  <i className="fa fa-step-forward"></i>
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -214,24 +222,26 @@ export default function ModalPopUp({
               <h5 className="text-center font-bold text-xl">Monotainer ID's</h5>
             </div>
             <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
-              {listData?.real_time_positions?.map((data1, index) => {
-                return (
-                  <button
-                    className={`${
-                      data1.misplaced === 1
-                        ? "text-green-700 border-green-700"
-                        : "text-red-700 border-red-700"
-                    } border px-3 py-2  rounded-lg`}
-                    key={index}
-                    onClick={() => {
-                      openTableModal(data1.monotainer_id);
-                      // closeModal2();
-                    }}
-                  >
-                    {data1.monotainer_id}
-                  </button>
-                );
-              })}
+              {listData?.real_time_positions?.monotainers.map(
+                (data1, index) => {
+                  return (
+                    <button
+                      className={`${
+                        data1.ifmisplaced
+                          ? "text-green-700 border-green-700"
+                          : "text-red-700 border-red-700"
+                      } border px-3 py-2  rounded-lg`}
+                      key={index}
+                      onClick={() => {
+                        openTableModal(data1);
+                        // closeModal2();
+                      }}
+                    >
+                      {data1.monotainer_id}
+                    </button>
+                  );
+                }
+              )}
             </div>
           </div>
         )}
@@ -244,14 +254,14 @@ export default function ModalPopUp({
               {listData?.pending?.monotainers?.map((data1, index) => {
                 return (
                   <button
-                    className="text-green-700 border-green-700 text-red-700 border-red-700 border px-3 py-2  rounded-lg"
-                    key={index}
+                    className="text-green-700 border-green-700 text-green-700 border px-3 py-2  rounded-lg"
+                    key={data1.index}
                     onClick={() => {
                       openTableModal(data1);
                       // closeModal2();
                     }}
                   >
-                    {data1}
+                    {data1.monotainer_id}
                   </button>
                 );
               })}
@@ -274,7 +284,7 @@ export default function ModalPopUp({
                       // closeModal2();
                     }}
                   >
-                    {data1}
+                    {data1.monotainer_id}
                   </button>
                 );
               })}
@@ -294,7 +304,7 @@ export default function ModalPopUp({
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
                   >
-                   Camera ID
+                    Camera ID
                   </th>
                   <th
                     scope="col"
@@ -323,42 +333,39 @@ export default function ModalPopUp({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {tableData.length > 0 &&
-                  tableData.map((data, index) => {
-                    return (
-                      <tr
-                        className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
-                        key={index}
-                      >
-                        <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                          {data.camera_id}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
-                          {data.lane_name}
-                        </td>
-                        <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
-                          {data.processed_timestamp}
-                        </td>
-                        <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
-                          {data.sorting_timestamp}
-                        </td>
-                        <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
-                          {data.staged_timestamp}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                  {tableData.length == 0 && 
-                      <tr
-                        className="bg-gray-100"
-                      >
-                        <td 
-                        colSpan="5"
-                        className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black text-center">
-                         <p> No data available </p>
-                        </td>
-                      </tr>
-                  }
+                {tableData.length > 0 ? (
+                  tableData.map((data, index) => (
+                    <tr
+                      className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
+                      key={data.id}
+                    >
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
+                        {data.camera_id}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
+                        {data.lane_name}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                        {data.processed_timestamp}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                        {data.sorting_timestamp}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                        {data.staged_timestamp}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr className="bg-gray-100">
+                    <td
+                      colSpan="5"
+                      className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black text-center"
+                    >
+                      <p> No data available </p>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -371,17 +378,16 @@ export default function ModalPopUp({
 
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-blue-200 custom-thead">
-                  
+                <thead className="bg-indigo-900">
                   {/* Add custom-thead class here */}
                   <tr>
-                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+                    <th className="px-6 py-3 text-xs font-bold text-left text-white uppercase">
                       Pending
                     </th>
-                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+                    <th className="px-6 py-3 text-xs font-bold text-left text-white uppercase">
                       Real Time
                     </th>
-                    <th className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase">
+                    <th className="px-6 py-3 text-xs font-bold text-left text-white uppercase">
                       Processed
                     </th>
                   </tr>
@@ -396,13 +402,13 @@ export default function ModalPopUp({
                   }).map((_, index) => (
                     <tr key={index}>
                       <td className="border border-gray-800 px-4 py-2">
-                        {AggregatePendingData[index]}
+                        {AggregatePendingData[index]?.monotainer_id}
                       </td>
                       <td className="border border-gray-800 px-6 py-2">
-                        {AggregateRealTimeData[index]}
+                        {AggregateRealTimeData[index]?.monotainer_id}
                       </td>
                       <td className="border border-gray-800 px-6 py-2">
-                        {AggregateProcessedData[index]}
+                        {AggregateProcessedData[index]?.monotainer_id}
                       </td>
                     </tr>
                   ))}

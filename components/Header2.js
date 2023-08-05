@@ -5,7 +5,7 @@ import moment from "moment";
 
 export default function Header2({
   show,
-  setShow,
+  // setShow,
   setUpdated,
   showDatePicker,
   setRangeFilter,
@@ -18,7 +18,7 @@ export default function Header2({
   const setSearchTerm = () => {
     const newValue = inputRef.current.value;
     setUpdated(newValue);
-    // onSearch(newValue); 
+    // onSearch(newValue);
   };
 
   const handleCancel = () => {
@@ -83,22 +83,37 @@ export default function Header2({
     <div className="mt-5 w-full">
       <div className="flex lg:flex-row flex-col lg:items-center gap-4">
         <div className="flex gap-4 ">
-          <div className="bg-gray-100 w-fit flex text-2xl gap-2 shadow rounded-md">
-            <i
-              onClick={() => setShow(true)}
-              className={`fa-solid cursor-pointer fa-eye p-2  ${
-                show == true && "bg-white rounded-md"
-              }`}
-            />
-            <i
-              onClick={() => setShow(false)}
-              className={`fa-solid cursor-pointer fa-eye-slash p-2 ${
-                show == false && "bg-white rounded-md"
-              }`}
-            />
-          </div>
-          { showSearchBar && <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded w-128">
-          <input
+          {/* <div className="w-fit flex text-2xl gap-2">
+          <label className="flex items-center space-x-2 cursor-pointer">
+  <input
+    type="checkbox"
+    className="form-toggle-checkbox hidden"
+    checked={show}
+    onChange={() => setShow(!show)}
+  />
+  <span
+    className={`form-toggle-label relative h-8 w-16 border rounded-full transition-colors duration-300 ${
+      show ? "bg-indigo-600" : "bg-gray-400"
+    }`}
+  >
+    <span
+      className={`absolute left-0 right-0 top-0 bottom-0 flex items-center justify-center transition-transform duration-300 ${
+        show ? "transform translate-x-full" : "transform translate-x-0"
+      }`}
+    >
+      <i
+        className={`fas ${
+          show ? "fa-arrow-right" : "fa-arrow-left"
+        } text-white`}
+      />
+    </span>
+  </span>
+</label>
+
+          </div> */}
+          {showSearchBar && (
+            <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded w-128">
+              <input
                 className="flex-1 h-full pr-4 py-2 focus:outline-none block"
                 placeholder="Enter Montainer/Lane ID:"
                 type="text"
@@ -113,11 +128,11 @@ export default function Header2({
                   <i className="px-4 fa-solid fa-times" />
                 </button>
               )}
-            <button type="submit" onClick={setSearchTerm}>
-              <i className="px-4 fa-solid fa-magnifying-glass" />
-            </button>
-          </div>}
-          
+              <button type="submit" onClick={setSearchTerm}>
+                <i className="px-4 fa-solid fa-magnifying-glass" />
+              </button>
+            </div>
+          )}
         </div>
         {showDatePicker && (
           <div className="flex border-groove border-2">
@@ -151,7 +166,6 @@ export default function Header2({
                   "DD-MM-YYYY(HH:mm)"
                 )} - ${range.end.format("DD-MM-YYYY(HH:mm)")}`}
                 className="w-80 h-full py-2 block border-solid px-5 cursor-pointer"
-                
               />
             </DateTimePicker>
           </div>
