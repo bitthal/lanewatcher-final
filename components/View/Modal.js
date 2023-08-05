@@ -41,11 +41,11 @@ export default function ModalPopUp({
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // Number of items to display per page
-  const totalItems = alertsTableData.length;
+  const totalItems = alertsTableData && alertsTableData.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentAlerts = alertsTableData.slice(startIndex, endIndex);
+  const currentAlerts = alertsTableData && alertsTableData.slice(startIndex, endIndex);
   return (
     <Fragment>
       <Modal
