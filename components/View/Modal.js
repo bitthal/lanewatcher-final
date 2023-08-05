@@ -123,7 +123,7 @@ export default function ModalPopUp({
                         return (
                           <tr>
                             <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
-                              {index}
+                              {alertsTableData.indexOf(data)}
                             </td>
                             <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
                               {data.key_str.slice(0, data.key_str.indexOf("#"))}

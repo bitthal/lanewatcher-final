@@ -129,7 +129,7 @@ function Alert({}) {
                               return (
                                 <tr>
                                 <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
-                                  {index}
+                                  {alertList.indexOf(data)}
                               </td>
                               <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center" >
                                   {data.key_str.slice(0,data.key_str.indexOf('#'))}
