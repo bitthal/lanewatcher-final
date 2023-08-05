@@ -73,7 +73,7 @@ export default function Index() {
 
   return (
     <Fragment>
-      <div className="w-full shadow-md p-3 flex justify-between items-center overflow-hidden ">
+      <div className="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed top-0 z-10  bg-gradient-to-l from-gray-200 to-gray-100">
         <div className="flex flex-row justify-content w-fit text-center text-red-800 font-bold">
             UST Canada Post
         </div>
@@ -99,7 +99,7 @@ export default function Index() {
             />
           </div> */}
           {!loginScreen && (
-            <div className="w-full rounded-lg shadow-md md:mt-0 sm:max-w-md xl:p-0  ">
+            <div className="w-full rounded-lg shadow-md sm:max-w-md mt-8">
               <div className="p-4 space-y-2 md:space-y-4 sm:p-5">
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                   Sign In
@@ -224,7 +224,7 @@ export default function Index() {
             </div>
           )}
           {loginScreen && (
-            <div className="w-full rounded-lg shadow-md md:mt-0 sm:max-w-md xl:p-0  ">
+            <div className="w-full rounded-lg shadow-md sm:max-w-md mt-12 ">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
                   Log In
