@@ -65,11 +65,11 @@ function Monotainers() {
   }
   return (
     <div className={`flex gap-4 my-3 mr-3 h-auto `}>
-      <Leftbar show={show} />
+      <Leftbar show={show} setShow={setShow}/>
       <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
         <div className={`w-full`}>
           <Header2
-            setShow={setShow}
+            
             show={show}
             showSearchBar={true}
             showDatePicker={false}

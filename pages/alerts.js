@@ -68,10 +68,10 @@ function Alert({}) {
 
   return (
       <div className="flex gap-4 my-3 mr-3 h-auto">
-        <Leftbar show={show} />
+        <Leftbar show={show} setShow={setShow}/>
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
-            <Header2 setShow={setShow} show={show} showSearchBar={false} showDatePicker={false} />
+            <Header2  show={show} showSearchBar={false} showDatePicker={false} />
           </div>
           <div className="flex flex-col">
             <div className="overflow-x-auto">
