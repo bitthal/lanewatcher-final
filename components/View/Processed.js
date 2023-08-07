@@ -61,7 +61,8 @@ export default function Processed({ show, data,showDashboardView }) {
               <div className="grid grid-cols-2 gap-3">
                 {data?.processed?.monotainers
                   ?.slice((page - 1) * dataPerPage, page * dataPerPage)
-                  .map((data1, index) => (
+                  .sort((a, b) => a.index - b.index)
+                  ?.map((data1, index) => (
                     <button
                     className={`${
                       data1.ifmisplaced

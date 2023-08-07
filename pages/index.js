@@ -99,7 +99,7 @@ export default function Index() {
             />
           </div> */}
           {!loginScreen && (
-            <div className="w-full rounded-lg shadow-md sm:max-w-md mt-8">
+            <div className="w-full rounded-lg shadow-md sm:max-w-md mt-8 bg-gradient-to-l from-gray-200 to-gray-100">
               <div className="p-4 space-y-2 md:space-y-4 sm:p-5">
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                   Sign In
@@ -198,7 +198,7 @@ export default function Index() {
                     </div>
                     <a
                       href="/"
-                      className="text-sm font-medium text-white text-primary-600 hover:underline "
+                      className="text-sm font-medium text-gray-500 hover:underline "
                     >
                       Forgot password?
                     </a>
@@ -224,7 +224,7 @@ export default function Index() {
             </div>
           )}
           {loginScreen && (
-            <div className="w-full rounded-lg shadow-md sm:max-w-md mt-12 ">
+            <div className="w-full rounded-lg shadow-md sm:max-w-md mt-12 bg-gradient-to-l from-gray-200 to-gray-100">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
                   Log In
@@ -302,7 +302,7 @@ export default function Index() {
                     </div>
                     <a
                       href="/"
-                      className="text-sm font-medium text-white text-primary-600 hover:underline "
+                      className="text-sm font-medium text-gray-500 hover:underline"
                     >
                       Forgot password?
                     </a>

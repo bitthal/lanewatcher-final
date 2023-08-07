@@ -12,7 +12,6 @@
     transition-delay: 0ms;
   }
 }
-
 .mt-6rem{
   margin-top: 50px;
   height: 200px;
@@ -177,13 +176,9 @@ body{
 } */
 
 .sidebar {
-  transition: width 0.3s ease-in-out, transform 0.5s ease-in-out;
+  transition: width 0.9s linear, width 0.9s ease-out;
 }
 
-.sidebar-entry {
-  opacity: 0;
-  animation: fadeInTranslate 0.6s forwards;
-}
 
 @keyframes fadeInTranslate {
   to {
@@ -191,4 +186,14 @@ body{
     transform: translateX(50);
   }
 }
+
+.sidebar-entry {
+  opacity: 0;
+  animation: fadeInTranslate 0.9s forwards;
+}
+
+.fa-beat-fade {
+  animation: beatFade 1s infinite;
+}
+
 

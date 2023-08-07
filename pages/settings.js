@@ -169,7 +169,6 @@ function Settings({}) {
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
             <Header2
-              
               show={show}
               showSearchBar={false}
               showDatePicker={false}
