@@ -426,7 +426,7 @@ export default function Leftbar({ show, setShow }) {
                         ${router.pathname == "/"
                           ? "text-white font-bold p-0.5 m-2"
                           : "text-red-800 font-bold p-0.5 m-2"}
-                          ${show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
+                          ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >
                       Logout
