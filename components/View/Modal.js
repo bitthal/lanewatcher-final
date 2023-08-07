@@ -55,8 +55,9 @@ export default function ModalPopUp({
         style={{
           content: {
             ...customStyles.content,
-            maxWidth: "80%", // Adjust the width as needed
+            maxWidth: "100%", // Adjust the width as needed
             maxHeight: "80%", // Adjust the height as needed
+            width:"60%%"
           },
           overlay: customStyles.overlay,
         }}
@@ -65,7 +66,7 @@ export default function ModalPopUp({
         shouldCloseOnOverlayClick={true}
       >
         <button
-          className="text-red-700 font-bold absolute top-0 right-0 p-2 "
+          className="text-red-700 font-bold absolute top-0 left-0 p-2 "
           onClick={closeModal2}
         >
           <i className="fa fa-window-close" aria-hidden="true"></i>
@@ -292,7 +293,7 @@ export default function ModalPopUp({
           </div>
         )}
         {tableData && (
-          <div className="max-w-[700px] max-h-[500px] overflow-y-auto m-10">
+          <div className="w-fit max-h-[500px] overflow-y-auto m-10">
             <h5 className="text-center font-bold text-xl mb-2">History</h5>
             <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary2 font-bold">
               {tempName}
@@ -310,7 +311,61 @@ export default function ModalPopUp({
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
                   >
+                    Finalized Timestamp
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                  >
+                    Finalized
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                  >
+                    Misplaced
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                  >
+                    Processed
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                  >
+                    Staged
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                  >
+                    Untagged
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                  >
                     Lane Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                  >
+                    Misplaced In
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                  >
+                    Misplaced Lane
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                  >
+                    Misplaced Timestamp
                   </th>
                   <th
                     scope="col"
@@ -342,8 +397,35 @@ export default function ModalPopUp({
                       <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
                         {data.camera_id}
                       </td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
+                        {data.finalized_timestamp}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
+                        {data.iffinalized}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
+                        {data.ifmisplaced}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
+                        {data.ifprocessed}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
+                        {data.ifstaged}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
+                        {data.ifuntagged}
+                      </td>
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
                         {data.lane_name}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
+                        {data.misplaced_in}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
+                        {data.misplaced_lane}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
+                        {data.misplaced_timestamp}
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data.processed_timestamp}

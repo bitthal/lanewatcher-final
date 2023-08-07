@@ -96,7 +96,8 @@ function Tracker({
           </div>
 
           <div className={`flex flex-col gap-8 mt-5 w-full`}>
-            {Alldata?.map((data, index) => {
+            {Alldata?.sort((a, b) => a.lane_number - b.lane_number)
+            .map((data, index) => {
               return (
                 <div className="" key={index}>
                   <View
