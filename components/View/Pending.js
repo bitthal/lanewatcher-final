@@ -90,8 +90,8 @@ export default function Pending({ show, data,showDashboardView }) {
                   .map((data1, index) => (
                     <button
                     onClick={() => {
-                      setTempName(data1);
-                      historyHandler(data1);
+                      setTempName(data1.monotainer_id);
+                      historyHandler(data1.monotainer_id);
                     }}
                     className={`${
                          data1.ifmisplaced
@@ -101,7 +101,7 @@ export default function Pending({ show, data,showDashboardView }) {
                     } border px-2 py-2 rounded-lg h-10 `}
                       key={data1.index}
                     >
-                      {data1}
+                      {data1.monotainer_id}
                     </button>
                   ))}
               </div>

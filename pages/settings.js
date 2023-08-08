@@ -68,7 +68,6 @@ function Settings({}) {
   }
 
   const deleteEmailHandler = (emailId) => {
-    console.log(emailId[0].Email,'em')
     const id = emailId[0].Email.split(",")[0];
     axios
       .post(`${process.env.NEXT_PUBLIC_DELETEEMAIL_API_URL}`, null, {

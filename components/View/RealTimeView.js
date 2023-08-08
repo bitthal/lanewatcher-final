@@ -55,7 +55,7 @@ export default function RealTimeView({ data }) {
           <p className="font-bold text-primary2 flex justify-content text-lg">
             Real Time View
             <span className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-lg font-bold shadow-blue ml-4">
-              {data?.real_time_positions?.total_monotainers ? data?.real_time_positions?.total_monotainers : data?.real_time_positions?.length}
+              {data?.real_time_positions?.total_monotainers}
             </span>
           </p>
           <div  style={{ lineHeight: 1,fontSize: '12px' }}>
