@@ -262,7 +262,7 @@ export default function ModalPopUp({
                       // closeModal2();
                     }}
                   >
-                    {data1.monotainer_id}
+                    {data1}
                   </button>
                 );
               })}
