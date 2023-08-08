@@ -56,10 +56,10 @@ export default function Header() {
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params: {
-          site_id: value ? value.site_id : drpdwnVaue[0].site_id,
+          site_id: value ? value.site_id : drpdwnVaue[2].site_id,
           // camera_id: value
           //   ? value.site_id
-          //   : Object.values(drpdwnVaue[0].camera_id).toString(),
+          //   : Object.values(drpdwnVaue[2].camera_id).toString(),
         },
       })
       .then((response) => {
@@ -106,6 +106,7 @@ export default function Header() {
           label="Global Site Selection:-"
           class="w-18 px-4 py-2 bg-white border text-black border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-transparent focus:border-indigo-600 cursor-pointer"
           onChange={handleChange}
+          defaultValue={2}
         >
           {siteId.map((option, index) => (
             <option key={option.camera_id} value={index}>

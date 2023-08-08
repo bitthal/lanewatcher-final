@@ -16,10 +16,10 @@ export default function PlanogramView({ data }) {
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params: {
-          site_id: value ? value.site_id : drpdwnVaue[0].site_id,
+          site_id: value ? value.site_id : drpdwnVaue[2].site_id,
           // camera_id: value
           //   ? value.site_id
-          //   : Object.values(drpdwnVaue[0].camera_id).toString(),
+          //   : Object.values(drpdwnVaue[2].camera_id).toString(),
         },
       })
       .then((response) => {

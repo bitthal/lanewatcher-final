@@ -7,7 +7,7 @@ import { value_data } from "@/context/context";
 import { useForm } from "react-hook-form";
 import withAuth from "@/utils/withAuth";
 import countries from "data/countries.json";
-import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
+import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
 // Create a Skeleton component
 const Skeleton = () => (
   <div className="animate-pulse bg-gray-200 h-8 rounded-md m-4 "></div>
@@ -33,9 +33,9 @@ function Settings({}) {
   const [inputFields, setInputFields] = useState([{ email: " " }]);
   const [resetloading, setLoading] = useState(false);
   const sortIcons = {
-    asc: <FaSortUp className="inline"/>,
-    desc: <FaSortDown className="inline"/>,
-    none: <FaSort className="inline"/>,
+    asc: <FaSortUp className="inline" />,
+    desc: <FaSortDown className="inline" />,
+    none: <FaSort className="inline" />,
   };
 
   function handleChange(event) {
@@ -47,12 +47,12 @@ function Settings({}) {
     const site_id = payload
       ? payload.site_id
       : drpdwnVaue
-      ? drpdwnVaue[0].site_id
+      ? drpdwnVaue[2].site_id
       : "";
     const camera_id = payload
       ? Object.values(payload.camera_id).toString()
       : drpdwnVaue
-      ? Object.values(drpdwnVaue[0].camera_id).toString()
+      ? Object.values(drpdwnVaue[2].camera_id).toString()
       : "";
     await axios
       .post(`${process.env.NEXT_PUBLIC_GETEMAILS_API_URL}`, null, {
@@ -67,16 +67,12 @@ function Settings({}) {
   }
 
   const deleteEmailHandler = (emailId) => {
-    console.log(emailId, "em");
-    const site_id = emailId.site_id;
-    const camera_id = emailId.camera_id.split(",")[0];
-    const email = emailId.Email;
+    console.log(emailId[0].Email,'em')
+    const id = emailId[0].Email.split(" ")[0];
     axios
       .post(`${process.env.NEXT_PUBLIC_DELETEEMAIL_API_URL}`, null, {
         params: {
-          site_id,
-          camera_id,
-          email,
+          id,
         },
       })
       .then();
@@ -85,11 +81,11 @@ function Settings({}) {
     const site_id =
       selectedSiteId && selectedSiteId.site_id
         ? selectedSiteId.site_id
-        : drpdwnVaue[0].site_id;
+        : drpdwnVaue[2].site_id;
     const camera_id =
       selectedSiteId && Object.values(selectedSiteId.camera_id).toString()
         ? Object.values(selectedSiteId.camera_id).toString()
-        : Object.values(drpdwnVaue[0].camera_id).toString();
+        : Object.values(drpdwnVaue[2].camera_id).toString();
     const email = emailId;
     axios
       .post(`${process.env.NEXT_PUBLIC_ADDEMAIL_API_URL}`, null, {
@@ -101,9 +97,9 @@ function Settings({}) {
       })
       .then(() => {
         setTableDate([
-          ...tableData,
+          ...sortedItems,
           {
-            id: tableData.length,
+            id: sortedItems.length,
             site_id: site_id,
             camera_id: camera_id,
             Email: emailId,
@@ -120,7 +116,7 @@ function Settings({}) {
 
   const resetHandler = () => {
     setLoading(true);
-    const site_id = drpdwnVaue[0].site_id;
+    const site_id = drpdwnVaue[2].site_id;
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL_RESET}`, {
         params: {
@@ -146,9 +142,13 @@ function Settings({}) {
   };
   const removeFields = (index) => {
     let data = [...tableData];
-    data.splice(index, 1);
-    setTableDate(data);
-    deleteEmailHandler(data[index - 1]);
+    // setTableDate(tableData[index - 1]);
+    // deleteEmailHandler(tableData[index]);
+    let tableDatad = [data[index - 1]]
+    let deletData = data.splice(index, 1)
+    console.log(data,'bb',tableDatad,'ww',deletData)
+    setTableDate(tableDatad);
+    deleteEmailHandler(deletData);
   };
 
   const fetchData = async () => {
@@ -176,12 +176,11 @@ function Settings({}) {
   const currentItems = tableData?.slice(indexOfFirstItem, indexOfLastItem);
   const handleSort = (column) => {
     if (sortColumn === column) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortColumn(column);
-      setSortDirection('asc');
+      setSortDirection("asc");
     }
-    
   };
 
   const getSortIcon = (column) => {
@@ -197,9 +196,9 @@ function Settings({}) {
 
   // Apply sorting to the data
   const sortedItems = [...currentItems].sort((a, b) => {
-    console.log(a[sortColumn],'s')
+    console.log(a[sortColumn], "s");
     const compareResult =
-      sortDirection === 'asc'
+      sortDirection === "asc"
         ? a[sortColumn].localeCompare(b[sortColumn])
         : b[sortColumn].localeCompare(a[sortColumn]);
     return compareResult;
@@ -223,6 +222,7 @@ function Settings({}) {
                 <select
                   className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm  appearance-none focus:border-indigo-600 cursor-pointer"
                   onChange={handleChange}
+                  defaultValue={2}
                 >
                   {drpdwnVaue.map((option, index) => (
                     <option key={option.camera_id} value={index}>
@@ -257,30 +257,30 @@ function Settings({}) {
                             <th
                               scope="col"
                               className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
-                              onClick={() => handleSorting('id')}
+                              onClick={() => handleSorting("id")}
                             >
-                              ID {getSortIcon('id')}
+                              ID {getSortIcon("id")}
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
-                              onClick={() => handleSorting('site_id')}
+                              onClick={() => handleSorting("site_id")}
                             >
-                              SITE ID {getSortIcon('site_id')}
+                              SITE ID {getSortIcon("site_id")}
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
-                              onClick={() => handleSorting('Email')}
+                              onClick={() => handleSorting("Email")}
                             >
-                              Email {getSortIcon('Email')}
+                              Email {getSortIcon("Email")}
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
-                              onClick={() => handleSorting('Email')}
+                              onClick={() => handleSorting("Email")}
                             >
-                              Phone {getSortIcon('Email')}
+                              Phone {getSortIcon("Email")}
                             </th>
                             <th
                               scope="col"
@@ -291,7 +291,7 @@ function Settings({}) {
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 bg-white-100">
-                          {tableData &&
+                          {tableData && tableData.length > 0 ? (
                             sortedItems?.map((data, index) => {
                               return (
                                 <tr>
@@ -317,7 +317,18 @@ function Settings({}) {
                                   </td>
                                 </tr>
                               );
-                            })}
+                            })
+                          ) : (
+                            <tr className="bg-gray-100">
+                              <td
+                                colSpan="5"
+                                className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black text-center"
+                              >
+                                <p> No data available </p>
+                              </td>
+                            </tr>
+                          )}
+                          
                         </tbody>
                         {/* <div className="flex justify-center mt-4">
                           <Pagination

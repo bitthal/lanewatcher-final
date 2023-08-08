@@ -25,7 +25,7 @@ export default function Pending({ show, data,showDashboardView }) {
     setListModalOpen(false);
   };
   const historyHandler = (data) =>{
-    const monoid = data.monotainer_id;
+    const monoid = data?.monotainer_id ? data?.monotainer_id : data;
      axios
       .get(`${process.env.NEXT_PUBLIC_API_URL_HISTORY}`, {
         params: {
@@ -90,7 +90,7 @@ export default function Pending({ show, data,showDashboardView }) {
                   .map((data1, index) => (
                     <button
                     onClick={() => {
-                      setTempName(data1.monotainer_id);
+                      setTempName(data1);
                       historyHandler(data1);
                     }}
                     className={`${
@@ -101,7 +101,7 @@ export default function Pending({ show, data,showDashboardView }) {
                     } border px-2 py-2 rounded-lg h-10 `}
                       key={data1.index}
                     >
-                      {data1.monotainer_id}
+                      {data1}
                     </button>
                   ))}
               </div>
