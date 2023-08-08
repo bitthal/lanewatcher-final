@@ -147,7 +147,7 @@ function Settings({}) {
     let tableDatad = [data[index - 1]]
     let deletData = data.splice(index, 1)
     console.log(data,'bb',tableDatad,'ww',deletData)
-    setTableDate(tableDatad);
+    setTableDate(data);
     deleteEmailHandler(deletData);
   };
 
