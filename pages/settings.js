@@ -50,11 +50,12 @@ function Settings({}) {
       : drpdwnVaue
       ? drpdwnVaue[2].site_id
       : "";
-    const camera_id = payload
-      ? Object.values(payload.camera_id).toString()
-      : drpdwnVaue
-      ? Object.values(drpdwnVaue[2].camera_id).toString().split(",")[0]
-      : "";
+    const camera_id = "C001"
+    // payload
+    //   ? Object.values(payload.camera_id).toString()
+    //   : drpdwnVaue
+    //   ? Object.values(drpdwnVaue[2].camera_id).toString().split(",")[1]
+    //   : "";
     await axios
       .post(`${process.env.NEXT_PUBLIC_GETEMAILS_API_URL}`, null, {
         params: {
@@ -82,10 +83,10 @@ function Settings({}) {
       selectedSiteId && selectedSiteId.site_id
         ? selectedSiteId.site_id
         : drpdwnVaue[2].site_id;
-    const camera_id =
-      selectedSiteId && Object.values(selectedSiteId.camera_id).toString()
-        ? Object.values(selectedSiteId.camera_id).toString().split(",")[0]
-        : Object.values(drpdwnVaue[2].camera_id).toString().split(",")[0];
+    const camera_id = "C001";
+      // selectedSiteId && Object.values(selectedSiteId.camera_id).toString()
+      //   ? Object.values(selectedSiteId.camera_id).toString().split(",")[0]
+      //   : Object.values(drpdwnVaue[2].camera_id).toString().split(",")[0];
     const email = emailId;
     axios
       .post(`${process.env.NEXT_PUBLIC_ADDEMAIL_API_URL}`, null, {

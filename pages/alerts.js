@@ -133,7 +133,7 @@ function Alert({}) {
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white-100">
                       {currentAlerts &&
-                        currentAlerts?.map((data, index) => {
+                        currentAlerts?.sort((a, b) => a.index - b.index).map((data, index) => {
                           return (
                             <tr>
                               <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center">
