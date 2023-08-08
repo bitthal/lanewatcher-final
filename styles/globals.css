@@ -202,5 +202,6 @@ body{
 /* } */
 .animate-gradient {
   background: linear-gradient(to left, #2a0077, #120997);
-  /* box-shadow: 10px 0 31px 1px rgba(22, 59, 267, 1.1); */
+  
+  box-shadow: 0 1px 13px 3px rgb(16 15 14);
 }

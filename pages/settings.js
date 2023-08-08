@@ -232,7 +232,7 @@ function Settings({}) {
                 </select>
               </div>
               <button
-                className="mt-3 bg-white text-red-800 border-red-800 font-semibold hover:text-red-800 py-2 px-4 border hover:border-transparent-800 rounded h-10 flex items-center gap-2"
+                className="mt-6 bg-white text-red-800 border-red-800 font-semibold hover:text-red-800 py-2 px-4 border hover:border-transparent-800 rounded h-10 flex items-center gap-2"
                 onClick={() => resetHandler()}
               >
                 Reset
