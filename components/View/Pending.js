@@ -77,9 +77,9 @@ export default function Pending({ show, data,showDashboardView }) {
                   fill="#434190"
                 />
               </svg>
-              <p className="font-bold text-primary2">Pending</p>
+              <p className="font-bold text-primary2 text-lg">Pending</p>
 
-              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-6 h-6 flex items-center justify-center text-white font-bold">
+              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl font-bold shadow-blue">
                 {data?.pending?.total_monotainers}
               </p>
             </div>

@@ -7,6 +7,7 @@ import { value_data } from "@/context/context";
 import { useForm } from "react-hook-form";
 import withAuth from "@/utils/withAuth";
 import countries from "data/countries.json";
+import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
 // Create a Skeleton component
 const Skeleton = () => (
   <div className="animate-pulse bg-gray-200 h-8 rounded-md m-4 "></div>
@@ -31,10 +32,11 @@ function Settings({}) {
   const [tableData, setTableDate] = useState("");
   const [inputFields, setInputFields] = useState([{ email: " " }]);
   const [resetloading, setLoading] = useState(false);
-  function convertToCSV(data) {
-    const csv = Papa.unparse(data);
-    return csv;
-  }
+  const sortIcons = {
+    asc: <FaSortUp className="inline"/>,
+    desc: <FaSortDown className="inline"/>,
+    none: <FaSort className="inline"/>,
+  };
 
   function handleChange(event) {
     setSelectedSiteId(drpdwnVaue[event.target.value]);
@@ -65,8 +67,9 @@ function Settings({}) {
   }
 
   const deleteEmailHandler = (emailId) => {
+    console.log(emailId, "em");
     const site_id = emailId.site_id;
-    const camera_id = emailId.camera_id;
+    const camera_id = emailId.camera_id.split(",")[0];
     const email = emailId.Email;
     axios
       .post(`${process.env.NEXT_PUBLIC_DELETEEMAIL_API_URL}`, null, {
@@ -161,18 +164,53 @@ function Settings({}) {
       fetchData();
     }
   }, [drpdwnVaue]);
+  // State for sorting
+  const [sortColumn, setSortColumn] = useState("site_id");
+  const [sortDirection, setSortDirection] = useState("asc");
+  // State for pagination
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  // Calculate pagination range
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = tableData?.slice(indexOfFirstItem, indexOfLastItem);
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortColumn(column);
+      setSortDirection('asc');
+    }
+    
+  };
 
+  const getSortIcon = (column) => {
+    if (sortColumn === column) {
+      return sortIcons[sortDirection];
+    }
+    return sortIcons.none;
+  };
+
+  const handleSorting = (column) => {
+    handleSort(column);
+  };
+
+  // Apply sorting to the data
+  const sortedItems = [...currentItems].sort((a, b) => {
+    console.log(a[sortColumn],'s')
+    const compareResult =
+      sortDirection === 'asc'
+        ? a[sortColumn].localeCompare(b[sortColumn])
+        : b[sortColumn].localeCompare(a[sortColumn]);
+    return compareResult;
+  });
   return (
     <>
       <div className="flex gap-4 my-3 mr-3 h-auto">
-        <Leftbar show={show} setShow={setShow}/>
+        <Leftbar show={show} setShow={setShow} />
         <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
           <div className={` w-full`}>
-            <Header2
-              show={show}
-              showSearchBar={false}
-              showDatePicker={false}
-            />
+            <Header2 show={show} showSearchBar={false} showDatePicker={false} />
           </div>
           {drpdwnVaue && (
             <div className="relative 2xl:max-w-sm mt-10 mb-10 mr-20 justify-between flex">
@@ -194,12 +232,12 @@ function Settings({}) {
                 </select>
               </div>
               <button
-  className="mt-3 bg-gradient-to-l from-red-500 to-red-800 hover:from-red-500 hover:to-red-700 text-white font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded h-10 flex items-center gap-2"
-  onClick={() => resetHandler()}
->Reset
-<i className="fas fa-sync-alt text-white"></i>
-  
-</button>
+                className="mt-3 bg-white text-red-800 border-red-800 font-semibold hover:text-red-800 py-2 px-4 border hover:border-transparent-800 rounded h-10 flex items-center gap-2"
+                onClick={() => resetHandler()}
+              >
+                Reset
+                <i className="fas fa-sync-alt text-red-800"></i>
+              </button>
             </div>
           )}
           <div>
@@ -219,26 +257,30 @@ function Settings({}) {
                             <th
                               scope="col"
                               className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                              onClick={() => handleSorting('id')}
                             >
-                              ID
+                              ID {getSortIcon('id')}
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                              onClick={() => handleSorting('site_id')}
                             >
-                              SITE ID
+                              SITE ID {getSortIcon('site_id')}
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                              onClick={() => handleSorting('Email')}
                             >
-                              Email
+                              Email {getSortIcon('Email')}
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                              onClick={() => handleSorting('Email')}
                             >
-                              Phone
+                              Phone {getSortIcon('Email')}
                             </th>
                             <th
                               scope="col"
@@ -250,7 +292,7 @@ function Settings({}) {
                         </thead>
                         <tbody className="divide-y divide-gray-200 bg-white-100">
                           {tableData &&
-                            tableData?.map((data, index) => {
+                            sortedItems?.map((data, index) => {
                               return (
                                 <tr>
                                   <td className="px-6 py-4 text-sm text-center font-medium text-gray-800 whitespace-nowrap">
@@ -277,6 +319,14 @@ function Settings({}) {
                               );
                             })}
                         </tbody>
+                        {/* <div className="flex justify-center mt-4">
+                          <Pagination
+                            itemsPerPage={itemsPerPage}
+                            totalItems={tableData.length}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                          />
+                        </div> */}
                       </table>
                     )}
                   </div>

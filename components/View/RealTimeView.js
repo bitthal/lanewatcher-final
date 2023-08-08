@@ -52,9 +52,9 @@ export default function RealTimeView({ data }) {
             </span>
           </div>
 
-          <p className="font-bold text-primary2 flex justify-content">
+          <p className="font-bold text-primary2 flex justify-content text-lg">
             Real Time View
-            <span className="ml-2 rounded-full border border-indigo-900 bg-indigo-900 w-6 h-6 flex items-center justify-center text-white font-bold">
+            <span className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-lg font-bold shadow-blue ml-4">
               {data?.real_time_positions?.total_monotainers}
             </span>
           </p>

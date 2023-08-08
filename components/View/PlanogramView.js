@@ -39,7 +39,6 @@ export default function PlanogramView({ data }) {
   };
 
   const showAggregateIds = () => {
-    console.log(data.pending.monotainers,'jj')
     setAggregateResult(true);
   };
   return (
@@ -59,14 +58,14 @@ export default function PlanogramView({ data }) {
             />
           </svg>
 
-          <span className="text-primary2 font-bold">Planogram View</span>
+          <span className="text-primary2 font-bold text-lg">Planogram View</span>
 
           <span></span>
         </div>
 
         <div className="flex justify-between gap-4 items-center w-full">
           <span className="text-black font-bold">Lane {data?.lane_number}</span>
-          <span className="text-black font-bold">{data?.lane_name}</span>
+          <span className="text-black font-bold">{data.lane_name ? data.lane_name.charAt(0).toUpperCase() + data.lane_name.slice(1) : ""}</span>
 
           <div className="relative ">
             <button onClick={getAlertHandler}>

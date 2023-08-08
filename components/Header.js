@@ -86,60 +86,56 @@ export default function Header() {
   const closeModalPopUp = (data) => {
     setModalOpen(data);
   };
+  
   return (
     <Fragment>
-      <div className="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed top-0 z-10  bg-gradient-to-r from-gray-200 to-gray-100">
-        <div className="flex gap-16 items-center">
-          <Link
-            href="/tracker"
-            className="w-fit text-center text-red-800 font-bold"
-          >
-            {/* <p > */}
-            UST Canada Post
-            {/* </p> */}
-          </Link>
-          {router !== "404" && (
-            <p className="w-fit  font-bold text-red-800">{router}</p>
-          )}
-        </div>
+      <div class="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed top-0 z-10 animate-gradient">
+  <div class="flex gap-16 items-center">
+    <a href="/tracker" class="w-fit text-center text-white font-bold">
+      UST Canada Post
+    </a>
+    {router !== "404" && (
+      <p class="w-fit font-bold text-white">{router}</p>
+    )}
+  </div>
 
-        {router !== "" && (
-          <div className="flex items-center gap-6">
-            {siteId && (
-              <select
-                label="Global Site Selection:-"
-                className="w-18 px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-transparent focus:border-indigo-600 cursor-pointer"
-                onChange={handleChange}
-              >
-                {siteId.map((option, index) => (
-                  <option key={option.camera_id} value={index}>
-                    {option.site_id}
-                  </option>
-                ))}
-              </select>
-            )}
-            <Link href="/settings">
-              <i className="text-2xl fa-solid fa-gear text-gray-600" />
-            </Link>
+  {router !== "" && (
+    <div class="flex items-center gap-6">
+      {siteId && (
+        <select
+          label="Global Site Selection:-"
+          class="w-18 px-4 py-2 bg-white border text-black border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-transparent focus:border-indigo-600 cursor-pointer"
+          onChange={handleChange}
+        >
+          {siteId.map((option, index) => (
+            <option key={option.camera_id} value={index}>
+              {option.site_id}
+            </option>
+          ))}
+        </select>
+      )}
+      <a href="/settings">
+        <i class="text-2xl fa-solid fa-gear text-white"></i>
+      </a>
 
-            <div className="relative cursor-pointer" onClick={getAlertHandler}>
-              <i className="fa-solid fa-bell text-2xl " />
-              <span className=" flex h-3 w-3 absolute top-0 translate-x-1/2 right-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-700"></span>
-              </span>
-            </div>
-
-            <div className="flex gap-4 items-center">
-              <p className="w-fit font-bold text-red-800">
-                Welcome
-                <span className="text-indigo-900">&nbsp;&nbsp;{userName}</span>
-              </p>
-              <i className=" text-2xl  fa-solid fa-user"></i>
-            </div>
-          </div>
-        )}
+      <div class="relative cursor-pointer" onClick={getAlertHandler}>
+        <i class="fa-solid fa-bell text-2xl text-white"></i>
+        <span class="flex h-3 w-3 absolute top-0 translate-x-1/2 right-0">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-green-700"></span>
+        </span>
       </div>
+
+      <div class="flex gap-4 items-center">
+        <p class="w-fit font-bold text-white">
+          Welcome
+          <span class="text-white">&nbsp;&nbsp;{userName}</span>
+        </p>
+        <i class="text-xl fa-solid fa-user text-white"></i>
+      </div>
+    </div>
+  )}
+</div>
       {modalState && (
         <ModalPopUp
           alertsTableData={alertList}
@@ -148,5 +144,8 @@ export default function Header() {
         ></ModalPopUp>
       )}
     </Fragment>
+    
   );
+  
 }
+

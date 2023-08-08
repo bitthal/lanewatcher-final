@@ -13,11 +13,11 @@ export default function Leftbar({ show, setShow }) {
 
   return (
     <div
-      className={`sidebar border rounded-r-xl shadow-xl  ${
+      className={`sidebar border rounded-r-2xl shadow-2xl ${
         !show
-          ? "w-40 "
+          ? "w-40"
           : "w-20"
-      } border rounded-r-xl shadow-xl pt-5`}
+      } border rounded-r-2xl shadow-xl pt-5`}
     >
       <div className="flex justify-center gap-2">
         <div className="w-fit flex text-2xl gap-2">
@@ -59,7 +59,7 @@ export default function Leftbar({ show, setShow }) {
           width={50}
           height={50}
           className={`flex relative justify-content ${
-            show ? "top-8 left-0 right-10" : "top-8 left-12 right-10"
+            show ? "top-8 left-1 right-10" : "top-8 left-12 right-10"
           } transition-transform duration-300`}
         />
       </Link>
@@ -301,7 +301,7 @@ export default function Leftbar({ show, setShow }) {
                           ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >
-                      Monotaine
+                      ID'S
                     </span>
                   )}
                 </div>

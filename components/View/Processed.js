@@ -51,9 +51,9 @@ export default function Processed({ show, data,showDashboardView }) {
           <div className="flex flex-col  items-center text-center  gap-5">
             <div className="flex  items-center text-center justify-between gap-4">
               <i className="fa-solid fa-cart-shopping text-indigo-800" />
-              <p className="font-bold text-primary2">Processed</p>
+              <p className="font-bold text-primary2 text-lg">Processed</p>
 
-              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-6 h-6 flex items-center justify-center text-white font-bold">
+              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl font-bold shadow-blue">
                 {data?.processed?.total_monotainers}
               </p>
             </div>

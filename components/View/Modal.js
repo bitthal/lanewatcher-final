@@ -137,7 +137,7 @@ export default function ModalPopUp({
                               {data?.alerts?.type}
                             </td>
                             <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center">
-                              {data?.alerts?.description}
+                              Belongs to {data?.alerts?.description.split(" ")[2].charAt(0).toUpperCase() + data?.alerts?.description.split(" ")[2].slice(1)}
                             </td>
                             <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
                               {data?.alerts?.claimed_status === true
@@ -416,7 +416,7 @@ export default function ModalPopUp({
                         {data.ifuntagged}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
-                        {data.lane_name}
+                        {data.lane_name ? data.lane_name.charAt(0).toUpperCase() + data.lane_name.slice(1) : ""}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
                         {data.misplaced_in}
