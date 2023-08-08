@@ -44,6 +44,7 @@ function Settings({}) {
     getEmailListHandler(payloadValue);
   }
   async function getEmailListHandler(payload) {
+    console.log(payload,drpdwnVaue,'hh')
     const site_id = payload
       ? payload.site_id
       : drpdwnVaue
@@ -52,7 +53,7 @@ function Settings({}) {
     const camera_id = payload
       ? Object.values(payload.camera_id).toString()
       : drpdwnVaue
-      ? Object.values(drpdwnVaue[2].camera_id).toString()
+      ? Object.values(drpdwnVaue[2].camera_id).toString().split(",")[0]
       : "";
     await axios
       .post(`${process.env.NEXT_PUBLIC_GETEMAILS_API_URL}`, null, {
@@ -68,7 +69,7 @@ function Settings({}) {
 
   const deleteEmailHandler = (emailId) => {
     console.log(emailId[0].Email,'em')
-    const id = emailId[0].Email.split(" ")[0];
+    const id = emailId[0].Email.split(",")[0];
     axios
       .post(`${process.env.NEXT_PUBLIC_DELETEEMAIL_API_URL}`, null, {
         params: {
@@ -84,8 +85,8 @@ function Settings({}) {
         : drpdwnVaue[2].site_id;
     const camera_id =
       selectedSiteId && Object.values(selectedSiteId.camera_id).toString()
-        ? Object.values(selectedSiteId.camera_id).toString()
-        : Object.values(drpdwnVaue[2].camera_id).toString();
+        ? Object.values(selectedSiteId.camera_id).toString().split(",")[0]
+        : Object.values(drpdwnVaue[2].camera_id).toString().split(",")[0];
     const email = emailId;
     axios
       .post(`${process.env.NEXT_PUBLIC_ADDEMAIL_API_URL}`, null, {
