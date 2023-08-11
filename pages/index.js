@@ -2,7 +2,7 @@ import React, { useState, Fragment, useContext } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
-import Logo from "./../public/logo.png";
+import Logo from "./../public/favicon.ico";
 import { useRouter } from "next/router";
 import { value_data } from "@/context/context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -74,7 +74,7 @@ export default function Index() {
   return (
     <Fragment>
       <div className="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed top-0 z-10  bg-gradient-to-l from-gray-200 to-gray-100">
-        <div className="flex flex-row justify-content w-fit text-center text-red-800 font-bold">
+        <div className="flex flex-row justify-content w-fit text-center text-red-800  ">
             UST Canada Post
         </div>
         <div className="object-contain" >
@@ -101,7 +101,7 @@ export default function Index() {
           {!loginScreen && (
             <div className="w-full rounded-lg shadow-md sm:max-w-md mt-8 bg-gradient-to-l from-gray-200 to-gray-100">
               <div className="p-4 space-y-2 md:space-y-4 sm:p-5">
-                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                <h1 className="text-xl   leading-tight tracking-tight text-gray-900 md:text-2xl">
                   Sign In
                 </h1>
                 <form
@@ -226,7 +226,7 @@ export default function Index() {
           {loginScreen && (
             <div className="w-full rounded-lg shadow-md sm:max-w-md mt-12 bg-gradient-to-l from-gray-200 to-gray-100">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
+                <h1 className="text-xl   leading-tight tracking-tight text-gray-900 md:text-2xl ">
                   Log In
                 </h1>
                 <form

@@ -23,14 +23,15 @@ function Settings({}) {
     mode: "onChange",
     defaultValues: {
       email: "",
+      phone: ""
     },
   });
   const { drpdwnVaue } = useContext(value_data);
   const [show, setShow] = useState(true);
   const [showAddField, setShowAddField] = useState(false);
   const [selectedSiteId, setSelectedSiteId] = useState("");
-  const [tableData, setTableDate] = useState("");
-  const [inputFields, setInputFields] = useState([{ email: " " }]);
+  const [tableData, setTableData] = useState("");
+  const [inputFields, setInputFields] = useState([{ email: " ", phone: " " }]);
   const [resetloading, setLoading] = useState(false);
   const sortIcons = {
     asc: <FaSortUp className="inline" />,
@@ -44,7 +45,7 @@ function Settings({}) {
     getEmailListHandler(payloadValue);
   }
   async function getEmailListHandler(payload) {
-    console.log(payload,drpdwnVaue,'hh')
+    setLoading(true);
     const site_id = payload
       ? payload.site_id
       : drpdwnVaue
@@ -64,21 +65,26 @@ function Settings({}) {
         },
       })
       .then((response) => {
-        setTableDate(response.data.result);
+        setTableData(response.data.result);
+        setLoading(false);
       });
   }
 
   const deleteEmailHandler = (emailId) => {
-    const id = emailId[0].Email.split(",")[0];
+    setLoading(true);
+    const id = emailId[0].id;
     axios
       .post(`${process.env.NEXT_PUBLIC_DELETEEMAIL_API_URL}`, null, {
         params: {
           id,
         },
       })
-      .then();
+      .then(()=>{
+        setLoading(false);
+      });
   };
-  const AddEmailHandler = (emailId) => {
+  const AddEmailHandler = (emailId, phoneNo) => {
+    setLoading(true);
     const site_id =
       selectedSiteId && selectedSiteId.site_id
         ? selectedSiteId.site_id
@@ -88,30 +94,35 @@ function Settings({}) {
       //   ? Object.values(selectedSiteId.camera_id).toString().split(",")[0]
       //   : Object.values(drpdwnVaue[2].camera_id).toString().split(",")[0];
     const email = emailId;
+    const phoneno = phoneNo;
     axios
       .post(`${process.env.NEXT_PUBLIC_ADDEMAIL_API_URL}`, null, {
         params: {
           site_id,
           camera_id,
           email,
+          phoneno
         },
       })
       .then(() => {
-        setTableDate([
-          ...sortedItems,
+        setTableData([
           {
-            id: sortedItems.length,
+            id: tableData.length,
             site_id: site_id,
             camera_id: camera_id,
-            Email: emailId,
+            emails_list: email,
+            phoneno:phoneNo
+
           },
+          ...tableData,
         ]);
       });
+      setLoading(false);
   };
 
   const addFields = () => {
     setShowAddField(true);
-    let newfield = { email: "" };
+    let newfield = { email: "",phoneno: "" };
     setInputFields([newfield]);
   };
 
@@ -135,20 +146,15 @@ function Settings({}) {
   const onSubmit = (data) => {
     const email = data.email;
     const phone = data.country + "-" + data.phone;
-    const combinedValue = `${email}, ${phone}`;
     // Call your AddEmailHandler function with the combined value
-    AddEmailHandler(combinedValue);
+    AddEmailHandler(email, phone);
     setShowAddField(false);
     reset();
   };
   const removeFields = (index) => {
     let data = [...tableData];
-    // setTableDate(tableData[index - 1]);
-    // deleteEmailHandler(tableData[index]);
-    let tableDatad = [data[index - 1]]
     let deletData = data.splice(index, 1)
-    console.log(data,'bb',tableDatad,'ww',deletData)
-    setTableDate(data);
+    setTableData(data);
     deleteEmailHandler(deletData);
   };
 
@@ -165,16 +171,12 @@ function Settings({}) {
       fetchData();
     }
   }, [drpdwnVaue]);
+
   // State for sorting
   const [sortColumn, setSortColumn] = useState("site_id");
   const [sortDirection, setSortDirection] = useState("asc");
-  // State for pagination
-  const itemsPerPage = 10;
-  const [currentPage, setCurrentPage] = useState(1);
+
   // Calculate pagination range
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = tableData?.slice(indexOfFirstItem, indexOfLastItem);
   const handleSort = (column) => {
     if (sortColumn === column) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -183,6 +185,7 @@ function Settings({}) {
       setSortDirection("asc");
     }
   };
+  
 
   const getSortIcon = (column) => {
     if (sortColumn === column) {
@@ -192,18 +195,26 @@ function Settings({}) {
   };
 
   const handleSorting = (column) => {
+    console.log(column,'col')
     handleSort(column);
   };
 
   // Apply sorting to the data
-  const sortedItems = [...currentItems].sort((a, b) => {
-    console.log(a[sortColumn], "s");
-    const compareResult =
-      sortDirection === "asc"
-        ? a[sortColumn].localeCompare(b[sortColumn])
-        : b[sortColumn].localeCompare(a[sortColumn]);
-    return compareResult;
-  });
+const sortedItems = [...tableData].sort((a, b) => {
+  const compareResult =
+    sortDirection === "asc"
+      ? a[sortColumn]?.localeCompare(b[sortColumn])
+      : b[sortColumn]?.localeCompare(a[sortColumn]);
+  return compareResult;
+});
+  // State for pagination
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+// Calculate pagination range for sorted data
+const indexOfLastItem = currentPage * itemsPerPage;
+const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <>
       <div className="flex gap-4 my-3 mr-3 h-auto">
@@ -253,47 +264,47 @@ function Settings({}) {
                       </div>
                     ) : (
                       <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-indigo-800">
+                        <thead className=" bg-indigo-900">
                           <tr className="">
                             <th
                               scope="col"
-                              className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                              className="px-6 py-3 text-xs   text-center text-white uppercase "
                               onClick={() => handleSorting("id")}
                             >
                               ID {getSortIcon("id")}
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                              className="px-6 py-3 text-xs   text-center text-white uppercase "
                               onClick={() => handleSorting("site_id")}
                             >
                               SITE ID {getSortIcon("site_id")}
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                              className="px-6 py-3 text-xs   text-center text-white uppercase "
                               onClick={() => handleSorting("Email")}
                             >
                               Email {getSortIcon("Email")}
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
-                              onClick={() => handleSorting("Email")}
+                              className="px-6 py-3 text-xs   text-center text-white uppercase "
+                              onClick={() => handleSorting("Phone")}
                             >
-                              Phone {getSortIcon("Email")}
+                              Phone {getSortIcon("Phone")}
                             </th>
                             <th
                               scope="col"
-                              className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                              className="px-6 py-3 text-xs   text-center text-white uppercase "
                             >
                               Action
                             </th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 bg-white-100">
-                          {tableData && tableData.length > 0 ? (
-                            sortedItems?.map((data, index) => {
+                          {currentItems && currentItems.length > 0 ? (
+                            currentItems?.map((data, index) => {
                               return (
                                 <tr>
                                   <td className="px-6 py-4 text-sm text-center font-medium text-gray-800 whitespace-nowrap">
@@ -303,10 +314,10 @@ function Settings({}) {
                                     {data.site_id}
                                   </td>
                                   <td className="px-6 py-4 text-sm text-center text-gray-800 whitespace-nowrap">
-                                    {data.Email.split(",")[0].trim()}
+                                    {data.emails_list}
                                   </td>
                                   <td className="px-6 py-4 text-sm text-center text-gray-800 whitespace-nowrap">
-                                    {data.Email.split(",")[1]?.trim()}
+                                    {data.phoneno}
                                   </td>
                                   <td className="px-6 py-4 text-sm text-center font-medium text-left whitespace-nowrap">
                                     <button
@@ -344,7 +355,7 @@ function Settings({}) {
                   </div>
                   <div className="flex">
                     <button
-                      className="mt-10 mb-10 mr-20 bg-transparent hover:bg-indigo-800 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded h-10"
+                      className="mt-10 mb-10 mr-20 bg-transparent hover: bg-indigo-900 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded h-10"
                       onClick={addFields}
                     >
                       Add
@@ -431,7 +442,7 @@ function Settings({}) {
                                     </p>
                                   )}
                                   <button
-                                    className="w-3/6 my-1 bg-transparent text-blue-800 border-blue-800 hover:bg-indigo-800 hover:text-white bg-indigo-800 font-semibold py-2 px-4 border hover:border-transparent"
+                                    className="w-3/6 my-1 bg-transparent text-blue-800 border-blue-800 hover: bg-indigo-900 hover:text-white  bg-indigo-900 font-semibold py-2 px-4 border hover:border-transparent"
                                     type="submit"
                                   >
                                     Submit

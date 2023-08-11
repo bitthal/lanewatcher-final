@@ -58,14 +58,14 @@ export default function PlanogramView({ data }) {
             />
           </svg>
 
-          <span className="text-primary2 font-bold text-lg">Planogram View</span>
+          <span className="text-primary2   text-lg">Planogram View</span>
 
           <span></span>
         </div>
 
         <div className="flex justify-between gap-4 items-center w-full">
-          <span className="text-black font-bold">Lane {data?.lane_number}</span>
-          <span className="text-black font-bold">{data.lane_name ? data.lane_name.charAt(0).toUpperCase() + data.lane_name.slice(1) : ""}</span>
+          <span className="text-black  ">Lane {data?.lane_number}</span>
+          <span className="text-black  ">{data.lane_name ? data.lane_name.charAt(0).toUpperCase() + data.lane_name.slice(1) : ""}</span>
 
           <div className="relative ">
             <button onClick={getAlertHandler}>
@@ -80,21 +80,21 @@ export default function PlanogramView({ data }) {
 
         <div className="flex gap-4 justify-between items-center w-full text-xs">
           <div className="p-2 border rounded-md border-[#434190] py-auto">
-            <div className=" text-[#434190] font-bold">
+            <div className=" text-[#434190]  ">
               <p className="text-center">{data?.planogram?.in_stage}</p>
               <p className="text-center">In&nbsp;Stage</p>
             </div>
           </div>
 
           <div className="p-2 border rounded-md border-[#434190] py-auto">
-            <div className=" text-[#434190] font-bold">
+            <div className=" text-[#434190]  ">
               <p className="text-center">{data?.planogram?.mapped}</p>
               <p className="text-center">Mapped</p>
             </div>
           </div>
 
           <div className="p-2 border rounded-md border-[#434190] py-auto">
-            <div className=" text-[#434190] font-bold">
+            <div className=" text-[#434190]  ">
               <p className="text-center">{data?.planogram?.missing}</p>
               <p className="text-center">Missing</p>
             </div>
@@ -109,14 +109,15 @@ export default function PlanogramView({ data }) {
           <p className="text-sm mb-5 text-gray-600">
             Trucks Ordered- {data?.planogram?.trucks_ordered}
           </p>
-          <div className="flex justify-center">
+          <div className="flex justify-center justify-content">
             <button
               onClick={showAggregateIds}
-              className={`${data?.planogram?.total > 0 ? '': ''}
-              bg-[#434190] w-1/2 py-3 rounded-lg text-white font-bold text-xs`}
+              className={`${data?.planogram?.total > 0 ? '': 'disabled'}
+              bg-[#434190] w-1/2 py-3 rounded-lg text-white   text-xs m-1`}
             >
               Total {data?.planogram?.total}
             </button>
+            
           </div>
         </div>
       </div>
