@@ -57,7 +57,7 @@ export default function ModalPopUp({
             ...customStyles.content,
             maxWidth: "100%", // Adjust the width as needed
             maxHeight: "80%", // Adjust the height as needed
-            width:"60%%"
+            width:"60%"
           },
           overlay: customStyles.overlay,
         }}
@@ -66,14 +66,14 @@ export default function ModalPopUp({
         shouldCloseOnOverlayClick={true}
       >
         <button
-          className="text-red-700 font-bold absolute top-0 left-0 p-2 "
+          className="text-red-700   absolute top-0 left-0 p-2 "
           onClick={closeModal2}
         >
           <i className="fa fa-window-close" aria-hidden="true"></i>
         </button>
         {alertsTableData && (
-          <div className="overflow-y-auto m-10">
-            <h5 className="text-center font-bold text-xl mb-2">
+          <div className="overflow-y-auto">
+            <h5 className="text-center   text-xl mb-2">
               Active Alerts
             </h5>
             <div className="overflow-hidden border">
@@ -83,37 +83,37 @@ export default function ModalPopUp({
                     <tr>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                        className="px-6 py-3 text-xs   text-center text-white uppercase "
                       >
                         ID
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                        className="px-6 py-3 text-xs   text-center text-white uppercase "
                       >
                         Monotaine ID
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                        className="px-6 py-3 text-xs   text-center text-white uppercase "
                       >
                         Timestamp
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                        className="px-6 py-3 text-xs   text-center text-white uppercase "
                       >
                         Type
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                        className="px-6 py-3 text-xs   text-center text-white uppercase "
                       >
                         Description
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                        className="px-6 py-3 text-xs   text-center text-white uppercase "
                       >
                         Claimed status
                       </th>
@@ -152,14 +152,14 @@ export default function ModalPopUp({
               )}
               <div className="flex justify-center mt-4">
                 <button
-                  className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+                  className="mx-1 p-2 bg-gray-300 rounded-md hover: bg-indigo-900 hover:text-white"
                   disabled={currentPage === 1}
                   onClick={() => setCurrentPage(1)}
                 >
                   <i className="fa fa-step-backward"></i>
                 </button>
                 <button
-                  className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+                  className="mx-1 p-2 bg-gray-300 rounded-md hover: bg-indigo-900 hover:text-white"
                   disabled={currentPage === 1}
                   onClick={() => setCurrentPage(currentPage - 1)}
                 >
@@ -178,8 +178,8 @@ export default function ModalPopUp({
                         key={index}
                         className={`mx-1 p-2 ${
                           currentPage === index + 1
-                            ? "bg-indigo-800 text-white"
-                            : "bg-gray-300 hover:bg-indigo-800 hover:text-white"
+                            ? " bg-indigo-900 text-white"
+                            : "bg-gray-300 hover: bg-indigo-900 hover:text-white"
                         } rounded-md`}
                         onClick={() => setCurrentPage(index + 1)}
                       >
@@ -200,14 +200,14 @@ export default function ModalPopUp({
                   return null;
                 })}
                 <button
-                  className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+                  className="mx-1 p-2 bg-gray-300 rounded-md hover: bg-indigo-900 hover:text-white"
                   disabled={currentPage === totalPages}
                   onClick={() => setCurrentPage(currentPage + 1)}
                 >
                   <i className="fa fa-chevron-right"></i>
                 </button>
                 <button
-                  className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+                  className="mx-1 p-2 bg-gray-300 rounded-md hover: bg-indigo-900 hover:text-white"
                   disabled={currentPage === totalPages}
                   onClick={() => setCurrentPage(totalPages)}
                 >
@@ -220,18 +220,19 @@ export default function ModalPopUp({
         {realTimeDataData && (
           <div className="flex flex-col ">
             <div>
-              <h5 className="text-center font-bold text-xl">Monotainer ID's</h5>
+              <h5 className="text-center   text-xl">Monotainer ID's</h5>
             </div>
             <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
               {listData?.real_time_positions?.monotainers.map(
                 (data1, index) => {
                   return (
                     <button
-                      className={`${
-                        data1.ifmisplaced
-                          ? "text-green-700 border-green-700"
-                          : "text-red-700 border-red-700"
-                      } border px-3 py-2  rounded-lg`}
+                    className={`${
+                      data1.ifmisplaced
+                     ? "text-red-800 border-red-800" 
+                     : data1.ifuntagged ? "text-yellow-500 border-yellow-500" 
+                     : " text-green-700 border-green-700"
+                 } border px-2 py-2 rounded-lg h-10 `}
                       key={index}
                       onClick={() => {
                         openTableModal(data1);
@@ -249,13 +250,18 @@ export default function ModalPopUp({
         {pendingData && (
           <div className="flex flex-col ">
             <div>
-              <h5 className="text-center font-bold text-xl">Monotainer ID's</h5>
+              <h5 className="text-center   text-xl">Monotainer ID's</h5>
             </div>
             <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
               {listData?.pending?.monotainers?.map((data1, index) => {
                 return (
                   <button
-                    className="text-green-700 border-green-700 text-green-700 border px-3 py-2  rounded-lg"
+                  className={`${
+                    data1.ifmisplaced
+                   ? "text-red-800 border-red-800" 
+                   : data1.ifuntagged ? "text-yellow-500 border-yellow-500" 
+                   : " text-green-700 border-green-700"
+               } border px-2 py-2 rounded-lg h-10 `}
                     key={data1.index}
                     onClick={() => {
                       openTableModal(data1);
@@ -272,13 +278,18 @@ export default function ModalPopUp({
         {processedData && (
           <div className="flex flex-col ">
             <div>
-              <h5 className="text-center font-bold text-xl">Monotainer ID's</h5>
+              <h5 className="text-center   text-xl">Monotainer ID's</h5>
             </div>
             <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
               {listData?.processed?.monotainers?.map((data1, index) => {
                 return (
                   <button
-                    className="text-green-700 border-green-700 text-red-700 border-red-700 border px-3 py-2  rounded-lg"
+                  className={`${
+                    data1.ifmisplaced
+                   ? "text-red-800 border-red-800" 
+                   : data1.ifuntagged ? "text-yellow-500 border-yellow-500" 
+                   : " text-green-700 border-green-700"
+               } border px-2 py-2 rounded-lg h-10 `}
                     key={index}
                     onClick={() => {
                       openTableModal(data1);
@@ -293,9 +304,9 @@ export default function ModalPopUp({
           </div>
         )}
         {tableData && (
-          <div className="w-fit max-h-[500px] overflow-y-auto m-10">
-            <h5 className="text-center font-bold text-xl mb-2">History</h5>
-            <h6 className="text-center underline mb-5 underline-offset-4 text-2xl text-primary2 font-bold">
+          <div className="overflow-y-auto">
+            <h5 className="text-center   text-md">History</h5>
+            <h6 className="text-center text-sm text-primary2  ">
               {tempName}
             </h6>
             <table className="min-w-full border-collapse border border-black">
@@ -303,87 +314,69 @@ export default function ModalPopUp({
                 <tr>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                    className="px-6 py-3 text-xs text-left text-white"
                   >
                     Camera ID
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
-                  >
-                    Finalized Timestamp
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
-                  >
-                    Finalized
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
-                  >
-                    Misplaced
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
-                  >
-                    Processed
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                    className="px-6 py-3 text-xs text-left text-white"
                   >
                     Staged
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                    className="px-6 py-3 text-xs text-left text-white"
+                  >
+                    Finalized
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs text-left text-white"
                   >
                     Untagged
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                    className="px-6 py-3 text-xs text-left text-white"
                   >
                     Lane Name
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                    className="px-6 py-3 text-xs text-left text-white"
                   >
                     Misplaced In
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
-                  >
-                    Misplaced Lane
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
-                  >
-                    Misplaced Timestamp
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
                   >
                     Processed Timestamp
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
                   >
                     Sorting Timestamp
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-white uppercase border border-black"
+                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
                   >
                     Staged Timestamp
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
+                  >
+                    Staged Delay
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
+                  >
+                    Processed Delay
                   </th>
                 </tr>
               </thead>
@@ -398,19 +391,10 @@ export default function ModalPopUp({
                         {data.camera_id}
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                        {data.finalized_timestamp}
+                        {data.ifstaged}
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
                         {data.iffinalized}
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                        {data.ifmisplaced}
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                        {data.ifprocessed}
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                        {data.ifstaged}
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
                         {data.ifuntagged}
@@ -421,12 +405,6 @@ export default function ModalPopUp({
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
                         {data.misplaced_in}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
-                        {data.misplaced_lane}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
-                        {data.misplaced_timestamp}
-                      </td>
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data.processed_timestamp}
                       </td>
@@ -435,6 +413,12 @@ export default function ModalPopUp({
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data.staged_timestamp}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                        {Math.floor(new Date(data.staged_timestamp) - new Date(data.sorting_timestamp)/(1000 * 60 * 60 * 24))}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                        {Math.floor(new Date(data.processed_timestamp) - new Date(data.sorting_timestamp)/(1000 * 60 * 60 * 24))}
                       </td>
                     </tr>
                   ))
@@ -453,8 +437,8 @@ export default function ModalPopUp({
           </div>
         )}
         {AllData && (
-          <div className="max-w-[700px] max-h-[500px]">
-            <h5 className="text-center font-bold text-xl mb-2">
+          <div className="">
+            <h5 className="text-center   text-xl mb-2">
               Total Aggregate ID'S
             </h5>
 
@@ -463,13 +447,13 @@ export default function ModalPopUp({
                 <thead className="bg-indigo-900">
                   {/* Add custom-thead class here */}
                   <tr>
-                    <th className="px-6 py-3 text-xs font-bold text-left text-white uppercase">
+                    <th className="px-6 py-3 text-xs   text-left text-white uppercase">
                       Pending
                     </th>
-                    <th className="px-6 py-3 text-xs font-bold text-left text-white uppercase">
+                    <th className="px-6 py-3 text-xs   text-left text-white uppercase">
                       Real Time
                     </th>
-                    <th className="px-6 py-3 text-xs font-bold text-left text-white uppercase">
+                    <th className="px-6 py-3 text-xs   text-left text-white uppercase">
                       Processed
                     </th>
                   </tr>

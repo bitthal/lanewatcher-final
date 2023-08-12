@@ -85,47 +85,47 @@ function Alert({}) {
               <div className="overflow-hidden border rounded-lg">
                 {alertList.length > 0 && (
                   <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-indigo-800">
+                    <thead className=" bg-indigo-900">
                       <tr>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                          className="px-6 py-3 text-xs   text-center text-white uppercase "
                         >
                           ID
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                          className="px-6 py-3 text-xs   text-center text-white uppercase "
                         >
                           Monotaine ID
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                          className="px-6 py-3 text-xs   text-center text-white uppercase "
                         >
                           Timestamp
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                          className="px-6 py-3 text-xs   text-center text-white uppercase "
                         >
                           Type
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                          className="px-6 py-3 text-xs   text-center text-white uppercase "
                         >
                           Description
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                          className="px-6 py-3 text-xs   text-center text-white uppercase "
                         >
                           Claim Status
                         </th>
                         <th
                           scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
+                          className="px-6 py-3 text-xs   text-center text-white uppercase "
                         >
                           Claim Action
                         </th>
@@ -174,7 +174,7 @@ function Alert({}) {
                                 <button
                                   className={`${
                                     data?.alerts?.claimed_status === true
-                                      ? "bg-indigo-800 text-white font-bold py-2 px-4 rounded-l cursor-not-allowed"
+                                      ? " bg-indigo-900 text-white   py-2 px-4 rounded-l cursor-not-allowed"
                                       : "bg-transparent hover:bg-red-800 border-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded"
                                   }`}
                                   onClick={() => handleClaim(data, index)}
@@ -194,14 +194,14 @@ function Alert({}) {
               </div>
               <div className="flex justify-center mt-4">
   <button
-    className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+    className="mx-1 p-2 bg-gray-300 rounded-md hover: bg-indigo-900 hover:text-white"
     disabled={currentPage === 1}
     onClick={() => setCurrentPage(1)}
   >
     <i className="fa fa-step-backward"></i>
   </button>
   <button
-    className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+    className="mx-1 p-2 bg-gray-300 rounded-md hover: bg-indigo-900 hover:text-white"
     disabled={currentPage === 1}
     onClick={() => setCurrentPage(currentPage - 1)}
   >
@@ -220,8 +220,8 @@ function Alert({}) {
           key={index}
           className={`mx-1 p-2 ${
             currentPage === index + 1
-              ? "bg-indigo-800 text-white"
-              : "bg-gray-300 hover:bg-indigo-800 hover:text-white"
+              ? " bg-indigo-900 text-white"
+              : "bg-gray-300 hover: bg-indigo-900 hover:text-white"
           } rounded-md`}
           onClick={() => setCurrentPage(index + 1)}
         >
@@ -241,14 +241,14 @@ function Alert({}) {
     return null;
   })}
   <button
-    className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+    className="mx-1 p-2 bg-gray-300 rounded-md hover: bg-indigo-900 hover:text-white"
     disabled={currentPage === totalPages}
     onClick={() => setCurrentPage(currentPage + 1)}
   >
     <i className="fa fa-chevron-right"></i>
   </button>
   <button
-    className="mx-1 p-2 bg-gray-300 rounded-md hover:bg-indigo-800 hover:text-white"
+    className="mx-1 p-2 bg-gray-300 rounded-md hover: bg-indigo-900 hover:text-white"
     disabled={currentPage === totalPages}
     onClick={() => setCurrentPage(totalPages)}
   >

@@ -10,6 +10,9 @@ export default function Header2({
   showDatePicker,
   setRangeFilter,
   showSearchBar,
+  totalLaneCount, 
+  filteredLaneCount,
+  showLaneCount
   // onSearch
 }) {
   const inputRef = useRef("");
@@ -80,7 +83,7 @@ export default function Header2({
     setRangeFilter({ start: startDate, end: endDate });
   }
   return (
-    <div className="mt-5 w-full">
+    <div className={` mt-5 w-full flex flex-row justify-between`}>
       <div className="flex lg:flex-row flex-col lg:items-center gap-4">
         <div className="flex gap-4 ">
           {/* <div className="w-fit flex text-2xl gap-2">
@@ -93,7 +96,7 @@ export default function Header2({
   />
   <span
     className={`form-toggle-label relative h-8 w-16 border rounded-full transition-colors duration-300 ${
-      show ? "bg-indigo-600" : "bg-gray-400"
+      show ? "bg-indigo-900" : "bg-gray-400"
     }`}
   >
     <span
@@ -112,7 +115,7 @@ export default function Header2({
 
           </div> */}
           {showSearchBar && (
-            <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded w-128">
+            <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded w-128 z-9">
               <input
                 className="flex-1 h-full pr-4 py-2 focus:outline-none block"
                 placeholder="Enter Montainer/Lane ID:"
@@ -171,6 +174,39 @@ export default function Header2({
           </div>
         )}
       </div>
+      {showLaneCount && <p className="text-sm mt-3">
+  <strong>Lanes</strong> : Showing&nbsp;
+  {filteredLaneCount !== totalLaneCount ? (
+    <>
+      <span className="inline-flex relative">
+        <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center -top-1 left-1 text-xs">
+          {filteredLaneCount ? filteredLaneCount : 0}
+        </span>
+        &nbsp;
+        {filteredLaneCount === 1 ? "lane" : "lanes"}
+      </span>
+      &nbsp;of&nbsp;
+      <span className="inline-flex relative">
+        <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center -top-1 left-1 text-xs">
+          {totalLaneCount ? totalLaneCount : 0}
+        </span>
+        &nbsp;
+        lanes
+      </span>
+    </>
+  ) : (
+    <>
+      <span className="inline-block relative">
+        <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center -top-1 left-1 text-xs">
+          {totalLaneCount ? totalLaneCount : 0}
+        </span>
+      </span>
+      
+      &nbsp;total lanes
+    </>
+  )}
+      </p>}
+
     </div>
   );
 }

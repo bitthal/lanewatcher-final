@@ -48,13 +48,13 @@ export default function Leftbar({ show, setShow }) {
           <div className="flex relative top-8 right-10 justify-content">
             <div className="w-2 h-2 rounded-full bg-red-800 m-1"></div>
             <div className="w-2 h-2 rounded-full bg-green-700 m-1"></div>
-            <div className="w-2 h-2 rounded-full bg-indigo-800 m-1"></div>
+            <div className="w-2 h-2 rounded-full  bg-indigo-900 m-1"></div>
           </div>
         </div>
       </div>
-      <Link href="/tracker">
+      {/* <Link href="/tracker">
         <Image
-          src="/logo.png"
+          src="/favicon.ico"
           alt="Logo"
           width={50}
           height={50}
@@ -62,13 +62,13 @@ export default function Leftbar({ show, setShow }) {
             show ? "top-8 left-1 right-10" : "top-8 left-12 right-10"
           } transition-transform duration-300`}
         />
-      </Link>
+      </Link> */}
       <div className="h-auto flex flex-col justify-between inline">
         <div className="flex flex-col mt-10">
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
               router.pathname == "/dashboard"
-                ? "bg-indigo-800"
+                ? " bg-indigo-900"
                 : "bg-transparent"
             }`}
           >
@@ -93,8 +93,8 @@ export default function Leftbar({ show, setShow }) {
                     <span
                       className={`
                         ${router.pathname == "/dashboard" 
-                          ? "text-white font-bold p-0.5 m-2"
-                          : "text-red-800 font-bold p-0.5 m-2"}
+                          ? "text-white   p-0.5 m-2"
+                          : "text-red-800   p-0.5 m-2"}
                           ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >
@@ -108,7 +108,7 @@ export default function Leftbar({ show, setShow }) {
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
               router.pathname == "/shipment"
-                ? "bg-indigo-800"
+                ? " bg-indigo-900"
                 : "bg-transparent"
             }`}
           >
@@ -131,8 +131,8 @@ export default function Leftbar({ show, setShow }) {
                     <span
                       className={`
                         ${router.pathname == "/shipment"
-                          ? "text-white font-bold p-0.5 m-2"
-                          : "text-red-800 font-bold p-0.5 m-2"}
+                          ? "text-white   p-0.5 m-2"
+                          : "text-red-800   p-0.5 m-2"}
                           ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >
@@ -145,7 +145,7 @@ export default function Leftbar({ show, setShow }) {
 
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
-              router.pathname == "/tracker" ? "bg-indigo-800" : "bg-transparent"
+              router.pathname == "/tracker" ? " bg-indigo-900" : "bg-transparent"
             }`}
           >
             <Tooltip message="Tracker">
@@ -168,8 +168,8 @@ export default function Leftbar({ show, setShow }) {
                     <span
                       className={`
                         ${router.pathname == "/tracker"
-                          ? "text-white font-bold p-0.5 m-2"
-                          : "text-red-800 font-bold p-0.5 m-2"}
+                          ? "text-white   p-0.5 m-2"
+                          : "text-red-800   p-0.5 m-2"}
                           ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >
@@ -183,7 +183,7 @@ export default function Leftbar({ show, setShow }) {
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
               router.pathname == "/settings"
-                ? "bg-indigo-800"
+                ? " bg-indigo-900"
                 : "bg-transparent"
             }`}
           >
@@ -216,8 +216,8 @@ export default function Leftbar({ show, setShow }) {
                     <span
                       className={`
                         ${router.pathname == "/settings"
-                          ? "text-white font-bold p-0.5 m-2"
-                          : "text-red-800 font-bold p-0.5 m-2"}
+                          ? "text-white   p-0.5 m-2"
+                          : "text-red-800   p-0.5 m-2"}
                           ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >
@@ -229,7 +229,7 @@ export default function Leftbar({ show, setShow }) {
           </div>
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
-              router.pathname == "/alerts" ? "bg-indigo-800" : "bg-transparent"
+              router.pathname == "/alerts" ? " bg-indigo-900" : "bg-transparent"
             }`}
           >
             <Tooltip message="Alerts">
@@ -253,8 +253,8 @@ export default function Leftbar({ show, setShow }) {
                     <span
                       className={`
                         ${router.pathname == "/alerts"
-                          ? "text-white font-bold p-0.5 m-2"
-                          : "text-red-800 font-bold p-0.5 m-2"}
+                          ? "text-white   p-0.5 m-2"
+                          : "text-red-800   p-0.5 m-2"}
                           ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >
@@ -267,7 +267,7 @@ export default function Leftbar({ show, setShow }) {
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
               router.pathname == "/monotainers"
-                ? "bg-indigo-800"
+                ? " bg-indigo-900"
                 : "bg-transparent"
             }`}
           >
@@ -296,8 +296,8 @@ export default function Leftbar({ show, setShow }) {
                     <span
                       className={`
                         ${router.pathname == "/monotainers"
-                          ? "text-white font-bold p-0.5 m-2"
-                          : "text-red-800 font-bold p-0.5 m-2"}
+                          ? "text-white   p-0.5 m-2"
+                          : "text-red-800   p-0.5 m-2"}
                           ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >
@@ -312,7 +312,7 @@ export default function Leftbar({ show, setShow }) {
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
               router.pathname == "/analysis"
-                ? "bg-indigo-800"
+                ? " bg-indigo-900"
                 : "bg-transparent"
             }`}
           >
@@ -339,8 +339,8 @@ export default function Leftbar({ show, setShow }) {
                     <span
                       className={`
                         ${router.pathname == "/analysis"
-                          ? "text-white font-bold p-0.5 m-2"
-                          : "text-red-800 font-bold p-0.5 m-2"}
+                          ? "text-white   p-0.5 m-2"
+                          : "text-red-800   p-0.5 m-2"}
                           ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >
@@ -354,7 +354,7 @@ export default function Leftbar({ show, setShow }) {
 
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
-              router.pathname == "/support" ? "bg-indigo-800" : "bg-transparent"
+              router.pathname == "/support" ? " bg-indigo-900" : "bg-transparent"
             }`}
           >
             <Tooltip message="Support">
@@ -380,8 +380,8 @@ export default function Leftbar({ show, setShow }) {
                     <span
                       className={`
                         ${router.pathname == "/support"
-                          ? "text-white font-bold p-0.5 m-2"
-                          : "text-red-800 font-bold p-0.5 m-2"}
+                          ? "text-white   p-0.5 m-2"
+                          : "text-red-800   p-0.5 m-2"}
                           ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >
@@ -395,7 +395,7 @@ export default function Leftbar({ show, setShow }) {
 
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
-              router.pathname == "/logout" ? "bg-indigo-800" : "bg-transparent"
+              router.pathname == "/logout" ? " bg-indigo-900" : "bg-transparent"
             }`}
           >
             <Tooltip message="Logout">
@@ -424,8 +424,8 @@ export default function Leftbar({ show, setShow }) {
                     <span
                       className={`
                         ${router.pathname == "/"
-                          ? "text-white font-bold p-0.5 m-2"
-                          : "text-red-800 font-bold p-0.5 m-2"}
+                          ? "text-white   p-0.5 m-2"
+                          : "text-red-800   p-0.5 m-2"}
                           ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
                       }
                     >

@@ -2,10 +2,12 @@
 /* eslint-disable react/jsx-key */
 import React, { useEffect, useState, useContext, Fragment } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
 import ModalPopUp from "./View/Modal";
 import { value_data } from "@/context/context";
+import Logo from "/public/favicon.ico";
 
 export default function Header() {
   const { value, setValue } = useContext(value_data);
@@ -86,57 +88,62 @@ export default function Header() {
   const closeModalPopUp = (data) => {
     setModalOpen(data);
   };
-  
+
   return (
     <Fragment>
-      <div class="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed top-0 z-10 animate-gradient">
-  <div class="flex gap-16 items-center">
-    <a href="/tracker" class="w-fit text-center text-white font-bold">
-      UST Canada Post
-    </a>
-    {router !== "404" && (
-      <p class="w-fit font-bold text-white">{router}</p>
-    )}
-  </div>
+      <div class="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed top-0 z-9999 animate-gradient top-header">
+        <div class="flex gap-16 items-center">
+          <Link href="/tracker" class="w-fit text-center text-white  ">
+            <Image src={Logo} width={30} height={30} />
+          </Link>
+          {router !== "404" && <p class="w-fit   text-white">{router}</p>}
+        </div>
 
-  {router !== "" && (
-    <div class="flex items-center gap-6">
-      {siteId && (
-        <select
-          label="Global Site Selection:-"
-          class="w-18 px-4 py-2 bg-white border text-black border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-transparent focus:border-indigo-600 cursor-pointer"
-          onChange={handleChange}
-          defaultValue={2}
-        >
-          {siteId.map((option, index) => (
-            <option key={option.camera_id} value={index}>
-              {option.site_id}
-            </option>
-          ))}
-        </select>
-      )}
-      <a href="/settings">
-        <i class="text-2xl fa-solid fa-gear text-white"></i>
-      </a>
+        {router !== "" && (
+          <div class="flex items-center gap-6">
+            {siteId && (
+              <select
+                label="Global Site Selection:-"
+                class="w-18 text-white bg-transparent border-b shadow-sm focus:outline-none focus:ring-0 focus:border-transparent focus:border-indigo-600 cursor-pointer"
+                onChange={handleChange}
+                defaultValue={"Global Site Selection"}
+              >
+                <option value="Global Site Selection" disabled>
+                  Global Site Selection
+                </option>
+                {siteId.map((option, index) => (
+                  <option
+                    key={option.camera_id}
+                    value={index}
+                    className="text-black"
+                  >
+                    {option.site_id}
+                  </option>
+                ))}
+              </select>
+            )}
+            <a href="/settings">
+              <i class="text-2xl fa-solid fa-gear text-white"></i>
+            </a>
 
-      <div class="relative cursor-pointer" onClick={getAlertHandler}>
-        <i class="fa-solid fa-bell text-2xl text-white"></i>
-        <span class="flex h-3 w-3 absolute top-0 translate-x-1/2 right-0">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3 bg-green-700"></span>
-        </span>
+            <div class="relative cursor-pointer" onClick={getAlertHandler}>
+              <i class="fa-solid fa-bell text-2xl text-white"></i>
+              <span class="flex h-3 w-3 absolute top-0 translate-x-1/2 right-0">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-green-700"></span>
+              </span>
+            </div>
+
+            <div class="flex gap-4 items-center">
+              <p class="w-fit   text-white">
+                Welcome
+                <span class="text-white">&nbsp;&nbsp;{userName}</span>
+              </p>
+              <i class="text-xl fa-solid fa-user text-white"></i>
+            </div>
+          </div>
+        )}
       </div>
-
-      <div class="flex gap-4 items-center">
-        <p class="w-fit font-bold text-white">
-          Welcome
-          <span class="text-white">&nbsp;&nbsp;{userName}</span>
-        </p>
-        <i class="text-xl fa-solid fa-user text-white"></i>
-      </div>
-    </div>
-  )}
-</div>
       {modalState && (
         <ModalPopUp
           alertsTableData={alertList}
@@ -145,8 +152,5 @@ export default function Header() {
         ></ModalPopUp>
       )}
     </Fragment>
-    
   );
-  
 }
-

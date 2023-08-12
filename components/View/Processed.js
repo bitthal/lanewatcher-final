@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ModalPopUp from "./Modal";
 import axios from "axios";
+import { FaEdit, FaEye } from "react-icons/fa";
 
 export default function Processed({ show, data,showDashboardView }) {
   
@@ -12,6 +13,7 @@ export default function Processed({ show, data,showDashboardView }) {
   const [dataModalOpen, setDataModalOpen] = useState(false);
   const [listModalOpen, setListModalOpen] = useState(false);
   const [history, showHistory] = useState('');
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const openTableModalBox = (params) => {
     setListModalOpen(false);
@@ -31,7 +33,7 @@ export default function Processed({ show, data,showDashboardView }) {
         },
       })
       .then((response) => {
-        console.log(response.data.result,'response.data.result')
+        setDataModalOpen(true);
         showHistory(response.data.result)        
       });
   }
@@ -40,10 +42,10 @@ export default function Processed({ show, data,showDashboardView }) {
       <div className={`${show ? "h-96" : "h-96"} bg-white rounded-xl p-5`}>
         {!show && !showDashboardView ? (
           <div className="flex flex-col items-center text-center gap-5 mt-55">
-            <p className="font-bold text-primary2">Processed</p>
+            <p className="  text-primary2">Processed</p>
 
             <i className="fa-solid fa-cart-shopping text-primary2" />
-            <p className="font-bold text-green-700">
+            <p className="  text-green-700">
               {data?.processed?.total_monotainers}
             </p>
           </div>
@@ -51,9 +53,9 @@ export default function Processed({ show, data,showDashboardView }) {
           <div className="flex flex-col  items-center text-center  gap-5">
             <div className="flex  items-center text-center justify-between gap-4">
               <i className="fa-solid fa-cart-shopping text-indigo-800" />
-              <p className="font-bold text-primary2 text-lg">Processed</p>
+              <p className="  text-primary2 text-lg">Processed</p>
 
-              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl font-bold shadow-blue">
+              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
                 {data?.processed?.total_monotainers}
               </p>
             </div>
@@ -64,22 +66,44 @@ export default function Processed({ show, data,showDashboardView }) {
                   ?.slice((page - 1) * dataPerPage, page * dataPerPage)
                   .sort((a, b) => a.index - b.index)
                   ?.map((data1, index) => (
-                    <button
-                    className={`${
-                      data1.ifmisplaced
-                     ? "text-red-800 border-red-800" 
-                     : data1.ifuntagged ? "text-yellow-500 border-yellow-500" 
-                     : " text-green-700 border-green-700"
-                 } border px-2 py-2 rounded-lg h-10 `}
-                   key={data1.index}
-                      onClick={() => {
-                        setDataModalOpen(true);
-                        setTempName(data1.monotainer_id);
-                        historyHandler(data1);
-                      }}
-                    >
-                      {data1.monotainer_id}
-                    </button>
+                    <div
+            className="relative button-hover"
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            key={data1.monotainer_id}
+          >
+            <button
+              
+              className={`${
+                data1.ifmisplaced
+                  ? "text-red-800 border-red-800"
+                  : data1.ifuntagged
+                  ? "text-yellow-500 border-yellow-500"
+                  : " text-green-700 border-green-700"
+              } border px-2 py-2 rounded-lg h-10 `}
+            >
+              {data1.monotainer_id}
+            </button>
+            {hoveredIndex === index && (
+              <div className="icons-container absolute top-0 right-0 ">
+                <FaEdit
+                  className="mr-2 cursor-pointer"
+                  onClick={() => {
+                    // Functionality for edit icon
+                    console.log("Edit clicked for:", data1.monotainer_id);
+                  }}
+                />
+                <FaEye
+                  className="cursor-pointer"
+                  onClick={() => {
+                    // Functionality for view icon
+                    setTempName(data1.monotainer_id)
+                    historyHandler(data1);
+                  }}
+                />
+              </div>
+            )}
+          </div>
                   ))}
               </div>
             </div>
@@ -114,7 +138,7 @@ export default function Processed({ show, data,showDashboardView }) {
 
               <button
                 className={`${totalPages === 0 ? 'disabled cursor-not-allowed' : ''}
-                bg-[#434190] rounded-md px-2 py-1 text-white text-sm font-bold text-xs
+                bg-[#434190] rounded-md px-2 py-1 text-white text-sm   text-xs
                 `}
                 onClick={() => {
                   setListModalOpen(true);
