@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'OpenSansMedium';
+    src: url('/fonts/OpenSans-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'OpenSansBold';
+    src: url('/fonts/OpenSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'OpenSansRegular';
+    src: url('/fonts/OpenSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'OpenSansExtraBold';
+    src: url('/fonts/OpenSans-SemiBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: bold;
+    font-size: small!important;
+  }
+  @font-face {
+    font-family: 'RobotoLight';
+    src: url('/fonts/Roboto-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'RobotoBlack';
+    src: url('/fonts/Roboto-Black.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'OpenSans_Condensed';
+    src: url('/public/fonts/OpenSans_Condensed-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }

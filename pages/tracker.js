@@ -5,6 +5,7 @@ import View from "@/components/View/View";
 import axios from "axios";
 import { useRouter } from "next/router";
 import withAuth from "@/utils/withAuth";
+import Toaster from "@/components/Toaster";
 
 function Tracker({
   showDatePicker,
@@ -18,6 +19,7 @@ function Tracker({
   const [Alldata, setAlldata] = useState();
   const [selectedValue, setOptionVal] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [error, setErrors] = useState(null);
 
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
@@ -27,7 +29,9 @@ function Tracker({
     setDate(date);
     handleSubmit(date);
   }
-
+  const handleCloseToaster = () => {
+    setErrors(null); // Clear the toaster message
+  };
   function handleState(newValue) {
     setSearchTerm(newValue);
   }
@@ -80,6 +84,10 @@ function Tracker({
       .post(`${process.env.NEXT_PUBLIC_API_URL}`, userData)
       .then((response) => {
         setAlldata(Object.values(response.data));
+      }).catch((error) => {
+        console.error("API error:", error);
+        setErrors('Date & time search is in progress.')
+
       });
   };
 
@@ -160,7 +168,9 @@ function Tracker({
                 )}
           </div>
         </div>
+
       </div>
+      <Toaster message={error} onClose={handleCloseToaster}/>
     </>
   );
 }

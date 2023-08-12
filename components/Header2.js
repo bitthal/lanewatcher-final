@@ -10,11 +10,12 @@ export default function Header2({
   showDatePicker,
   setRangeFilter,
   showSearchBar,
-  totalLaneCount, 
+  totalLaneCount,
   filteredLaneCount,
-  showLaneCount
+  showLaneCount,
   // onSearch
 }) {
+  const [showBorder, setShowBorder] = useState(true);
   const inputRef = useRef("");
   // const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
 
@@ -83,39 +84,11 @@ export default function Header2({
     setRangeFilter({ start: startDate, end: endDate });
   }
   return (
-    <div className={` mt-5 w-full flex flex-row justify-between`}>
-      <div className="flex lg:flex-row flex-col lg:items-center gap-4">
-        <div className="flex gap-4 ">
-          {/* <div className="w-fit flex text-2xl gap-2">
-          <label className="flex items-center space-x-2 cursor-pointer">
-  <input
-    type="checkbox"
-    className="form-toggle-checkbox hidden"
-    checked={show}
-    onChange={() => setShow(!show)}
-  />
-  <span
-    className={`form-toggle-label relative h-8 w-16 border rounded-full transition-colors duration-300 ${
-      show ? "bg-indigo-900" : "bg-gray-400"
-    }`}
-  >
-    <span
-      className={`absolute left-0 right-0 top-0 bottom-0 flex items-center justify-center transition-transform duration-300 ${
-        show ? "transform translate-x-full" : "transform translate-x-0"
-      }`}
-    >
-      <i
-        className={`fas ${
-          show ? "fa-arrow-right" : "fa-arrow-left"
-        } text-white`}
-      />
-    </span>
-  </span>
-</label>
-
-          </div> */}
+    <div className={`mt-5 w-full flex flex-col lg:flex-row justify-between`}>
+      <div className="flex flex-col lg:flex-row items-center gap-8">
+        <div className="gap-4 mb-4 lg:mb-0">
           {showSearchBar && (
-            <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded w-128 z-9">
+            <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded w-full lg:w-116 z-9">
               <input
                 className="flex-1 h-full pr-4 py-2 focus:outline-none block"
                 placeholder="Enter Montainer/Lane ID:"
@@ -136,9 +109,41 @@ export default function Header2({
               </button>
             </div>
           )}
+          {showLaneCount && (
+        <div className="text-sm mt-3 text-center lg:text-left">
+          <strong>Lanes</strong> : Showing&nbsp;
+          {filteredLaneCount !== totalLaneCount ? (
+            <>
+              <span className="inline-flex relative">
+                <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center top-1 left-1 text-xs">
+                  {filteredLaneCount ? filteredLaneCount : 0}
+                </span>
+                &nbsp;
+                {filteredLaneCount === 1 ? "lane" : "lanes"}
+              </span>
+              &nbsp;of&nbsp;
+              <span className="inline-flex relative">
+                <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center -top-1 left-1 text-xs">
+                  {totalLaneCount ? totalLaneCount : 0}
+                </span>
+                &nbsp; lanes
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="inline-block relative">
+                <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center -top-1 left-1 text-xs">
+                  {totalLaneCount ? totalLaneCount : 0}
+                </span>
+              </span>
+              &nbsp;total lanes
+            </>
+          )}
+        </div>
+        )}
         </div>
         {showDatePicker && (
-          <div className="flex border-groove border-2">
+          <div className="flex mb-8">
             <DateTimePicker
               primaryColor="fuchsia"
               ranges={ranges}
@@ -168,45 +173,14 @@ export default function Header2({
                 value={`${range.start.format(
                   "DD-MM-YYYY(HH:mm)"
                 )} - ${range.end.format("DD-MM-YYYY(HH:mm)")}`}
-                className="w-80 h-full py-2 block border-solid px-5 cursor-pointer"
+                className={`w-72 h-full py-2 px-2.5 cursor-pointer text-sm`}
+                onClick={() => setShowBorder(!showBorder)} // Toggle the border style
               />
             </DateTimePicker>
           </div>
         )}
       </div>
-      {showLaneCount && <p className="text-sm mt-3">
-  <strong>Lanes</strong> : Showing&nbsp;
-  {filteredLaneCount !== totalLaneCount ? (
-    <>
-      <span className="inline-flex relative">
-        <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center -top-1 left-1 text-xs">
-          {filteredLaneCount ? filteredLaneCount : 0}
-        </span>
-        &nbsp;
-        {filteredLaneCount === 1 ? "lane" : "lanes"}
-      </span>
-      &nbsp;of&nbsp;
-      <span className="inline-flex relative">
-        <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center -top-1 left-1 text-xs">
-          {totalLaneCount ? totalLaneCount : 0}
-        </span>
-        &nbsp;
-        lanes
-      </span>
-    </>
-  ) : (
-    <>
-      <span className="inline-block relative">
-        <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center -top-1 left-1 text-xs">
-          {totalLaneCount ? totalLaneCount : 0}
-        </span>
-      </span>
       
-      &nbsp;total lanes
-    </>
-  )}
-      </p>}
-
     </div>
   );
 }

@@ -9,13 +9,14 @@ export default function Layout({ children }) {
   return (
     <> 
       <Head>
-        <title>Lanewatcher</title>
-        <meta name="description" content="LaneWatcher" />
+        <title>Lanewatch</title>
+        <meta name="description" content="Lanewatch" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
       {showHeader && <Header />}
-      <div className={`${showHeader ? " mt-20" : "mt-20"}`}>
+      
+      <div className={`${showHeader ? "mt-20" : "mt-20"}`}>
       {children}
       </div>
       </main>

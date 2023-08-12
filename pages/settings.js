@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import withAuth from "@/utils/withAuth";
 import countries from "data/countries.json";
 import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
+import Toaster from "@/components/Toaster";
+
 // Create a Skeleton component
 const Skeleton = () => (
   <div className="animate-pulse bg-gray-200 h-8 rounded-md m-4 "></div>
@@ -33,12 +35,16 @@ function Settings({}) {
   const [tableData, setTableData] = useState("");
   const [inputFields, setInputFields] = useState([{ email: " ", phone: " " }]);
   const [resetloading, setLoading] = useState(false);
+  const [error, setErrors] = useState(null);
+
   const sortIcons = {
     asc: <FaSortUp className="inline" />,
     desc: <FaSortDown className="inline" />,
     none: <FaSort className="inline" />,
   };
-
+  const handleCloseToaster = () => {
+    setErrors(null); // Clear the toaster message
+  };
   function handleChange(event) {
     setSelectedSiteId(drpdwnVaue[event.target.value]);
     let payloadValue = drpdwnVaue[event.target.value];
@@ -49,7 +55,7 @@ function Settings({}) {
     const site_id = payload
       ? payload.site_id
       : drpdwnVaue
-      ? drpdwnVaue[2].site_id
+      ? drpdwnVaue[0].site_id
       : "";
     const camera_id = "C001"
     // payload
@@ -88,7 +94,7 @@ function Settings({}) {
     const site_id =
       selectedSiteId && selectedSiteId.site_id
         ? selectedSiteId.site_id
-        : drpdwnVaue[2].site_id;
+        : drpdwnVaue[0].site_id;
     const camera_id = "C001";
       // selectedSiteId && Object.values(selectedSiteId.camera_id).toString()
       //   ? Object.values(selectedSiteId.camera_id).toString().split(",")[0]
@@ -128,15 +134,15 @@ function Settings({}) {
 
   const resetHandler = () => {
     setLoading(true);
-    const site_id = drpdwnVaue[2].site_id;
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL_RESET}`, {
-        params: {
-          site_id,
-        },
       })
       .then((response) => {
         setLoading(false);
+      }).catch((error) => {
+        console.error("API error:", error);
+        setLoading(false);
+        setErrors("API error")
       });
   };
   const cancelHandler = () => {
@@ -234,7 +240,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                 <select
                   className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm  appearance-none focus:border-indigo-600 cursor-pointer"
                   onChange={handleChange}
-                  defaultValue={2}
+                  defaultValue={0}
                 >
                   {drpdwnVaue.map((option, index) => (
                     <option key={option.camera_id} value={index}>
@@ -244,11 +250,11 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                 </select>
               </div>
               <button
-                className="mt-6 bg-white text-red-800 border-red-800 font-semibold hover:text-red-800 py-2 px-4 border hover:border-transparent-800 rounded h-10 flex items-center gap-2"
+                className="bg-[#434190] w-24 rounded-md text-white text-xs h-8"
                 onClick={() => resetHandler()}
               >
                 Reset
-                <i className="fas fa-sync-alt text-red-800"></i>
+                <i className="fas fa-sync-alt text-white ml-2"></i>
               </button>
             </div>
           )}
@@ -355,7 +361,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                   </div>
                   <div className="flex">
                     <button
-                      className="mt-10 mb-10 mr-20 bg-transparent hover: bg-indigo-900 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded h-10"
+                      className="mt-10 mb-10 mr-20 bg-transparent hover:bg-indigo-900 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded h-10"
                       onClick={addFields}
                     >
                       Add
@@ -442,7 +448,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                                     </p>
                                   )}
                                   <button
-                                    className="w-3/6 my-1 bg-transparent text-blue-800 border-blue-800 hover: bg-indigo-900 hover:text-white  bg-indigo-900 font-semibold py-2 px-4 border hover:border-transparent"
+                                    className="w-3/6 my-1 bg-transparent text-blue-800 border-blue-800 hover:bg-indigo-900 hover:text-white  bg-indigo-900 font-semibold py-2 px-4 border hover:border-transparent"
                                     type="submit"
                                   >
                                     Submit
@@ -468,6 +474,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
           </div>
         </div>
       </div>
+      <Toaster message={error} onClose={handleCloseToaster}/>
     </>
   );
 }

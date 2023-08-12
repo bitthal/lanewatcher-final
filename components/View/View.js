@@ -12,7 +12,7 @@ export default function View({ show, data, showRealTimeView,showDashboardView,sh
         <div className="bg-[#F4F3F8] flex items-center p-5 rounded-xl">
           <Pending showDashboardView={showDashboardView} show={show} data={data} />
           <Arrow />
-          {showRealTimeView && <RealTimeView data={data} allData={allData}/>}
+          {showRealTimeView && <RealTimeView data={data} allData={allData} className="w-100"/>}
           {showRealTimeView && <Arrow />}
           <Processed showDashboardView={showDashboardView}  show={show} data={data} />
           <Arrow />

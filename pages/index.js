@@ -2,7 +2,7 @@ import React, { useState, Fragment, useContext } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Cookies from "js-cookie";
-import Logo from "./../public/favicon.ico";
+import Logo from "./../public/favicon.png";
 import { useRouter } from "next/router";
 import { value_data } from "@/context/context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

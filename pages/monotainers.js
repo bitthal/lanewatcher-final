@@ -14,6 +14,13 @@ function Monotainers() {
   const [dataModalOpen, setDataModalOpen] = useState(false);
   const [tempName, setTempName] = useState("");
   const [history, showHistory] = useState('');
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isDropdownValueShow, setIsDropdownOpen1] = useState(false);
+  const [isDropdownValues, setIsDropdownValues] = useState([]);
+  const [selectedDropdownValue, setSelectedDropdownValue] = useState(null);
+  const [selectedLane, setSelectedLane] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [dropdownStates, setDropdownStates] = useState({});
   // Function to fetch all the monotainer data from the API at once
   const fetchAllMonotainers = async () => {
     try {
@@ -87,6 +94,7 @@ function Monotainers() {
                   onClick={() => {
                     setTempName(monotainer);
                     historyHandler(monotainer);
+                    
                   }}
                 >
                   {monotainer}

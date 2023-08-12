@@ -14,9 +14,7 @@ export default function Leftbar({ show, setShow }) {
   return (
     <div
       className={`sidebar border rounded-r-2xl shadow-2xl ${
-        !show
-          ? "w-40"
-          : "w-20"
+        !show ? "w-40" : "w-20"
       } border rounded-r-2xl shadow-xl pt-5`}
     >
       <div className="flex justify-center gap-2">
@@ -34,10 +32,7 @@ export default function Leftbar({ show, setShow }) {
               <span className="form-toggle-label relative h-8 w-16">
                 <span className="flex items-center justify-center text-indigo-900">
                   {show ? (
-                    
-                      // <i class="fa-light fa-forward absolute text-2xl"></i>
-                      <i class="fa-solid fa-light fa-forward fa-beat-fade fa-lg absolute left-16 swipe-icon"></i>
-                      
+                    <i class="fa-solid fa-light fa-forward fa-beat-fade fa-lg absolute left-16 swipe-icon"></i>
                   ) : (
                     <i class="fa-solid fa-light fa-backward fa-beat-fade fa-lg absolute left-24 swipe-icon"></i>
                   )}
@@ -52,17 +47,6 @@ export default function Leftbar({ show, setShow }) {
           </div>
         </div>
       </div>
-      {/* <Link href="/tracker">
-        <Image
-          src="/favicon.ico"
-          alt="Logo"
-          width={50}
-          height={50}
-          className={`flex relative justify-content ${
-            show ? "top-8 left-1 right-10" : "top-8 left-12 right-10"
-          } transition-transform duration-300`}
-        />
-      </Link> */}
       <div className="h-auto flex flex-col justify-between inline">
         <div className="flex flex-col mt-10">
           <div
@@ -72,9 +56,9 @@ export default function Leftbar({ show, setShow }) {
                 : "bg-transparent"
             }`}
           >
-            <Tooltip message="Dashboard">
-              <Link href="/dashboard" className={`${!show ? "w-32" : ""}`}>
-                <div className="flex items-center" style={{ lineHeight: "0" }}>
+            <Link href="/dashboard" className={`${!show ? "w-32" : ""}`}>
+              <div className="flex items-center" style={{ lineHeight: "0" }}>
+                <Tooltip message="Dashboard">
                   <svg
                     className="inline"
                     width="24"
@@ -90,21 +74,25 @@ export default function Leftbar({ show, setShow }) {
                       }
                     />
                   </svg>
-                    <span
-                      className={`
-                        ${router.pathname == "/dashboard" 
-                          ? "text-white   p-0.5 m-2"
-                          : "text-red-800   p-0.5 m-2"}
-                          ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
-                      }
-                    >
-                      Dashboard
-                    </span>
-                </div>
-              </Link>
-            </Tooltip>
+                </Tooltip>
+                <span
+                  className={`
+                        ${
+                          router.pathname == "/dashboard"
+                            ? "text-white   p-0.5 m-2"
+                            : "text-red-800   p-0.5 m-2"
+                        }
+                          ${
+                            !show
+                              ? "m-2 opacity-100 transition-opacity duration-300"
+                              : "m-2 opacity-0 transition-opacity duration-300"
+                          }`}
+                >
+                  Dashboard
+                </span>
+              </div>
+            </Link>
           </div>
-
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
               router.pathname == "/shipment"
@@ -112,9 +100,9 @@ export default function Leftbar({ show, setShow }) {
                 : "bg-transparent"
             }`}
           >
-            <Tooltip message="Shipment">
-              <Link href="/shipment" className="">
-                <div className="flex items-center" style={{ lineHeight: "0" }}>
+            <Link href="/shipment" className="">
+              <div className="flex items-center" style={{ lineHeight: "0" }}>
+                <Tooltip message="Shipment">
                   <svg
                     className="inline"
                     width="24"
@@ -128,29 +116,35 @@ export default function Leftbar({ show, setShow }) {
                       fill={router.pathname == "/shipment" ? "#fff" : "#9b2c2c"}
                     />
                   </svg>
-                    <span
-                      className={`
-                        ${router.pathname == "/shipment"
-                          ? "text-white   p-0.5 m-2"
-                          : "text-red-800   p-0.5 m-2"}
-                          ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
-                      }
-                    >
-                      Shipment
-                    </span>
-                </div>
-              </Link>
-            </Tooltip>
+                </Tooltip>
+                <span
+                  className={`
+                        ${
+                          router.pathname == "/shipment"
+                            ? "text-white   p-0.5 m-2"
+                            : "text-red-800   p-0.5 m-2"
+                        }
+                          ${
+                            !show
+                              ? "m-2 opacity-100 transition-opacity duration-300"
+                              : "m-2 opacity-0 transition-opacity duration-300"
+                          }`}
+                >
+                  Shipment
+                </span>
+              </div>
+            </Link>
           </div>
-
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
-              router.pathname == "/tracker" ? " bg-indigo-900" : "bg-transparent"
+              router.pathname == "/tracker"
+                ? " bg-indigo-900"
+                : "bg-transparent"
             }`}
           >
-            <Tooltip message="Tracker">
-              <Link href="/tracker" className={`${!show ? "w-32" : "w-auto"}`}>
-                <div className="flex items-center" style={{ lineHeight: "0" }}>
+            <Link href="/tracker" className={`${!show ? "w-32" : "w-auto"}`}>
+              <div className="flex items-center" style={{ lineHeight: "0" }}>
+                <Tooltip message="Tracker">
                   <svg
                     className="inline"
                     width="24"
@@ -164,21 +158,24 @@ export default function Leftbar({ show, setShow }) {
                       fill={router.pathname == "/tracker" ? "#fff" : "#9b2c2c"}
                     />
                   </svg>
-                  
-                    <span
-                      className={`
-                        ${router.pathname == "/tracker"
-                          ? "text-white   p-0.5 m-2"
-                          : "text-red-800   p-0.5 m-2"}
-                          ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
-                      }
-                    >
-                      Tracker
-                    </span>
-                  
-                </div>
-              </Link>
-            </Tooltip>
+                </Tooltip>
+                <span
+                  className={`
+                        ${
+                          router.pathname == "/tracker"
+                            ? "text-white   p-0.5 m-2"
+                            : "text-red-800   p-0.5 m-2"
+                        }
+                          ${
+                            !show
+                              ? "m-2 opacity-100 transition-opacity duration-300"
+                              : "m-2 opacity-0 transition-opacity duration-300"
+                          }`}
+                >
+                  Tracker
+                </span>
+              </div>
+            </Link>
           </div>
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
@@ -187,12 +184,9 @@ export default function Leftbar({ show, setShow }) {
                 : "bg-transparent"
             }`}
           >
-            <Tooltip message="Settings">
-              <Link
-                href="/settings"
-                className={`${!show ? "w-auto" : "w-auto"}`}
-              >
-                <div className="flex items-center" style={{ lineHeight: "0" }}>
+            <Link href="/settings" className={`${!show ? "w-auto" : "w-auto"}`}>
+              <div className="flex items-center" style={{ lineHeight: "0" }}>
+                <Tooltip message="Settings">
                   <svg
                     className="inline"
                     xmlns="http://www.w3.org/2000/svg"
@@ -213,28 +207,33 @@ export default function Leftbar({ show, setShow }) {
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                    <span
-                      className={`
-                        ${router.pathname == "/settings"
-                          ? "text-white   p-0.5 m-2"
-                          : "text-red-800   p-0.5 m-2"}
-                          ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
-                      }
-                    >
-                      Settings
-                    </span>
-                </div>
-              </Link>
-            </Tooltip>
+                </Tooltip>
+                <span
+                  className={`
+                        ${
+                          router.pathname == "/settings"
+                            ? "text-white p-0.5 m-2"
+                            : "text-red-800 p-0.5 m-2"
+                        }
+                          ${
+                            !show
+                              ? "m-2 opacity-100 transition-opacity duration-300"
+                              : "m-2 opacity-0 transition-opacity duration-300"
+                          }`}
+                >
+                  Settings
+                </span>
+              </div>
+            </Link>
           </div>
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
               router.pathname == "/alerts" ? " bg-indigo-900" : "bg-transparent"
             }`}
           >
-            <Tooltip message="Alerts">
-              <Link href="/alerts" className={`${!show ? "w-32" : "w-auto"}`}>
-                <div className="flex items-center" style={{ lineHeight: "0" }}>
+            <Link href="/alerts" className={`${!show ? "w-32" : "w-auto"}`}>
+              <div className="flex items-center" style={{ lineHeight: "0" }}>
+                <Tooltip message="Alerts">
                   <svg
                     className="inline"
                     width="24"
@@ -250,19 +249,24 @@ export default function Leftbar({ show, setShow }) {
                       fill={router.pathname == "/alerts" ? "#fff" : "#9b2c2c"}
                     ></path>
                   </svg>
-                    <span
-                      className={`
-                        ${router.pathname == "/alerts"
-                          ? "text-white   p-0.5 m-2"
-                          : "text-red-800   p-0.5 m-2"}
-                          ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
-                      }
-                    >
-                      Alerts
-                    </span>
-                </div>
-              </Link>
-            </Tooltip>
+                </Tooltip>
+                <span
+                  className={`
+                        ${
+                          router.pathname == "/alerts"
+                            ? "text-white p-0.5 m-2"
+                            : "text-red-800 p-0.5 m-2"
+                        }
+                          ${
+                            !show
+                              ? "m-2 opacity-100 transition-opacity duration-300"
+                              : "m-2 opacity-0 transition-opacity duration-300"
+                          }`}
+                >
+                  Alerts
+                </span>
+              </div>
+            </Link>
           </div>
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
@@ -271,12 +275,12 @@ export default function Leftbar({ show, setShow }) {
                 : "bg-transparent"
             }`}
           >
-            <Tooltip message="Monotainers">
-              <Link
-                href="/monotainers"
-                className={`${!show ? "w-32 " : "w-auto "}`}
-              >
-                <div className="flex items-center" style={{ lineHeight: "0" }}>
+            <Link
+              href="/monotainers"
+              className={`${!show ? "w-32" : "w-auto"}`}
+            >
+              <div className="flex items-center" style={{ lineHeight: "0" }}>
+                <Tooltip message="Monotainers">
                   <svg
                     className="inline"
                     width="24"
@@ -292,23 +296,25 @@ export default function Leftbar({ show, setShow }) {
                       }
                     />
                   </svg>
-                  {!show && (
-                    <span
-                      className={`
-                        ${router.pathname == "/monotainers"
-                          ? "text-white   p-0.5 m-2"
-                          : "text-red-800   p-0.5 m-2"}
-                          ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
-                      }
-                    >
-                      ID'S
-                    </span>
-                  )}
-                </div>
-              </Link>
-            </Tooltip>
+                </Tooltip>
+                <span
+                  className={`
+                        ${
+                          router.pathname == "/monotainers"
+                            ? "text-white p-0.5 m-2"
+                            : "text-red-800 p-0.5 m-2"
+                        }
+                          ${
+                            !show
+                              ? "m-2 opacity-100 transition-opacity duration-300"
+                              : "m-2 opacity-0 transition-opacity duration-300"
+                          }`}
+                >
+                  Monotainer
+                </span>
+              </div>
+            </Link>
           </div>
-
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
               router.pathname == "/analysis"
@@ -316,12 +322,9 @@ export default function Leftbar({ show, setShow }) {
                 : "bg-transparent"
             }`}
           >
-            <Tooltip message="Analysis">
-              <Link
-                href="/analysis"
-                className={`${!show ? "w-32 " : "w-auto "}`}
-              >
-                <div className="flex items-center" style={{ lineHeight: "0" }}>
+            <Link href="/analysis" className={`${!show ? "w-32" : "w-auto"}`}>
+              <div className="flex items-center" style={{ lineHeight: "0" }}>
+                <Tooltip message="Analysis">
                   <svg
                     className="inline"
                     width="24"
@@ -335,34 +338,35 @@ export default function Leftbar({ show, setShow }) {
                       fill={router.pathname == "/analysis" ? "#fff" : "#9b2c2c"}
                     />
                   </svg>
-                  {!show && (
-                    <span
-                      className={`
-                        ${router.pathname == "/analysis"
-                          ? "text-white   p-0.5 m-2"
-                          : "text-red-800   p-0.5 m-2"}
-                          ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
-                      }
-                    >
-                      Analysis
-                    </span>
-                  )}
-                </div>
-              </Link>
-            </Tooltip>
+                </Tooltip>
+                <span
+                  className={`
+                        ${
+                          router.pathname == "/analysis"
+                            ? "text-white p-0.5 m-2"
+                            : "text-red-800 p-0.5 m-2"
+                        }
+                          ${
+                            !show
+                              ? "m-2 opacity-100 transition-opacity duration-300"
+                              : "m-2 opacity-0 transition-opacity duration-300"
+                          }`}
+                >
+                  Analysis
+                </span>
+              </div>
+            </Link>
           </div>
-
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
-              router.pathname == "/support" ? " bg-indigo-900" : "bg-transparent"
+              router.pathname == "/support"
+                ? " bg-indigo-900"
+                : "bg-transparent"
             }`}
           >
-            <Tooltip message="Support">
-              <Link
-                href="/support"
-                className={`${!show ? "w-32 " : "w-auto "}`}
-              >
-                <div className="flex items-center" style={{ lineHeight: "0" }}>
+            <Link href="/support" className={`${!show ? "w-32" : "w-auto"}`}>
+              <div className="flex items-center" style={{ lineHeight: "0" }}>
+                <Tooltip message="Support">
                   <svg
                     className="inline"
                     width="24"
@@ -376,35 +380,37 @@ export default function Leftbar({ show, setShow }) {
                       fill={router.pathname == "/support" ? "#fff" : "#9b2c2c"}
                     />
                   </svg>
-                  {!show && (
-                    <span
-                      className={`
-                        ${router.pathname == "/support"
-                          ? "text-white   p-0.5 m-2"
-                          : "text-red-800   p-0.5 m-2"}
-                          ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
-                      }
-                    >
-                      Support
-                    </span>
-                  )}
-                </div>
-              </Link>
-            </Tooltip>
+                </Tooltip>
+                <span
+                  className={`
+                        ${
+                          router.pathname == "/support"
+                            ? "text-white p-0.5 m-2"
+                            : "text-red-800 p-0.5 m-2"
+                        }
+                          ${
+                            !show
+                              ? "m-2 opacity-100 transition-opacity duration-300"
+                              : "m-2 opacity-0 transition-opacity duration-300"
+                          }`}
+                >
+                  Support
+                </span>
+              </div>
+            </Link>
           </div>
-
           <div
             className={`cursor-pointer flex items-center p-5 gap-2 inline sidebar-entry ${
               router.pathname == "/logout" ? " bg-indigo-900" : "bg-transparent"
             }`}
           >
-            <Tooltip message="Logout">
-              <Link
-                href="/"
-                className={`${!show ? "w-32 " : "w-auto "}`}
-                onClick={handleLogout}
-              >
-                <div className="flex items-center" style={{ lineHeight: "0" }}>
+            <Link
+              href="/support"
+              className={`${!show ? "w-32" : "w-auto"}`}
+              onClick={handleLogout}
+            >
+              <div className="flex items-center" style={{ lineHeight: "0" }}>
+                <Tooltip message="Logout">
                   <svg
                     className="inline"
                     width="24"
@@ -420,21 +426,24 @@ export default function Leftbar({ show, setShow }) {
                       fill={router.pathname == "/logout" ? "#fff" : "#9b2c2c"}
                     />
                   </svg>
-                  {!show && (
-                    <span
-                      className={`
-                        ${router.pathname == "/"
-                          ? "text-white   p-0.5 m-2"
-                          : "text-red-800   p-0.5 m-2"}
-                          ${!show ? 'm-2 opacity-100 transition-opacity duration-300' : 'm-2 opacity-0 transition-opacity duration-300'}`
-                      }
-                    >
-                      Logout
-                    </span>
-                  )}
-                </div>
-              </Link>
-            </Tooltip>
+                </Tooltip>
+                <span
+                  className={`
+                        ${
+                          router.pathname == "/logout"
+                            ? "text-white p-0.5 m-2"
+                            : "text-red-800 p-0.5 m-2"
+                        }
+                          ${
+                            !show
+                              ? "m-2 opacity-100 transition-opacity duration-300"
+                              : "m-2 opacity-0 transition-opacity duration-300"
+                          }`}
+                >
+                  Logout
+                </span>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

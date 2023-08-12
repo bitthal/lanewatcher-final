@@ -2,9 +2,19 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import url('./font.css');
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'OpenSansExtraBold', sans-serif;
+  scroll-behavior: smooth !important;
+
+}
+button {
+  font-family: 'OpenSansMedium', sans-serif;
+}
+input {
+  font-family: 'OpenSansRegular', sans-serif;
+
 }
 /* Add custom transition properties */
 @layer utilities {
@@ -27,9 +37,9 @@ body {
   margin-top: 3rem;
 } */
 .disabled {
-  /* opacity: 0.5; Reduce opacity to visually indicate the button is disabled */
+  opacity: 0.5; 
+  /* Reduce opacity to visually indicate the button is disabled */
   pointer-events: none; /* Disable mouse events to prevent interactions */
-  /* Add any other styles you want to apply when the button is disabled */
 }
 .lane-1{
   float: left;
@@ -93,7 +103,13 @@ div#daterangepicker {
     margin-right: auto;
     margin-left: auto;
   }
+  @media (max-width:787) {
+    .realTimeView{
+      width: 100%;
+    }
+  }
   @media (min-width: 768px) {
+    
     .container-sk {
       width: 720px;
     }
@@ -122,11 +138,6 @@ div#daterangepicker {
 
 
 /* scrollbar */
-
-body{
-  scroll-behavior: smooth !important;
-}
-
 
 /* body::-webkit-scrollbar-track {
   width: 3px;
@@ -242,6 +253,7 @@ body{
 .relative:hover .icons-container {
   opacity: 1;
   transform: scale(1); /* Scale up the icons on hover */
+  z-index: 1;
 }
 
 /* Apply styles to the individual icons */

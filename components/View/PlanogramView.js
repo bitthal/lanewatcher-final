@@ -16,7 +16,7 @@ export default function PlanogramView({ data }) {
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params: {
-          site_id: value ? value.site_id : drpdwnVaue[2].site_id,
+          site_id: value ? value.site_id : drpdwnVaue[0].site_id,
           // camera_id: value
           //   ? value.site_id
           //   : Object.values(drpdwnVaue[2].camera_id).toString(),
@@ -46,8 +46,8 @@ export default function PlanogramView({ data }) {
       <div className="bg-white rounded-xl p-5 flex flex-col gap-8 h-96 ">
         <div className="flex gap-4 justify-between items-center w-full">
           <svg
-            width="30"
-            height="31"
+            width="26"
+            height="26"
             viewBox="0 0 30 31"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

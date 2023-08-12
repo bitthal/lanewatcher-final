@@ -15,7 +15,6 @@ export default function Pending({ show, data, showDashboardView }) {
   const [history, showHistory] = useState([]);
   const [isDropdownValueShow, setIsDropdownOpen1] = useState(false);
   const [isDropdownValues, setIsDropdownValues] = useState([]);
-  const [tempSelectedOptionsEdit, setTempSelectedOptionsEdit] = useState([]);
   const [dropdownStates, setDropdownStates] = useState({});
 
   const openTableModalBox = (params) => {
@@ -63,6 +62,7 @@ export default function Pending({ show, data, showDashboardView }) {
     .then((response) => {
       console.log("API response:", response.data);
       setIsDropdownOpen1(false); // Close the dropdown after submission
+      setDropdownStates({});
     })
     .catch((error) => {
       console.error("API error:", error);
@@ -90,28 +90,7 @@ export default function Pending({ show, data, showDashboardView }) {
   return (
     <>
       <div className={`${show ? "h-96" : "h-96"} bg-white rounded-xl p-5`}>
-        {!show && !showDashboardView ? (
-          <div className="flex flex-col items-center justify-center  text-center gap-5">
-            <p className="text-red-700"><h1><strong>Pending</strong></h1></p>
-
-            <svg
-              width="16"
-              height="19"
-              viewBox="0 0 16 19"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11.1668 10C8.86683 10 7.00016 11.8667 7.00016 14.1667C7.00016 16.4667 8.86683 18.3334 11.1668 18.3334C13.4668 18.3334 15.3335 16.4667 15.3335 14.1667C15.3335 11.8667 13.4668 10 11.1668 10ZM12.5418 16.125L10.7502 14.3334V11.6667H11.5835V13.9917L13.1252 15.5334L12.5418 16.125ZM12.0002 2.50004H9.35016C9.00016 1.53337 8.0835 0.833374 7.00016 0.833374C5.91683 0.833374 5.00016 1.53337 4.65016 2.50004H2.00016C1.0835 2.50004 0.333496 3.25004 0.333496 4.16671V16.6667C0.333496 17.5834 1.0835 18.3334 2.00016 18.3334H7.09183C6.59881 17.8548 6.19773 17.2899 5.9085 16.6667H2.00016V4.16671H3.66683V6.66671H10.3335V4.16671H12.0002V8.40004C12.5918 8.48337 13.1502 8.65837 13.6668 8.90004V4.16671C13.6668 3.25004 12.9168 2.50004 12.0002 2.50004ZM7.00016 4.16671C6.54183 4.16671 6.16683 3.79171 6.16683 3.33337C6.16683 2.87504 6.54183 2.50004 7.00016 2.50004C7.4585 2.50004 7.8335 2.87504 7.8335 3.33337C7.8335 3.79171 7.4585 4.16671 7.00016 4.16671Z"
-                fill="#FF0000"
-              />
-            </svg>
-            {/* <p className="  text-red-700">
-              {data?.pending?.total_monotainers}
-            </p> */}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center text-center  gap-5">
+      <div className="flex flex-col items-center text-center  gap-5">
             <div className="flex items-center text-center justify-between gap-4">
               <svg
                 width="16"
@@ -139,7 +118,10 @@ export default function Pending({ show, data, showDashboardView }) {
                     <div
                       className="relative button-hover"
                       onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
+                      onMouseLeave={() => {
+                        setHoveredIndex(null);
+                        setIsDropdownOpen1(false);
+                      }}
                       key={data1.monotainer_id}
                     >
                       <button
@@ -162,7 +144,7 @@ export default function Pending({ show, data, showDashboardView }) {
                             }}
                           />
                           {isDropdownValueShow && (
-                            <div className="absolute bg-white shadow-md z-99 w-64 text-sm p-4">
+                            <div className="absolute bg-white shadow-md z-10 w-64 text-sm p-4">
                               <div
                                 key={data1.index}
                                 className={`flex flex-col cursor-pointer`}
@@ -304,7 +286,6 @@ export default function Pending({ show, data, showDashboardView }) {
                               </div>
                             </div>
                           )}
-
                           <FaEye
                             className="cursor-pointer"
                             onClick={() => {
@@ -361,7 +342,6 @@ export default function Pending({ show, data, showDashboardView }) {
               </button>
             </div>
           </div>
-        )}
       </div>
       {listModalOpen && (
         <ModalPopUp

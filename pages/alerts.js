@@ -34,7 +34,7 @@ function Alert({}) {
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params: {
-          site_id: value ? value.site_id : drpdwnVaue[2].site_id,
+          site_id: value ? value.site_id : drpdwnVaue[0].site_id,
           // camera_id: payload ? Object.values(payload.camera_id).toString()  : value ?  Object.values(value.camera_id).toString() : ''
         },
       })

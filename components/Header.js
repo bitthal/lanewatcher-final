@@ -7,7 +7,7 @@ import axios from "axios";
 import Link from "next/link";
 import ModalPopUp from "./View/Modal";
 import { value_data } from "@/context/context";
-import Logo from "/public/favicon.ico";
+import Logo from "/public/favicon.png";
 
 export default function Header() {
   const { value, setValue } = useContext(value_data);
@@ -58,7 +58,7 @@ export default function Header() {
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params: {
-          site_id: value ? value.site_id : drpdwnVaue[2].site_id,
+          site_id: value ? value.site_id : drpdwnVaue[0].site_id,
           // camera_id: value
           //   ? value.site_id
           //   : Object.values(drpdwnVaue[2].camera_id).toString(),

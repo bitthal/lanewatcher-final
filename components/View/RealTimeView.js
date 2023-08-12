@@ -11,6 +11,10 @@ const Skeleton = () => (
 );
 
 export default function RealTimeView({ data, allData }) {
+
+  const dataPerPage = 32;
+  const totalData = data?.real_time_positions?.total_monotainers;
+  const totalPages = Math.ceil(totalData / dataPerPage);
   // const { value, setValue } = useContext(value_data);
   // const { drpdwnVaue, setdrpdwnVaue } = useContext(value_data);
   const [page, setPage] = useState(1);
@@ -20,21 +24,18 @@ export default function RealTimeView({ data, allData }) {
   const [history, showHistory] = useState("");
   const [tempSelectedOptions, setTempSelectedOptions] = useState([]);
   const [tempSelectedOptionsEdit, setTempSelectedOptionsEdit] = useState([]);
-  const dataPerPage = 32;
-  const totalData = data?.real_time_positions?.total_monotainers;
-  const totalPages = Math.ceil(totalData / dataPerPage);
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpenLane, setIsDropdownOpenLane] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-
   const [isDropdownValueShow, setIsDropdownOpen1] = useState(false);
   const [isDropdownValues, setIsDropdownValues] = useState([]);
   const [selectedDropdownValue, setSelectedDropdownValue] = useState(null);
   const [selectedLane, setSelectedLane] = useState(null);
   const [monotainersData, setMonotainersData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [dropdownStates, setDropdownStates] = useState({});
+
 
   const fetchAllMonotainers = async () => {
     try {
@@ -44,6 +45,7 @@ export default function RealTimeView({ data, allData }) {
       const data = await response.json();
       if (Array.isArray(data.Sortedids)) {
         setMonotainersData(data.Sortedids);
+        toggleDropdown()
       } else {
         console.error("Invalid data format: data.result is not an array.");
       }
@@ -53,9 +55,10 @@ export default function RealTimeView({ data, allData }) {
   };
 
   // Fetch all the monotainer data initially
-  useEffect(() => {
-    fetchAllMonotainers();
-  }, []); // Empty dependency array, so this effect runs only once on mount
+  // useEffect(() => {
+  //   fetchAllMonotainers();
+  // }, []); 
+  // Empty dependency array, so this effect runs only once on mount
 
   const handleOptionSelection = (value) => {
     setTempSelectedOptions((prevSelected) => {
@@ -123,6 +126,44 @@ export default function RealTimeView({ data, allData }) {
       .catch((error) => {
         console.error("API error:", error);
       });
+  };
+
+  const handleDropdownEditSubmit = (updatedData,data1) => {
+    console.log(updatedData, "up",data1);
+    // Prepare the payload to send to the API with the updated data
+    const camera_id = "C001";
+    const iffinalized = updatedData.iffinalized ? updatedData.iffinalized : false;
+    const ifmisplaced = updatedData.ifmisplaced ? updatedData.ifmisplaced : false;
+    const ifprocessed = updatedData.ifprocessed ? updatedData.ifprocessed : false;
+    const ifstaged = updatedData.ifstaged ? updatedData.ifstaged : false;
+    const lane_name = data1.lane_name;
+    const monoid = data1.monotainer_id;
+    // Call the API with the payload
+    axios
+    .post(`${process.env.NEXT_PUBLIC_EDITTAG_API_URL}`, null, {
+      params: {
+        camera_id,
+        iffinalized,
+        ifmisplaced,
+        ifprocessed,
+        ifstaged,
+        lane_name,
+        monoid,
+      },
+    })
+    .then((response) => {
+      console.log("API response:", response.data);
+      setIsDropdownOpen1(false); // Close the dropdown after submission
+      setDropdownStates({});
+    })
+    .catch((error) => {
+      console.error("API error:", error);
+    });
+    // ... other properties ...
+  };
+
+  const handleDropdownEditCancel = () => {
+    setIsDropdownOpen1(false); // Close the dropdown after submission
   };
 
   const handleDropdownCancel = () => {
@@ -200,7 +241,7 @@ export default function RealTimeView({ data, allData }) {
             </span>
           </div>
           <div className="relative inline-block ml-4">
-            <button onClick={toggleDropdown} className="focus:outline-none">
+            <button onClick={() => fetchAllMonotainers()} className="focus:outline-none">
               <Image
                 src={tag}
                 className="object-contain w-10 h-10 cursor-pointer text-white bg-white"
@@ -210,7 +251,7 @@ export default function RealTimeView({ data, allData }) {
               />
             </button>
             {isDropdownOpen && (
-              <div className="absolute top-[40px] right-0 bg-white shadow-md p-2 z-10">
+              <div className="absolute top-[40px] right-0 bg-white shadow-md p-2 z-10 h-[300px] overflow-y-auto">
                 {monotainersData?.map((value) => (
                   <div
                     key={value}
@@ -309,7 +350,10 @@ export default function RealTimeView({ data, allData }) {
                 <div
                   className="relative button-hover"
                   onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+                  onMouseLeave={() => {
+                        setHoveredIndex(null);
+                        setIsDropdownOpen1(false);
+                      }}
                   key={data1.monotainer_id}
                 >
                   <button
@@ -332,110 +376,150 @@ export default function RealTimeView({ data, allData }) {
                         }}
                       />
                       {isDropdownValueShow && (
-                        <div className="absolute left-0 bg-white shadow-md p-2 z-9">
-                          <div
-                            key={data1.index}
-                            className={`items-center cursor-pointer`}
-                          >
-                            <input
-                              type="checkbox"
-                              checked={data1.iffinalized}
-                              onChange={() =>
-                                handleOptionSelection1(
-                                  data1.iffinalized != data1.iffinalized
-                                )
-                              }
-                              className="mr-2"
-                            />
-                            <div
-                              onClick={() =>
-                                handleOptionSelection1(
-                                  data1.iffinalized != data1.iffinalized
-                                )
-                              }
-                              className={`py-1 px-2`}
-                            >
-                              Finalized : {data1.iffinalized}
+                            <div className="absolute bg-white shadow-md z-10 w-64 text-sm p-4">
+                              <div
+                                key={data1.index}
+                                className={`flex flex-col cursor-pointer`}
+                              >
+                                <div className="flex items-center mb-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={
+                                      dropdownStates[data1.monotainer_id]
+                                        ?.iffinalized || false
+                                    }
+                                    onChange={() => {
+                                      setDropdownStates((prevState) => ({
+                                        ...prevState,
+                                        [data1.monotainer_id]: {
+                                          ...prevState[data1.monotainer_id],
+                                          iffinalized:
+                                            !prevState[data1.monotainer_id]
+                                              ?.iffinalized,
+                                        },
+                                      }));
+                                    }}
+                                    className="mr-2"
+                                  />
+                                  <div>
+                                    Finalized :{" "}
+                                    {dropdownStates[data1.monotainer_id]
+                                      ?.iffinalized
+                                      ? "True"
+                                      : "False"}
+                                  </div>
+                                </div>
+                                <div className="flex items-center mb-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={
+                                      dropdownStates[data1.monotainer_id]
+                                        ?.misplaced || false
+                                    }
+                                    onChange={() => {
+                                      setDropdownStates((prevState) => ({
+                                        ...prevState,
+                                        [data1.monotainer_id]: {
+                                          ...prevState[data1.monotainer_id],
+                                          misplaced:
+                                            !prevState[data1.monotainer_id]
+                                              ?.misplaced,
+                                        },
+                                      }));
+                                    }}
+                                    className="mr-2"
+                                  />
+                                  <div>
+                                    Misplaced :{" "}
+                                    {dropdownStates[data1.monotainer_id]
+                                      ?.misplaced
+                                      ? "True"
+                                      : "False"}
+                                  </div>
+                                </div>
+                                <div className="flex items-center mb-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={
+                                      dropdownStates[data1.monotainer_id]
+                                        ?.ifprocessed || false
+                                    }
+                                    onChange={() => {
+                                      setDropdownStates((prevState) => ({
+                                        ...prevState,
+                                        [data1.monotainer_id]: {
+                                          ...prevState[data1.monotainer_id],
+                                          ifprocessed:
+                                            !prevState[data1.monotainer_id]
+                                              ?.ifprocessed,
+                                        },
+                                      }));
+                                    }}
+                                    className="mr-2"
+                                  />
+                                  <div>
+                                    Processed :{" "}
+                                    {dropdownStates[data1.monotainer_id]
+                                      ?.ifprocessed
+                                      ? "True"
+                                      : "False"}
+                                  </div>
+                                </div>
+                                <div className="flex items-center mb-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={
+                                      dropdownStates[data1.monotainer_id]
+                                        ?.ifstaged || false
+                                    }
+                                    onChange={() => {
+                                      setDropdownStates((prevState) => ({
+                                        ...prevState,
+                                        [data1.monotainer_id]: {
+                                          ...prevState[data1.monotainer_id],
+                                          ifstaged:
+                                            !prevState[data1.monotainer_id]
+                                              ?.ifstaged,
+                                        },
+                                      }));
+                                    }}
+                                    className="mr-2"
+                                  />
+                                  <div>
+                                    Untagged :{" "}
+                                    {dropdownStates[data1.monotainer_id]
+                                      ?.ifstaged
+                                      ? "True"
+                                      : "False"}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex justify-end mt-4">
+                                <button
+                                  className={`mr-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 ${
+                                    isDropdownValueShow ? "exclude-blur" : ""
+                                  }`}
+                                  onClick={() =>
+                                    handleDropdownEditSubmit(
+                                      dropdownStates[data1.monotainer_id],data1
+                                    )
+                                  }
+                                >
+                                  Submit
+                                </button>
+                                <button
+                                  className={`bg-gray-300 px-2 py-1 rounded hover:bg-gray-400 ${
+                                    isDropdownValueShow ? "exclude-blur" : ""
+                                  }`}
+                                  onClick={handleDropdownEditCancel}
+                                >
+                                  Cancel
+                                </button>
+                              </div>
                             </div>
-                            <input
-                              type="checkbox"
-                              checked={data1.misplaced}
-                              onChange={() =>
-                                handleOptionSelection1(
-                                  data1.misplaced !== data1.misplaced
-                                )
-                              }
-                              className="mr-2"
-                            />
-                            <div
-                              onClick={() =>
-                                handleOptionSelection1(
-                                  data1.misplaced !== data1.misplaced
-                                )
-                              }
-                              className={`py-1 px-2`}
-                            >
-                              Misplaced : {data1.misplaced}
-                            </div>
-                            <input
-                              type="checkbox"
-                              checked={data1.ifprocessed}
-                              onChange={() =>
-                                handleOptionSelection(
-                                  data1.ifprocessed !== data1.ifprocessed
-                                )
-                              }
-                              className="mr-2"
-                            />
-                            <div
-                              onClick={() =>
-                                handleOptionSelection(
-                                  ata1.ifprocessed !== data1.ifprocessed
-                                )
-                              }
-                              className={`py-1 px-2`}
-                            >
-                              Processed : {data1.ifprocessed}
-                            </div>
-                            <input
-                              type="checkbox"
-                              checked={data1.ifuntagged}
-                              onChange={() =>
-                                handleOptionSelection(
-                                  data1.ifuntagged !== !data1.ifuntagged
-                                )
-                              }
-                              className="mr-2"
-                            />
-                            <div
-                              onClick={() =>
-                                handleOptionSelection(
-                                  data1.ifuntagged !== !data1.ifuntagged
-                                )
-                              }
-                              className={`py-1 px-2`}
-                            >
-                              Untagged : {data1.ifuntagged}
-                            </div>
-                          </div>
-                          <div className="flex justify-end mt-2">
-                            <button
-                              className="mr-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
-                              // onClick={handleDropdownEditSubmit}
-                            >
-                              Submit
-                            </button>
-                            <button
-                              className="bg-gray-300 px-2 py-1 rounded hover:bg-gray-400"
-                              // onClick={handleDropdownEditCancel}
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        </div>
-                      )}
+                          )}
                       <FaEye
-                        className="cursor-pointer"
+                        className="cursor-pointer text-red-800"
                         onClick={() => {
                           // Functionality for view icon
                           setTempName(data1.monotainer_id);

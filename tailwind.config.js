@@ -4,12 +4,13 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./src/**/*.{js,jsx,ts,tsx}",
     "./node_modules/react-tailwindcss-datetimepicker/dist/react-tailwindcss-datetimepicker.js",
+    "./public/fonts/OpenSans-Medium.ttf"
   ],
 
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Noto Sans", "sans-serif"],
+        sans: ["OpenSansExtraBold", "sans-serif"],
       },
       colors: {
         primary: "#A30000",
