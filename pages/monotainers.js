@@ -89,7 +89,7 @@ function Monotainers() {
           <div className="grid grid-cols-8 gap-4 mt-10">
               {filteredMonotainers.map((monotainer, index) => (
                 <button
-                  className={`text-green-700 border-green-700 border px-3 py-2 rounded-lg`}
+                  className={`text-green-700 border-green-700 border px-3 py-2 rounded-lg green-button`}
                   key={index}
                   onClick={() => {
                     setTempName(monotainer);

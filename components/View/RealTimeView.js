@@ -59,7 +59,9 @@ export default function RealTimeView({ data, allData }) {
   //   fetchAllMonotainers();
   // }, []); 
   // Empty dependency array, so this effect runs only once on mount
-
+  const handleDropdownDelete  = (value) => {
+    
+  }
   const handleOptionSelection = (value) => {
     setTempSelectedOptions((prevSelected) => {
       if (prevSelected.includes(value)) {
@@ -252,9 +254,9 @@ export default function RealTimeView({ data, allData }) {
             </button>
             {isDropdownOpen && (
               <div className="absolute top-[40px] right-0 bg-white shadow-md p-2 z-10 h-[300px] overflow-y-auto">
-                {monotainersData?.map((value) => (
+                {monotainersData?.map((value,index) => (
                   <div
-                    key={value}
+                    key={index}
                     className={`flex items-center cursor-pointer`}
                   >
                     <input
@@ -359,10 +361,10 @@ export default function RealTimeView({ data, allData }) {
                   <button
                     className={`${
                       data1.ifmisplaced
-                        ? "text-red-800 border-red-800"
+                        ? "text-red-800 red-button"
                         : data1.ifuntagged
-                        ? "text-yellow-500 border-yellow-500"
-                        : " text-green-700 border-green-700"
+                        ? "text-yellow-500 yellow-button"
+                        : " text-green-700 green-button"
                     } border px-2 py-2 rounded-lg h-10 `}
                   >
                     {data1.monotainer_id}
@@ -514,6 +516,14 @@ export default function RealTimeView({ data, allData }) {
                                   onClick={handleDropdownEditCancel}
                                 >
                                   Cancel
+                                </button>
+                                <button
+                                  className={`bg-gray-300 px-2 py-1 rounded hover:bg-gray-400 ${
+                                    isDropdownValueShow ? "exclude-blur" : ""
+                                  }`}
+                                  onClick={handleDropdownDelete}
+                                >
+                                  Delete
                                 </button>
                               </div>
                             </div>

@@ -300,13 +300,13 @@ export default function ModalPopUp({
               {listData?.processed?.monotainers?.map((data1, index) => {
                 return (
                   <button
-                    className={`${
-                      data1.ifmisplaced
-                        ? "text-red-800 border-red-800"
-                        : data1.ifuntagged
-                        ? "text-yellow-500 border-yellow-500"
-                        : " text-green-700 border-green-700"
-                    } border px-2 py-2 rounded-lg h-10 `}
+                  className={`${
+                    data1.ifmisplaced
+                      ? "text-red-800 border-red-800 red-button"
+                      : data1.ifuntagged
+                      ? "text-yellow-500 border-yellow-500 yellow-button"
+                      : " text-white border-green-700 green-button"
+                  } border px-2 py-2 rounded-lg h-10 `}
                     key={index}
                     onClick={() => {
                       openTableModal(data1);
