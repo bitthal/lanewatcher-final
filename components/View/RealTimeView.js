@@ -363,7 +363,7 @@ export default function RealTimeView({ data, allData }) {
             </div>
             <div className="flex gap-3 flex-col mt-7rem">
               <div className="grid grid-cols-8 gap-2">
-                {data?.pending?.monotainers
+                {data?.real_time_positions?.monotainers
                   ?.slice((page - 1) * dataPerPage, page * dataPerPage)
                   .sort((a, b) => a.index - b.index)
                   ?.map((data1, index) => (
