@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import Leftbar from "@/components/Leftbar";
 import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import withAuth from "@/utils/withAuth";
 import Toaster from "@/components/Toaster";
+import { value_data } from "@/context/context";
 
 function Tracker({
   showDatePicker,
@@ -20,6 +21,7 @@ function Tracker({
   const [selectedValue, setOptionVal] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setErrors] = useState(null);
+  const { laneNames, setLaneNames } = useContext(value_data);
 
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
@@ -96,6 +98,7 @@ function Tracker({
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
         setAlldata(response?.data?.lanes);
+        setLaneNames(response?.data?.lanes);
       } catch (error) {
         console.error("Error:", error);
       }

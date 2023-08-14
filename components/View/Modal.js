@@ -28,6 +28,16 @@ export default function ModalPopUp({
     second: "2-digit",
     timeZoneName: "short",
   };
+  const tableHeader = document.querySelector(".your-table thead tr");
+let tableWidth = 0;
+
+if (tableHeader) {
+  const thElements = tableHeader.querySelectorAll("th");
+  thElements.forEach((th) => {
+    tableWidth += th.offsetWidth;
+  });
+}
+const modalWidth = tableWidth + 100; 
   const customStyles = {
     content: {
       top: "55%",
@@ -64,9 +74,8 @@ export default function ModalPopUp({
         style={{
           content: {
             ...customStyles.content,
-            maxWidth: "100%", // Adjust the width as needed
+            maxWidth: "100%", // Set the modal width      
             maxHeight: "80%", // Adjust the height as needed
-            width: "60%",
           },
           overlay: customStyles.overlay,
         }}
@@ -231,44 +240,13 @@ export default function ModalPopUp({
             </div>
           </div>
         )}
-        {realTimeDataData && (
+        {listData && (
           <div className="flex flex-col ">
             <div>
               <h5 className="text-center   text-xl">Monotainer ID's</h5>
             </div>
             <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
-              {listData?.real_time_positions?.monotainers.map(
-                (data1, index) => {
-                  return (
-                    <button
-                      className={`${
-                        data1.ifmisplaced
-                          ? "text-red-800 border-red-800"
-                          : data1.ifuntagged
-                          ? "text-yellow-500 border-yellow-500"
-                          : " text-green-700 border-green-700"
-                      } border px-2 py-2 rounded-lg h-10 `}
-                      key={index}
-                      onClick={() => {
-                        openTableModal(data1);
-                        // closeModal2();
-                      }}
-                    >
-                      {data1.monotainer_id}
-                    </button>
-                  );
-                }
-              )}
-            </div>
-          </div>
-        )}
-        {pendingData && (
-          <div className="flex flex-col ">
-            <div>
-              <h5 className="text-center   text-xl">Monotainer ID's</h5>
-            </div>
-            <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
-              {listData?.pending?.monotainers?.map((data1, index) => {
+              {listData?.map((data1, index) => {
                 return (
                   <button
                     className={`${
@@ -291,39 +269,10 @@ export default function ModalPopUp({
             </div>
           </div>
         )}
-        {processedData && (
-          <div className="flex flex-col ">
-            <div>
-              <h5 className="text-center   text-xl">Monotainer ID's</h5>
-            </div>
-            <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
-              {listData?.processed?.monotainers?.map((data1, index) => {
-                return (
-                  <button
-                  className={`${
-                    data1.ifmisplaced
-                      ? "text-red-800 border-red-800 red-button"
-                      : data1.ifuntagged
-                      ? "text-yellow-500 border-yellow-500 yellow-button"
-                      : " text-white border-green-700 green-button"
-                  } border px-2 py-2 rounded-lg h-10 `}
-                    key={index}
-                    onClick={() => {
-                      openTableModal(data1);
-                      // closeModal2();
-                    }}
-                  >
-                    {data1.monotainer_id}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
         {tableData && (
           <div className="overflow-y-auto">
-            <h5 className="text-center   text-md">History</h5>
-            <h6 className="text-center text-sm text-primary2  ">{tempName}</h6>
+            <h5 className="text-center text-md">History</h5>
+            <h6 className="text-center text-sm text-primary2">{tempName}</h6>
             <table className="min-w-full border-collapse border border-black">
               <thead className="bg-indigo-900">
                 <tr>
@@ -337,37 +286,19 @@ export default function ModalPopUp({
                     scope="col"
                     className="px-6 py-3 text-xs text-left text-white"
                   >
-                    Staged
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs text-left text-white"
-                  >
                     Finalized
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs text-left text-white"
                   >
-                    Untagged
+                    Misplaced
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs text-left text-white"
                   >
                     Lane Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs text-left text-white"
-                  >
-                    Misplaced In
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
-                  >
-                    Processed Timestamp
                   </th>
                   <th
                     scope="col"
@@ -380,6 +311,12 @@ export default function ModalPopUp({
                     className="px-6 py-3 text-xs text-left text-white border border-gray-800"
                   >
                     Staged Timestamp
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
+                  >
+                    Processed Timestamp
                   </th>
                   <th
                     scope="col"
@@ -405,14 +342,12 @@ export default function ModalPopUp({
                       <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
                         {data.camera_id}
                       </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                        {data.ifstaged}
-                      </td>
+                     
                       <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
                         {data.iffinalized}
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                        {data.ifuntagged}
+                        {data.ifmisplaced}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
                         {data.lane_name
@@ -420,16 +355,7 @@ export default function ModalPopUp({
                             data.lane_name.slice(1)
                           : ""}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
-                        {data.misplaced_in}
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
-                        {data.processed_timestamp
-                          ? new Date(
-                              data.processed_timestamp
-                            ).toLocaleDateString("en-US", options)
-                          : ""}
-                      </td>
+                      
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data.sorting_timestamp
                           ? new Date(data.sorting_timestamp).toLocaleDateString(
@@ -447,6 +373,14 @@ export default function ModalPopUp({
                           : ""}
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                        {data.processed_timestamp
+                          ? new Date(
+                              data.processed_timestamp
+                            ).toLocaleDateString("en-US", options)
+                          : ""}
+                      </td>
+                      
+                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data?.staged_timestamp && data?.sorting_timestamp
                           ? (() => {
                               const stagedDate = new Date(
@@ -457,9 +391,9 @@ export default function ModalPopUp({
                               );
                               const timeDifference = stagedDate - sortingDate;
                               const daysDifference = Math.floor(
-                                timeDifference / (1000 * 60 * 60 * 24)
+                                timeDifference / (1000 * 60 * 60)
                               );
-                              return `${daysDifference} days`;
+                              return `${daysDifference} hours`;
                             })()
                           : ""}
                       </td>
@@ -475,9 +409,9 @@ export default function ModalPopUp({
                               const timeDifference =
                                 processed_timestamp - sorting_timestamp;
                               const daysDifference = Math.floor(
-                                timeDifference / (1000 * 60 * 60 * 24)
+                                timeDifference / (1000 * 60 * 60)
                               );
-                              return `${daysDifference} days`;
+                              return `${daysDifference} hours`;
                             })()
                           : ""}
                       </td>
@@ -499,7 +433,7 @@ export default function ModalPopUp({
         )}
         {AllData && (
           <div className="">
-            <h5 className="text-center   text-xl mb-2">Total Aggregate ID'S</h5>
+            <h5 className="text-center text-xl mb-2">Total Aggregate ID'S</h5>
 
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">

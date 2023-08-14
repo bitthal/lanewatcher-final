@@ -21,7 +21,7 @@ export default function Pending({ show, data, showDashboardView }) {
     setListModalOpen(false);
     setTempName(params.monotainer_id);
     setDataModalOpen(true);
-    historyHandler(params);
+    historyHandler(params,false);
   };
   const closeModalPopUp = () => {
     setDataModalOpen(false);
@@ -29,8 +29,7 @@ export default function Pending({ show, data, showDashboardView }) {
   };
   const toggleDropdown1 = (data) => {
     console.log(data, "data");
-    setIsDropdownOpen1((prevOpen) => !prevOpen);
-    setIsDropdownValues(data);
+    historyHandler(data,true);
     // if (!isDropdownOpen) {
     //   setTempSelectedOptions1(selectedOptions1);
     // }
@@ -84,7 +83,8 @@ export default function Pending({ show, data, showDashboardView }) {
     setIsDropdownOpen1(false); // Close the dropdown after submission
   };
 
-  const historyHandler = (data) => {
+  const historyHandler = (data,toggle) => {
+   
     const monoid = data?.monotainer_id ? data?.monotainer_id : data;
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL_HISTORY}`, {
@@ -93,8 +93,14 @@ export default function Pending({ show, data, showDashboardView }) {
         },
       })
       .then((response) => {
-        setDataModalOpen(true);
+        if(toggle){
+          setIsDropdownOpen1((prevOpen) => !prevOpen);
+          setIsDropdownValues(response?.data?.result);
+        }
+        else{
+          setDataModalOpen(true);
         showHistory(response?.data?.result);
+        }
       });
   };
   const handleDropdownDelete = (value) => {
@@ -156,8 +162,12 @@ export default function Pending({ show, data, showDashboardView }) {
                             toggleDropdown1(data1);
                           }}
                         />
-                        {isDropdownValueShow && (
-                          <div className="absolute bg-white shadow-md z-10 w-64 text-sm p-4">
+                        {isDropdownValueShow && 
+                        (
+                          <div>
+                            {isDropdownValues.map((data1) => (
+                            <div className="absolute bg-white shadow-md z-10 w-64 text-sm p-4">
+                              <h1 className="text-center">ID : {data1.monotainer_id}</h1>
                             <div
                               key={data1.index}
                               className={`flex flex-col cursor-pointer`}
@@ -294,10 +304,8 @@ export default function Pending({ show, data, showDashboardView }) {
                                   className="mr-2"
                                 />
                                 <div>
-                                  Delete :{" "}
-                                  {dropdownStates[data1.monotainer_id]?.delete
-                                    ? "True"
-                                    : "False"}
+                                  Delete 
+                                 
                                 </div>
                               </div>
                             </div>
@@ -325,13 +333,17 @@ export default function Pending({ show, data, showDashboardView }) {
                               </button>
                             </div>
                           </div>
-                        )}
+                          ))}
+                          </div>
+                          
+                        )
+                        }
                         <FaEye
                           className="cursor-pointer"
                           onClick={() => {
                             // Functionality for view icon
                             setTempName(data1.monotainer_id);
-                            historyHandler(data1.monotainer_id);
+                            historyHandler(data1.monotainer_id,false);
                           }}
                         />
                       </div>
@@ -385,8 +397,8 @@ export default function Pending({ show, data, showDashboardView }) {
       </div>
       {listModalOpen && (
         <ModalPopUp
-          listData={data}
-          pendingData={true}
+          listData={data.pending?.monotainers}
+          // pendingData={true}
           openTableModalBox={openTableModalBox}
           modalState={listModalOpen}
           closeModalPopUp={closeModalPopUp}
