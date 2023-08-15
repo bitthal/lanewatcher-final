@@ -39,8 +39,8 @@ export default function Header2({
         `${process.env.NEXT_PUBLIC_API_URL_MONO_ID}?pageNo=20`
       );
       const data = await response.json();
-      if (Array.isArray(data.Sortedids)) {
-        setMonotainersData(data.Sortedids);
+      if (Array.isArray(data.result)) {
+        setMonotainersData(data.result);
         toggleDropdown();
       } else {
         console.error("Invalid data format: data.result is not an array.");
@@ -253,30 +253,6 @@ export default function Header2({
                 onChange={(e) => setSearchIdValue(e.target.value)}
                 className="mb-2 p-1 border border-gray-300 rounded"
               />
-              {monotainersData
-                ?.filter((value) =>
-                  value.toLowerCase().includes(searchIdValue.toLowerCase())
-                )
-                .map((value, index) => (
-                  <div
-                    key={index}
-                    className={`flex items-center cursor-pointer`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={tempSelectedOptions.includes(value)}
-                      onChange={() => handleOptionSelection(value)}
-                      className="mr-2"
-                    />
-
-                    <div
-                      onClick={() => handleOptionSelection(value)}
-                      className={`py-1 px-2 ${selectedOptions.includes(value)}`}
-                    >
-                      {value}
-                    </div>
-                  </div>
-                ))}
               <div className="relative w-40">
                 <div
                   className="w-full bg-white border border-gray-300 rounded-md py-2 px-3 cursor-pointer flex justify-between items-center"
@@ -312,6 +288,31 @@ export default function Header2({
                   </div>
                 )}
               </div>
+              {monotainersData
+                ?.filter((value) =>
+                  value.toLowerCase().includes(searchIdValue.toLowerCase())
+                )
+                .map((value, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-center cursor-pointer`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={tempSelectedOptions.includes(value)}
+                      onChange={() => handleOptionSelection(value)}
+                      className="mr-2"
+                    />
+
+                    <div
+                      onClick={() => handleOptionSelection(value)}
+                      className={`py-1 px-2 ${selectedOptions.includes(value)}`}
+                    >
+                      {value}
+                    </div>
+                  </div>
+                ))}
+              
               <div className="flex justify-end mt-2">
                 <button
                   className="mr-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
