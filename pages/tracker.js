@@ -51,7 +51,7 @@ function Tracker({
     const isMatched = allMonotainers?.some((monotainer) => {
       const isMatch = monotainer?.monotainer_id ? monotainer?.monotainer_id 
       ?.toLowerCase()
-      .includes(searchTerm?.toLowerCase()) : monotainer?.includes(searchTerm?.toLowerCase());
+      .includes(searchTerm?.toLowerCase()) : "";
       return isMatch;
     });
 
@@ -70,7 +70,7 @@ function Tracker({
     return allMonotainers?.some((monotainer) => {
       return monotainer?.monotainer_id ? monotainer?.monotainer_id 
         ?.toLowerCase()
-        .includes(searchTerm?.toLowerCase()) : monotainer?.includes(searchTerm?.toLowerCase());
+        .includes(searchTerm?.toLowerCase()) : "";
     });
   }).length;
 

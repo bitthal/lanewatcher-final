@@ -8,6 +8,7 @@ import Link from "next/link";
 import ModalPopUp from "./View/Modal";
 import { value_data } from "@/context/context";
 import Logo from "/public/favicon.png";
+import Toaster from "@/components/Toaster";
 
 export default function Header() {
   const { value, setValue } = useContext(value_data);
@@ -17,6 +18,7 @@ export default function Header() {
   const [modalState, setModalOpen] = useState(false);
   const [apiCalled, setApiCalled] = useState(false);
   const [siteId, setSiteID] = useState();
+  const [error, setErrors] = useState(null);
   const [userName, setUserName] = useState("");
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
@@ -53,6 +55,9 @@ export default function Header() {
     };
   }, [value]);
 
+  const handleCloseToaster = () => {
+    setErrors(null); // Clear the toaster message
+  }
   async function getAlertHandler() {
     setModalOpen(true);
     await axios
@@ -80,7 +85,10 @@ export default function Header() {
             return data.alerts.claimed_status === false;
           });
         setAlerts(mapped);
-      });
+      })
+      .catch((error) => {
+				setErrors("No data available");
+			});
   }
   const handleChange = (event) => {
     setValue(siteId[event.target.value]);
@@ -151,6 +159,8 @@ export default function Header() {
           closeModalPopUp={closeModalPopUp}
         ></ModalPopUp>
       )}
+            <Toaster message={error} onClose={handleCloseToaster}/>
+
     </Fragment>
   );
 }

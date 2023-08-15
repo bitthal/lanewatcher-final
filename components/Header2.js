@@ -231,7 +231,7 @@ export default function Header2({
             </div>
           )}
         </div>
-        {showLaneCount && <div className="relative inline-block ml-4 mb-8">
+        {/* {showLaneCount && <div className="relative inline-block ml-4 mb-8">
           <button
             onClick={() => fetchAllMonotainers()}
             className="focus:outline-none"
@@ -328,7 +328,7 @@ export default function Header2({
               </div>
             </div>
           )}
-        </div>}
+        </div>} */}
         {showLaneCount && <div className="flex mb-8">
     <div className="flex items-center gap-2">
       <span className="w-3 h-3 bg-red-500 rounded-full" />

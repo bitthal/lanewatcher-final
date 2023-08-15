@@ -16,6 +16,7 @@ export default function Pending({ show, data, showDashboardView }) {
   const [isDropdownValueShow, setIsDropdownOpen1] = useState(false);
   const [isDropdownValues, setIsDropdownValues] = useState([]);
   const [dropdownStates, setDropdownStates] = useState({});
+  const [selectedDropdownValue, setSelectedDropdownValue] = useState("");
 
   const openTableModalBox = (params) => {
     setListModalOpen(false);
@@ -121,232 +122,6 @@ export default function Pending({ show, data, showDashboardView }) {
             </p>
           </div>
           <div className="flex gap-3 flex-col mt-6rem">
-            {isDropdownValueShow && (
-              <div>
-                {isDropdownValues.map((data1) => (
-                  <div className="absolute bg-white shadow-md z-10 w-64 text-sm p-4">
-                    <h1 className="text-center underline">
-                      ID : {data1.monotainer_id}
-                    </h1>
-                    <div
-                      key={data1.index}
-                      className={`flex flex-col cursor-pointer`}
-                    >
-                      <div className="flex items-center mb-2">
-                        <input
-                          type="checkbox"
-                          checked={
-                            dropdownStates[data1.monotainer_id]?.iffinalized ||
-                            false
-                          }
-                          onChange={() => {
-                            setDropdownStates((prevState) => ({
-                              ...prevState,
-                              [data1.monotainer_id]: {
-                                ...prevState[data1.monotainer_id],
-                                iffinalized:
-                                  !prevState[data1.monotainer_id]?.iffinalized,
-                              },
-                            }));
-                          }}
-                          className={`mr-2 ${
-                            dropdownStates[data1.monotainer_id]?.delete
-                              ? "disabled"
-                              : ""
-                          }`}
-                          disabled={dropdownStates[data1.monotainer_id]?.delete}
-                        />
-                        <div className={`mr-2 ${
-                            dropdownStates[data1.monotainer_id]?.delete
-                              ? "disabled"
-                              : ""
-                          }`}>
-                          Finalized :{" "}
-                          {dropdownStates[data1.monotainer_id]?.iffinalized ? (
-                            <i className="fas fa-toggle-on text-green-500" />
-                          ) : (
-                            <i className="fas fa-toggle-off text-red-500" />
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex items-center mb-2">
-                        <input
-                          type="checkbox"
-                          checked={
-                            dropdownStates[data1.monotainer_id]?.misplaced ||
-                            false
-                          }
-                          onChange={() => {
-                            setDropdownStates((prevState) => ({
-                              ...prevState,
-                              [data1.monotainer_id]: {
-                                ...prevState[data1.monotainer_id],
-                                misplaced:
-                                  !prevState[data1.monotainer_id]?.misplaced,
-                              },
-                            }));
-                          }}
-                          className={`mr-2 ${
-                            dropdownStates[data1.monotainer_id]?.delete
-                              ? "disabled"
-                              : ""
-                          }`}
-                          disabled={dropdownStates[data1.monotainer_id]?.delete}
-                        />
-                        <div className={`mr-2 ${
-                            dropdownStates[data1.monotainer_id]?.delete
-                              ? "disabled"
-                              : ""
-                          }`}>
-                          Misplaced :{" "}
-                          {dropdownStates[data1.monotainer_id]?.misplaced ? (
-                            <i className="fas fa-toggle-on text-green-500" />
-                          ) : (
-                            <i className="fas fa-toggle-off text-red-500" />
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex items-center mb-2">
-                        <input
-                          type="checkbox"
-                          checked={
-                            dropdownStates[data1.monotainer_id]?.ifprocessed ||
-                            false
-                          }
-                          onChange={() => {
-                            setDropdownStates((prevState) => ({
-                              ...prevState,
-                              [data1.monotainer_id]: {
-                                ...prevState[data1.monotainer_id],
-                                ifprocessed:
-                                  !prevState[data1.monotainer_id]?.ifprocessed,
-                              },
-                            }));
-                          }}
-                          className={`mr-2 ${
-                            dropdownStates[data1.monotainer_id]?.delete
-                              ? "disabled"
-                              : ""
-                          }`}
-                          disabled={dropdownStates[data1.monotainer_id]?.delete}
-                        />
-                        <div className={`mr-2 ${
-                            dropdownStates[data1.monotainer_id]?.delete
-                              ? "disabled"
-                              : ""
-                          }`}>
-                          Processed :{" "}
-                          {dropdownStates[data1.monotainer_id]?.ifprocessed ? (
-                            <i className="fas fa-toggle-on text-green-500" />
-                          ) : (
-                            <i className="fas fa-toggle-off text-red-500" />
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex items-center mb-2">
-                        <input
-                          type="checkbox"
-                          checked={
-                            dropdownStates[data1.monotainer_id]?.ifstaged ||
-                            false
-                          }
-                          onChange={() => {
-                            setDropdownStates((prevState) => ({
-                              ...prevState,
-                              [data1.monotainer_id]: {
-                                ...prevState[data1.monotainer_id],
-                                ifstaged:
-                                  !prevState[data1.monotainer_id]?.ifstaged,
-                              },
-                            }));
-                          }}
-                          className={`mr-2 ${
-                            dropdownStates[data1.monotainer_id]?.delete
-                              ? "disabled"
-                              : ""
-                          }`}
-                          disabled={dropdownStates[data1.monotainer_id]?.delete}
-                        />
-                        <div className={`mr-2 ${
-                            dropdownStates[data1.monotainer_id]?.delete
-                              ? "disabled"
-                              : ""
-                          }`}>
-                          Untagged :{" "}
-                          {dropdownStates[data1.monotainer_id]?.ifstaged ? (
-                            <i className="fas fa-toggle-on text-green-500" />
-                          ) : (
-                            <i className="fas fa-toggle-off text-red-500" />
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex items-center mb-2">
-                        <input
-                          type="checkbox"
-                          className="mr-2"
-                          checked={
-                            dropdownStates[data1.monotainer_id]?.delete || false
-                          }
-                          onChange={() => {
-                            setDropdownStates((prevState) => {
-                              const updatedStates = {
-                                ...prevState,
-                                [data1.monotainer_id]: {
-                                  ...prevState[data1.monotainer_id],
-                                  delete:
-                                    !prevState[data1.monotainer_id]?.delete,
-                                },
-                              };
-
-                              if (updatedStates[data1.monotainer_id]?.delete) {
-                                updatedStates[
-                                  data1.monotainer_id
-                                ].iffinalized = false;
-                                updatedStates[
-                                  data1.monotainer_id
-                                ].misplaced = false;
-                                updatedStates[
-                                  data1.monotainer_id
-                                ].ifprocessed = false;
-                                updatedStates[
-                                  data1.monotainer_id
-                                ].ifstaged = false;
-                              }
-
-                              return updatedStates;
-                            });
-                          }}
-                        />
-                        <div>Delete</div>
-                      </div>
-                    </div>
-                    <div className="flex justify-end mt-4">
-                      <button
-                        className={`mr-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 ${
-                          isDropdownValueShow ? "exclude-blur" : ""
-                        }`}
-                        onClick={() =>
-                          handleDropdownEditSubmit(
-                            dropdownStates[data1.monotainer_id],
-                            data1
-                          )
-                        }
-                      >
-                        Submit
-                      </button>
-                      <button
-                        className={`bg-gray-300 px-2 py-1 rounded hover:bg-gray-400 ${
-                          isDropdownValueShow ? "exclude-blur" : ""
-                        }`}
-                        onClick={handleDropdownEditCancel}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
             <div className="grid grid-cols-2 gap-3">
               {data?.pending?.monotainers
                 ?.slice((page - 1) * dataPerPage, page * dataPerPage)
@@ -362,7 +137,7 @@ export default function Pending({ show, data, showDashboardView }) {
                         data1.ifmisplaced
                           ? "text-red-800 red-button"
                           : data1.ifuntagged
-                          ? "text-yellow-500 yellow-button" 
+                          ? "text-yellow-500 yellow-button"
                           : data1.iffinalized
                           ? "text-indigo-700 blue-button"
                           : " text-green-700 green-button"
@@ -376,6 +151,7 @@ export default function Pending({ show, data, showDashboardView }) {
                         <FaEdit
                           className="mr-2 cursor-pointer"
                           onClick={() => {
+                            setSelectedDropdownValue(data1.monotainer_id);
                             toggleDropdown1(data1);
                           }}
                         />
@@ -390,6 +166,267 @@ export default function Pending({ show, data, showDashboardView }) {
                         />
                       </div>
                     )}
+                    {isDropdownValueShow &&
+                      selectedDropdownValue === data1.monotainer_id && (
+                        <div>
+                          {isDropdownValues.map((data1) => (
+                            <div
+                              className="absolute bg-white shadow-md z-10 w-64 text-sm p-4"
+                              style={{ pointerEvents: "none" }}
+                            >
+                              <div style={{ pointerEvents: "auto" }}>
+                                <h1 className="text-center underline">
+                                  ID : {data1.monotainer_id}
+                                </h1>
+                                <div
+                                  key={data1.index}
+                                  className={`flex flex-col cursor-pointer`}
+                                >
+                                  <div className="flex items-center mb-2">
+                                    <input
+                                      type="checkbox"
+                                      checked={
+                                        dropdownStates[data1]?.iffinalized
+                                      }
+                                      onChange={() => {
+                                        setDropdownStates((prevState) => ({
+                                          ...prevState,
+                                          [data1.monotainer_id]: {
+                                            ...prevState[data1.monotainer_id],
+                                            iffinalized:
+                                              !prevState[data1.monotainer_id]
+                                                ?.iffinalized,
+                                          },
+                                        }));
+                                      }}
+                                      className={`mr-2 ${
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.delete
+                                          ? "disabled"
+                                          : ""
+                                      }`}
+                                    />
+                                    <div
+                                      className={`mr-2 ${
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.delete
+                                          ? "disabled"
+                                          : ""
+                                      }`}
+                                    >
+                                      Finalized :{" "}
+                                      {dropdownStates[data1]?.iffinalized ? (
+                                        <i className="fas fa-toggle-on text-green-500" />
+                                      ) : (
+                                        <i className="fas fa-toggle-off text-red-500" />
+                                      )}
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center mb-2">
+                                    <input
+                                      type="checkbox"
+                                      checked={
+                                        dropdownStates[data1]?.ifmisplaced
+                                      }
+                                      onChange={() => {
+                                        setDropdownStates((prevState) => ({
+                                          ...prevState,
+                                          [data1.monotainer_id]: {
+                                            ...prevState[data1.monotainer_id],
+                                            ifmisplaced:
+                                              !prevState[data1.monotainer_id]
+                                                ?.ifmisplaced,
+                                          },
+                                        }));
+                                      }}
+                                      className={`mr-2 ${
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.delete
+                                          ? "disabled"
+                                          : ""
+                                      }`}
+                                    />
+                                    <div
+                                      className={`mr-2 ${
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.delete
+                                          ? "disabled"
+                                          : ""
+                                      }`}
+                                    >
+                                      Misplaced :
+                                      {dropdownStates[data1]?.ifmisplaced ? (
+                                        <i className="fas fa-toggle-on text-green-500" />
+                                      ) : (
+                                        <i className="fas fa-toggle-off text-red-500" />
+                                      )}
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center mb-2">
+                                    <input
+                                      type="checkbox"
+                                      checked={
+                                        data1.ifprocessed &&
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.ifprocessed
+                                          ? true
+                                          : false
+                                      }
+                                      onChange={() => {
+                                        setDropdownStates((prevState) => ({
+                                          ...prevState,
+                                          [data1.monotainer_id]: {
+                                            ...prevState[data1.monotainer_id],
+                                            ifprocessed:
+                                              !prevState[data1.monotainer_id]
+                                                ?.ifprocessed,
+                                          },
+                                        }));
+                                      }}
+                                      className={`mr-2 ${
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.delete
+                                          ? "disabled"
+                                          : ""
+                                      }`}
+                                    />
+                                    <div
+                                      className={`mr-2 ${
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.delete
+                                          ? "disabled"
+                                          : ""
+                                      }`}
+                                    >
+                                      Processed :{" "}
+                                      {data1.ifprocessed &&
+                                      dropdownStates[data1.monotainer_id]
+                                        ?.ifprocessed ? (
+                                        <i className="fas fa-toggle-on text-green-500" />
+                                      ) : (
+                                        <i className="fas fa-toggle-off text-red-500" />
+                                      )}
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center mb-2">
+                                    <input
+                                      type="checkbox"
+                                      checked={
+                                        data1.ifstaged &&
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.ifstaged
+                                          ? true
+                                          : false
+                                      }
+                                      onChange={() => {
+                                        setDropdownStates((prevState) => ({
+                                          ...prevState,
+                                          [data1.monotainer_id]: {
+                                            ...prevState[data1.monotainer_id],
+                                            ifstaged:
+                                              !prevState[data1.monotainer_id]
+                                                ?.ifstaged,
+                                          },
+                                        }));
+                                      }}
+                                      className={`mr-2 ${
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.delete
+                                          ? "disabled"
+                                          : ""
+                                      }`}
+                                    />
+                                    <div
+                                      className={`mr-2 ${
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.delete
+                                          ? "disabled"
+                                          : ""
+                                      }`}
+                                    >
+                                      Untagged :{" "}
+                                      {data1.ifuntagged &&
+                                      dropdownStates[data1.monotainer_id]
+                                        ?.ifuntagged ? (
+                                        <i className="fas fa-toggle-on text-green-500" />
+                                      ) : (
+                                        <i className="fas fa-toggle-off text-red-500" />
+                                      )}
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center mb-2">
+                                    <input
+                                      type="checkbox"
+                                      className="mr-2"
+                                      checked={
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.delete || false
+                                      }
+                                      onChange={() => {
+                                        setDropdownStates((prevState) => {
+                                          const updatedStates = {
+                                            ...prevState,
+                                            [data1.monotainer_id]: {
+                                              ...prevState[data1.monotainer_id],
+                                              delete:
+                                                !prevState[data1.monotainer_id]
+                                                  ?.delete,
+                                            },
+                                          };
+
+                                          if (
+                                            updatedStates[data1.monotainer_id]
+                                              ?.delete
+                                          ) {
+                                            updatedStates[
+                                              data1.monotainer_id
+                                            ].iffinalized = false;
+                                            updatedStates[
+                                              data1.monotainer_id
+                                            ].misplaced = false;
+                                            updatedStates[
+                                              data1.monotainer_id
+                                            ].ifprocessed = false;
+                                            updatedStates[
+                                              data1.monotainer_id
+                                            ].ifstaged = false;
+                                          }
+
+                                          return updatedStates;
+                                        });
+                                      }}
+                                    />
+                                    <div>Delete</div>
+                                  </div>
+                                </div>
+                                <div className="flex justify-end mt-4">
+                                  <button
+                                    className={`mr-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 ${
+                                      isDropdownValueShow ? "exclude-blur" : ""
+                                    }`}
+                                    onClick={() =>
+                                      handleDropdownEditSubmit(
+                                        dropdownStates[data1.monotainer_id],
+                                        data1
+                                      )
+                                    }
+                                  >
+                                    Submit
+                                  </button>
+                                  <button
+                                    className={`bg-gray-300 px-2 py-1 rounded hover:bg-gray-400 ${
+                                      isDropdownValueShow ? "exclude-blur" : ""
+                                    }`}
+                                    onClick={handleDropdownEditCancel}
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                   </div>
                 ))}
             </div>
