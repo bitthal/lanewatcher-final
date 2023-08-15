@@ -231,7 +231,7 @@ export default function Header2({
             </div>
           )}
         </div>
-        <div className="relative inline-block ml-4 mb-8">
+        {showLaneCount && <div className="relative inline-block ml-4 mb-8">
           <button
             onClick={() => fetchAllMonotainers()}
             className="focus:outline-none"
@@ -328,7 +328,25 @@ export default function Header2({
               </div>
             </div>
           )}
-        </div>
+        </div>}
+        {showLaneCount && <div className="flex mb-8">
+    <div className="flex items-center gap-2">
+      <span className="w-3 h-3 bg-red-500 rounded-full" />
+      <span className="text-xs text-red-500">Misplaced</span>
+    </div>
+    <div className="flex items-center gap-2 ml-3">
+      <span className="w-3 h-3 bg-green-500 rounded-full" />
+      <span className="text-xs text-green-500">Staged</span>
+    </div>
+    <div className="flex items-center gap-2 ml-3">
+      <span className="w-3 h-3 bg-yellow-500 rounded-full" />
+      <span className="text-xs text-yellow-500">Untagged</span>
+    </div>
+    <div className="flex items-center gap-2 ml-3">
+      <span className="w-3 h-3 bg-indigo-800 rounded-full" />
+      <span className="text-xs text-indigo-800">Finalized</span>
+    </div>
+  </div>}
         {showDatePicker && (
           <div className="flex mb-8">
             <DateTimePicker
@@ -366,7 +384,9 @@ export default function Header2({
             </DateTimePicker>
           </div>
         )}
+        
       </div>
+      
     </div>
   );
 }

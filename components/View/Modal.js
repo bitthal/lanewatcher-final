@@ -249,13 +249,13 @@ const modalWidth = tableWidth + 100;
               {listData?.map((data1, index) => {
                 return (
                   <button
-                    className={`${
-                      data1.ifmisplaced
-                        ? "text-red-800 border-red-800"
-                        : data1.ifuntagged
-                        ? "text-yellow-500 border-yellow-500"
-                        : " text-green-700 border-green-700"
-                    } border px-2 py-2 rounded-lg h-10 `}
+                  className={`${
+                    data1.ifmisplaced
+                      ? "text-red-800 border border-green-300 red-button"
+                      : data1.ifuntagged
+                      ? "text-yellow-500 yellow-button"
+                      : " text-green-900 green-button"
+                  } border px-2 py-2 rounded-lg h-10 `}
                     key={data1.index}
                     onClick={() => {
                       openTableModal(data1);
@@ -284,15 +284,9 @@ const modalWidth = tableWidth + 100;
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs text-left text-white"
+                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
                   >
-                    Finalized
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs text-left text-white"
-                  >
-                    Misplaced
+                    Sorting Timestamp
                   </th>
                   <th
                     scope="col"
@@ -300,23 +294,30 @@ const modalWidth = tableWidth + 100;
                   >
                     Lane Name
                   </th>
+                  {/* <th
+                    scope="col"
+                    className="px-6 py-3 text-xs text-left text-white"
+                  >
+                    Finalized
+                  </th> */}
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
+                    className="px-6 py-3 text-xs text-left text-white"
                   >
-                    Sorting Timestamp
+                    Misplaced In
                   </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs text-left text-white"
+                  >
+                    Misplaced Timestamp
+                  </th>
+                  
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs text-left text-white border border-gray-800"
                   >
                     Staged Timestamp
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
-                  >
-                    Processed Timestamp
                   </th>
                   <th
                     scope="col"
@@ -328,7 +329,27 @@ const modalWidth = tableWidth + 100;
                     scope="col"
                     className="px-6 py-3 text-xs text-left text-white border border-gray-800"
                   >
+                    Processed Timestamp
+                  </th>
+                  
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
+                  >
                     Processed Delay
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
+                  >
+                    Finalized Timestamp
+                  </th>
+                  
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs text-left text-white border border-gray-800"
+                  >
+                    Finalized Delay
                   </th>
                 </tr>
               </thead>
@@ -342,20 +363,6 @@ const modalWidth = tableWidth + 100;
                       <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
                         {data.camera_id}
                       </td>
-                     
-                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                        {data.iffinalized}
-                      </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
-                        {data.ifmisplaced}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
-                        {data.lane_name
-                          ? data.lane_name.charAt(0).toUpperCase() +
-                            data.lane_name.slice(1)
-                          : ""}
-                      </td>
-                      
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data.sorting_timestamp
                           ? new Date(data.sorting_timestamp).toLocaleDateString(
@@ -364,12 +371,44 @@ const modalWidth = tableWidth + 100;
                             )
                           : ""}
                       </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap border border-black">
+                        {data.lane_name
+                          ? data.lane_name.charAt(0).toUpperCase() +
+                            data.lane_name.slice(1)
+                          : ""}
+                      </td>
+
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
+                        {data.misplaced_in}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
+                        {data.misplaced_timestamp}
+                      </td>
+                      
+                      
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data?.staged_timestamp
                           ? new Date(data.staged_timestamp).toLocaleDateString(
                               "en-US",
                               options
                             )
+                          : ""}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                        {data?.staged_timestamp && data?.sorting_timestamp
+                          ? (() => {
+                              const stagedDate = new Date(
+                                data.staged_timestamp
+                              );
+                              const sortingDate = new Date(
+                                data.sorting_timestamp
+                              );
+                              const timeDifference = sortingDate - stagedDate;
+                              const daysDifference = Math.floor(
+                                timeDifference / (1000 * 60 * 60)
+                              );
+                              return `${daysDifference} hours`;
+                            })()
                           : ""}
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
@@ -380,23 +419,7 @@ const modalWidth = tableWidth + 100;
                           : ""}
                       </td>
                       
-                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
-                        {data?.staged_timestamp && data?.sorting_timestamp
-                          ? (() => {
-                              const stagedDate = new Date(
-                                data.staged_timestamp
-                              );
-                              const sortingDate = new Date(
-                                data.sorting_timestamp
-                              );
-                              const timeDifference = stagedDate - sortingDate;
-                              const daysDifference = Math.floor(
-                                timeDifference / (1000 * 60 * 60)
-                              );
-                              return `${daysDifference} hours`;
-                            })()
-                          : ""}
-                      </td>
+                     
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data?.processed_timestamp && data?.sorting_timestamp
                           ? (() => {
@@ -407,7 +430,34 @@ const modalWidth = tableWidth + 100;
                                 data.sorting_timestamp
                               );
                               const timeDifference =
-                                processed_timestamp - sorting_timestamp;
+                                sorting_timestamp - processed_timestamp;
+                              const daysDifference = Math.floor(
+                                timeDifference / (1000 * 60 * 60)
+                              );
+                              return `${daysDifference} hours`;
+                            })()
+                          : ""}
+                      </td>
+                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                        {data.finalized_timestamp
+                          ? new Date(
+                              data.finalized_timestamp
+                            ).toLocaleDateString("en-US", options)
+                          : ""}
+                      </td>
+                      
+                     
+                      <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
+                        {data?.finalized_timestamp && data?.sorting_timestamp
+                          ? (() => {
+                              const finalized_timestamp = new Date(
+                                data.finalized_timestamp
+                              );
+                              const sorting_timestamp = new Date(
+                                data.sorting_timestamp
+                              );
+                              const timeDifference =
+                                sorting_timestamp - finalized_timestamp;
                               const daysDifference = Math.floor(
                                 timeDifference / (1000 * 60 * 60)
                               );

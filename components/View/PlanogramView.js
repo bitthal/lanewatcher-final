@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import React, { Fragment, useState, useContext } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { value_data } from "@/context/context";
 import ModalPopUp from "./Modal";
 
@@ -10,7 +11,9 @@ export default function PlanogramView({ data }) {
   const { value } = useContext(value_data);
   const [modalState, setModalOpen] = useState(false);
   const [aggregateResult, setAggregateResult] = useState(false);
-
+  const router =
+    useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
+    useRouter().pathname.replace(/\//, "").slice(1);
   async function getAlertHandler() {
     setModalOpen(true);
     await axios
@@ -102,9 +105,9 @@ export default function PlanogramView({ data }) {
         </div>
 
         <div>
-          <p className="text-sm text-gray-600">
+          {router == 'Tracker' && <p className="text-sm text-gray-600">
             Trucks Required- {data?.planogram?.trucks_required}
-          </p>
+          </p>}
 
           <p className="text-sm mb-5 text-gray-600">
             Trucks Ordered- {data?.planogram?.trucks_ordered}

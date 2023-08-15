@@ -67,6 +67,13 @@ div#DateRangePickerChildren {
   /* background: linear-gradient(to left, #7770004f, #7770004f); */
   box-shadow: -3px 2px 6px 0px rgb(101 141 109 / 50%);
 }
+
+.blue-button{
+  border: 1px solid indigo;
+
+  /* background: linear-gradient(to left, #7770004f, #7770004f); */
+  box-shadow: -3px 2px 6px 0px rgba(3, 5, 114, 0.5);
+}
 /* @keyframes buttonAnimation {
   0% {
     transform: perspective(500px) rotateX(-5deg) rotateY(0) translateZ(0);

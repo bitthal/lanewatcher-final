@@ -21,6 +21,7 @@ function Tracker({
   const [selectedValue, setOptionVal] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setErrors] = useState(null);
+  // const [finalizedData, setFinalData] = useState([]);
   const { laneNames, setLaneNames } = useContext(value_data);
 
   const router =
@@ -97,7 +98,9 @@ function Tracker({
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
+        // const finalized = await axios.post(`${process.env.NEXT_PUBLIC_API_URL_FINALIZED}`)
         setAlldata(response?.data?.lanes);
+        // setFinalData(finalized?.data?.Finalized)
         setLaneNames(response?.data?.lanes);
       } catch (error) {
         console.error("Error:", error);
@@ -151,6 +154,7 @@ function Tracker({
                         show={show}
                         data={data}
                         allData={Alldata}
+                        // finalData={finalizedData}
                         showRealTimeView={showRealTimeView ? false : true}
                       />
                     </div>
@@ -164,6 +168,7 @@ function Tracker({
                         show={show}
                         data={data}
                         allData={Alldata}
+                        // finalData={finalizedData}
                         showRealTimeView={showRealTimeView ? false : true}
                       />
                     </div>

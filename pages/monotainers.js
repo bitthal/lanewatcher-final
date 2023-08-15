@@ -86,10 +86,10 @@ function Monotainers() {
         </div>
         <div className="flex flex-col m-4">
           <div className="overflow-x-auto">
-          <div className="grid grid-cols-8 gap-4 mt-10">
+          <div className="grid gap-4 mt-10 sm:grid-cols-2 md:grid-cols-8">
               {filteredMonotainers.map((monotainer, index) => (
                 <button
-                  className={`text-green-700 border-green-700 border px-3 py-2 rounded-lg green-button`}
+                  className={`text-green-700 border-green-700 border px-3 py-2 rounded-lg green-button sm:w-20 md:w-24 lg:w-28 `}
                   key={index}
                   onClick={() => {
                     setTempName(monotainer);
