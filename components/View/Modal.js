@@ -403,7 +403,7 @@ const modalWidth = tableWidth + 100;
                               const sortingDate = new Date(
                                 data.sorting_timestamp
                               );
-                              const timeDifference = sortingDate - stagedDate;
+                              const timeDifference = stagedDate - sortingDate;
                               const daysDifference = Math.floor(
                                 timeDifference / (1000 * 60 * 60)
                               );
@@ -430,7 +430,7 @@ const modalWidth = tableWidth + 100;
                                 data.sorting_timestamp
                               );
                               const timeDifference =
-                                sorting_timestamp - processed_timestamp;
+                                processed_timestamp - sorting_timestamp;
                               const daysDifference = Math.floor(
                                 timeDifference / (1000 * 60 * 60)
                               );
