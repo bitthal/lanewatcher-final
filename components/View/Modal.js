@@ -246,7 +246,7 @@ const modalWidth = tableWidth + 100;
               <h5 className="text-center   text-xl">Monotainer ID's</h5>
             </div>
             <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
-              {listData?.map((data1, index) => {
+              {listData?.sort((a, b) => a.index - b.index).map((data1, index) => {
                 return (
                   <button
                   className={`${

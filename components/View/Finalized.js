@@ -465,7 +465,7 @@ export default function Finalized({ show, data,allData,showDashboardView }) {
           </div>}
       </div>
       {listModalOpen && <ModalPopUp
-                    listData={data.processed.monotainers}
+                    listData={data.finalized.monotainers}
                     // processedData={true}
                     openTableModalBox={openTableModalBox}
                     modalState={listModalOpen}
