@@ -11,24 +11,16 @@ function Alert({}) {
   const { value } = useContext(value_data);
   const [show, setShow] = useState(true);
   const [alertList, setAlerts] = useState("");
+  const [ loader , setLoader] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // Number of items to display per page
   const totalItems = alertList.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentAlerts = Array.isArray(alertList)
+  const sortedAlerts = Array.isArray(alertList)
     ? alertList.slice(startIndex, endIndex)
     : [];
-  console.log("Type of currentAlerts:", typeof currentAlerts);
-  const sortedAlerts = currentAlerts
-    ?.slice() // Create a shallow copy of the array before sorting
-    ?.sort((b, a) => {
-      const timestampA = new Date(a.sorting_timestamp).getTime();
-      const timestampB = new Date(b.sorting_timestamp).getTime();
-
-      return timestampA - timestampB;
-    });
   const options = {
     year: "numeric",
     month: "long",
@@ -51,6 +43,7 @@ function Alert({}) {
 
   // Inside your useEffect or wherever you fetch and set the alerts
   async function getAlertHandler() {
+    setLoader(true);
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params: {
@@ -70,14 +63,14 @@ function Alert({}) {
         );
 
         // Sort alerts by sorting_timestamp in descending order (newest first)
-        const sortedAlerts = mapped.sort((a, b) => {
+        const alertSorted = mapped.sort((a, b) => {
           const timestampA = new Date(b.sorting_timestamp).getTime();
           const timestampB = new Date(a.sorting_timestamp).getTime();
 
           return timestampA - timestampB;
         });
-
-        setAlerts(sortedAlerts);
+        setLoader(false);
+        setAlerts(alertSorted);
       });
   }
 
@@ -107,7 +100,20 @@ function Alert({}) {
         <div className={` w-full`}>
           <Header2 show={show} showSearchBar={false} showDatePicker={false} />
         </div>
-        <div className="flex flex-col page-container">
+        {loader && 
+        <div className="flex flex-col"><div className="animate-pulse h-8 bg-gray-300 rounded w-2/3 mx-auto mb-4"></div>
+            <div className="flex flex-col space-y-4">
+              <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+              <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+              <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+              <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+              <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+              <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+              {/* Add more skeleton lines for each row */}
+        </div>
+        </div>}
+        {!loader && <div className="flex flex-col page-container">
+        
           <div className="overflow-x-auto">
             <div className="p-1.5 w-full inline-block align-middle page-container">
               <div className="overflow-hidden border rounded-lg table-container">
@@ -162,15 +168,6 @@ function Alert({}) {
                     <tbody className="divide-y divide-gray-200 bg-white-100">
                       {sortedAlerts &&
                         sortedAlerts
-                          ?.sort((a, b) => {
-                            const timestampA = new Date(
-                              a.sorting_timestamp
-                            ).getTime();
-                            const timestampB = new Date(
-                              b.sorting_timestamp
-                            ).getTime();
-                            return timestampA - timestampB;
-                          })
                           .map((data, index) => {
                             return (
                               <tr>
@@ -300,7 +297,7 @@ function Alert({}) {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );

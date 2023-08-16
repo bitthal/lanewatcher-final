@@ -11,13 +11,11 @@ export default function ModalPopUp({
   tableData,
   tempName,
   openTableModalBox,
-  realTimeDataData,
-  pendingData,
-  processedData,
   AllData,
   AggregatePendingData,
   AggregateRealTimeData,
   AggregateProcessedData,
+  skeletonLoader
 }) {
   const options = {
     year: "numeric",
@@ -37,7 +35,6 @@ export default function ModalPopUp({
       tableWidth += th.offsetWidth;
     });
   }
-  const modalWidth = tableWidth + 100;
   const customStyles = {
     content: {
       top: "55%",
@@ -67,15 +64,6 @@ export default function ModalPopUp({
   const currentAlerts = Array.isArray(alertsTableData)
     ? alertsTableData.slice(startIndex, endIndex)
     : [];
-  console.log("Type of currentAlerts:", typeof currentAlerts);
-  const sortedAlerts = currentAlerts
-    ?.slice() // Create a shallow copy of the array before sorting
-    ?.sort((b, a) => {
-      const timestampA = new Date(a.sorting_timestamp).getTime();
-      const timestampB = new Date(b.sorting_timestamp).getTime();
-
-      return timestampA - timestampB;
-    });
   return (
     <Fragment>
       <Modal
@@ -99,9 +87,24 @@ export default function ModalPopUp({
         >
           <i className="fa fa-window-close" aria-hidden="true"></i>
         </button>
+        
+        {skeletonLoader && 
+        <div className="flex flex-col min-w-[200px]">
+        <div className="animate-pulse h-8 bg-gray-300 rounded w-2/3 mx-auto mb-4"></div>
+        <div className="flex flex-col space-y-4">
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          {/* Add more skeleton lines for each row */}
+    </div>
+    </div>}
         {alertsTableData && (
+          
           <div className="overflow-y-auto">
-            <h5 className="text-center   text-xl mb-2">Active Alerts</h5>
+            <h5 className="text-center text-xl mb-2">Active Alerts</h5>
             <div className="overflow-y-auto border">
               {alertsTableData && (
                 <table className="min-w-full divide-y divide-gray-200 border-collapse border border-black">
@@ -146,17 +149,9 @@ export default function ModalPopUp({
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {sortedAlerts &&
-                      sortedAlerts
-                        ?.sort((a, b) => {
-                          const timestampA = new Date(
-                            a.sorting_timestamp
-                          ).getTime();
-                          const timestampB = new Date(
-                            b.sorting_timestamp
-                          ).getTime();
-                          return timestampA - timestampB;
-                        })
+                    {currentAlerts &&
+                      currentAlerts
+                        
                         ?.map((data, index) => {
                           return (
                             <tr>

@@ -15,6 +15,7 @@ export default function Header() {
   const { drpdwnVaue, setdrpdwnVaue } = useContext(value_data);
   const { loginData } = useContext(value_data);
   const [alertList, setAlerts] = useState("");
+  const [skeletonLoader, setLoader] = useState(false);
   const [modalState, setModalOpen] = useState(false);
   const [apiCalled, setApiCalled] = useState(false);
   const [siteId, setSiteID] = useState();
@@ -59,6 +60,7 @@ export default function Header() {
     setErrors(null); // Clear the toaster message
   }
   async function getAlertHandler() {
+    setLoader(true)
     setModalOpen(true);
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
@@ -90,6 +92,7 @@ export default function Header() {
   
             return timestampA - timestampB;
           });
+        setLoader(false)
         setAlerts(sortedAlerts);
       })
       .catch((error) => {
@@ -160,7 +163,8 @@ export default function Header() {
       </div>
       {modalState && (
         <ModalPopUp
-          alertsTableData={alertList}
+          alertsTableData={skeletonLoader ? false : alertList}
+          skeletonLoader={skeletonLoader}
           modalState={modalState}
           closeModalPopUp={closeModalPopUp}
         ></ModalPopUp>

@@ -12,7 +12,18 @@ import Toaster from "@/components/Toaster";
 
 // Create a Skeleton component
 const Skeleton = () => (
-  <div className="animate-pulse bg-gray-200 h-8 rounded-md m-4 "></div>
+  <div className="flex flex-col min-w-[200px]">
+        <div className="animate-pulse h-8 bg-gray-300 rounded w-2/3 mx-auto mb-4"></div>
+        <div className="flex flex-col space-y-4">
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+          {/* Add more skeleton lines for each row */}
+    </div>
+    </div>
 );
 
 function Settings({}) {
@@ -258,17 +269,19 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
               </button>
             </div>
           )}
+          {
+            resetloading && 
+            (
+              <Skeleton/>
+            )
+          }
           <div>
-            <div className="flex flex-col">
+            {!resetloading && <div className="flex flex-col">
               <div className="overflow-x-auto">
                 <div className="p-1.5 w-full inline-block align-middle">
                   <div className="overflow-hidden border rounded-lg">
-                    {resetloading ? (
-                      // Skeleton Loader while resetting
-                      <div>
-                        <Skeleton />
-                      </div>
-                    ) : (
+                    
+                    
                       <table className="min-w-full divide-y divide-gray-200">
                         <thead className=" bg-indigo-900">
                           <tr className="">
@@ -309,7 +322,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 bg-white-100">
-                          {currentItems && currentItems.length > 0 ? (
+                          {currentItems && currentItems.length > 0 && !resetloading  ? (
                             currentItems?.map((data, index) => {
                               return (
                                 <tr>
@@ -357,7 +370,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                           />
                         </div> */}
                       </table>
-                    )}
+                    
                   </div>
                   <div className="flex">
                     <button
@@ -470,7 +483,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                   </div>
                 </div>
               </div>
-            </div>
+            </div>}
           </div>
         </div>
       </div>
