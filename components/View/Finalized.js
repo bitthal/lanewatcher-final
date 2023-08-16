@@ -215,8 +215,13 @@ export default function Finalized({ show, data,allData,showDashboardView }) {
                                   <div className="flex items-center mb-2">
                                     <input
                                       type="checkbox"
+                                      
                                       checked={
-                                        dropdownStates[data1]?.ifmisplaced
+                                        data1.ifmisplaced &&
+                                        dropdownStates[data1.monotainer_id]
+                                          ?.ifmisplaced
+                                          ? true
+                                          : false
                                       }
                                       onChange={() => {
                                         setDropdownStates((prevState) => ({
@@ -245,6 +250,7 @@ export default function Finalized({ show, data,allData,showDashboardView }) {
                                       }`}
                                     >
                                       Misplaced :
+                                      {dropdownStates[data1]}
                                       {dropdownStates[data1]?.ifmisplaced ? (
                                         <i className="fas fa-toggle-on text-green-500" />
                                       ) : (
@@ -302,9 +308,9 @@ export default function Finalized({ show, data,allData,showDashboardView }) {
                                     <input
                                       type="checkbox"
                                       checked={
-                                        data1.ifstaged &&
+                                        data1.ifuntagged &&
                                         dropdownStates[data1.monotainer_id]
-                                          ?.ifstaged
+                                          ?.ifuntagged
                                           ? true
                                           : false
                                       }
@@ -313,9 +319,9 @@ export default function Finalized({ show, data,allData,showDashboardView }) {
                                           ...prevState,
                                           [data1.monotainer_id]: {
                                             ...prevState[data1.monotainer_id],
-                                            ifstaged:
+                                            ifuntagged:
                                               !prevState[data1.monotainer_id]
-                                                ?.ifstaged,
+                                                ?.ifuntagged,
                                           },
                                         }));
                                       }}
