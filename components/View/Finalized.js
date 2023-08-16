@@ -125,15 +125,7 @@ export default function Finalized({ show, data,allData,showDashboardView }) {
             key={data1.monotainer_id}
           >
             <button
-                    className={`${
-                      data1.ifmisplaced
-                        ? "text-red-800 red-button"
-                        : data1.ifuntagged
-                        ? "text-yellow-500 yellow-button" 
-                        : data1.iffinalized
-                        ? "text-indigo-700 blue-button"
-                        : " text-green-700 green-button"
-                    } border px-2 py-2 rounded-lg h-10 `}
+                    className={`text-indigo-700 blue-button border px-2 py-2 rounded-lg h-10 `}
                   >
               {data1.monotainer_id}
             </button>
