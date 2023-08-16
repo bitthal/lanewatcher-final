@@ -245,7 +245,7 @@ export default function Header2({
             />
           </button>
           {isDropdownOpen && (
-            <div className="absolute top-[40px] right-0 bg-white shadow-md p-2 z-10 h-[300px] overflow-y-auto">
+            <div className="absolute top-[40px] right-0 bg-white shadow-md p-2 z-10 h-auto overflow-hidden">
               <input
                 type="text"
                 placeholder="Search IDs..."
@@ -288,6 +288,7 @@ export default function Header2({
                   </div>
                 )}
               </div>
+              <div className="h-[200px] overflow-y-auto">
               {monotainersData
                 ?.filter((value) =>
                   value.toLowerCase().includes(searchIdValue.toLowerCase())
@@ -312,7 +313,7 @@ export default function Header2({
                     </div>
                   </div>
                 ))}
-              
+              </div>
               <div className="flex justify-end mt-2">
                 <button
                   className="mr-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
@@ -330,21 +331,21 @@ export default function Header2({
             </div>
           )}
         </div>}
-        {showLaneCount && <div className="flex mb-8">
-    <div className="flex items-center gap-2">
-      <span className="w-3 h-3 bg-red-500 rounded-full" />
+        {showLaneCount && <div className="flex mb-10">
+    <div className="flex items-center gap-2 w-50 h-50">
+      <span className="w-7 h-8 bg-red-500 rounded-sm" />
       <span className="text-xs text-red-500">Misplaced</span>
     </div>
     <div className="flex items-center gap-2 ml-3">
-      <span className="w-3 h-3 bg-green-500 rounded-full" />
+      <span className="w-7 h-8 bg-green-500 rounded-sm" />
       <span className="text-xs text-green-500">Staged</span>
     </div>
     <div className="flex items-center gap-2 ml-3">
-      <span className="w-3 h-3 bg-yellow-500 rounded-full" />
+      <span className="w-7 h-8 bg-yellow-500 rounded-sm" />
       <span className="text-xs text-yellow-500">Untagged</span>
     </div>
     <div className="flex items-center gap-2 ml-3">
-      <span className="w-3 h-3 bg-indigo-800 rounded-full" />
+      <span className="w-7 h-8 bg-indigo-800 rounded-sm" />
       <span className="text-xs text-indigo-800">Finalized</span>
     </div>
   </div>}

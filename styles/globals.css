@@ -319,6 +319,26 @@ div#daterangepicker {
 }
 
 /* Add this CSS to your stylesheet */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 90vh; /* Set the container height to fill the viewport */
+}
+
+.table-container {
+  flex: 1; /* Make the table container grow to fill the available space */
+  overflow: auto; /* Enable scrolling if content overflows */
+}
+
+.pagination-container {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 

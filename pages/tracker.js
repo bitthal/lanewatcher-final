@@ -98,26 +98,21 @@ function Tracker({
     const fetchData = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
-        // const finalized = await axios.post(`${process.env.NEXT_PUBLIC_API_URL_FINALIZED}`)
         setAlldata(response?.data?.lanes);
-        // setFinalData(finalized?.data?.Finalized)
         setLaneNames(response?.data?.lanes);
       } catch (error) {
         console.error("Error:", error);
       }
     };
-    return () => {
-      if (router == "Tracker" || router == "Dashboard") {
-        fetchData();
-        const intervalId = setInterval(() => {
-          fetchData();
-        }, 5000); // 5 seconds interval
 
-        // Clean up the interval on component unmount to prevent memory leaks
-        return () => {
-          clearInterval(intervalId);
-        };
-      }
+    fetchData();
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 5000); // 5 seconds interval
+
+    // Clean up the interval on component unmount to prevent memory leaks
+    return () => {
+      clearInterval(intervalId);
     };
   }, []);
 
