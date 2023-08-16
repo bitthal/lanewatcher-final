@@ -686,7 +686,7 @@ export default function RealTimeView({ data, allData }) {
                 <span className="  text-gray-400 text-xs mb-1">Lane Out</span>
                 <button
                   className={`${
-                    totalPages === 0 ? "disabled cursor-not-allowed" : ""
+                    data.real_time_positions.total_monotainers === 0 ? "disabled cursor-not-allowed" : ""
                   } bg-[#434190] rounded-md px-2 py-1 text-white text-sm   text-xs`}
                   onClick={() => {
                     setListModalOpen(true);

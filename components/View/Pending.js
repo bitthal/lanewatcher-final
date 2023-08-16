@@ -467,7 +467,7 @@ export default function Pending({ show, data, showDashboardView }) {
 
             <button
               className={`${
-                totalPages === 0 ? "disabled cursor-not-allowed" : ""
+                data.pending.total_monotainers === 0 ? "disabled cursor-not-allowed" : ""
               }
                 bg-[#434190] rounded-md px-2 py-1 text-white text-sm   text-xs
                 `}
