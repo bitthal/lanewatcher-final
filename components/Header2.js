@@ -18,6 +18,9 @@ export default function Header2({
   showLaneCount,
   // onSearch
 }) {
+  const router =
+    useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
+    useRouter().pathname.replace(/\//, "").slice(1);
   const [showBorder, setShowBorder] = useState(true);
   const inputRef = useRef("");
   const [selectedDropdownValue, setSelectedDropdownValue] = useState(null);
@@ -331,7 +334,7 @@ export default function Header2({
             </div>
           )}
         </div>}
-        {showLaneCount && <div className="flex mb-10">
+        {router == "Tracker" && <div className="flex mb-10">
     <div className="flex items-center gap-2 w-50 h-50">
       <span className="w-7 h-8 bg-red-500 rounded-sm" />
       <span className="text-xs text-red-500">Misplaced</span>

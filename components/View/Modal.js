@@ -29,15 +29,15 @@ export default function ModalPopUp({
     timeZoneName: "short",
   };
   const tableHeader = document.querySelector(".your-table thead tr");
-let tableWidth = 0;
+  let tableWidth = 0;
 
-if (tableHeader) {
-  const thElements = tableHeader.querySelectorAll("th");
-  thElements.forEach((th) => {
-    tableWidth += th.offsetWidth;
-  });
-}
-const modalWidth = tableWidth + 100; 
+  if (tableHeader) {
+    const thElements = tableHeader.querySelectorAll("th");
+    thElements.forEach((th) => {
+      tableWidth += th.offsetWidth;
+    });
+  }
+  const modalWidth = tableWidth + 100;
   const customStyles = {
     content: {
       top: "55%",
@@ -64,8 +64,18 @@ const modalWidth = tableWidth + 100;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentAlerts =
-    alertsTableData && alertsTableData?.slice(startIndex, endIndex);
+  const currentAlerts = Array.isArray(alertsTableData)
+    ? alertsTableData.slice(startIndex, endIndex)
+    : [];
+  console.log("Type of currentAlerts:", typeof currentAlerts);
+  const sortedAlerts = currentAlerts
+    ?.slice() // Create a shallow copy of the array before sorting
+    ?.sort((b, a) => {
+      const timestampA = new Date(a.sorting_timestamp).getTime();
+      const timestampB = new Date(b.sorting_timestamp).getTime();
+
+      return timestampA - timestampB;
+    });
   return (
     <Fragment>
       <Modal
@@ -74,7 +84,7 @@ const modalWidth = tableWidth + 100;
         style={{
           content: {
             ...customStyles.content,
-            maxWidth: "100%", // Set the modal width      
+            maxWidth: "100%", // Set the modal width
             maxHeight: "80%", // Adjust the height as needed
           },
           overlay: customStyles.overlay,
@@ -136,40 +146,57 @@ const modalWidth = tableWidth + 100;
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {alertsTableData &&
-                      currentAlerts?.map((data, index) => {
-                        return (
-                          <tr>
-                            <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
-                              {alertsTableData.indexOf(data)}
-                            </td>
-                            <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
-                              {data.key_str.slice(0, data.key_str.indexOf("#"))}
-                            </td>
-                            <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
-                              {data.sorting_timestamp}
-                            </td>
-                            <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
-                              {data?.alerts?.type}
-                            </td>
-                            <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center">
-                              Belongs to{" "}
-                              {data?.alerts?.description
-                                .split(" ")[2]
-                                .charAt(0)
-                                .toUpperCase() +
-                                data?.alerts?.description
+                    {sortedAlerts &&
+                      sortedAlerts
+                        ?.sort((a, b) => {
+                          const timestampA = new Date(
+                            a.sorting_timestamp
+                          ).getTime();
+                          const timestampB = new Date(
+                            b.sorting_timestamp
+                          ).getTime();
+                          return timestampA - timestampB;
+                        })
+                        ?.map((data, index) => {
+                          return (
+                            <tr>
+                              <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
+                                {alertsTableData.indexOf(data)}
+                              </td>
+                              <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
+                                {data.key_str.slice(
+                                  0,
+                                  data.key_str.indexOf("#")
+                                )}
+                              </td>
+                              <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
+                                {data.sorting_timestamp
+                                  ? new Date(
+                                      data.sorting_timestamp
+                                    ).toLocaleDateString("en-US", options)
+                                  : ""}
+                              </td>
+                              <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
+                                {data?.alerts?.type}
+                              </td>
+                              <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center">
+                                Belongs to{" "}
+                                {data?.alerts?.description
                                   .split(" ")[2]
-                                  .slice(1)}
-                            </td>
-                            <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
-                              {data?.alerts?.claimed_status === true
-                                ? "True"
-                                : "False"}
-                            </td>
-                          </tr>
-                        );
-                      })}
+                                  .charAt(0)
+                                  .toUpperCase() +
+                                  data?.alerts?.description
+                                    .split(" ")[2]
+                                    .slice(1)}
+                              </td>
+                              <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
+                                {data?.alerts?.claimed_status === true
+                                  ? "True"
+                                  : "False"}
+                              </td>
+                            </tr>
+                          );
+                        })}
                   </tbody>
                 </table>
               )}
@@ -246,28 +273,30 @@ const modalWidth = tableWidth + 100;
               <h5 className="text-center   text-xl">Monotainer ID's</h5>
             </div>
             <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
-              {listData?.sort((a, b) => a.index - b.index).map((data1, index) => {
-                return (
-                  <button
-                  className={`${
-                    data1.ifmisplaced
-                      ? "text-red-800 red-button"
-                      : data1.ifuntagged
-                      ? "text-yellow-500 yellow-button" 
-                      : data1.iffinalized
-                      ? "text-indigo-700 blue-button"
-                      : " text-green-700 green-button"
-                  } border px-2 py-2 rounded-lg h-10 `}
-                    key={data1.index}
-                    onClick={() => {
-                      openTableModal(data1);
-                      // closeModal2();
-                    }}
-                  >
-                    {data1.monotainer_id}
-                  </button>
-                );
-              })}
+              {listData
+                ?.sort((a, b) => a.index - b.index)
+                .map((data1, index) => {
+                  return (
+                    <button
+                      className={`${
+                        data1.ifmisplaced
+                          ? "text-red-800 red-button"
+                          : data1.ifuntagged
+                          ? "text-yellow-500 yellow-button"
+                          : data1.iffinalized
+                          ? "text-indigo-700 blue-button"
+                          : " text-green-700 green-button"
+                      } border px-2 py-2 rounded-lg h-10 `}
+                      key={data1.index}
+                      onClick={() => {
+                        openTableModal(data1);
+                        // closeModal2();
+                      }}
+                    >
+                      {data1.monotainer_id}
+                    </button>
+                  );
+                })}
             </div>
           </div>
         )}
@@ -314,7 +343,7 @@ const modalWidth = tableWidth + 100;
                   >
                     Misplaced Timestamp
                   </th>
-                  
+
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs text-left text-white border border-gray-800"
@@ -333,7 +362,7 @@ const modalWidth = tableWidth + 100;
                   >
                     Processed Timestamp
                   </th>
-                  
+
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs text-left text-white border border-gray-800"
@@ -346,7 +375,7 @@ const modalWidth = tableWidth + 100;
                   >
                     Finalized Timestamp
                   </th>
-                  
+
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs text-left text-white border border-gray-800"
@@ -386,8 +415,7 @@ const modalWidth = tableWidth + 100;
                       <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black">
                         {data.misplaced_timestamp}
                       </td>
-                      
-                      
+
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data?.staged_timestamp
                           ? new Date(data.staged_timestamp).toLocaleDateString(
@@ -420,8 +448,7 @@ const modalWidth = tableWidth + 100;
                             ).toLocaleDateString("en-US", options)
                           : ""}
                       </td>
-                      
-                     
+
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data?.processed_timestamp && data?.sorting_timestamp
                           ? (() => {
@@ -447,8 +474,7 @@ const modalWidth = tableWidth + 100;
                             ).toLocaleDateString("en-US", options)
                           : ""}
                       </td>
-                      
-                     
+
                       <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap border border-black">
                         {data?.finalized_timestamp && data?.sorting_timestamp
                           ? (() => {

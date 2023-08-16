@@ -84,7 +84,13 @@ export default function Header() {
           .filter((data) => {
             return data.alerts.claimed_status === false;
           });
-        setAlerts(mapped);
+          const sortedAlerts = mapped.sort((a, b) => {
+            const timestampA = new Date(b.sorting_timestamp).getTime();
+            const timestampB = new Date(a.sorting_timestamp).getTime();
+  
+            return timestampA - timestampB;
+          });
+        setAlerts(sortedAlerts);
       })
       .catch((error) => {
 				setErrors("No data available");
