@@ -251,10 +251,12 @@ const modalWidth = tableWidth + 100;
                   <button
                   className={`${
                     data1.ifmisplaced
-                      ? "text-red-800 border border-green-300 red-button"
+                      ? "text-red-800 red-button"
                       : data1.ifuntagged
-                      ? "text-yellow-500 yellow-button"
-                      : " text-green-900 green-button"
+                      ? "text-yellow-500 yellow-button" 
+                      : data1.iffinalized
+                      ? "text-indigo-700 blue-button"
+                      : " text-green-700 green-button"
                   } border px-2 py-2 rounded-lg h-10 `}
                     key={data1.index}
                     onClick={() => {
@@ -457,7 +459,7 @@ const modalWidth = tableWidth + 100;
                                 data.sorting_timestamp
                               );
                               const timeDifference =
-                                sorting_timestamp - finalized_timestamp;
+                                finalized_timestamp - sorting_timestamp;
                               const daysDifference = Math.floor(
                                 timeDifference / (1000 * 60 * 60)
                               );
