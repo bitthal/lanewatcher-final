@@ -1,20 +1,25 @@
 /* eslint-disable react/jsx-key */
 import React, { Fragment, useState, useContext } from "react";
+import Skeleton from "../Skeleton";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { value_data } from "@/context/context";
 import ModalPopUp from "./Modal";
 
-export default function PlanogramView({ data }) {
+export default function PlanogramView({ data, resetLoader }) {
   const [alertList, setAlerts] = useState("");
   const { drpdwnVaue } = useContext(value_data);
   const { value } = useContext(value_data);
   const [modalState, setModalOpen] = useState(false);
   const [aggregateResult, setAggregateResult] = useState(false);
+  const [skeletonLoader, setLoader] = useState(false);
+
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
     useRouter().pathname.replace(/\//, "").slice(1);
+
   async function getAlertHandler() {
+    setLoader(true);
     setModalOpen(true);
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
@@ -33,7 +38,14 @@ export default function PlanogramView({ data }) {
           .filter((data) => {
             return data.alerts.claimed_status === false;
           });
-        setAlerts(mapped);
+          const sortedAlerts = mapped.sort((a, b) => {
+            const timestampA = new Date(b.sorting_timestamp).getTime();
+            const timestampB = new Date(a.sorting_timestamp).getTime();
+  
+            return timestampA - timestampB;
+          });
+        setLoader(false)
+        setAlerts(sortedAlerts);
       });
   }
   const closeModalPopUp = (data) => {
@@ -46,7 +58,8 @@ export default function PlanogramView({ data }) {
   };
   return (
     <Fragment>
-      <div className="bg-white rounded-xl p-5 flex flex-col gap-8 h-96 ">
+       
+       <div className="bg-white rounded-xl p-5 flex flex-col gap-8 h-96 ">
         <div className="flex gap-4 justify-between items-center w-full">
           <svg
             width="26"
@@ -123,10 +136,12 @@ export default function PlanogramView({ data }) {
             
           </div>
         </div>
-      </div>
+      </div>  
+      
       {modalState && (
         <ModalPopUp
-        alertsTableData={alertList}
+        alertsTableData={skeletonLoader ? false : alertList}
+          skeletonLoader={skeletonLoader}
           modalState={modalState}
           closeModalPopUp={closeModalPopUp}
         ></ModalPopUp>
