@@ -1,16 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import ModalPopUp from "./Modal";
+import Skeleton from "../Skeleton";
 import axios from "axios";
 // import { value_data } from "@/context/context";
 import Image from "next/image";
 import tag from "/public/tag.svg";
 import { FaEdit, FaEye } from "react-icons/fa";
 
-const Skeleton = () => (
-  <div className="animate-pulse bg-gray-200 h-92 rounded-md mt-4 p-5"></div>
-);
-
-export default function RealTimeView({ data, allData }) {
+export default function RealTimeView({ data, allData,resetLoader }) {
   const dataPerPage = 32;
   const totalData = data?.real_time_positions?.total_monotainers;
   const totalPages = Math.ceil(totalData / dataPerPage);
@@ -231,10 +228,8 @@ export default function RealTimeView({ data, allData }) {
   };
   return (
     <>
-      <div className={`p-5 bg-white rounded-xl h-96 realTimeView`}>
-        {isLoading ? (
-          <Skeleton />
-        ) : (
+      
+    <div className={`p-5 bg-white rounded-xl h-96 realTimeView`}>    
           <div>
             <div className="flex items-center text-center justify-between">
               <div style={{ lineHeight: 1, fontSize: "12px" }}>
@@ -697,8 +692,7 @@ export default function RealTimeView({ data, allData }) {
               </div>
             </div>
           </div>
-        )}
-      </div>
+      </div> 
 
       {listModalOpen && (
         <ModalPopUp

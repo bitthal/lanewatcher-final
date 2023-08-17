@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useContext, useEffect } from "react";
 import DateTimePicker from "react-tailwindcss-datetimepicker";
 import moment from "moment";
 import Image from "next/image";
@@ -17,6 +17,7 @@ export default function Header2({
   filteredLaneCount,
   showLaneCount,
   // onSearch
+  progress
 }) {
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
@@ -34,6 +35,29 @@ export default function Header2({
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isDropdownOpenLane, setIsDropdownOpenLane] = useState(false);
   const { laneNames } = useContext(value_data);
+  const { resetLoader,setResetLoader } = useContext(value_data);
+  // const [progress, setProgress] = useState(0);
+
+  // useEffect(() => {
+  //   if (updateProgress) {
+  //     const interval = setInterval(() => {
+  //       setProgress((prevProgress) => {
+  //         const newProgress = prevProgress + 1;
+  //         if (newProgress >= 5) {
+  //           clearInterval(interval); // Stop the interval when progress reaches 5
+  //         }
+  //         return newProgress;
+  //       });
+  //     }, 1000); // Update the progress every 1000 milliseconds (1 second)
+
+  //     return () => {
+  //       clearInterval(interval); // Cleanup the interval when the component unmounts
+  //     };
+  //   }
+  // }, [updateProgress]);
+  const progressBarStyle = {
+    transform: `rotate(${(progress / 5) * 360}deg)`,
+  };
 
   // const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
   const fetchAllMonotainers = async () => {
@@ -175,6 +199,14 @@ export default function Header2({
     setRange({ start: startDate, end: endDate });
     setRangeFilter({ start: startDate, end: endDate });
   }
+  const resetHandler = ()=>{
+    setResetLoader(true);
+    console.log('reset');
+  
+    setTimeout(() => {
+      setResetLoader(false);
+    }, 2000); // 2000 milliseconds = 2 seconds
+  }
   return (
     <div className={`mt-5 w-full flex flex-col lg:flex-row justify-between`}>
       <div className="flex flex-col lg:flex-row items-center gap-8">
@@ -201,6 +233,7 @@ export default function Header2({
               </button>
             </div>
           )}
+
           {showLaneCount && (
             <div className="text-sm mt-3 text-center lg:text-left">
               <strong>Lanes</strong> : Showing&nbsp;
@@ -234,124 +267,139 @@ export default function Header2({
             </div>
           )}
         </div>
-        {showLaneCount && <div className="relative inline-block ml-4 mb-8">
-          <button
-            onClick={() => fetchAllMonotainers()}
-            className="focus:outline-none"
-          >
-            <Image
-              src={tag}
-              className="object-contain w-10 h-10 cursor-pointer text-white bg-white"
-              alt="logo"
-              width={35}
-              height={35}
-            />
-          </button>
-          {isDropdownOpen && (
-            <div className="absolute top-[40px] right-0 bg-white shadow-md p-2 z-10 h-auto overflow-hidden">
-              <input
-                type="text"
-                placeholder="Search IDs..."
-                value={searchIdValue}
-                onChange={(e) => setSearchIdValue(e.target.value)}
-                className="mb-2 p-1 border border-gray-300 rounded"
+        {showLaneCount && (
+          <div className="relative inline-block ml-4 mb-8">
+            <button
+              onClick={() => fetchAllMonotainers()}
+              className="focus:outline-none"
+            >
+              <Image
+                src={tag}
+                className="object-contain w-10 h-10 cursor-pointer text-white bg-white"
+                alt="logo"
+                width={35}
+                height={35}
               />
-              <div className="relative w-40">
-                <div
-                  className="w-full bg-white border border-gray-300 rounded-md py-2 px-3 cursor-pointer flex justify-between items-center"
-                  onClick={() => setIsDropdownOpenLane(!isDropdownOpenLane)}
-                >
-                  <span>{selectedLane || "Select Lane"}</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="h-4 w-4"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M6.293 8.293a1 1 0 011.414 0L10 10.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                {isDropdownOpenLane && (
-                  <div className="absolute z-10 mt-2 w-full bg-white border border-t border-r border-l border-gray-300 rounded-md shadow-md hover:bg-gray-10">
-                    {laneNames
-                      ?.map((lane) => lane.lane_name)
-                      .map((lane) => (
-                        <div
-                          key={lane}
-                          className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                          onClick={() => handleLaneSelection(lane)}
-                        >
-                          {lane}
-                        </div>
-                      ))}
-                  </div>
-                )}
-              </div>
-              <div className="h-[200px] overflow-y-auto">
-              {monotainersData
-                ?.filter((value) =>
-                  value.toLowerCase().includes(searchIdValue.toLowerCase())
-                )
-                .map((value, index) => (
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute top-[40px] right-0 bg-white shadow-md p-2 z-10 h-auto overflow-hidden">
+                <input
+                  type="text"
+                  placeholder="Search IDs..."
+                  value={searchIdValue}
+                  onChange={(e) => setSearchIdValue(e.target.value)}
+                  className="mb-2 p-1 border border-gray-300 rounded"
+                />
+                <div className="relative w-40">
                   <div
-                    key={index}
-                    className={`flex items-center cursor-pointer`}
+                    className="w-full bg-white border border-gray-300 rounded-md py-2 px-3 cursor-pointer flex justify-between items-center"
+                    onClick={() => setIsDropdownOpenLane(!isDropdownOpenLane)}
                   >
-                    <input
-                      type="checkbox"
-                      checked={tempSelectedOptions.includes(value)}
-                      onChange={() => handleOptionSelection(value)}
-                      className="mr-2"
-                    />
-
-                    <div
-                      onClick={() => handleOptionSelection(value)}
-                      className={`py-1 px-2 ${selectedOptions.includes(value)}`}
+                    <span>{selectedLane || "Select Lane"}</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="h-4 w-4"
                     >
-                      {value}
-                    </div>
+                      <path
+                        fillRule="evenodd"
+                        d="M6.293 8.293a1 1 0 011.414 0L10 10.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
                   </div>
-                ))}
+                  {isDropdownOpenLane && (
+                    <div className="absolute z-10 mt-2 w-full bg-white border border-t border-r border-l border-gray-300 rounded-md shadow-md hover:bg-gray-10">
+                      {laneNames
+                        ?.map((lane) => lane.lane_name)
+                        .map((lane) => (
+                          <div
+                            key={lane}
+                            className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleLaneSelection(lane)}
+                          >
+                            {lane}
+                          </div>
+                        ))}
+                    </div>
+                  )}
+                </div>
+                <div className="h-[200px] overflow-y-auto">
+                  {monotainersData
+                    ?.filter((value) =>
+                      value.toLowerCase().includes(searchIdValue.toLowerCase())
+                    )
+                    .map((value, index) => (
+                      <div
+                        key={index}
+                        className={`flex items-center cursor-pointer`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={tempSelectedOptions.includes(value)}
+                          onChange={() => handleOptionSelection(value)}
+                          className="mr-2"
+                        />
+
+                        <div
+                          onClick={() => handleOptionSelection(value)}
+                          className={`py-1 px-2 ${selectedOptions.includes(
+                            value
+                          )}`}
+                        >
+                          {value}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+                <div className="flex justify-end mt-2">
+                  <button
+                    className="mr-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                    onClick={handleDropdownSubmit}
+                  >
+                    Submit
+                  </button>
+                  <button
+                    className="bg-gray-300 px-2 py-1 rounded hover:bg-gray-400"
+                    onClick={handleDropdownCancel}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
-              <div className="flex justify-end mt-2">
-                <button
-                  className="mr-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
-                  onClick={handleDropdownSubmit}
-                >
-                  Submit
-                </button>
-                <button
-                  className="bg-gray-300 px-2 py-1 rounded hover:bg-gray-400"
-                  onClick={handleDropdownCancel}
-                >
-                  Cancel
-                </button>
-              </div>
+            )}
+          </div>
+        )}
+        {router == "Tracker" && (
+          <div className="flex mb-10">
+            <div className="flex items-center gap-2 w-50 h-50">
+              <span className="w-7 h-8 bg-red-500 rounded-sm" />
+              <span className="text-xs text-red-500">Misplaced</span>
             </div>
-          )}
-        </div>}
-        {router == "Tracker" && <div className="flex mb-10">
-    <div className="flex items-center gap-2 w-50 h-50">
-      <span className="w-7 h-8 bg-red-500 rounded-sm" />
-      <span className="text-xs text-red-500">Misplaced</span>
-    </div>
-    <div className="flex items-center gap-2 ml-3">
-      <span className="w-7 h-8 bg-green-500 rounded-sm" />
-      <span className="text-xs text-green-500">Staged</span>
-    </div>
-    <div className="flex items-center gap-2 ml-3">
-      <span className="w-7 h-8 bg-yellow-500 rounded-sm" />
-      <span className="text-xs text-yellow-500">Untagged</span>
-    </div>
-    <div className="flex items-center gap-2 ml-3">
-      <span className="w-7 h-8 bg-indigo-800 rounded-sm" />
-      <span className="text-xs text-indigo-800">Finalized</span>
-    </div>
-  </div>}
+            <div className="flex items-center gap-2 ml-3">
+              <span className="w-7 h-8 bg-green-500 rounded-sm" />
+              <span className="text-xs text-green-500">Staged</span>
+            </div>
+            <div className="flex items-center gap-2 ml-3">
+              <span className="w-7 h-8 bg-yellow-500 rounded-sm" />
+              <span className="text-xs text-yellow-500">Untagged</span>
+            </div>
+            <div className="flex items-center gap-2 ml-3">
+              <span className="w-7 h-8 bg-indigo-800 rounded-sm" />
+              <span className="text-xs text-indigo-800">Finalized</span>
+            </div>
+          </div>
+        )}
+        { router == "Tracker" &&
+          <button
+            className="bg-red-800 w-28 rounded-md text-white text-xs h-8 mb-10"
+            onClick={() => resetHandler()}
+          >
+            Sorting Reset
+            <i className="fas fa-sync-alt text-white ml-2"></i>
+          </button>
+        }
         {showDatePicker && (
           <div className="flex mb-8">
             <DateTimePicker
@@ -389,9 +437,19 @@ export default function Header2({
             </DateTimePicker>
           </div>
         )}
-        
+       { showLaneCount && 
+       <div className="flex flex-row">
+       <span className="flex mt-3">Reset Time:</span>
+        <div className="loader-animated-container mb-10">
+          
+          <div
+            className="loader-animated-progress"
+            style={progressBarStyle}
+          ></div>
+          <span className="relative left-5 top-3">{progress}</span>
+        </div>
+        </div>}
       </div>
-      
     </div>
   );
 }

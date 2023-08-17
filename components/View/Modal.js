@@ -15,7 +15,8 @@ export default function ModalPopUp({
   AggregatePendingData,
   AggregateRealTimeData,
   AggregateProcessedData,
-  skeletonLoader
+  skeletonLoader,
+  finalizedData
 }) {
   const options = {
     year: "numeric",
@@ -263,25 +264,18 @@ export default function ModalPopUp({
           </div>
         )}
         {listData && (
-          <div className="flex flex-col ">
+          <div className="flex flex-col">
             <div>
               <h5 className="text-center   text-xl">Monotainer ID's</h5>
             </div>
+            {finalizedData ?
             <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
               {listData
                 ?.sort((a, b) => a.index - b.index)
                 .map((data1, index) => {
                   return (
                     <button
-                      className={`${
-                        data1.ifmisplaced
-                          ? "text-red-800 red-button"
-                          : data1.ifuntagged
-                          ? "text-yellow-500 yellow-button"
-                          : data1.iffinalized
-                          ? "text-indigo-700 blue-button"
-                          : " text-green-700 green-button"
-                      } border px-2 py-2 rounded-lg h-10 `}
+                      className={`text-indigo-700 blue-button border px-2 py-2 rounded-lg h-10 `}
                       key={data1.index}
                       onClick={() => {
                         openTableModal(data1);
@@ -292,7 +286,34 @@ export default function ModalPopUp({
                     </button>
                   );
                 })}
-            </div>
+            </div>:
+            <div className="grid grid-cols-5 gap-3 mt-5 max-h-80 overflow-auto p-5">
+            {listData
+              ?.sort((a, b) => a.index - b.index)
+              .map((data1, index) => {
+                return (
+                  <button
+                    className={`${
+                      data1.ifmisplaced
+                        ? "text-red-800 red-button"
+                        : data1.ifuntagged
+                        ? "text-yellow-500 yellow-button"
+                        : data1.iffinalized
+                        ? "text-indigo-700 blue-button"
+                        : " text-green-700 green-button"
+                    } border px-2 py-2 rounded-lg h-10 `}
+                    key={data1.index}
+                    onClick={() => {
+                      openTableModal(data1);
+                      // closeModal2();
+                    }}
+                  >
+                    {data1.monotainer_id}
+                  </button>
+                );
+              })}
+          </div>
+            }
           </div>
         )}
         {tableData && (

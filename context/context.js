@@ -7,8 +7,9 @@ function Context({ children }) {
     const [drpdwnVaue, setdrpdwnVaue] = useState('');
     const [loginData,setLoginData] = useState({});
     const [laneNames, setLaneNames] = useState('');
+    const [resetLoader,setResetLoader] = useState('');
     return (
-      <value_data.Provider value={{ value, setValue,drpdwnVaue, setdrpdwnVaue,loginData,setLoginData, setLaneNames, laneNames}}>
+      <value_data.Provider value={{ value, setValue,drpdwnVaue, setdrpdwnVaue,loginData,setLoginData, setLaneNames, laneNames,resetLoader,setResetLoader}}>
         {children}
       </value_data.Provider>
     );
