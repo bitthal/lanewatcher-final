@@ -459,7 +459,7 @@ export default function Finalized({
 
           <button
             className={`${
-              data.pending.total_monotainers === 0 ? "disabled cursor-not-allowed" : ""
+              data.finalized.total_monotainers === 0 ? "disabled cursor-not-allowed" : ""
             }
               bg-[#434190] rounded-md px-2 py-1 text-white text-sm   text-xs
               `}
