@@ -75,6 +75,7 @@ export default function Pending({ show, data,resetLoader }) {
   };
 
   const handleDropdownEditCancel = () => {
+    setDropdownStates({});
     setIsDropdownOpen1(false); // Close the dropdown after submission
   };
 
@@ -165,7 +166,7 @@ export default function Pending({ show, data,resetLoader }) {
                       />
                     </div>
                   )}
-                  {isDropdownValueShow &&
+                 {isDropdownValueShow &&
                     selectedDropdownValue === data1.monotainer_id && (
                       <div>
                         {isDropdownValues.map((data1) => (
@@ -185,7 +186,7 @@ export default function Pending({ show, data,resetLoader }) {
                                   <input
                                     type="checkbox"
                                     checked={
-                                      data1.iffinalized &&
+                                      data1.iffinalized ||
                                       dropdownStates[data1.monotainer_id]
                                         ?.iffinalized
                                         ? true
@@ -218,7 +219,7 @@ export default function Pending({ show, data,resetLoader }) {
                                     }`}
                                   >
                                     Finalized :
-                                    {data1.iffinalized && dropdownStates[data1]?.iffinalized ? (
+                                    {data1.iffinalized || dropdownStates[data1.monotainer_id]?.iffinalized ? (
                                       <i className="fas fa-toggle-on text-green-500" />
                                     ) : (
                                       <i className="fas fa-toggle-off text-red-500" />
@@ -230,7 +231,7 @@ export default function Pending({ show, data,resetLoader }) {
                                     type="checkbox"
                                     
                                     checked={
-                                      data1.ifmisplaced &&
+                                      data1.ifmisplaced ||
                                       dropdownStates[data1.monotainer_id]
                                         ?.ifmisplaced
                                         ? true
@@ -263,7 +264,7 @@ export default function Pending({ show, data,resetLoader }) {
                                     }`}
                                   >
                                     Misplaced :
-                                    {data1.ifmisplaced && dropdownStates[data1]?.ifmisplaced ? (
+                                    {data1.ifmisplaced || dropdownStates[data1.monotainer_id]?.ifmisplaced ? (
                                       <i className="fas fa-toggle-on text-green-500" />
                                     ) : (
                                       <i className="fas fa-toggle-off text-red-500" />
@@ -274,7 +275,7 @@ export default function Pending({ show, data,resetLoader }) {
                                   <input
                                     type="checkbox"
                                     checked={
-                                      data1.ifprocessed &&
+                                      data1.ifprocessed ||
                                       dropdownStates[data1.monotainer_id]
                                         ?.ifprocessed
                                         ? true
@@ -307,7 +308,7 @@ export default function Pending({ show, data,resetLoader }) {
                                     }`}
                                   >
                                     Processed :
-                                    {data1.ifprocessed &&
+                                    {data1.ifprocessed ||
                                     dropdownStates[data1.monotainer_id]
                                       ?.ifprocessed ? (
                                       <i className="fas fa-toggle-on text-green-500" />
@@ -320,9 +321,9 @@ export default function Pending({ show, data,resetLoader }) {
                                   <input
                                     type="checkbox"
                                     checked={
-                                      data1.ifuntagged &&
+                                      data1.ifstaged ||
                                       dropdownStates[data1.monotainer_id]
-                                        ?.ifuntagged
+                                        ?.ifstaged
                                         ? true
                                         : false
                                     }
@@ -331,9 +332,9 @@ export default function Pending({ show, data,resetLoader }) {
                                         ...prevState,
                                         [data1.monotainer_id]: {
                                           ...prevState[data1.monotainer_id],
-                                          ifuntagged:
+                                          ifstaged:
                                             !prevState[data1.monotainer_id]
-                                              ?.ifuntagged,
+                                              ?.ifstaged,
                                         },
                                       }));
                                     }}
@@ -352,10 +353,10 @@ export default function Pending({ show, data,resetLoader }) {
                                         : ""
                                     }`}
                                   >
-                                    Untagged :{" "}
-                                    {data1.ifuntagged &&
+                                    Staged :
+                                    {data1.ifstaged ||
                                     dropdownStates[data1.monotainer_id]
-                                      ?.ifuntagged ? (
+                                      ?.ifstaged ? (
                                       <i className="fas fa-toggle-on text-green-500" />
                                     ) : (
                                       <i className="fas fa-toggle-off text-red-500" />
@@ -391,7 +392,7 @@ export default function Pending({ show, data,resetLoader }) {
                                           ].iffinalized = false;
                                           updatedStates[
                                             data1.monotainer_id
-                                          ].misplaced = false;
+                                          ].ifmisplaced = false;
                                           updatedStates[
                                             data1.monotainer_id
                                           ].ifprocessed = false;

@@ -174,7 +174,7 @@ export default function Finalized({
                                   <input
                                     type="checkbox"
                                     checked={
-                                      data1.iffinalized &&
+                                      data1.iffinalized ||
                                       dropdownStates[data1.monotainer_id]
                                         ?.iffinalized
                                         ? true
@@ -207,7 +207,7 @@ export default function Finalized({
                                     }`}
                                   >
                                     Finalized :
-                                    {data1.iffinalized && dropdownStates[data1]?.iffinalized ? (
+                                    {data1.iffinalized || dropdownStates[data1.monotainer_id]?.iffinalized ? (
                                       <i className="fas fa-toggle-on text-green-500" />
                                     ) : (
                                       <i className="fas fa-toggle-off text-red-500" />
@@ -219,7 +219,7 @@ export default function Finalized({
                                     type="checkbox"
                                     
                                     checked={
-                                      data1.ifmisplaced &&
+                                      data1.ifmisplaced ||
                                       dropdownStates[data1.monotainer_id]
                                         ?.ifmisplaced
                                         ? true
@@ -252,7 +252,7 @@ export default function Finalized({
                                     }`}
                                   >
                                     Misplaced :
-                                    {data1.ifmisplaced && dropdownStates[data1]?.ifmisplaced ? (
+                                    {data1.ifmisplaced || dropdownStates[data1.monotainer_id]?.ifmisplaced ? (
                                       <i className="fas fa-toggle-on text-green-500" />
                                     ) : (
                                       <i className="fas fa-toggle-off text-red-500" />
@@ -263,7 +263,7 @@ export default function Finalized({
                                   <input
                                     type="checkbox"
                                     checked={
-                                      data1.ifprocessed &&
+                                      data1.ifprocessed ||
                                       dropdownStates[data1.monotainer_id]
                                         ?.ifprocessed
                                         ? true
@@ -296,7 +296,7 @@ export default function Finalized({
                                     }`}
                                   >
                                     Processed :
-                                    {data1.ifprocessed &&
+                                    {data1.ifprocessed ||
                                     dropdownStates[data1.monotainer_id]
                                       ?.ifprocessed ? (
                                       <i className="fas fa-toggle-on text-green-500" />
@@ -309,9 +309,9 @@ export default function Finalized({
                                   <input
                                     type="checkbox"
                                     checked={
-                                      data1.ifuntagged &&
+                                      data1.ifstaged ||
                                       dropdownStates[data1.monotainer_id]
-                                        ?.ifuntagged
+                                        ?.ifstaged
                                         ? true
                                         : false
                                     }
@@ -320,9 +320,9 @@ export default function Finalized({
                                         ...prevState,
                                         [data1.monotainer_id]: {
                                           ...prevState[data1.monotainer_id],
-                                          ifuntagged:
+                                          ifstaged:
                                             !prevState[data1.monotainer_id]
-                                              ?.ifuntagged,
+                                              ?.ifstaged,
                                         },
                                       }));
                                     }}
@@ -341,10 +341,10 @@ export default function Finalized({
                                         : ""
                                     }`}
                                   >
-                                    Untagged :{" "}
-                                    {data1.ifuntagged &&
+                                    Staged :
+                                    {data1.ifstaged ||
                                     dropdownStates[data1.monotainer_id]
-                                      ?.ifuntagged ? (
+                                      ?.ifstaged ? (
                                       <i className="fas fa-toggle-on text-green-500" />
                                     ) : (
                                       <i className="fas fa-toggle-off text-red-500" />
@@ -380,7 +380,7 @@ export default function Finalized({
                                           ].iffinalized = false;
                                           updatedStates[
                                             data1.monotainer_id
-                                          ].misplaced = false;
+                                          ].ifmisplaced = false;
                                           updatedStates[
                                             data1.monotainer_id
                                           ].ifprocessed = false;
