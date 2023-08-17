@@ -111,8 +111,9 @@ export default function Processed({ show, data,showDashboardView,resetLoader }) 
           {
             <div className="flex flex-col items-center text-center gap-4">
               <div className="flex items-center text-center justify-between gap-4">
-                <div className="flex flex-col mt-2"><i className="fa-solid fa-cart-shopping text-indigo-800" />
-                <span className="  text-gray-400 text-xs justify-between lane-1">
+                <div className="flex flex-col">
+                  {/* <i className="fa-solid fa-cart-shopping text-indigo-800" /> */}
+                <span className="text-gray-400 text-xs justify-between lane-1">
               Lane In
             </span></div>
                 
