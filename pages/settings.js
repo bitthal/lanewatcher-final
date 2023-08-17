@@ -261,7 +261,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                 </select>
               </div>
               <button
-                className="bg-[#434190] w-24 rounded-md text-white text-xs h-8"
+                className="bg-[#434190] w-24 rounded-md text-white text-xs h-8 mt-8"
                 onClick={() => resetHandler()}
               >
                 Reset
