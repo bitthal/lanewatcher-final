@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useRef, useState, useContext, useEffect } from "react";
+import Toaster from "./Toaster";
 import DateTimePicker from "react-tailwindcss-datetimepicker";
 import moment from "moment";
 import Image from "next/image";
@@ -19,6 +20,9 @@ export default function Header2({
   // onSearch
   progress
 }) {
+  const handleCloseToaster = () => {
+    setErrors(null); // Clear the toaster message
+  };
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
     useRouter().pathname.replace(/\//, "").slice(1);
@@ -34,8 +38,10 @@ export default function Header2({
   const [tempSelectedOptions, setTempSelectedOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isDropdownOpenLane, setIsDropdownOpenLane] = useState(false);
+  const [error, setErrors] = useState(null);
   const { laneNames } = useContext(value_data);
   const { resetLoader,setResetLoader } = useContext(value_data);
+
   // const [progress, setProgress] = useState(0);
 
   // useEffect(() => {
@@ -201,11 +207,16 @@ export default function Header2({
   }
   const resetHandler = ()=>{
     setResetLoader(true);
-    console.log('reset');
-  
-    setTimeout(() => {
-      setResetLoader(false);
-    }, 2000); // 2000 milliseconds = 2 seconds
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL_RESET}`, {
+      })
+      .then((response) => {
+        setResetLoader(false);
+      }).catch((error) => {
+        console.error("API error:", error);
+        setResetLoader(false);
+        setErrors("API error")
+      });
   }
   return (
     <div className={`mt-5 w-full flex flex-col lg:flex-row justify-between`}>
@@ -401,7 +412,7 @@ export default function Header2({
           </button>
         }
         {showDatePicker && (
-          <div className="flex mb-8">
+          <div className="flex mb-10">
             <DateTimePicker
               primaryColor="fuchsia"
               ranges={ranges}
@@ -439,17 +450,19 @@ export default function Header2({
         )}
        { showLaneCount && 
        <div className="flex flex-row">
-       <span className="flex mt-3">Reset Time:</span>
+       <span className="flex mt-3">Refereshing:</span>
         <div className="loader-animated-container mb-10">
           
           <div
-            className="loader-animated-progress"
+            className="loader-animated-progress mt-3"
             style={progressBarStyle}
           ></div>
-          <span className="relative left-5 top-3">{progress}</span>
+          <span className="relative left-2 top-3">{progress}</span>
         </div>
         </div>}
       </div>
+      <Toaster message={error} onClose={handleCloseToaster}/>
     </div>
+    
   );
 }
