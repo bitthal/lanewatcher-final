@@ -109,7 +109,7 @@ export default function ModalPopUp({
             <div className="overflow-y-auto border">
               {alertsTableData && (
                 <table className="min-w-full divide-y divide-gray-200 border-collapse border border-black">
-                  <thead className="bg-indigo-900">
+                  <thead className="bg-[#2a2e67]">
                     <tr>
                       <th
                         scope="col"
@@ -198,14 +198,14 @@ export default function ModalPopUp({
               )}
               <div className="flex justify-center mt-4">
                 <button
-                  className="mx-1 p-2 bg-gray-300 rounded-md text-white hover:bg-indigo-900 hover:text-white"
+                  className="mx-1 p-2 bg-gray-300 rounded-md text-white hover:bg-[#2a2e67] hover:text-white"
                   disabled={currentPage === 1}
                   onClick={() => setCurrentPage(1)}
                 >
                   <i className="fa fa-step-backward text-white"></i>
                 </button>
                 <button
-                  className="mx-1 p-2 bg-gray-300 rounded-md text-white hover:bg-indigo-900 hover:text-white"
+                  className="mx-1 p-2 bg-gray-300 rounded-md text-white hover:bg-[#2a2e67] hover:text-white"
                   disabled={currentPage === 1}
                   onClick={() => setCurrentPage(currentPage - 1)}
                 >
@@ -225,7 +225,7 @@ export default function ModalPopUp({
                         className={`mx-1 p-2 ${
                           currentPage === index + 1
                             ? "bg-gray-300 text-white"
-                            : "bg-gray-300 text-white hover:bg-indigo-900 hover:text-white"
+                            : "bg-gray-300 text-white hover:bg-[#2a2e67] hover:text-white"
                         } rounded-md`}
                         onClick={() => setCurrentPage(index + 1)}
                       >
@@ -246,14 +246,14 @@ export default function ModalPopUp({
                   return null;
                 })}
                 <button
-                  className="mx-1 p-2 bg-gray-300 text-white rounded-md hover:bg-indigo-900 hover:text-white"
+                  className="mx-1 p-2 bg-gray-300 text-white rounded-md hover:bg-[#2a2e67] hover:text-white"
                   disabled={currentPage === totalPages}
                   onClick={() => setCurrentPage(currentPage + 1)}
                 >
                   <i className="fa fa-chevron-right text-white"></i>
                 </button>
                 <button
-                  className="mx-1 p-2 bg-gray-300 rounded-md text-white hover:bg-indigo-900 hover:text-white"
+                  className="mx-1 p-2 bg-gray-300 rounded-md text-white hover:bg-[#2a2e67] hover:text-white"
                   disabled={currentPage === totalPages}
                   onClick={() => setCurrentPage(totalPages)}
                 >
@@ -321,7 +321,7 @@ export default function ModalPopUp({
             <h5 className="text-center text-md">History</h5>
             <h6 className="text-center text-sm text-primary2">{tempName}</h6>
             <table className="min-w-full border-collapse border border-black">
-              <thead className="bg-indigo-900">
+              <thead className="bg-[#2a2e67]">
                 <tr>
                   <th
                     scope="col"
@@ -531,7 +531,7 @@ export default function ModalPopUp({
 
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-indigo-900">
+                <thead className="bg-[#2a2e67]">
                   {/* Add custom-thead class here */}
                   <tr>
                     <th className="px-6 py-3 text-xs   text-left text-white uppercase">

@@ -118,7 +118,7 @@ export default function Pending({ show, data,resetLoader }) {
           </svg>
           <p className="  text-primary2 text-lg">Pending</p>
 
-          <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
+          <p className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
             {data?.pending?.total_monotainers}
           </p>
         </div>

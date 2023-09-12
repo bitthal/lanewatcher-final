@@ -283,7 +283,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                     
                     
                       <table className="min-w-full divide-y divide-gray-200">
-                        <thead className=" bg-indigo-900">
+                        <thead className=" bg-[#2a2e67]">
                           <tr className="">
                             <th
                               scope="col"
@@ -374,7 +374,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                   </div>
                   <div className="flex">
                     <button
-                      className="mt-10 mb-10 mr-20 bg-transparent hover:bg-indigo-900 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded h-10"
+                      className="mt-10 mb-10 mr-20 bg-transparent hover:bg-[#2a2e67] text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded h-10"
                       onClick={addFields}
                     >
                       Add
@@ -461,7 +461,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                                     </p>
                                   )}
                                   <button
-                                    className="w-3/6 my-1 bg-transparent text-blue-800 border-blue-800 hover:bg-indigo-900 hover:text-white  bg-indigo-900 font-semibold py-2 px-4 border hover:border-transparent"
+                                    className="w-3/6 my-1 bg-transparent text-blue-800 border-blue-800 hover:bg-[#2a2e67] hover:text-white  bg-[#2a2e67] font-semibold py-2 px-4 border hover:border-transparent"
                                     type="submit"
                                   >
                                     Submit

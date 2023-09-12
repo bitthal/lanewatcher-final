@@ -113,7 +113,7 @@ const Skeleton = ({data}) => {
               </svg>
               <p className="  text-primary2 text-lg">Pending</p>
 
-              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
+              <p className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
                 {data?.pending?.total_monotainers}
               </p>
             </div>
@@ -492,7 +492,7 @@ const Skeleton = ({data}) => {
             </div>
             <p className="text-primary2 flex justify-content text-lg">
               Real Time View
-              <span className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-lg   shadow-blue ml-4">
+              <span className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-lg   shadow-blue ml-4">
                 0
               </span>
             </p>
@@ -542,7 +542,7 @@ const Skeleton = ({data}) => {
             <div className="flex items-center text-center justify-between gap-4">
               <div className="w-16 h-19 bg-gray-300 animate-pulse"></div>
               <p className="text-primary2 text-lg">Processing</p>
-              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl shadow-blue animate-pulse">
+              <p className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-xl shadow-blue animate-pulse">
                 0
               </p>
             </div>
@@ -586,7 +586,7 @@ const Skeleton = ({data}) => {
             <div className="flex items-center text-center justify-between gap-4">
               <div className="w-16 h-19 bg-gray-300 animate-pulse"></div>
               <p className="text-primary2 text-lg">Finalized</p>
-              <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl shadow-blue animate-pulse">
+              <p className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-xl shadow-blue animate-pulse">
                 0
               </p>
             </div>

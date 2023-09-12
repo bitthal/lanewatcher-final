@@ -111,7 +111,7 @@ export default function Finalized({ show, data, resetLoader }) {
                 <i className="fa-solid fa-cart-shopping text-indigo-800" />
                 <p className="  text-primary2 text-lg">Finalized</p>
 
-                <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
+                <p className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
                   {data?.finalized?.monotainers.length}
                 </p>
               </div>
