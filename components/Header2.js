@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useRef, useState, useContext, useEffect } from "react";
+import React, { useRef, useState, useContext, useEffect,Fragment } from "react";
 import Toaster from "./Toaster";
 import DateTimePicker from "react-tailwindcss-datetimepicker";
 import moment from "moment";
@@ -219,8 +219,8 @@ export default function Header2({
       });
   }
   return (
-    <div className={`mt-5 w-full flex flex-col lg:flex-row justify-between`}>
-      <div className="flex flex-col lg:flex-row items-center gap-8">
+    <Fragment>
+      <div className="mt-5 flex flex-col lg:flex-row items-center gap-8 justify-between">
         <div className="gap-4 mb-4 lg:mb-0">
           {showSearchBar && (
             <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded w-full lg:w-116 z-9">
@@ -462,7 +462,7 @@ export default function Header2({
         </div>}
       </div>
       <Toaster message={error} onClose={handleCloseToaster}/>
-    </div>
+    </Fragment>
     
   );
 }

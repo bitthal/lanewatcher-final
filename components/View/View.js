@@ -16,15 +16,15 @@ export default function View({ show, data, showRealTimeView,showDashboardView,sh
   return (
     <Fragment>
     {!resetLoader ? 
-    <div>
+    
       <div className="flex overflow-ellipsis">
         <div className="bg-[#F4F3F8] flex items-center p-5 rounded-xl relative">
         {loader && 
         <div>
         <div className="loader-border-pulse top"></div>
-      <div className="loader-border-pulse right"></div>
-      <div className="loader-border-pulse bottom"></div>
-      <div className="loader-border-pulse left"></div>
+        <div className="loader-border-pulse right"></div>
+        <div className="loader-border-pulse bottom"></div>
+        <div className="loader-border-pulse left"></div>
       </div>}
           <Pending showDashboardView={showDashboardView} show={show} data={data} resetLoader={resetLoader}/>
           <Arrow />
@@ -39,7 +39,7 @@ export default function View({ show, data, showRealTimeView,showDashboardView,sh
           
         </div>
       </div>
-    </div> : 
+     : 
     <Skeleton data={data}></Skeleton>}
     </Fragment>
   );
