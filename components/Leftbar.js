@@ -13,7 +13,7 @@ export default function Leftbar({ show, setShow }) {
 
   return (
     <div
-      className={`sidebar border rounded-r-2xl shadow-2xl absolute z-10 bg-white ${
+      className={`sidebar border rounded-r-2xl shadow-2xl absolute z-1 bg-white ${
         show ? "w-20" : "w-40"
       } border rounded-r-2xl shadow-xl pt-5`}
     >

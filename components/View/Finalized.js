@@ -112,7 +112,7 @@ export default function Finalized({ show, data, resetLoader }) {
                 <p className="  text-primary2 text-lg">Finalized</p>
 
                 <p className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
-                  {data?.finalized?.monotainers.length}
+                  {data?.finalized?.monotainers?.length ? data?.finalized?.monotainers?.length : '0'}
                 </p>
               </div>
 
@@ -489,7 +489,7 @@ export default function Finalized({ show, data, resetLoader }) {
                   </div>
 
                   <span className="text-sm text-gray-500">
-                    {page}&nbsp;out&nbsp;of&nbsp;{totalPages}
+                    {page}&nbsp;out&nbsp;of&nbsp;{totalPages?totalPages:'0'}
                   </span>
                   <div
                     className="w-6 h-6 rounded-full border bg-gray-200 cursor-pointer"
@@ -505,7 +505,7 @@ export default function Finalized({ show, data, resetLoader }) {
 
                 <button
                   className={`${
-                    data?.finalized?.total_monotainers === 0
+                    data?.finalized?.total_monotainers? data?.finalized?.total_monotainers : 0 === 0
                       ? "disabled cursor-not-allowed"
                       : ""
                   }
