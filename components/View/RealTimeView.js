@@ -240,7 +240,7 @@ export default function RealTimeView({ data, allData,resetLoader }) {
             </div>
             <p className="text-primary2 flex justify-content text-lg">
               Real Time View
-              <span className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-lg   shadow-blue ml-4">
+              <span className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-lg   shadow-blue ml-4">
                 0
               </span>
             </p>
@@ -372,7 +372,7 @@ export default function RealTimeView({ data, allData,resetLoader }) {
           </div> */}
           <p className="  text-primary2 flex justify-content text-lg">
             Real Time View
-            <span className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-lg   shadow-blue ml-4">
+            <span className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-lg   shadow-blue ml-4">
               {data?.real_time_positions?.total_monotainers}
             </span>
           </p>

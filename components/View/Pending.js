@@ -100,8 +100,7 @@ export default function Pending({ show, data,resetLoader }) {
   };
   return (
     <>
-      
-      <div className={`${show ? "h-96" : "h-96"} bg-white rounded-xl p-5`}>
+      <div className={`h-96 bg-white rounded-xl p-5`}>
       <div className="flex flex-col items-center text-center  gap-5">
         <div className="flex items-center text-center justify-between gap-4">
           <svg
@@ -118,7 +117,7 @@ export default function Pending({ show, data,resetLoader }) {
           </svg>
           <p className="  text-primary2 text-lg">Pending</p>
 
-          <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
+          <p className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
             {data?.pending?.total_monotainers}
           </p>
         </div>

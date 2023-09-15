@@ -104,14 +104,14 @@ export default function Finalized({ show, data, resetLoader }) {
       {resetLoader ? (
         <Skeleton finalizedData={true} resetLoader={resetLoader}></Skeleton>
       ) : (
-        <div className={`${show ? "h-96" : "h-96"} bg-white rounded-xl p-5`}>
+        <div className={`h-96 bg-white rounded-xl p-5`}>
           {
             <div className="flex flex-col items-center text-center gap-5">
               <div className="flex items-center text-center justify-between gap-4">
                 <i className="fa-solid fa-cart-shopping text-indigo-800" />
                 <p className="  text-primary2 text-lg">Finalized</p>
 
-                <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
+                <p className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
                   {data?.finalized?.monotainers.length}
                 </p>
               </div>
@@ -505,7 +505,7 @@ export default function Finalized({ show, data, resetLoader }) {
 
                 <button
                   className={`${
-                    data.finalized.total_monotainers === 0
+                    data?.finalized?.total_monotainers === 0
                       ? "disabled cursor-not-allowed"
                       : ""
                   }
@@ -524,7 +524,7 @@ export default function Finalized({ show, data, resetLoader }) {
       )}
       {listModalOpen && (
         <ModalPopUp
-          listData={data.finalized.monotainers}
+          listData={data?.finalized.monotainers}
           finalizedData={true}
           openTableModalBox={openTableModalBox}
           modalState={listModalOpen}

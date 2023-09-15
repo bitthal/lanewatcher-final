@@ -119,7 +119,7 @@ export default function Processed({ show, data,showDashboardView,resetLoader }) 
                 
                 <p className="  text-primary2 text-lg">Processing</p>
 
-                <p className="rounded-full border border-indigo-900 bg-indigo-900 w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
+                <p className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
                   {data?.processed?.monotainers.length}
 
                 </p>
