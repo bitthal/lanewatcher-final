@@ -405,7 +405,7 @@ export default function Leftbar({ show, setShow }) {
             }`}
           >
             <Link
-              href="/logout"
+              href="/"
               className={`${!show ? "w-32" : "w-auto"}`}
               onClick={handleLogout}
             >
