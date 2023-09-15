@@ -142,7 +142,7 @@ function Tracker({
   return (
     <>
       <div className="flex gap-5 my-3 mr-3 h-auto">
-        <Leftbar show={show} setShow={setShow} />
+        {/* <Leftbar show={show} setShow={setShow} /> */}
         <div className="w-full flex-grow max-w-[90vw] lg:w-[80%]! xl:w-[70%]!">
           <div className={`w-full`}>
             <Header2

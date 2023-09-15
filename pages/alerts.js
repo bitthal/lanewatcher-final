@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Leftbar from "@/components/Leftbar";
 import Header2 from "@/components/Header2";
+import Toaster from "@/components/Toaster";
 import axios from "axios";
 import { value_data } from "@/context/context";
 import withAuth from "@/utils/withAuth";
@@ -13,6 +14,7 @@ function Alert({}) {
   const [alertList, setAlerts] = useState("");
   const [ loader , setLoader] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [error, setErrors] = useState(null);
   const itemsPerPage = 5; // Number of items to display per page
   const totalItems = alertList.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -29,6 +31,9 @@ function Alert({}) {
     minute: "2-digit",
     second: "2-digit",
     timeZoneName: "short",
+  };
+  const handleCloseToaster = () => {
+    setErrors(null); // Clear the toaster message
   };
   const fetchData = async () => {
     try {
@@ -47,20 +52,25 @@ function Alert({}) {
     await axios
       .get(`${process.env.NEXT_PUBLIC_ALERTS_API_URL}`, {
         params: {
-          site_id: value ? value.site_id : drpdwnVaue[0].site_id,
+          site_id: value ? value?.site_id : drpdwnVaue[0]?.site_id,
         },
       })
       .then((response) => {
-        const mapped = response.data.dlist.flatMap(
-          ({ alerts, key_str, sorting_timestamp, id, description }) =>
-            alerts.map((alerts) => ({
-              alerts,
-              key_str,
-              sorting_timestamp,
-              id,
-              description,
-            }))
-        );
+        console.log(response.data.dlist,'re')
+        const mapped = response?.data?.dlist
+        // .flatMap(
+          
+        //   ({ alerts, key_str, sorting_timestamp, id, description }) =>
+          
+        //     alerts.map((alerts) => ({
+              
+        //       alerts,
+        //       key_str,
+        //       sorting_timestamp,
+        //       id,
+        //       description,
+        //     }))
+        // );
 
         // Sort alerts by sorting_timestamp in descending order (newest first)
         const alertSorted = mapped.sort((a, b) => {
@@ -71,6 +81,8 @@ function Alert({}) {
         });
         setLoader(false);
         setAlerts(alertSorted);
+      }).catch((error) => {
+        setErrors("No data available");
       });
   }
 
@@ -89,13 +101,16 @@ function Alert({}) {
           let data = [...alertList];
           data.splice(index, 1);
           setAlerts(data);
-        });
+        })
+        .catch((error) => {
+          setErrors("No data available");
+        });;
     }
   };
 
   return (
     <div className="flex gap-4 my-3 mr-3 h-auto">
-      <Leftbar show={show} setShow={setShow} />
+      {/* <Leftbar show={show} setShow={setShow} /> */}
       <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
         <div className={` w-full`}>
           <Header2 show={show} showSearchBar={false} showDatePicker={false} />
@@ -299,6 +314,7 @@ function Alert({}) {
           </div>
         </div>}
       </div>
+      <Toaster message={error} onClose={handleCloseToaster} />
     </div>
   );
 }

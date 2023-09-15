@@ -57,6 +57,10 @@ module.exports = {
       zIndex: {
         100: "100",
       },
+      margin: {
+        32: "6rem",
+        35: "7rem",
+      },
       boxShadow: {
         "3xl": "0px 8px 25px rgba(0, 0, 0, 0.07)",
         "4xl": "0px 8px 25px rgba(0, 0, 0, 0.04);",

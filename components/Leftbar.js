@@ -13,8 +13,8 @@ export default function Leftbar({ show, setShow }) {
 
   return (
     <div
-      className={`sidebar border rounded-r-2xl shadow-2xl ${
-        !show ? "w-40" : "w-20"
+      className={`sidebar border rounded-r-2xl shadow-2xl absolute z-10 bg-white ${
+        show ? "w-20" : "w-40"
       } border rounded-r-2xl shadow-xl pt-5`}
     >
       <div className="flex justify-center gap-2">

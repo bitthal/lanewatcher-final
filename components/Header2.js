@@ -120,11 +120,10 @@ export default function Header2({
         },
       })
       .then((response) => {
-        console.log("API response:", response.data);
         setIsDropdownOpen1(false); // Close the dropdown after submission
       })
       .catch((error) => {
-        console.error("API error:", error);
+        setErrors("No data available")
       });
   };
   const handleDropdownCancel = () => {
@@ -216,11 +215,12 @@ export default function Header2({
         console.error("API error:", error);
         setResetLoader(false);
         setErrors("API error")
-      });
+      })
+      
   }
   return (
     <Fragment>
-      <div className="mt-5 flex flex-col lg:flex-row items-center gap-8 justify-between">
+      <div className="mt-5 flex items-center gap-8 justify-between ml-32">
         <div className="gap-4 mb-4 lg:mb-0">
           {showSearchBar && (
             <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded w-full lg:w-116 z-9">

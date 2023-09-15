@@ -73,8 +73,8 @@ export default function Index() {
 
   return (
     <Fragment>
-      <div className="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed top-0 z-10  bg-gradient-to-l from-gray-200 to-gray-100">
-        <div className="flex flex-row justify-content w-fit text-center text-red-800  ">
+      <div className="w-full shadow-md p-5 flex justify-between items-center overflow-hidden fixed top-0 z-10 bg-[#2a2e67]">
+        <div className="flex flex-row justify-content w-fit text-center text-white">
             UST Canada Post
         </div>
         <div className="object-contain" >
@@ -87,21 +87,12 @@ export default function Index() {
             />
         </div>
       </div>
-      <div className="m-5 ">
+      <div className="m-16">
         <div className="flex flex-col items-center">
-          {/* <div className="flex items-center text-2xl font-semibold text-gray-900 ">
-            <Image
-              src={Logo}
-              className="object-contain w-40 h-40"
-              alt="logo"
-              width={35}
-              height={35}
-            />
-          </div> */}
           {!loginScreen && (
-            <div className="w-full rounded-lg shadow-md sm:max-w-md mt-8 bg-gradient-to-l from-gray-200 to-gray-100">
+            <div className="w-full rounded-lg shadow-md sm:max-w-md mt-8 bg-[#2a2e67]">
               <div className="p-4 space-y-2 md:space-y-4 sm:p-5">
-                <h1 className="text-xl   leading-tight tracking-tight text-gray-900 md:text-2xl">
+                <h1 className="text-xl leading-tight tracking-tight text-white md:text-2xl">
                   Sign In
                 </h1>
                 <form
@@ -111,7 +102,7 @@ export default function Index() {
                   <div>
                     <label
                       htmlFor="username"
-                      className="block mb-2 text-sm font-medium text-gray-900 "
+                      className="block mb-2 text-sm font-medium text-white "
                     >
                       Your Name
                     </label>
@@ -121,7 +112,7 @@ export default function Index() {
                       name="username"
                       id="username"
                       onChange={(e) => setUsername(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
+                      className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
                       placeholder="name@company.com"
                       required=""
                     />
@@ -129,7 +120,7 @@ export default function Index() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block mb-2 text-sm font-medium text-gray-900 "
+                      className="block mb-2 text-sm font-medium text-white "
                     >
                       Your email
                     </label>
@@ -139,7 +130,7 @@ export default function Index() {
                       name="email"
                       id="email"
                       onChange={(e) => setEmail(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
+                      className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
                       placeholder="name@company.com"
                       required=""
                     />
@@ -147,7 +138,7 @@ export default function Index() {
                   <div >
                     <label
                       htmlFor="password"
-                      className="block mb-2 text-sm font-medium text-gray-900 "
+                      className="block mb-2 text-sm font-medium text-white "
                     >
                       Password
                     </label>
@@ -159,7 +150,7 @@ export default function Index() {
                       id="password"
                       placeholder="••••••••"
                       onChange={(e) => setPassword(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5    "
+                      className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5    "
                       required=""
                     />
                     <FontAwesomeIcon
@@ -188,7 +179,7 @@ export default function Index() {
                       <div className="ml-3 text-sm">
                         <label
                           htmlFor="remember"
-                          className="text-gray-500 "
+                          className="text-white "
                           checked={rememberMe}
                           onChange={() => setRememberMe(!rememberMe)}
                         >
@@ -198,7 +189,7 @@ export default function Index() {
                     </div>
                     <a
                       href="/"
-                      className="text-sm font-medium text-gray-500 hover:underline "
+                      className="text-sm font-medium text-white hover:underline "
                     >
                       Forgot password?
                     </a>
@@ -210,7 +201,7 @@ export default function Index() {
                     Register
                   </button>
                   {/* </Link> */}
-                  <div className="text-sm font-light text-gray-500 ">
+                  <div className="text-sm font-light text-white ">
                     Already have an account ?
                     <p
                       onClick={(e) => showLoginScreen(true)}
@@ -224,9 +215,9 @@ export default function Index() {
             </div>
           )}
           {loginScreen && (
-            <div className="w-full rounded-lg shadow-md sm:max-w-md mt-12 bg-gradient-to-l from-gray-200 to-gray-100">
+            <div className="w-full rounded-lg shadow-md sm:max-w-md mt-12 bg-[#2a2e67]">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 className="text-xl   leading-tight tracking-tight text-gray-900 md:text-2xl ">
+                <h1 className="text-xl   leading-tight tracking-tight text-white md:text-2xl ">
                   Log In
                 </h1>
                 <form
@@ -236,7 +227,7 @@ export default function Index() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block mb-2 text-sm font-medium text-gray-900 "
+                      className="block mb-2 text-sm font-medium text-white "
                     >
                       Your email
                     </label>
@@ -246,7 +237,7 @@ export default function Index() {
                       name="email"
                       id="email"
                       onChange={(e) => setEmail(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
+                      className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
                       placeholder="name@company.com"
                       required=""
                     />
@@ -255,7 +246,7 @@ export default function Index() {
                   <div >
                     <label
                       htmlFor="password"
-                      className="block mb-2 text-sm font-medium text-gray-900 "
+                      className="block mb-2 text-sm font-medium text-white "
                     >
                       Password
                     </label>
@@ -267,7 +258,7 @@ export default function Index() {
                       id="password"
                       placeholder="••••••••"
                       onChange={(e) => setPassword(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 relative   "
+                      className="bg-gray-50 border border-gray-300 text-indigo-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 relative   "
                       required=""
                     />  
                       <FontAwesomeIcon
@@ -295,14 +286,14 @@ export default function Index() {
                         />
                       </div>
                       <div className="ml-3 text-sm">
-                        <label htmlFor="remember" className="text-gray-500 ">
+                        <label htmlFor="remember" className="text-white ">
                           Remember me
                         </label>
                       </div>
                     </div>
                     <a
                       href="/"
-                      className="text-sm font-medium text-gray-500 hover:underline"
+                      className="text-sm font-medium text-white hover:underline"
                     >
                       Forgot password?
                     </a>
@@ -310,15 +301,16 @@ export default function Index() {
 
                   <button
                     type="submit"
-                    className="bg-red-500 w-full flex justify-center mt-10 text-white  bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    className="bg-white w-full flex justify-center mt-10 text-indigo-800 hover:bg-indigo-900 
+                    hover:text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-1.5 text-center dark:bg-indigo-800 dark:hover:bg-indigo-800 dark:focus:ring-primary-800"
                   >
                     Submit
                   </button>
-                  <div className="text-sm font-light text-gray-500 ">
+                  <div className="text-sm font-light text-white ">
                     Don't have an account yet?
                     <p
                       onClick={(e) => (showLoginScreen(false))}
-                      className="font-medium text-primary-600 hover:underline cursor-pointer"
+                      className="font-medium text-white hover:underline cursor-pointer"
                     >
                       Sign up
                     </p>

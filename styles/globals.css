@@ -52,9 +52,6 @@ div#DateRangePickerChildren {
   display: flex;
 }
 
-.top-header{
-  z-index: 9999!important;
-}
 .red-button{
   /* background: linear-gradient(to left, #7700004f, #7700004f); */
   border: 1px solid red;
@@ -410,3 +407,66 @@ div#daterangepicker {
     transform: rotate(360deg);
   }
 }
+
+.top-header {
+  transition: transform 0.3s ease, opacity 0.3s ease; 
+  /* Add smooth transitions for transform and opacity */
+  transform-origin: top;
+  z-index: 9999!important;
+}
+/* In your CSS file or a separate CSS module */
+.mobile-hamburger-icon i {
+  transition: transform 0.3s ease; /* Add a smooth transform transition */
+}
+
+/* Rotate the icon 180 degrees when the menu is open */
+.mobile-hamburger-icon i.rotate-180 {
+  transform: rotate(180deg);
+}
+
+
+
+
+
+
+
+
+/* In your CSS file or a separate CSS module */
+@media (min-width: 770px) {
+  .mobile-hamburger-icon {
+    display: none;
+  }
+  
+}
+
+/* Media query for screens with a maximum width of 768px (adjust as needed) */
+@media screen and (max-width: 768px) {
+  /* Show the mobile menu icon and hide the header elements */
+  #menu-toggle {
+    display: block;
+  }
+  .mobile-menu {
+    display: block; 
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 100;/* Show the menu when "open" class is present */
+  }
+  .mobile-header {
+    position: fixed;
+    height: 88px; /* Initial height of the header */
+    transition: height 0.3s ease;
+    overflow: hidden;
+  }
+  #header-elements {
+    display: none;
+  }
+  /* Show the mobile menu when the menu icon is clicked */
+  #menu-toggle.active + #mobile-menu {
+    display: block;
+  }
+}
+
+
+
