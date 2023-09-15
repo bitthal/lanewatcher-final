@@ -45,7 +45,7 @@ function Settings({}) {
   const [selectedSiteId, setSelectedSiteId] = useState("");
   const [tableData, setTableData] = useState("");
   const [inputFields, setInputFields] = useState([{ email: " ", phone: " " }]);
-  const [resetloading, setLoading] = useState(false);
+  const [resetloading, setLoading] = useState(true);
   const [error, setErrors] = useState(null);
 
   const sortIcons = {
@@ -84,7 +84,11 @@ function Settings({}) {
       .then((response) => {
         setTableData(response.data.result);
         setLoading(false);
-      });
+      })
+      .catch((error) => {
+        setLoading(false);
+        setErrors("No data available");
+      });;
   }
 
   const deleteEmailHandler = (emailId) => {
@@ -98,7 +102,11 @@ function Settings({}) {
       })
       .then(() => {
         setLoading(false);
-      });
+      })
+      .catch((error) => {
+        setLoading(false);
+        setErrors("No data available");
+      });;;
   };
   const AddEmailHandler = (emailId, phoneNo) => {
     setLoading(true);
@@ -132,8 +140,13 @@ function Settings({}) {
           },
           ...tableData,
         ]);
-      });
-    setLoading(false);
+        setLoading(false)
+      })
+      .catch((error) => {
+        setLoading(false);
+        setErrors("No data available");
+      });;;
+    ;
   };
 
   const addFields = () => {
@@ -232,7 +245,6 @@ function Settings({}) {
 
   return (
     <div className="flex gap-4 my-3 mr-3 h-auto mt-32">
-      {resetloading && <Skeleton />}
       <div className="flex">
         <div className="flex flex-col">
           {drpdwnVaue && (
@@ -249,7 +261,7 @@ function Settings({}) {
                   defaultValue={0}
                 >
                   {drpdwnVaue.map((option, index) => (
-                    <option key={option.camera_id} value={index}>
+                    <option key={index} value={index}>
                       {option.site_id}
                     </option>
                   ))}
@@ -308,9 +320,9 @@ function Settings({}) {
                             <option value="" disabled>
                               Select Country
                             </option>
-                            {countries.map((country) => (
+                            {countries.map((country,index) => (
                               <option
-                                key={country.phoneCode}
+                                key={index}
                                 value={country.phoneCode}
                               >
                                 <span className="flex items-center">
@@ -371,7 +383,7 @@ function Settings({}) {
           </div>
         </div>
 
-        {!resetloading && (
+        {!resetloading ? (
               <div className="p-1.5 w-full inline-block align-middle overflow-x-auto">
                 <div className="overflow-hidden rounded-lg">
                 <label>
@@ -470,7 +482,7 @@ function Settings({}) {
                   </table>
                 </div>
               </div>          
-        )}
+        ) : <Skeleton />}
       </div>
       <Toaster message={error} onClose={handleCloseToaster} />
     </div>

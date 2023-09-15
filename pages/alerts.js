@@ -82,13 +82,14 @@ function Alert({}) {
         setLoader(false);
         setAlerts(alertSorted);
       }).catch((error) => {
+        setLoader(false);
         setErrors("No data available");
       });
   }
 
   const handleClaim = (payload, index) => {
-    if (payload.alerts.claimed_status === false) {
-      const key_str = payload.key_str;
+    if (payload?.alerts?.claimed_status === false) {
+      const key_str = payload?.key_str;
       const username = "l7yhyjg";
       axios
         .post(`${process.env.NEXT_PUBLIC_CLAIMNOW_API_URL}`, null, {

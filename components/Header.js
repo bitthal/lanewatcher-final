@@ -79,19 +79,19 @@ export default function Header() {
       })
       .then((response) => {
         const mapped = response.data.dlist
-          .flatMap(
-            ({ alerts, key_str, camera_id, sorting_timestamp, site_id }) =>
-              alerts.map((alerts) => ({
-                alerts,
-                key_str,
-                camera_id,
-                sorting_timestamp,
-                site_id,
-              }))
-          )
-          .filter((data) => {
-            return data.alerts.claimed_status === false;
-          });
+          // .flatMap(
+          //   ({ alerts, key_str, camera_id, sorting_timestamp, site_id }) =>
+          //     alerts.map((alerts) => ({
+          //       alerts,
+          //       key_str,
+          //       camera_id,
+          //       sorting_timestamp,
+          //       site_id,
+          //     }))
+          // )
+          // .filter((data) => {
+          //   return data.alerts.claimed_status === false;
+          // });
         const sortedAlerts = mapped.sort((a, b) => {
           const timestampA = new Date(b.sorting_timestamp).getTime();
           const timestampB = new Date(a.sorting_timestamp).getTime();
@@ -102,6 +102,7 @@ export default function Header() {
         setAlerts(sortedAlerts);
       })
       .catch((error) => {
+        setLoader(false);
         setErrors("No data available");
       });
   }
