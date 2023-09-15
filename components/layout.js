@@ -24,8 +24,8 @@ export default function Layout({ children }) {
       <Leftbar show={show} setShow={setShow}/>
       </div>
       }
-      <div className={`${showHeader ? "" : 'mt-32'} 
-      ${show ? 'transition-max-h duration-700 ml-40' : "transition-max-h duration-700 ml-52"} mt-20`}>
+      <div className={` 
+      ${show && showHeader ? 'ml-32' : !show && showHeader ? "ml-52" : ''} transition-max-h duration-700 mt-20`}>
       {children}
       </div>
       </main>

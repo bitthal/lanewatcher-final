@@ -455,7 +455,7 @@ div#daterangepicker {
   }
   .mobile-header {
     position: fixed;
-    height: 88px; /* Initial height of the header */
+    height: auto; /* Initial height of the header */
     transition: height 0.3s ease;
     overflow: hidden;
   }

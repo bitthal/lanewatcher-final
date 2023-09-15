@@ -109,14 +109,10 @@ function Alert({}) {
   };
 
   return (
-    <div className="flex gap-4 my-3 mr-3 h-auto">
-      {/* <Leftbar show={show} setShow={setShow} /> */}
-      <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
-        <div className={` w-full`}>
-          <Header2 show={show} showSearchBar={false} showDatePicker={false} />
-        </div>
+    <div className="flex gap-4 my-3 mr-3 h-auto mt-32">
         {loader && 
-        <div className="flex flex-col"><div className="animate-pulse h-8 bg-gray-300 rounded w-2/3 mx-auto mb-4"></div>
+        <div className="flex flex-col">
+          <div className="animate-pulse h-8 bg-gray-300 rounded w-2/3 mx-auto mb-4"></div>
             <div className="flex flex-col space-y-4">
               <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
               <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
@@ -128,7 +124,7 @@ function Alert({}) {
         </div>
         </div>}
         {!loader && <div className="flex flex-col page-container">
-        
+
           <div className="overflow-x-auto">
             <div className="p-1.5 w-full inline-block align-middle page-container">
               <div className="overflow-hidden border rounded-lg table-container">
@@ -313,7 +309,6 @@ function Alert({}) {
             </div>
           </div>
         </div>}
-      </div>
       <Toaster message={error} onClose={handleCloseToaster} />
     </div>
   );

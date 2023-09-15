@@ -13,17 +13,17 @@ import Toaster from "@/components/Toaster";
 // Create a Skeleton component
 const Skeleton = () => (
   <div className="flex flex-col min-w-[200px]">
-        <div className="animate-pulse h-8 bg-gray-300 rounded w-2/3 mx-auto mb-4"></div>
-        <div className="flex flex-col space-y-4">
-          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
-          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
-          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
-          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
-          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
-          <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
-          {/* Add more skeleton lines for each row */}
+    <div className="animate-pulse h-8 bg-gray-300 rounded w-2/3 mx-auto mb-4"></div>
+    <div className="flex flex-col space-y-4">
+      <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+      <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+      <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+      <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+      <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+      <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
+      {/* Add more skeleton lines for each row */}
     </div>
-    </div>
+  </div>
 );
 
 function Settings({}) {
@@ -36,7 +36,7 @@ function Settings({}) {
     mode: "onChange",
     defaultValues: {
       email: "",
-      phone: ""
+      phone: "",
     },
   });
   const { drpdwnVaue } = useContext(value_data);
@@ -64,11 +64,11 @@ function Settings({}) {
   async function getEmailListHandler(payload) {
     setLoading(true);
     const site_id = payload
-      ? payload.site_id
+      ? payload?.site_id
       : drpdwnVaue
-      ? drpdwnVaue[0].site_id
+      ? drpdwnVaue[0]?.site_id
       : "";
-    const camera_id = "C001"
+    const camera_id = "C001";
     // payload
     //   ? Object.values(payload.camera_id).toString()
     //   : drpdwnVaue
@@ -96,20 +96,20 @@ function Settings({}) {
           id,
         },
       })
-      .then(()=>{
+      .then(() => {
         setLoading(false);
       });
   };
   const AddEmailHandler = (emailId, phoneNo) => {
     setLoading(true);
     const site_id =
-      selectedSiteId && selectedSiteId.site_id
-        ? selectedSiteId.site_id
-        : drpdwnVaue[0].site_id;
+      selectedSiteId && selectedSiteId?.site_id
+        ? selectedSiteId?.site_id
+        : drpdwnVaue[0]?.site_id;
     const camera_id = "C001";
-      // selectedSiteId && Object.values(selectedSiteId.camera_id).toString()
-      //   ? Object.values(selectedSiteId.camera_id).toString().split(",")[0]
-      //   : Object.values(drpdwnVaue[2].camera_id).toString().split(",")[0];
+    // selectedSiteId && Object.values(selectedSiteId.camera_id).toString()
+    //   ? Object.values(selectedSiteId.camera_id).toString().split(",")[0]
+    //   : Object.values(drpdwnVaue[2].camera_id).toString().split(",")[0];
     const email = emailId;
     const phoneno = phoneNo;
     axios
@@ -118,42 +118,41 @@ function Settings({}) {
           site_id,
           camera_id,
           email,
-          phoneno
+          phoneno,
         },
       })
       .then(() => {
         setTableData([
           {
-            id: tableData.length,
-            site_id: site_id,
-            camera_id: camera_id,
-            emails_list: email,
-            phoneno:phoneNo
-
+            id: tableData?.length,
+            site_id: site_id?site_id:'',
+            camera_id: camera_id?camera_id:'',
+            emails_list: email?email:'',
+            phoneno: phoneNo,
           },
           ...tableData,
         ]);
       });
-      setLoading(false);
+    setLoading(false);
   };
 
   const addFields = () => {
     setShowAddField(true);
-    let newfield = { email: "",phoneno: "" };
+    let newfield = { email: "", phoneno: "" };
     setInputFields([newfield]);
   };
 
   const resetHandler = () => {
     setLoading(true);
     axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL_RESET}`, {
-      })
+      .get(`${process.env.NEXT_PUBLIC_API_URL_RESET}`, {})
       .then((response) => {
         setLoading(false);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.error("API error:", error);
         setLoading(false);
-        setErrors("API error")
+        setErrors("API error");
       });
   };
   const cancelHandler = () => {
@@ -170,7 +169,7 @@ function Settings({}) {
   };
   const removeFields = (index) => {
     let data = [...tableData];
-    let deletData = data.splice(index, 1)
+    let deletData = data.splice(index, 1);
     setTableData(data);
     deleteEmailHandler(deletData);
   };
@@ -202,7 +201,6 @@ function Settings({}) {
       setSortDirection("asc");
     }
   };
-  
 
   const getSortIcon = (column) => {
     if (sortColumn === column) {
@@ -212,36 +210,33 @@ function Settings({}) {
   };
 
   const handleSorting = (column) => {
-    console.log(column,'col')
+    console.log(column, "col");
     handleSort(column);
   };
 
   // Apply sorting to the data
-const sortedItems = [...tableData].sort((a, b) => {
-  const compareResult =
-    sortDirection === "asc"
-      ? a[sortColumn]?.localeCompare(b[sortColumn])
-      : b[sortColumn]?.localeCompare(a[sortColumn]);
-  return compareResult;
-});
+  const sortedItems = [...tableData].sort((a, b) => {
+    const compareResult =
+      sortDirection === "asc"
+        ? a[sortColumn]?.localeCompare(b[sortColumn])
+        : b[sortColumn]?.localeCompare(a[sortColumn]);
+    return compareResult;
+  });
   // State for pagination
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
-// Calculate pagination range for sorted data
-const indexOfLastItem = currentPage * itemsPerPage;
-const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
+  // Calculate pagination range for sorted data
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <>
-      <div className="flex gap-4 my-3 mr-3 h-auto">
-        {/* <Leftbar show={show} setShow={setShow} /> */}
-        <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
-          <div className={` w-full`}>
-            <Header2 show={show} showSearchBar={false} showDatePicker={false} />
-          </div>
+    <div className="flex gap-4 my-3 mr-3 h-auto mt-32">
+      {resetloading && <Skeleton />}
+      <div className="flex">
+        <div className="flex flex-col">
           {drpdwnVaue && (
-            <div className="relative 2xl:max-w-sm mt-10 mb-10 mr-20 justify-between flex">
+            <div className="relative 2xl:max-w-sm mt-10 mb-10 mr-20">
               <div>
                 <label>
                   <h1>
@@ -261,7 +256,7 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                 </select>
               </div>
               <button
-                className="bg-[#434190] w-24 rounded-md text-white text-xs h-8 mt-8"
+                className="bg-[#434190] w-24 rounded-md text-white text-xs h-8 mt-8 ml-3"
                 onClick={() => resetHandler()}
               >
                 Reset
@@ -269,99 +264,202 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
               </button>
             </div>
           )}
-          {
-            resetloading && 
-            (
-              <Skeleton/>
-            )
-          }
           <div>
-            {!resetloading && <div className="flex flex-col">
-              <div className="overflow-x-auto">
-                <div className="p-1.5 w-full inline-block align-middle">
-                  <div className="overflow-hidden border rounded-lg">
-                    
-                    
-                      <table className="min-w-full divide-y divide-gray-200">
-                        <thead className=" bg-[#2a2e67]">
-                          <tr className="">
-                            <th
-                              scope="col"
-                              className="px-6 py-3 text-xs   text-center text-white uppercase "
-                              onClick={() => handleSorting("id")}
-                            >
-                              ID {getSortIcon("id")}
-                            </th>
-                            <th
-                              scope="col"
-                              className="px-6 py-3 text-xs   text-center text-white uppercase "
-                              onClick={() => handleSorting("site_id")}
-                            >
-                              SITE ID {getSortIcon("site_id")}
-                            </th>
-                            <th
-                              scope="col"
-                              className="px-6 py-3 text-xs   text-center text-white uppercase "
-                              onClick={() => handleSorting("Email")}
-                            >
-                              Email {getSortIcon("Email")}
-                            </th>
-                            <th
-                              scope="col"
-                              className="px-6 py-3 text-xs   text-center text-white uppercase "
-                              onClick={() => handleSorting("Phone")}
-                            >
-                              Phone {getSortIcon("Phone")}
-                            </th>
-                            <th
-                              scope="col"
-                              className="px-6 py-3 text-xs   text-center text-white uppercase "
-                            >
-                              Action
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-200 bg-white-100">
-                          {currentItems && currentItems.length > 0 && !resetloading  ? (
-                            currentItems?.map((data, index) => {
-                              return (
-                                <tr>
-                                  <td className="px-6 py-4 text-sm text-center font-medium text-gray-800 whitespace-nowrap">
-                                    {index}
-                                  </td>
-                                  <td className="px-6 py-4 text-sm text-center font-medium text-gray-800 whitespace-nowrap">
-                                    {data.site_id}
-                                  </td>
-                                  <td className="px-6 py-4 text-sm text-center text-gray-800 whitespace-nowrap">
-                                    {data.emails_list}
-                                  </td>
-                                  <td className="px-6 py-4 text-sm text-center text-gray-800 whitespace-nowrap">
-                                    {data.phoneno}
-                                  </td>
-                                  <td className="px-6 py-4 text-sm text-center font-medium text-left whitespace-nowrap">
-                                    <button
-                                      className="bg-transparent hover:bg-red-800 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
-                                      onClick={() => removeFields(index)}
-                                    >
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                              );
-                            })
-                          ) : (
-                            <tr className="bg-gray-100">
-                              <td
-                                colSpan="5"
-                                className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap border border-black text-center"
+            <button
+              className="mt-10 mb-10 mr-20 bg-transparent hover:bg-[#2a2e67] text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded h-10"
+              onClick={addFields}
+            >
+              Add
+            </button>
+
+            <div
+              className={`${
+                showAddField ? "opacity-1" : "opacity-0"
+              } my-5 mx-5`}
+            >
+              <form onSubmit={handleSubmit(onSubmit)}>
+                {inputFields.map((input, index) => {
+                  return (
+                    <div key={index}>
+                      <input
+                        className="w-full pr-4 py-2 block border-gray-400 border-opacity-100 border-gray-400 border px-2 focus-visible:none"
+                        placeholder="Email"
+                        {...register("email", {
+                          required: "Email is required",
+                          pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                            message: "Invalid email address",
+                          },
+                        })}
+                      />
+                      {errors.email && (
+                        <p className="text-xs italic text-red-500">
+                          {errors.email.message}
+                        </p>
+                      )}
+                      <div className="flex mt-4 mb-4 border border-gray-400 border-opacity-100">
+                        <div className="">
+                          <select
+                            className="p-1 text-gray-500 bg-white border shadow-sm appearance-none focus:border-indigo-600 cursor-pointer pr-4 py-2"
+                            {...register("country", {
+                              required: "Country is required",
+                            })}
+                          >
+                            <option value="" disabled>
+                              Select Country
+                            </option>
+                            {countries.map((country) => (
+                              <option
+                                key={country.phoneCode}
+                                value={country.phoneCode}
                               >
-                                <p> No data available </p>
+                                <span className="flex items-center">
+                                  <img
+                                    className="w-5 h-5 mr-2"
+                                    src={country.flag}
+                                    alt={`${country.name} Flag`}
+                                  />
+                                  {country.phoneCode} - {country.name}
+                                </span>
+                              </option>
+                            ))}
+                          </select>
+                          {errors.country && (
+                            <p className="text-xs italic text-red-500">
+                              {errors.country.message}
+                            </p>
+                          )}
+                        </div>
+                        <input
+                          className="flex-grow px-2  border pr-4 py-2 focus:ring-indigo-600 focus:border-indigo-600"
+                          placeholder="Phone"
+                          type="number"
+                          {...register("phone", {
+                            required: "Phone is required",
+                            // Add your phone number validation pattern here
+                          })}
+                        />
+                      </div>
+                      {errors.country && (
+                        <p className="text-xs italic text-red-500">
+                          {errors.country.message}
+                        </p>
+                      )}
+                      {errors.phone && (
+                        <p className="text-xs italic text-red-500">
+                          {errors.phone.message}
+                        </p>
+                      )}
+                      <button
+                        className="w-3/6 my-1 bg-transparent text-blue-800 border-blue-800 hover:bg-[#2a2e67] hover:text-white  bg-[#2a2e67] font-semibold py-2 px-4 border hover:border-transparent"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                      <button
+                        className="w-3/6 my-1 bg-transparent text-red-800 border-red-800 hover:bg-red-800 hover:text-white font-semibold py-2 px-4 border hover:border-transparent"
+                        type="reset"
+                        onClick={cancelHandler}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  );
+                })}
+              </form>
+            </div>
+          </div>
+        </div>
+
+        {!resetloading && (
+              <div className="p-1.5 w-full inline-block align-middle overflow-x-auto">
+                <div className="overflow-hidden rounded-lg">
+                <label>
+                  <h1>
+                    List of Items:
+                  </h1>
+                </label>
+                  <table className="min-w-full">
+                    <thead className=" bg-[#2a2e67]">
+                      <tr className="">
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs text-center text-white uppercase "
+                          onClick={() => handleSorting("id")}
+                        >
+                          ID {getSortIcon("id")}
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs text-center text-white uppercase "
+                          onClick={() => handleSorting("site_id")}
+                        >
+                          SITE ID {getSortIcon("site_id")}
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs text-center text-white uppercase "
+                          onClick={() => handleSorting("Email")}
+                        >
+                          Email {getSortIcon("Email")}
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs   text-center text-white uppercase "
+                          onClick={() => handleSorting("Phone")}
+                        >
+                          Phone {getSortIcon("Phone")}
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs   text-center text-white uppercase "
+                        >
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200 bg-white-100">
+                      {currentItems &&
+                      currentItems.length > 0 &&
+                      !resetloading ? (
+                        currentItems?.map((data, index) => {
+                          return (
+                            <tr>
+                              <td className="px-6 py-4 text-sm text-center font-medium text-gray-800 whitespace-nowrap">
+                                {index}
+                              </td>
+                              <td className="px-6 py-4 text-sm text-center font-medium text-gray-800 whitespace-nowrap">
+                                {data.site_id}
+                              </td>
+                              <td className="px-6 py-4 text-sm text-center text-gray-800 whitespace-nowrap">
+                                {data.emails_list}
+                              </td>
+                              <td className="px-6 py-4 text-sm text-center text-gray-800 whitespace-nowrap">
+                                {data.phoneno}
+                              </td>
+                              <td className="px-6 py-4 text-sm text-center font-medium text-left whitespace-nowrap">
+                                <button
+                                  className="bg-transparent hover:bg-red-800 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+                                  onClick={() => removeFields(index)}
+                                >
+                                  Delete
+                                </button>
                               </td>
                             </tr>
-                          )}
-                          
-                        </tbody>
-                        {/* <div className="flex justify-center mt-4">
+                          );
+                        })
+                      ) : (
+                        <tr className="bg-gray-100">
+                          <td
+                            colSpan="5"
+                            className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center"
+                          >
+                            <p> No data available </p>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                    {/* <div className="flex justify-center mt-4">
                           <Pagination
                             itemsPerPage={itemsPerPage}
                             totalItems={tableData.length}
@@ -369,126 +467,13 @@ const currentItems = sortedItems?.slice(indexOfFirstItem, indexOfLastItem);
                             setCurrentPage={setCurrentPage}
                           />
                         </div> */}
-                      </table>
-                    
-                  </div>
-                  <div className="flex">
-                    <button
-                      className="mt-10 mb-10 mr-20 bg-transparent hover:bg-[#2a2e67] text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded h-10"
-                      onClick={addFields}
-                    >
-                      Add
-                    </button>
-                    {showAddField && (
-                      <div className="my-5 mx-5">
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                          {inputFields.map((input, index) => {
-                            return (
-                              <div>
-                                {/* <h1 className="text-sm font-medium text-gray-800 whitespace-nowrap">
-                                  Add new email :
-                                </h1> */}
-                                <div key={index}>
-                                  <input
-                                    className="w-128 pr-4 py-2 block border-gray-400 border-opacity-100 border-gray-400 border px-2 focus-visible:none"
-                                    placeholder="Email"
-                                    {...register("email", {
-                                      required: "Email is required",
-                                      pattern: {
-                                        value:
-                                          /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                        message: "Invalid email address",
-                                      },
-                                    })}
-                                  />
-                                  {errors.email && (
-                                    <p className="text-xs italic text-red-500">
-                                      {errors.email.message}
-                                    </p>
-                                  )}
-                                  <div className="flex mt-4 mb-4 border border-gray-400 border-opacity-100">
-                                    <div className="">
-                                      <select
-                                        className="p-1 text-gray-500 bg-white border shadow-sm appearance-none focus:border-indigo-600 cursor-pointer pr-4 py-2"
-                                        {...register("country", {
-                                          required: "Country is required",
-                                        })}
-                                      >
-                                        <option value="" disabled>
-                                          Select Country
-                                        </option>
-                                        {countries.map((country) => (
-                                          <option
-                                            key={country.phoneCode}
-                                            value={country.phoneCode}
-                                          >
-                                            <span className="flex items-center">
-                                              <img
-                                                className="w-5 h-5 mr-2"
-                                                src={country.flag}
-                                                alt={`${country.name} Flag`}
-                                              />
-                                              {country.phoneCode} -{" "}
-                                              {country.name}
-                                            </span>
-                                          </option>
-                                        ))}
-                                      </select>
-                                      {errors.country && (
-                                        <p className="text-xs italic text-red-500">
-                                          {errors.country.message}
-                                        </p>
-                                      )}
-                                    </div>
-                                    <input
-                                      className="flex-grow px-2  border pr-4 py-2 focus:ring-indigo-600 focus:border-indigo-600"
-                                      placeholder="Phone"
-                                      type="number"
-                                      {...register("phone", {
-                                        required: "Phone is required",
-                                        // Add your phone number validation pattern here
-                                      })}
-                                    />
-                                  </div>
-                                  {errors.country && (
-                                    <p className="text-xs italic text-red-500">
-                                      {errors.country.message}
-                                    </p>
-                                  )}
-                                  {errors.phone && (
-                                    <p className="text-xs italic text-red-500">
-                                      {errors.phone.message}
-                                    </p>
-                                  )}
-                                  <button
-                                    className="w-3/6 my-1 bg-transparent text-blue-800 border-blue-800 hover:bg-[#2a2e67] hover:text-white  bg-[#2a2e67] font-semibold py-2 px-4 border hover:border-transparent"
-                                    type="submit"
-                                  >
-                                    Submit
-                                  </button>
-                                  <button
-                                    className="w-3/6 my-1 bg-transparent text-red-800 border-red-800 hover:bg-red-800 hover:text-white font-semibold py-2 px-4 border hover:border-transparent"
-                                    type="reset"
-                                    onClick={cancelHandler}
-                                  >
-                                    Cancel
-                                  </button>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </form>
-                      </div>
-                    )}
-                  </div>
+                  </table>
                 </div>
-              </div>
-            </div>}
-          </div>
-        </div>
+              </div>          
+        )}
       </div>
-      <Toaster message={error} onClose={handleCloseToaster}/>
-    </>
+      <Toaster message={error} onClose={handleCloseToaster} />
+    </div>
   );
 }
 
