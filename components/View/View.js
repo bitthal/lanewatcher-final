@@ -28,7 +28,7 @@ export default function View({ show, data, showRealTimeView,showDashboardView,sh
       </div>}
           <Pending showDashboardView={showDashboardView} show={show} data={data} resetLoader={resetLoader}/>
           <Arrow />
-          {showRealTimeView && <RealTimeView data={data} allData={allData} className="w-100" resetLoader={resetLoader}/>}
+          {showRealTimeView && <RealTimeView data={data} allData={allData} resetLoader={resetLoader}/>}
           {showRealTimeView && <Arrow />}
           <Processed showDashboardView={showDashboardView}  show={show} data={data} resetLoader={resetLoader}/>
           <Arrow />

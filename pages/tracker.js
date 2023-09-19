@@ -41,53 +41,64 @@ function Tracker({
   const totalLaneCount = Alldata?.length;
 
   // Filter the lanes based on the search term
-  const filteredLanes = Alldata?.filter((lane) => {
-    const allMonotainers = [
-      ...(lane?.pending?.monotainers
-        ? lane?.pending?.monotainers
-        : lane?.pending),
-      ...(lane?.real_time_positions?.monotainers
-        ? lane?.real_time_positions?.monotainers
-        : lane?.real_time_positions),
-      ...(lane?.processed?.monotainers
-        ? lane?.processed?.monotainers
-        : lane?.processed),
-    ];
-    const isMatched = allMonotainers?.some((monotainer) => {
-      const isMatch = monotainer?.monotainer_id
+  // Filter the lanes based on the search term
+const filteredLanes = Alldata?.filter((lane) => {
+  const allMonotainers = [
+    ...(lane?.pending?.monotainers
+      ? lane?.pending?.monotainers
+      : lane?.pending),
+    ...(lane?.real_time_positions?.monotainers
+      ? lane?.real_time_positions?.monotainers
+      : lane?.real_time_positions),
+    ...(lane?.processed?.monotainers
+      ? lane?.processed?.monotainers
+      : lane?.processed),
+  ];
+  const isMatched = allMonotainers?.some((monotainer) => {
+    const isMatch =
+      (monotainer?.monotainer_id
         ? monotainer?.monotainer_id
             ?.toLowerCase()
             .includes(searchTerm?.toLowerCase())
-        : "";
-      return isMatch;
-    });
-
-    console.log("Lane Matched:", isMatched);
-
-    return isMatched;
+        : "") ||
+      (lane?.lane_name
+        ? lane?.lane_name?.toLowerCase().includes(searchTerm?.toLowerCase())
+        : "");
+    return isMatch;
   });
 
-  // Calculate filtered lane count (count all lanes)
-  const filteredLaneCount = Alldata?.filter((lane) => {
-    const allMonotainers = [
-      ...(lane?.pending?.monotainers
-        ? lane?.pending?.monotainers
-        : lane?.pending),
-      ...(lane?.real_time_positions?.monotainers
-        ? lane?.real_time_positions?.monotainers
-        : lane?.real_time_positions),
-      ...(lane?.processed?.monotainers
-        ? lane?.processed?.monotainers
-        : lane?.processed),
-    ];
-    return allMonotainers?.some((monotainer) => {
-      return monotainer?.monotainer_id
+  console.log("Lane Matched:", isMatched);
+
+  return isMatched;
+});
+
+// Calculate filtered lane count (count all lanes)
+const filteredLaneCount = Alldata?.filter((lane) => {
+  const allMonotainers = [
+    ...(lane?.pending?.monotainers
+      ? lane?.pending?.monotainers
+      : lane?.pending),
+    ...(lane?.real_time_positions?.monotainers
+      ? lane?.real_time_positions?.monotainers
+      : lane?.real_time_positions),
+    ...(lane?.processed?.monotainers
+      ? lane?.processed?.monotainers
+      : lane?.processed),
+  ];
+  return allMonotainers?.some((monotainer) => {
+    const isMatch =
+      (monotainer?.monotainer_id
         ? monotainer?.monotainer_id
             ?.toLowerCase()
             .includes(searchTerm?.toLowerCase())
-        : "";
-    });
-  }).length;
+        : "") ||
+      (lane?.lane_name
+        ? lane?.lane_name?.toLowerCase().includes(searchTerm?.toLowerCase())
+        : "");
+    return isMatch;
+  });
+}).length;
+
 
   function handleOption(selectedValue) {
     setOptionVal(selectedValue);
