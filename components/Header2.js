@@ -1,5 +1,11 @@
 import { useRouter } from "next/router";
-import React, { useRef, useState, useContext, useEffect,Fragment } from "react";
+import React, {
+  useRef,
+  useState,
+  useContext,
+  useEffect,
+  Fragment,
+} from "react";
 import Toaster from "./Toaster";
 import DateTimePicker from "react-tailwindcss-datetimepicker";
 import moment from "moment";
@@ -18,7 +24,7 @@ export default function Header2({
   filteredLaneCount,
   showLaneCount,
   // onSearch
-  progress
+  progress,
 }) {
   const handleCloseToaster = () => {
     setErrors(null); // Clear the toaster message
@@ -40,7 +46,7 @@ export default function Header2({
   const [isDropdownOpenLane, setIsDropdownOpenLane] = useState(false);
   const [error, setErrors] = useState(null);
   const { laneNames } = useContext(value_data);
-  const { resetLoader,setResetLoader } = useContext(value_data);
+  const { resetLoader, setResetLoader } = useContext(value_data);
 
   // const [progress, setProgress] = useState(0);
 
@@ -123,7 +129,7 @@ export default function Header2({
         setIsDropdownOpen1(false); // Close the dropdown after submission
       })
       .catch((error) => {
-        setErrors("No data available")
+        setErrors("No data available");
       });
   };
   const handleDropdownCancel = () => {
@@ -204,41 +210,43 @@ export default function Header2({
     setRange({ start: startDate, end: endDate });
     setRangeFilter({ start: startDate, end: endDate });
   }
-  const resetHandler = ()=>{
+  const resetHandler = () => {
     setResetLoader(true);
     axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL_RESET}`, {
-      })
+      .get(`${process.env.NEXT_PUBLIC_API_URL_RESET}`, {})
       .then((response) => {
         setResetLoader(false);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.error("API error:", error);
         setResetLoader(false);
-        setErrors("API error")
-      })
-      
-  }
+        setErrors("API error");
+      });
+  };
   return (
     <Fragment>
-      <div className="mt-5 flex items-center gap-8 justify-between ml-32">
-        <div className="gap-4 mb-4 lg:mb-0">
+      <div className="mt-5 flex items-center lg:flex-row gap-4 lg:items-center justify-between ">
+        <div className="lg:w-full lg:mb-0">
           {showSearchBar && (
-            <div className="border border-gray-300 flex gap-3 items-center overflow-clip rounded-md h-10 px-5 rounded w-full lg:w-116 z-9">
-              <input
-                className="flex-1 h-full pr-4 py-2 focus:outline-none block"
-                placeholder="Enter Montainer/Lane Name:"
-                type="text"
-                id="message"
-                name="message"
-                ref={inputRef}
-                // value={inputRef} // Set the value to the searchTerm state
-                onChange={(e) => setSearchTerm(e.target.value)} // Handle input change to update the searchTerm state
-              />
-              {inputRef.current.value != "" && ( // Display the cancel button when searchTerm is not empty
-                <button type="button" onClick={handleCancel}>
-                  <i className="px-4 fa-solid fa-times" />
-                </button>
-              )}
+            <div className="border border-gray-300 flex items-center overflow-clip rounded-md px-2 md:px-5 h-10 lg:w-116 z-9">
+              <div className="flex-1">
+                <div className="flex items-center w-full">
+                  <input
+                    className="flex-1 h-full pr-4 py-2 focus:outline-none block"
+                    placeholder="Enter Montainer/Lane Name:"
+                    type="text"
+                    id="message"
+                    name="message"
+                    ref={inputRef}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  {inputRef.current.value !== "" && (
+                    <button type="button" onClick={handleCancel}>
+                      <i className="px-4 fa-solid fa-times" />
+                    </button>
+                  )}
+                </div>
+              </div>
               <button type="submit" onClick={setSearchTerm}>
                 <i className="px-4 fa-solid fa-magnifying-glass" />
               </button>
@@ -278,6 +286,7 @@ export default function Header2({
             </div>
           )}
         </div>
+
         {showLaneCount && (
           <div className="relative inline-block ml-4 mb-8">
             <button
@@ -286,10 +295,10 @@ export default function Header2({
             >
               <Image
                 src={tag}
-                className="object-contain w-10 h-10 cursor-pointer text-white bg-white"
+                className="object-contain cursor-pointer text-white bg-white"
                 alt="logo"
-                width={35}
-                height={35}
+                width={80}
+                height={80}
               />
             </button>
             {isDropdownOpen && (
@@ -382,8 +391,9 @@ export default function Header2({
             )}
           </div>
         )}
+
         {router == "Tracker" && (
-          <div className="flex mb-10">
+          <div className="flex items-center lg:flex-row mb-10">
             <div className="flex items-center gap-2 w-50 h-50">
               <span className="w-7 h-8 bg-red-500 rounded-sm" />
               <span className="text-xs text-red-500">Misplaced</span>
@@ -402,17 +412,19 @@ export default function Header2({
             </div>
           </div>
         )}
-        { router == "Tracker" &&
+        {router == "Tracker" && (
+          <div className="mb-10 w-90">
           <button
-            className="bg-red-800 w-28 rounded-md text-white text-xs h-8 mb-10"
+            className="text-xs underline text-red-800"
             onClick={() => resetHandler()}
           >
-            Sorting Reset
-            <i className="fas fa-sync-alt text-white ml-2"></i>
+            Sorting Reset &nbsp;
+            <i className="fas fa-sync-alt text-red-800 underline"></i>
           </button>
-        }
+          </div>
+        )}
         {showDatePicker && (
-          <div className="flex mb-10">
+          <div className="flex flex-col lg:flex-row items-center mb-10 border-0">
             <DateTimePicker
               primaryColor="fuchsia"
               ranges={ranges}
@@ -442,27 +454,34 @@ export default function Header2({
                 value={`${range.start.format(
                   "DD-MM-YYYY(HH:mm)"
                 )} - ${range.end.format("DD-MM-YYYY(HH:mm)")}`}
-                className={`w-72 h-full py-2 px-2.5 cursor-pointer text-sm`}
+                className={`w-72 h-full py-2 px-2.5 cursor-pointer text-sm focus-visible:outline-none ${
+                  showBorder ? "border-0" : "border-0"
+                }`}
                 onClick={() => setShowBorder(!showBorder)} // Toggle the border style
               />
             </DateTimePicker>
           </div>
         )}
-       { showLaneCount && 
-       <div className="flex flex-row">
-       <span className="flex mt-3">Refereshing:</span>
-        <div className="loader-animated-container mb-10">
-          
-          <div
-            className="loader-animated-progress mt-3"
-            style={progressBarStyle}
-          ></div>
-          <span className="relative left-2 top-3">{progress}</span>
+        {showLaneCount && (
+          <div className="flex lg:flex-row items-center lg:mb-10">
+          <div className="items-center">
+            <span>Refreshing:</span>
+          </div>
+          <div className="loader-animated-container mt-3 lg:mt-0">
+            <div
+              className="loader-animated-progress"
+              style={progressBarStyle}
+            ></div>
+            <span className="relative lg:left-2 lg:top-3 ml-2 lg:ml-0">
+              {progress}
+            </span>
+          </div>
         </div>
-        </div>}
+        
+        )}
       </div>
-      <Toaster message={error} onClose={handleCloseToaster}/>
+
+      <Toaster message={error} onClose={handleCloseToaster} />
     </Fragment>
-    
   );
 }

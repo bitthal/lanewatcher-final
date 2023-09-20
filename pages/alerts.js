@@ -110,7 +110,7 @@ function Alert({}) {
   };
 
   return (
-    <div className="flex gap-4 my-3 mr-3 h-auto mt-32">
+    <div className="mt-32 lg:justify-around">
         {loader && 
         <div className="flex flex-col">
           <div className="animate-pulse h-8 bg-gray-300 rounded w-2/3 mx-auto mb-4"></div>
@@ -121,16 +121,12 @@ function Alert({}) {
               <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
               <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
               <div className="animate-pulse h-4 bg-gray-300 rounded w-full"></div>
-              {/* Add more skeleton lines for each row */}
         </div>
         </div>}
-        {!loader && <div className="flex flex-col page-container">
-
-          <div className="overflow-x-auto">
-            <div className="p-1.5 w-full inline-block align-middle page-container">
-              <div className="overflow-hidden border rounded-lg table-container">
+        {!loader && 
+            <div className="">
                 {alertList.length > 0 && (
-                  <table className="min-w-full divide-y divide-gray-200">
+                  <table className="overflow-auto min-w-full divide-y divide-gray-200 border rounded-lg">
                     <thead className=" bg-[#2a2e67]">
                       <tr>
                         <th
@@ -240,10 +236,7 @@ function Alert({}) {
                           })}
                     </tbody>
                   </table>
-                )}
-                
-                {/* {alertList.length < 1 && <p className="text-center">No data available!!</p>} */}
-              </div>
+                )}              
               <div className="flex justify-center mt-4 pagination-container">
                 <button
                   className="mx-1 p-2 bg-gray-300 rounded-md text-white hover:bg-[#2a2e67] hover:text-white"
@@ -308,8 +301,7 @@ function Alert({}) {
                 </button>
               </div>
             </div>
-          </div>
-        </div>}
+        }
       <Toaster message={error} onClose={handleCloseToaster} />
     </div>
   );

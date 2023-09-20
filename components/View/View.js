@@ -17,7 +17,7 @@ export default function View({ show, data, showRealTimeView,showDashboardView,sh
     <Fragment>
     {!resetLoader ? 
     
-      <div className="flex overflow-ellipsis">
+      <div className={`flex overflow-ellipsis justify-between md:justify-between lg:justify-between xl:justify-between 2xl:justify-around `}>
         <div className="bg-[#F4F3F8] flex items-center p-5 rounded-xl relative">
         {loader && 
         <div>

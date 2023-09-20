@@ -115,7 +115,7 @@ export default function Pending({ show, data,resetLoader }) {
               fill="#434190"
             />
           </svg>
-          <p className="  text-primary2 text-lg">Pending</p>
+          <p className="text-primary2 text-lg">Pending</p>
 
           <p className="rounded-full border border-indigo-900 bg-[#2a2e67] w-8 h-8 flex items-center justify-center text-white text-xl   shadow-blue">
             {data?.pending?.total_monotainers}
@@ -144,6 +144,7 @@ export default function Pending({ show, data,resetLoader }) {
                     } border px-2 py-2 rounded-lg h-10 `}
                   >
                     {data1.monotainer_id}
+                    
                   </button>
 
                   {hoveredIndex === index && (

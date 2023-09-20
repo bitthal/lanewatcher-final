@@ -15,7 +15,7 @@ export default function Layout({ children }) {
       <Head>
         <title>Lanewatch</title>
         <meta name="description" content="Lanewatch" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
       {showHeader && 
@@ -25,7 +25,7 @@ export default function Layout({ children }) {
       </div>
       }
       <div className={` 
-      ${show && showHeader ? 'ml-32' : !show && showHeader ? "ml-52" : ''} transition-max-h duration-700 mt-20`}>
+      ${show && showHeader ? 'ml-32' : !show && showHeader ? "ml-52" : ''} transition-max-h duration-700 mt-20 `}>
       {children}
       </div>
       </main>

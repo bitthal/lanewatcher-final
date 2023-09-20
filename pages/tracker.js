@@ -152,10 +152,7 @@ const filteredLaneCount = Alldata?.filter((lane) => {
 
   return (
     <>
-      <div className="flex gap-5 my-3 mr-3 h-auto">
-        {/* <Leftbar show={show} setShow={setShow} /> */}
-        <div className="w-full flex-grow max-w-[90vw] lg:w-[80%]! xl:w-[70%]!">
-          <div className={`w-full`}>
+      <div className="flex flex-col gap-5 my-3 mr-3 h-auto">
             <Header2
               show={show}
               setUpdated={handleState}
@@ -172,14 +169,13 @@ const filteredLaneCount = Alldata?.filter((lane) => {
               showLaneCount={true}
               progress={timer}
             />
-          </div>
 
-          <div className={`flex flex-col gap-8 mt-5 w-full`}>
+          <div className={`flex flex-col gap-8 mt-5`}>
             {searchTerm
               ? filteredLanes
                   ?.sort((a, b) => a.lane_number - b.lane_number)
                   .map((data, index) => (
-                    <div className="" key={index}>
+                    <div className="overflow-y-auto" key={index}>
                       <View
                         showPieChart={showPieChart ? true : false}
                         showDashboardView={showDashboardView ? false : true}
@@ -210,7 +206,7 @@ const filteredLaneCount = Alldata?.filter((lane) => {
                 )}
           </div>
         </div>
-      </div>
+      
       <Toaster message={error} onClose={handleCloseToaster} />
     </>
   );

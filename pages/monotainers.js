@@ -71,25 +71,17 @@ function Monotainers() {
       });
   }
   return (
-    <div className={`flex gap-4 my-3 mr-3 h-auto `}>
-      {/* <Leftbar show={show} setShow={setShow}/> */}
-      <div className={`w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"}`}>
-        <div className={`w-full`}>
+    <div className={`flex flex-col my-3 mr-3 h-auto w-full  ${show ? "max-w-[90vw]" : "max-w-[95vw]"} `}>
           <Header2
-            
             show={show}
             showSearchBar={true}
             showDatePicker={false}
             setUpdated={handleSearch}
-            // onSearch={handleSearch}
           />
-        </div>
-        <div className="flex flex-col m-4">
-          <div className="overflow-x-auto">
-          <div className="grid gap-4 mt-10 sm:grid-cols-2 md:grid-cols-8">
+          <div className="grid gap-4 mt-10 xs:flex-row sm:grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
               {filteredMonotainers.map((monotainer, index) => (
                 <button
-                  className={`text-green-700 border-green-700 border px-3 py-2 rounded-lg green-button sm:w-20 md:w-24 lg:w-28 `}
+                  className={`text-green-700 border-green-700 border px-3 py-2 rounded-lg green-button `}
                   key={index}
                   onClick={() => {
                     setTempName(monotainer);
@@ -101,9 +93,6 @@ function Monotainers() {
                 </button>
               ))}
             </div>
-          </div>
-        </div>
-      </div>
       {dataModalOpen && (
         <ModalPopUp
           tableData={history}

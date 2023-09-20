@@ -391,6 +391,7 @@ div#daterangepicker {
 
 .loader-animated-progress {
   position: absolute;
+  top: 9px;
   width: 50%;
   height: 50%;
   border: 2px solid transparent;
