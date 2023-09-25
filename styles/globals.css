@@ -475,14 +475,14 @@ div#daterangepicker {
   height: 500px;
 } */
 
-@media (max-width: 1440px) {
+@media (max-width: 1708px) {
   .view-section {
     width: max-content;
   }
 }
 
 /* For screens with a width equal to or greater than 1024px */
-@media (min-width: 1441px) {
+@media (min-width: 1707px) {
   .view-section {
     width: auto;
   }
