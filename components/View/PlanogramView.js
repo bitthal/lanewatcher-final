@@ -59,8 +59,8 @@ export default function PlanogramView({ data, resetLoader }) {
   return (
     <Fragment>
        
-       <div className="bg-white rounded-xl p-5 flex flex-col gap-8 h-96 ">
-        <div className="flex gap-4 justify-between items-center w-full">
+       <div className={`${router == 'Tracker' ? 'bg-white rounded-xl px-5 py-5 flex flex-col h-96 w-auto gap-8' : 'bg-white rounded-xl px-5 py-5 flex flex-col h-96 w-full gap-8' }`} >
+        <div className="flex gap-4 justify-evenly items-center w-full">
           <svg
             width="26"
             height="26"
@@ -76,22 +76,20 @@ export default function PlanogramView({ data, resetLoader }) {
 
           <span className="text-primary2   text-lg">Planogram View</span>
 
-          <span></span>
-        </div>
-
-        <div className="flex justify-between gap-4 items-center w-full">
-          <span className="text-black  ">Lane {data?.lane_number}</span>
-          <span className="text-black  ">{data.lane_name ? data.lane_name.charAt(0).toUpperCase() + data.lane_name.slice(1) : ""}</span>
-
-          <div className="relative ">
-            <button onClick={getAlertHandler}>
+            <button onClick={getAlertHandler} className="relative">
               <i className="fa-solid fa-bell text-2xl " />
               <span className=" flex h-3 w-3 absolute top-0 translate-x-1/2 right-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-700"></span>
               </span>
             </button>
-          </div>
+        </div>
+
+        <div className="flex justify-between gap-4 items-center w-full">
+          <span className="text-black  ">Lane {data?.lane_number}</span>
+          <span className="text-black  ">{data.lane_name ? data.lane_name.charAt(0).toUpperCase() + data.lane_name.slice(1) : ""}</span>
+
+          
         </div>
 
         <div className="flex gap-4 justify-between items-center w-full text-xs">

@@ -100,7 +100,7 @@ export default function Pending({ show, data,resetLoader }) {
   };
   return (
     <>
-      <div className={`h-96 bg-white rounded-xl p-5`}>
+      <div className={`h-auto bg-white rounded-xl px-5 py-5 w-max`} >
       <div className="flex flex-col items-center text-center  gap-5">
         <div className="flex items-center text-center justify-between gap-4">
           <svg

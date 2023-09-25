@@ -232,7 +232,7 @@ export default function RealTimeView({ data, allData,resetLoader }) {
     <>
       
     {}
-      {isLoading ? <div className={`p-5 bg-white rounded-xl h-96 realTimeView`}>
+      {isLoading ? <div className={`p-5 bg-white rounded-xl h-auto realTimeView`}>
           <div className="flex items-center text-center justify-between">
             <div style={{ lineHeight: 1, fontSize: "12px" }}>
               <div className="h-4 w-24 bg-gray-300 mb-1 animate-pulse" />
@@ -284,7 +284,7 @@ export default function RealTimeView({ data, allData,resetLoader }) {
             </div>
           </div>
         </div> : 
-      <div className={`p-5 bg-white rounded-xl h-96 realTimeView`}>    
+      <div className={`p-5 bg-white rounded-xl h-auto realTimeView`}>    
       <div>
         <div className="flex items-center text-center justify-between">
           <div style={{ lineHeight: 1, fontSize: "12px" }}>

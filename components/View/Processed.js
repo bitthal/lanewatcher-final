@@ -107,7 +107,7 @@ export default function Processed({ show, data,showDashboardView,resetLoader }) 
       {resetLoader ? (
         <Skeleton processedData={true} resetLoader={resetLoader}></Skeleton>
       ) : (
-        <div className={`h-96 bg-white rounded-xl p-5 w-60`}>
+        <div className={`h-auto bg-white rounded-xl px-5 py-5 w-max`} >
           {
             <div className="flex flex-col items-center text-center gap-4">
               <div className="flex items-center text-center justify-between gap-4">

@@ -175,7 +175,7 @@ const filteredLaneCount = Alldata?.filter((lane) => {
               ? filteredLanes
                   ?.sort((a, b) => a.lane_number - b.lane_number)
                   .map((data, index) => (
-                    <div className="overflow-y-auto" key={index}>
+                    <div className="" key={index}>
                       <View
                         showPieChart={showPieChart ? true : false}
                         showDashboardView={showDashboardView ? false : true}

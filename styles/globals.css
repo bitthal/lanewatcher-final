@@ -470,4 +470,20 @@ div#daterangepicker {
 }
 
 
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
 
+@media (max-width: 1440px) {
+  .view-section {
+    width: 2560px;
+  }
+}
+
+/* For screens with a width equal to or greater than 1024px */
+@media (min-width: 1441px) {
+  .view-section {
+    width: auto;
+  }
+}

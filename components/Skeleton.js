@@ -96,7 +96,7 @@ const Skeleton = ({data}) => {
   return (
     <div className="flex overflow-ellipsis">
       <div className="bg-[#F4F3F8] flex items-center p-5 rounded-xl relative">
-        <div className={`h-96 bg-white rounded-xl p-5`}>
+        <div className={`h-auto bg-white rounded-xl p-5`}>
           <div className="flex flex-col items-center text-center  gap-5">
             <div className="flex items-center text-center justify-between gap-4">
               <svg
@@ -484,7 +484,7 @@ const Skeleton = ({data}) => {
           </div>
         </div>
         <Arrow />
-        <div className={`p-5 bg-white rounded-xl h-96 realTimeView`}>
+        <div className={`p-5 bg-white rounded-xl h-auto realTimeView`}>
           <div className="flex items-center text-center justify-between">
             <div style={{ lineHeight: 1, fontSize: "12px" }}>
               <div className="h-4 w-24 bg-gray-300 mb-1 animate-pulse" />
@@ -537,7 +537,7 @@ const Skeleton = ({data}) => {
           </div>
         </div>
         <Arrow />
-        <div className={`h-96 bg-white rounded-xl p-5`}>
+        <div className={`h-auto bg-white rounded-xl p-5`}>
           <div className="flex flex-col items-center text-center gap-5">
             <div className="flex items-center text-center justify-between gap-4">
               <div className="w-16 h-19 bg-gray-300 animate-pulse"></div>
@@ -581,7 +581,7 @@ const Skeleton = ({data}) => {
           </div>
         </div>
         <Arrow />
-        <div className={`h-96 bg-white rounded-xl p-5`}>
+        <div className={`h-auto bg-white rounded-xl p-5`}>
           <div className="flex flex-col items-center text-center gap-5">
             <div className="flex items-center text-center justify-between gap-4">
               <div className="w-16 h-19 bg-gray-300 animate-pulse"></div>
@@ -625,7 +625,7 @@ const Skeleton = ({data}) => {
           </div>
         </div>
         <Arrow />
-        <div className="bg-white rounded-xl p-5 flex flex-col gap-8 h-96">
+        <div className="bg-white rounded-xl p-5 flex flex-col gap-8 h-auto">
           <div className="flex gap-4 justify-between items-center w-full">
             <div className="w-26 h-26 bg-gray-300 animate-pulse"></div>
             <span className="text-primary2 text-lg w-28 h-6 bg-gray-300 animate-pulse"></span>
