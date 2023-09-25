@@ -6,7 +6,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 const PieChart = ({ chartId, res }) => {
   // Apply CSS for a 3D-like effect
   const chartContainerStyle = {
-    width: "100%",
+    width: "600px",
     height: "100%", // Increase the height
   };
 
