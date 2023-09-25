@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-//import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HC_more from "highcharts/highcharts-more";
@@ -10,8 +9,11 @@ HC_more(Highcharts);
 highcharts3d(Highcharts);
 
 function PieChart(res) {
-  let chart = null;
-  var sample_options = {
+  const chartRef = useRef(null);
+  const elementRef = useRef();
+  
+  // Define chartOptions once during component initialization
+  const chartOptions = {
     credits: { enabled: false },
     chart: {
       type: "pie",
@@ -21,6 +23,7 @@ function PieChart(res) {
       spacingBottom: 0,
       spacingLeft: 0,
       spacingRight: 0,
+      animation: false,
       options3d: {
         enabled: true,
         alpha: 65,
@@ -39,10 +42,10 @@ function PieChart(res) {
     plotOptions: {
       pie: {
         shadow: true,
-        // startAngle: angle,
         cursor: "pointer",
         depth: 55,
         size: "80%",
+        animation: false
       },
       series: {
         allowPointSelect: true,
@@ -50,13 +53,13 @@ function PieChart(res) {
           enabled: true,
           format: "{point.name} {point.percentage:.1f}%",
         },
-        point: {
-          events: {
-            select: function () {
-              console.log("chart event", chart);
-            },
-          },
-        },
+        // point: {
+        //   events: {
+        //     select: function () {
+        //       console.log("chart event", chart);
+        //     },
+        //   },
+        // },
       },
     },
     series: [
@@ -64,7 +67,6 @@ function PieChart(res) {
         colorByPoint: true,
         center: [280, 180],
         data: [
-         
           {
             name: "In Stage",
             y: res.res.planogram.in_stage,
@@ -77,13 +79,17 @@ function PieChart(res) {
             name: "Missing",
             y: res.res.planogram.missing,
           },
-          
         ],
       },
     ],
   };
 
-  const elementRef = useRef();
+  useEffect(() => {
+    // Update the chart with new data only when res changes
+    if (chartRef.current) {
+      chartRef.current.update(chartOptions);
+    }
+  }, [res]);
 
   return (
     <div>
@@ -92,10 +98,11 @@ function PieChart(res) {
           ref={elementRef}
           highcharts={Highcharts}
           allowChartUpdate={true}
-          options={sample_options}
+          options={chartOptions}
         />
       </div>
     </div>
   );
 }
+
 export default PieChart;
