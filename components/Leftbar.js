@@ -32,9 +32,9 @@ export default function Leftbar({ show, setShow }) {
               <span className="form-toggle-label relative h-8 w-16">
                 <span className="flex items-center justify-center text-indigo-900">
                   {show ? (
-                    <i class="fa-solid fa-light fa-forward fa-beat-fade fa-lg absolute left-16 swipe-icon"></i>
+                    <i className="fa-solid fa-light fa-forward fa-beat-fade fa-lg absolute left-16 swipe-icon"></i>
                   ) : (
-                    <i class="fa-solid fa-light fa-backward fa-beat-fade fa-lg absolute left-24 swipe-icon"></i>
+                    <i className="fa-solid fa-light fa-backward fa-beat-fade fa-lg absolute left-24 swipe-icon"></i>
                   )}
                 </span>
               </span>

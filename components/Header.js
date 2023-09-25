@@ -171,7 +171,7 @@ export default function Header() {
         </div> */}
         <div className="flex gap-16 items-center" >
           <Link href="/tracker" className="w-fit text-center text-white  ">
-            <Image src={Logo} width={30} height={30} />
+            <Image src={Logo} width={30} height={30} alt="Logo"/>
           </Link>
           {router !== "404" && <p className="w-fit   text-white">{router}</p>}
         </div>

@@ -84,6 +84,7 @@ export default function Index() {
               alt="logo"
               width={35}
               height={35}
+              
             />
         </div>
       </div>
