@@ -174,7 +174,7 @@ const filteredLaneCount = Alldata?.filter((lane) => {
               ? filteredLanes
                   ?.sort((a, b) => a.lane_number - b.lane_number)
                   .map((data, index) => (
-                    <div className="m-auto" key={index}>
+                    <div className="" key={index}>
                       <View
                         showPieChart={showPieChart ? true : false}
                         showDashboardView={showDashboardView ? false : true}
@@ -189,7 +189,7 @@ const filteredLaneCount = Alldata?.filter((lane) => {
                   ))
               : Alldata?.sort((a, b) => a.lane_number - b.lane_number).map(
                   (data, index) => (
-                    <div className="m-auto" key={index}>
+                    <div className="" key={index}>
                       <View
                         showPieChart={showPieChart ? true : false}
                         showDashboardView={showDashboardView ? false : true}

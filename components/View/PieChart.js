@@ -30,7 +30,7 @@ function PieChart(res) {
         beta: 0,
       },
     },
-    title: { text: undefined },
+    title: { text: "Chart View" },
     accessibility: {
       point: {
         valueSuffix: "%",
@@ -52,6 +52,7 @@ function PieChart(res) {
         dataLabels: {
           enabled: true,
           format: "{point.name} {point.percentage:.1f}%",
+          
         },
         // point: {
         //   events: {
@@ -65,7 +66,7 @@ function PieChart(res) {
     series: [
       {
         colorByPoint: true,
-        center: [280, 180],
+        center: [200, 180],
         data: [
           {
             name: "In Stage",
@@ -93,7 +94,7 @@ function PieChart(res) {
 
   return (
     <div>
-      <div>
+      <div className="high-charts">
         <HighchartsReact
           ref={elementRef}
           highcharts={Highcharts}

@@ -487,3 +487,7 @@ div#daterangepicker {
     width: auto;
   }
 }
+
+.high-charts{
+  width: 500px!important;
+}
