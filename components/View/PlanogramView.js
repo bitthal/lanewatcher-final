@@ -59,8 +59,8 @@ export default function PlanogramView({ data, resetLoader }) {
   return (
     <Fragment>
        
-       <div className={`bg-white rounded-xl px-5 py-5 flex flex-col h-96 w-full gap-8 justify-between`} >
-        <div className="flex gap-4 justify-between items-center w-full">
+       <div className={`bg-white rounded-xl px-5 py-5 flex flex-col h-96 gap-8 justify-between ${router == 'Tracker' ? 'w-auto':'w-full'}`} >
+        <div className={`flex gap-4 justify-between items-center w-full`}>
           <svg
             width="26"
             height="26"
