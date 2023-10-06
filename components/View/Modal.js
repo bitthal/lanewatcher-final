@@ -176,14 +176,14 @@ export default function ModalPopUp({
                                 {data?.alerts?.type}
                               </td>
                               <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center">
-                                Belongs to{" "}
-                                {data?.alerts?.description
+                                Belongs to{" "}{data?.lane_name}
+                                {/* {data?.alerts?.description
                                   .split(" ")[2]
                                   .charAt(0)
                                   .toUpperCase() +
                                   data?.alerts?.description
                                     .split(" ")[2]
-                                    .slice(1)}
+                                    .slice(1)} */}
                               </td>
                               <td className="px-6 py-4 text-sm font-medium text-center text-gray-800 whitespace-nowrap">
                                 {data?.alerts?.claimed_status === true

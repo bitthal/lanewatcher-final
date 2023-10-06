@@ -17,7 +17,8 @@ export default function Header2({
   show,
   // setShow,
   setUpdated,
-  showDatePicker,
+  // showDatePicker,
+  // showDashboardViewInHeader,
   setRangeFilter,
   showSearchBar,
   totalLaneCount,
@@ -25,6 +26,8 @@ export default function Header2({
   showLaneCount,
   // onSearch
   progress,
+  showDashboardData
+  
 }) {
   const handleCloseToaster = () => {
     setErrors(null); // Clear the toaster message
@@ -47,7 +50,6 @@ export default function Header2({
   const [error, setErrors] = useState(null);
   const { laneNames } = useContext(value_data);
   const { resetLoader, setResetLoader } = useContext(value_data);
-
   // const [progress, setProgress] = useState(0);
 
   // useEffect(() => {
@@ -164,8 +166,10 @@ export default function Header2({
 
   const end = moment(start).add(1, "days").subtract(1, "seconds");
   const [range, setRange] = useState({
-    start: start,
-    end: end,
+    // Calculate the start date as 6 months ago from the current date
+    start: moment().subtract(6, "months"),
+    // Set the end date to the current date
+    end: moment(),
   });
   const ranges = {
     Today: [moment(start), moment(end)],
@@ -423,8 +427,8 @@ export default function Header2({
           </button>
           </div>
         )}
-        {showDatePicker && (
-          <div className="flex flex-col lg:flex-row items-center mb-10 border-0">
+        {showDashboardData && (
+          <div className="flex flex-col lg:flex-row items-center border-0 mb-8 w-full">
             <DateTimePicker
               primaryColor="fuchsia"
               ranges={ranges}
@@ -452,9 +456,9 @@ export default function Header2({
               <input
                 placeholder="Enter date..."
                 value={`${range.start.format(
-                  "DD-MM-YYYY(HH:mm)"
-                )} - ${range.end.format("DD-MM-YYYY(HH:mm)")}`}
-                className={`w-72 h-full py-2 px-2.5 cursor-pointer text-sm focus-visible:outline-none ${
+                  "DD-MM-YYYY"
+                )} - ${range.end.format("DD-MM-YYYY")}`}
+                className={`w-72 h-full py-2 px-2.5 cursor-pointer text-lg focus-visible:outline-none ${
                   showBorder ? "border-0" : "border-0"
                 }`}
                 onClick={() => setShowBorder(!showBorder)} // Toggle the border style
@@ -462,7 +466,7 @@ export default function Header2({
             </DateTimePicker>
           </div>
         )}
-        {showLaneCount && (
+        {router == "Tracker" && (
           <div className="flex lg:flex-row items-center lg:mb-10">
           <div className="items-center">
             <span>Refreshing:</span>

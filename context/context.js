@@ -5,11 +5,12 @@ export const value_data = createContext(null);
 function Context({ children }) {
     const [value, setValue] = useState('');
     const [drpdwnVaue, setdrpdwnVaue] = useState('');
+    const [siteIds,setSiteIds] = useState('');
     const [loginData,setLoginData] = useState({});
     const [laneNames, setLaneNames] = useState('');
     const [resetLoader,setResetLoader] = useState('');
     return (
-      <value_data.Provider value={{ value, setValue,drpdwnVaue, setdrpdwnVaue,loginData,setLoginData, setLaneNames, laneNames,resetLoader,setResetLoader}}>
+      <value_data.Provider value={{ value, setValue,drpdwnVaue, setdrpdwnVaue,loginData,setLoginData, setLaneNames, laneNames,resetLoader,setResetLoader, siteIds,setSiteIds}}>
         {children}
       </value_data.Provider>
     );

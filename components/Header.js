@@ -13,6 +13,7 @@ import Toaster from "@/components/Toaster";
 export default function Header() {
   const { value, setValue } = useContext(value_data);
   const { drpdwnVaue, setdrpdwnVaue } = useContext(value_data);
+  const { siteIds, setSiteIds } = useContext(value_data);
   const { loginData } = useContext(value_data);
   const [alertList, setAlerts] = useState("");
   const [skeletonLoader, setLoader] = useState(false);
@@ -37,6 +38,8 @@ export default function Header() {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_SITEID_API_URL}`
         );
+        console.log(response.data.result,'response.data.result')
+        setSiteIds(response.data.result)
         setSiteID(response.data.result);
         setdrpdwnVaue(response.data.result);
       } catch (error) {
@@ -183,7 +186,7 @@ export default function Header() {
                 label="Global Site Selection:-"
                 className="w-18 text-white bg-transparent border-b shadow-sm focus:outline-none focus:ring-0 focus:border-transparent focus:border-indigo-600 cursor-pointer"
                 onChange={handleChange}
-                defaultValue={"Global Site Selection"}
+                // defaultValue={"Global Site Selection"}
               >
                 <option value="Global Site Selection" disabled>
                   Global Site Selection

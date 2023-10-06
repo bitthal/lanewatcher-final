@@ -491,3 +491,96 @@ div#daterangepicker {
 .high-charts{
   width: 500px!important;
 }
+
+/* Define a class for the selected card */
+.selected-card {
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Light font color */
+  transition: background-color 0.3s, color 0.3s; /* Add transition for background and font color */
+}
+
+/* Define styles for normal and hovered cards */
+.card {
+  background-color: #fff; /* Normal background color */
+  color: #333; /* Normal font color */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Add transition for background and font color */
+}
+
+/* Style the card on hover */
+.card:hover {
+  background-color: #f0f0f0; /* Hover background color */
+  color: #555; /* Hover font color */
+}
+
+/* Add CSS classes to your global styles or component-specific styles */
+.fixed.cardSection {
+  width: 300px; /* Set a fixed width for the card section */
+  height: 100%; /* Make the card section full height */
+  position: fixed;
+  right: 0;
+  overflow-y: auto; /* Allow vertical scrolling if content exceeds the height */
+  background-color: #ffffff; /* Set background color as needed */
+  padding: 20px; /* Add padding as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow as needed */
+}
+
+.flex-auto {
+  flex: 1; /* Allow the content to take up remaining space */
+  overflow: hidden; /* Hide horizontal overflow */
+}
+
+.overflow-x-auto {
+  overflow-x: auto; /* Enable horizontal scrolling if content exceeds width */
+}
+.right-card{
+  height: 70vh;
+  width: 50%;
+}
+
+.left-card{
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+.lists{
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+.big-text{
+  font-size: 24px;
+  line-height: 2;
+}
+/* Default font sizes for laptops and smaller screens */
+.text-cs {
+  font-size: large;
+  line-height: 1;
+}
+
+.align-center-element {
+  align-items: center;
+  font-size: medium;
+  font-weight: 700;
+}
+.flex-boxShadow{
+  box-shadow: -1px 0px 7px 0px #cacacd;
+}
+
+.planogramBox{
+  box-shadow: 1px 0px 1px 0px #cacacd;
+}
+/* Larger font sizes for desktop screens */
+@media (min-width: 2560px) {
+  .text-cs {
+    font-size: xx-large;
+  }
+
+  .align-center-element {
+    font-size: large;
+  }
+}
