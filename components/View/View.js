@@ -22,7 +22,7 @@ export default function View({
   const { resetLoader } = useContext(value_data);
   return (
     <Fragment>
-      {!resetLoader ? (
+      {  (
         <div>     
            <div className="px-5 py-5 rounded-xl">
             {loader && (
@@ -72,8 +72,6 @@ export default function View({
             
           </div>
         </div>
-      ) : (
-        <Skeleton data={data}></Skeleton>
       )}
     </Fragment>
   );

@@ -14,9 +14,9 @@ const Custom404 = () => {
         <div>
           <Link
             className="hover:underline hover:text-indigo-400 text-indigo-500"
-            href="/tracker"
+            href="/dashboard"
           >
-            Go to Home Page
+            Go to Dashboard Page
           </Link>
         </div>
       </div>

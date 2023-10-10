@@ -12,22 +12,22 @@ function Dashboard() {
   const [show, setShow] = useState(true);
   // const [dateValue, setDate] = useState([]);
   const [Alldata, setAlldata] = useState();
-  const [totalLaneCount, setTotalLaneCount] = useState([]);
+  const [totalLaneCount, setTotalLaneCount] = useState(0);
   const [selectedValue, setOptionVal] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [loader, setLoader] = useState(false);
   const [filteredData, setFilteredDataLanes] = useState([]);
   const [filteredDataCount, setFilteredDataLanesCount] = useState([]);
   const [totalStats, setTotalStats] = useState([]);
-  const { drpdwnVaue, value, setValue } = useContext(value_data);
+  const { drpdwnVaue, value } = useContext(value_data);
   console.log(value,'value')
-  const [siteID, setSiteId] = useState([
-    value ? value : drpdwnVaue[0]?.site_id]
-  );
+  // const [siteID, setSiteId] = useState(
+  //   drpdwnVaue[0]?.site_id
+  // );
   const router =
     useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
     useRouter().pathname.replace(/\//, "").slice(1);
-
+  console.log(value,'line31')
   useEffect(() => {
     fetchData();
   }, [value]);
@@ -90,23 +90,17 @@ function Dashboard() {
   // const filteredDataCount = filteredLanes ? filteredLanes?.length : Alldata.length
   // const totalLaneCount = Alldata?.length;
   function setRangeFilter(date) {
-    console.log(date.start.format("YYYY-MM-DDTHH:mm:ss"), "date");
     setRange(date);
     fetchData();
   }
   const fetchData = async () => {
-    console.log(
-      range?.start?.format("YYYY-MM-DDTHH:mm:ss"),
-      "dateeee",
-      range.start,'date',siteID
-    );
     setLoader(true);
     try {
       const start_date = range?.start?.format("YYYY-MM-DDTHH:mm:ss");
       const end_date = range?.end?.format("YYYY-MM-DDTHH:mm:ss");
-      const site_id = value.site_id;
+      const site_id = value.site_id ? value.site_id : drpdwnVaue[0].site_id;
       await axios
-        .post(`${process.env.NEXT_PUBLIC_API_URL_DATEFILTER}`, null, {
+        .get(`${process.env.NEXT_PUBLIC_API_URL_DATEFILTER}`, {
           params: {
             start_date,
             end_date,
@@ -114,12 +108,13 @@ function Dashboard() {
           },
         })
         .then((response) => {
-            console.log(response.data.lanewise_data,'ResponseData')         
-            setSiteId(response.data.total_stats[0].site_id);
+            // console.log(response.data.lanewise_data.length,'ResponseData')         
+            // setSiteId(response.data.total_stats[0].site_id);
             setAlldata(response.data.lanewise_data);
             setTotalLaneCount(response.data.lanewise_data.length)
             setFilteredDataLanes(response.data.lanewise_data);
             setTotalStats(response.data.total_stats);
+            console.log(response.data.lanewise_data.length,'tot')
           
         });
     } catch (error) {
@@ -128,6 +123,7 @@ function Dashboard() {
       setTotalStats([]);
     }
   };
+
   return (
     <>
       <div className="flex flex-col gap-5 my-3 mr-3 h-auto ">
@@ -139,11 +135,12 @@ function Dashboard() {
           range={range}
           showSearchBar={true}
           showLaneCount={true}
-          showDashboardData={true}
+          // showDashboardData={true}
           totalLaneCount={totalLaneCount}
           filteredLaneCount={searchTerm ? filteredDataCount : totalLaneCount}
         />
-        <span className="text-xl">Site: {siteID}</span>
+        
+        <span className="text-xl">Site: {value.site_id?value.site_id:drpdwnVaue[0]?.site_id}</span>
         {totalLaneCount && totalLaneCount > 0  ?
           
           <div
@@ -171,7 +168,7 @@ function Dashboard() {
                 Overall Site Stats
               </h1>
                 {totalStats.map((data, index) => (
-                  <ul>
+                  <ul key={index}>
                     <li className="lists">
                       <p className="flex justify-around ">
                         <span className="pr-5 flex align-center-element w-full">
@@ -179,7 +176,7 @@ function Dashboard() {
                         </span>
 
                         <span className="text-cs text-gray-300 w-full">
-                          {data?.Total_monotainer}
+                          {data?.Total_candapost_monoid}
                         </span>
                       </p>
                     </li>
@@ -229,11 +226,11 @@ function Dashboard() {
                     <li className="lists">
                       <p className="flex justify-around">
                         <span className="pr-5 flex align-center-element w-full">
-                          Total Pending
+                          Total Sorted
                         </span>
 
                         <span className="text-cs text-gray-300 w-full">
-                          {data.Total_missing}
+                          {data.Total_sorted}
                         </span>
                       </p>
                     </li>
@@ -255,7 +252,7 @@ function Dashboard() {
                         </span>
 
                         <span className="text-cs text-gray-300 w-full">
-                          {data.Total_sorted}
+                          {data.Total_finalized}
                         </span>
                       </p>
                     </li>

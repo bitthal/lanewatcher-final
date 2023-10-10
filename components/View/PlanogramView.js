@@ -87,7 +87,7 @@ export default function PlanogramView({
               />
             </svg>
 
-            <span className="text-primary2 text-lg">Planogram View</span>
+            <span className="text-primary2 text-xl">Planogram View</span>
 
             <button onClick={getAlertHandler} className="relative">
               <i className="fa-solid fa-bell text-2xl " />
@@ -101,8 +101,8 @@ export default function PlanogramView({
           <div className="flex justify-between gap-4 items-center w-auto">
             {/* <span className="text-black">Lane {data && data ? data?.lane_number : ''}</span> */}
 
-            <span className="text-black">{cameraId}</span>
-            <span className="text-black">
+            <span className="text-black text-xl">{cameraId}</span>
+            <span className="text-black text-xl">
               {data && data?.lane_name
                 ? data?.lane_name.charAt(0).toUpperCase() +
                   data?.lane_name.slice(1)
@@ -115,7 +115,7 @@ export default function PlanogramView({
                 <p className="text-center big-text">
                   {data && data?.pending?.length}
                 </p>
-                <p className="text-center">In&nbsp;Stage</p>
+                <p className="text-center text-xl">Sorted</p>
               </div>
             </div>
 
@@ -124,7 +124,7 @@ export default function PlanogramView({
                 <p className="text-center big-text">
                   {data && data?.processed?.length}
                 </p>
-                <p className="text-center">Mapped</p>
+                <p className="text-center text-xl">Processed</p>
               </div>
             </div>
 
@@ -133,7 +133,15 @@ export default function PlanogramView({
                 <p className="text-center big-text">
                   {data && data?.misplaced?.length}
                 </p>
-                <p className="text-center">Missing</p>
+                <p className="text-center text-xl">Misplaced</p>
+              </div>
+            </div>
+            <div className="p-2 border rounded-md border-[#434190] py-auto">
+              <div className="text-[#434190] relative">
+                <p className="text-center big-text">
+                  {data && data?.finalized?.length}
+                </p>
+                <p className="text-center text-xl">Finalized</p>
               </div>
             </div>
           </div>
@@ -160,7 +168,7 @@ export default function PlanogramView({
                     ? ""
                     : "disabled"
                 }
-             bg-[#434190] w-1/2 py-3 rounded-lg text-white   text-xs m-1`}
+             bg-[#434190] w-1/2 py-3 rounded-lg text-white   text-lg m-1`}
               >
                 Total {""}
                 {data &&

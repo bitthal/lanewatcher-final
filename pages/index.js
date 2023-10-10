@@ -113,7 +113,7 @@ export default function Index() {
                       name="username"
                       id="username"
                       onChange={(e) => setUsername(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
+                      className="bg-gray-50 border border-gray-300 text-indigo-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
                       placeholder="name@company.com"
                       required=""
                     />
@@ -131,7 +131,7 @@ export default function Index() {
                       name="email"
                       id="email"
                       onChange={(e) => setEmail(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
+                      className="bg-gray-50 border border-gray-300 text-indigo-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
                       placeholder="name@company.com"
                       required=""
                     />
@@ -238,7 +238,7 @@ export default function Index() {
                       name="email"
                       id="email"
                       onChange={(e) => setEmail(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
+                      className="bg-gray-50 border border-gray-300 text-indigo-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 "
                       placeholder="name@company.com"
                       required=""
                     />

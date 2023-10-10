@@ -26,7 +26,7 @@ export default function Header2({
   showLaneCount,
   // onSearch
   progress,
-  showDashboardData
+  // showDashboardData
   
 }) {
   const handleCloseToaster = () => {
@@ -258,12 +258,12 @@ export default function Header2({
           )}
 
           {showLaneCount && (
-            <div className="text-sm mt-3 text-center lg:text-left">
+            <div className="text-xl mt-3 text-center lg:text-left">
               <strong>Lanes</strong> : Showing&nbsp;
               {filteredLaneCount !== totalLaneCount ? (
                 <>
                   <span className="inline-flex relative">
-                    <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center top-1 left-1 text-xs">
+                    <span className="bg-white text-indigo-700 flex items-center  text-xl">
                       {filteredLaneCount ? filteredLaneCount : 0}
                     </span>
                     &nbsp;
@@ -271,7 +271,7 @@ export default function Header2({
                   </span>
                   &nbsp;of&nbsp;
                   <span className="inline-flex relative">
-                    <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center -top-1 left-1 text-xs">
+                    <span className="bg-white text-indigo-700 flex items-center left-1 text-xl">
                       {totalLaneCount ? totalLaneCount : 0}
                     </span>
                     &nbsp; lanes
@@ -280,7 +280,7 @@ export default function Header2({
               ) : (
                 <>
                   <span className="inline-block relative">
-                    <span className="rounded-full border border-blue-500 bg-white text-blue-500 w-5 h-5 flex items-center justify-center -top-1 left-1 text-xs">
+                    <span className="bg-white text-indigo-700 flex items-center justify-center left-1 text-xl">
                       {totalLaneCount ? totalLaneCount : 0}
                     </span>
                   </span>
@@ -291,7 +291,7 @@ export default function Header2({
           )}
         </div>
 
-        {showLaneCount && (
+        {/* { (
           <div className="relative inline-block ml-4 mb-8">
             <button
               onClick={() => fetchAllMonotainers()}
@@ -394,7 +394,7 @@ export default function Header2({
               </div>
             )}
           </div>
-        )}
+        )} */}
 
         {router == "Tracker" && (
           <div className="flex items-center lg:flex-row mb-10">
@@ -427,7 +427,7 @@ export default function Header2({
           </button>
           </div>
         )}
-        {showDashboardData && (
+        {router == "Dashboard" && (
           <div className="flex flex-col lg:flex-row items-center border-0 mb-8 w-full">
             <DateTimePicker
               primaryColor="fuchsia"

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Leftbar from "@/components/Leftbar";
 import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
+import Custom404 from "./404";
 import axios from "axios";
 import { useRouter } from "next/router";
 import withAuth from "@/utils/withAuth";
@@ -119,16 +120,17 @@ const filteredLaneCount = Alldata?.filter((lane) => {
   };
   const [timer, setTimer] = useState(0);  
   const fetchData = async () => {
+
     setLoader(true);
-    try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
-      setLoader(false);
-      setAlldata(response?.data?.lanes);
-      setLaneNames(response?.data?.lanes);
-    } catch (error) {
-      setLoader(false);
-      console.error("Error:", error);
-    }
+    // try {
+    //   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
+    //   setLoader(false);
+    //   setAlldata(response?.data?.lanes);
+    //   setLaneNames(response?.data?.lanes);
+    // } catch (error) {
+    //   setLoader(false);
+    //   console.error("Error:", error);
+    // }
   };
 
   useEffect(() => {
@@ -169,7 +171,8 @@ const filteredLaneCount = Alldata?.filter((lane) => {
             />
 
           <div className={`flex flex-col gap-8 mt-5`}>
-            {searchTerm
+            <Custom404/>
+            {/* {searchTerm
               ? filteredLanes
                   ?.sort((a, b) => a.lane_number - b.lane_number)
                   .map((data, index) => (
@@ -201,7 +204,7 @@ const filteredLaneCount = Alldata?.filter((lane) => {
                       />
                     </div>
                   )
-                )}
+                )} */}
           </div>
         </div>
       

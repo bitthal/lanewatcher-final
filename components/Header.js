@@ -186,7 +186,7 @@ export default function Header() {
                 label="Global Site Selection:-"
                 className="w-18 text-white bg-transparent border-b shadow-sm focus:outline-none focus:ring-0 focus:border-transparent focus:border-indigo-600 cursor-pointer"
                 onChange={handleChange}
-                // defaultValue={"Global Site Selection"}
+                defaultValue={siteId[0].site_id}
               >
                 <option value="Global Site Selection" disabled>
                   Global Site Selection

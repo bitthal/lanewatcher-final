@@ -12,6 +12,13 @@ module.exports = {
       fontFamily: {
         sans: ["OpenSansExtraBold", "sans-serif"],
       },
+      fontSize: {
+        sm: ['14px', '20px'],
+        base: ['16px', '24px'],
+        lg: ['20px', '28px'],
+        xl: ['24px', '32px'],
+        xxl:['32px', '45px']
+      },
       colors: {
         primary: "#A30000",
         primary2: "#ad1f15",

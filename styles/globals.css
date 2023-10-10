@@ -549,17 +549,18 @@ div#daterangepicker {
 }
 
 .lists{
-  border: 1px solid #ccc;
-  padding: 5px;
+  box-shadow: 2px 2px 1px 0px #cacacd;
+  padding: 15px;
 }
 .big-text{
-  font-size: 24px;
+  font-size: 32px;
   line-height: 2;
 }
 /* Default font sizes for laptops and smaller screens */
 .text-cs {
   font-size: large;
   line-height: 1;
+  color: #0e0e0f;
 }
 
 .align-center-element {
@@ -572,15 +573,16 @@ div#daterangepicker {
 }
 
 .planogramBox{
-  box-shadow: 1px 0px 1px 0px #cacacd;
+  box-shadow: 2px 2px 1px 0px #cacacd;
 }
 /* Larger font sizes for desktop screens */
 @media (min-width: 2560px) {
   .text-cs {
-    font-size: xx-large;
+    font-size: 45px;
+    color: #0e0e0f;
   }
 
   .align-center-element {
-    font-size: large;
+    font-size: xx-large;
   }
 }

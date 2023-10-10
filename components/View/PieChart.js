@@ -52,7 +52,7 @@ function PieChart(res) {
           enabled: true,
           format: "{point.name}",
           style: {
-            fontSize: "16px", // Set the desired font size here
+            fontSize: "24px", // Set the desired font size here
           },
         },
         // point: {
@@ -70,7 +70,7 @@ function PieChart(res) {
         center: [250, 180],
         data: [
           {
-            name: "In Stage",
+            name: "Sorted",
             y: 10,
           },
           {
@@ -80,6 +80,10 @@ function PieChart(res) {
           {
             name: "Missing",
             y: 30,
+          },
+          {
+            name: "Finalized",
+            y: 40,
           },
         ],
       },
