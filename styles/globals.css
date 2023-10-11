@@ -572,6 +572,12 @@ div#daterangepicker {
     font-size: medium;
   }
 }
+
+@media (min-width:1910) {
+  .planogramBox{
+    width: fit-content!important;
+  }
+}
 /* scrollbar-styles.css */
 
 /* WebKit (Chrome, Safari) */

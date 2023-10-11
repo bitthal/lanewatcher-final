@@ -5,20 +5,19 @@ import HC_more from "highcharts/highcharts-more";
 import highcharts3d from "highcharts/highcharts-3d";
 import _ from "lodash";
 
-// HC_more(Highcharts);
-// highcharts3d(Highcharts);
 
 function PieChart(res) {
+  HC_more(Highcharts);
+  highcharts3d(Highcharts);
   console.log(res,'resss')
   const chartRef = useRef(null);
   const elementRef = useRef();
-  
   // Define chartOptions once during component initialization
   const chartOptions = {
     credits: { enabled: false },
     chart: {
       type: "pie",
-      backgroundColor: 'transparent',
+      backgroundColor: 'Transparent',
       spacingTop: 0,
       spacingBottom: 0,
       spacingLeft: 0,
@@ -73,18 +72,22 @@ function PieChart(res) {
           {
             name: "Sorted",
             y: res?.data?.pending?.length,
+            color:'#03a33e'
           },
           {
             name: "Processed",
             y: res?.data?.processed?.length,
+            color:'#fcba03'
           },
           {
             name: "Misplaced",
             y: res?.data?.misplaced?.length,
+            color:'#a3030e'
           },
           {
             name: "Finalized",
             y: res?.data?.finalized?.length,
+            color:'#0373fc'
           },
           
         ],

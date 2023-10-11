@@ -9,6 +9,9 @@ module.exports = {
 
   theme: {
     extend: {
+      screens: {
+        'xl': '1910px',
+      },
       fontFamily: {
         sans: ["OpenSansExtraBold", "sans-serif"],
       },
@@ -78,6 +81,17 @@ module.exports = {
       },
     },
   },
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.flex-col-xl': {
+          display: 'flex',
+          flexDirection: 'row',
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
   variants: {
     scale: ["responsive", "hover", "focus", "group-hover"],
     textDecoration: ["responsive", "hover", "focus", "focus-visible"],

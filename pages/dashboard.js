@@ -13,23 +13,15 @@ function Dashboard() {
   // const [dateValue, setDate] = useState([]);
   const [Alldata, setAlldata] = useState();
   const [totalLaneCount, setTotalLaneCount] = useState(0);
-  const [selectedValue, setOptionVal] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [loader, setLoader] = useState(false);
   const [filteredData, setFilteredDataLanes] = useState([]);
   const [filteredDataCount, setFilteredDataLanesCount] = useState([]);
   const [totalStats, setTotalStats] = useState([]);
   const { drpdwnVaue, value } = useContext(value_data);
-  console.log(value,'value')
-  // const [siteID, setSiteId] = useState(
-  //   drpdwnVaue[0]?.site_id
-  // );
-  const router =
-    useRouter().pathname.replace(/\//, "").charAt(0).toUpperCase() +
-    useRouter().pathname.replace(/\//, "").slice(1);
-  console.log(value,'line31')
+
   useEffect(() => {
-    fetchData();
+    fetchData(range);
   }, [value]);
 
   const [range, setRange] = useState({
@@ -40,22 +32,7 @@ function Dashboard() {
   });
 
   function handleState(newValue) {
-    console.log(newValue.length,'ResponseData')
     setSearchTerm(newValue);
-    // const filteredLanes = Alldata.filter((lane) => {
-    //   const allMonotainers = [
-    //     ...(lane.pending || []),
-    //     ...(lane.real_time_positions || []),
-    //     ...(lane.processed || []),
-    //   ];
-    //   console.log(allMonotainers,)
-    //   return (
-    //     allMonotainers.some((monotainer) =>
-    //       monotainer.monotainer_id.includes(newValue)
-    //     ) ||
-    //     lane.lane_name.toLowerCase().includes(newValue.toLowerCase())
-    //   );
-    // });
     if(newValue.length > 0){
       const filteredLanes = Alldata?.filter((lane) => {
         const allMonotainers = [
@@ -87,17 +64,15 @@ function Dashboard() {
     
   }
   
-  // const filteredDataCount = filteredLanes ? filteredLanes?.length : Alldata.length
-  // const totalLaneCount = Alldata?.length;
   function setRangeFilter(date) {
     setRange(date);
-    fetchData();
+    fetchData(date);
   }
-  const fetchData = async () => {
+  const fetchData = async (date) => {
     setLoader(true);
     try {
-      const start_date = range?.start?.format("YYYY-MM-DDTHH:mm:ss");
-      const end_date = range?.end?.format("YYYY-MM-DDTHH:mm:ss");
+      const start_date = date?.start?.format("YYYY-MM-DDTHH:mm:ss");
+      const end_date = date?.end?.format("YYYY-MM-DDTHH:mm:ss");
       const site_id = value.site_id ? value.site_id : drpdwnVaue[0].site_id;
       await axios
         .get(`${process.env.NEXT_PUBLIC_API_URL_DATEFILTER}`, {
@@ -108,8 +83,6 @@ function Dashboard() {
           },
         })
         .then((response) => {
-            // console.log(response.data.lanewise_data.length,'ResponseData')         
-            // setSiteId(response.data.total_stats[0].site_id);
             setAlldata(response.data.lanewise_data);
             setTotalLaneCount(response.data.lanewise_data.length)
             setFilteredDataLanes(response.data.lanewise_data);
@@ -135,12 +108,13 @@ function Dashboard() {
           range={range}
           showSearchBar={true}
           showLaneCount={true}
-          // showDashboardData={true}
           totalLaneCount={totalLaneCount}
           filteredLaneCount={searchTerm ? filteredDataCount : totalLaneCount}
         />
+
         
-        <span className="text-xl">Site: {value.site_id?value.site_id:drpdwnVaue[0]?.site_id}</span>
+        <h1 className="text-xl">Site: {value.site_id?value.site_id:drpdwnVaue[0]?.site_id}</h1>
+
         {totalStats[0]?.Total_master_monoids && totalStats[0]?.Total_master_monoids > 0  ?
           
           <div
@@ -148,6 +122,7 @@ function Dashboard() {
           >
             <div className={`flex flex-col left-card border rounded-md border-[#cccc] h-[70vh] p-10 m-2 pl-1 overflow-scroll mb-2 xl:h-[80vh] w-full`}>
             
+
             {
               filteredData.length > 0 ? filteredData?.map((data, index) => (
                   <div className="flex" key={index}>
@@ -164,14 +139,14 @@ function Dashboard() {
             </div>
             
             <div className="right-card w-25 m-2 pl-1 xl:h-[80vh] h-[70vh]">
-              <h1 className="text-center align-center-element">
+            <h1 className="text-xl text-center">
                 Overall Site Stats
               </h1>
                 {totalStats.map((data, index) => (
                   <ul key={index}>
                     <li className="lists">
-                      <p className="flex justify-around ">
-                        <span className="pr-5 flex align-center-element w-full">
+                      <p className="flex flex-col xl:flex-col-xl">
+                        <span className="flex align-center-element w-full">
                           Total Monotainers
                         </span>
 
@@ -181,8 +156,8 @@ function Dashboard() {
                       </p>
                     </li>
                     <li className="lists">
-                      <p className="flex justify-around">
-                        <span className="pr-5 flex align-center-element w-full">
+                      <p className="flex flex-col xl:flex-col-xl">
+                        <span className="flex align-center-element w-full">
                           Total Active Monotainers
                         </span>
 
@@ -192,8 +167,8 @@ function Dashboard() {
                       </p>
                     </li>
                     <li className="lists">
-                      <p className="flex justify-around">
-                        <span className="pr-5 flex align-center-element w-full">
+                      <p className="flex flex-col xl:flex-col-xl">
+                        <span className="flex align-center-element w-full">
                           Total Misc assets
                         </span>
 
@@ -203,8 +178,8 @@ function Dashboard() {
                       </p>
                     </li>
                     <li className="lists">
-                      <p className="flex justify-around">
-                        <span className="pr-5 flex align-center-element w-full">
+                      <p className="flex flex-col xl:flex-col-xl">
+                        <span className="flex align-center-element w-full">
                           Total trucks
                         </span>
                         <span className="text-cs text-gray-300 w-full">
@@ -213,8 +188,8 @@ function Dashboard() {
                       </p>
                     </li>
                     <li className="lists">
-                      <p className="flex justify-around">
-                        <span className="pr-5 flex align-center-element w-full">
+                      <p className="flex flex-col xl:flex-col-xl">
+                        <span className="flex align-center-element w-full">
                           Total lanes
                         </span>
 
@@ -224,8 +199,8 @@ function Dashboard() {
                       </p>
                     </li>
                     <li className="lists">
-                      <p className="flex justify-around">
-                        <span className="pr-5 flex align-center-element w-full">
+                      <p className="flex flex-col xl:flex-col-xl">
+                        <span className="flex align-center-element w-full">
                           Total Sorted
                         </span>
 
@@ -235,8 +210,8 @@ function Dashboard() {
                       </p>
                     </li>
                     <li className="lists">
-                      <p className="flex justify-around">
-                        <span className="pr-5 flex align-center-element w-full">
+                      <p className="flex flex-col xl:flex-col-xl">
+                        <span className="flex align-center-element w-full">
                           Total Processed
                         </span>
 
@@ -246,8 +221,8 @@ function Dashboard() {
                       </p>
                     </li>
                     <li className="lists">
-                      <p className="flex justify-around">
-                        <span className="pr-5 flex align-center-element w-full">
+                      <p className="flex flex-col xl:flex-col-xl">
+                        <span className="flex align-center-element w-full">
                           Total Finalized
                         </span>
 
@@ -257,8 +232,8 @@ function Dashboard() {
                       </p>
                     </li>
                     <li className="lists">
-                      <p className="flex justify-around">
-                        <span className="pr-5 flex align-center-element w-full">
+                      <p className="flex flex-col xl:flex-col-xl">
+                        <span className="flex align-center-element w-full">
                           Total Misplaced
                         </span>
 
@@ -267,6 +242,7 @@ function Dashboard() {
                         </span>
                       </p>
                     </li>
+                    
                   </ul>
                 ))}
                 {/* <PieChart data={totalStats}/> */}
