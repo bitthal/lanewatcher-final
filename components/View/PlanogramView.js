@@ -174,6 +174,7 @@ export default function PlanogramView({
                 {data &&
                   data?.misplaced?.length +
                     data?.pending?.length +
+                    data?.finalized?.length +
                     data?.processed?.length}
               </button>
             </div>

@@ -9,6 +9,7 @@ import _ from "lodash";
 // highcharts3d(Highcharts);
 
 function PieChart(res) {
+  console.log(res,'resss')
   const chartRef = useRef(null);
   const elementRef = useRef();
   
@@ -36,7 +37,7 @@ function PieChart(res) {
       },
     },
     tooltip: {
-      pointFormat: "{series.name}: <b>{point.y}%</b>",
+      pointFormat: "{series.name}: <b>{point.y}</b>",
     },
     plotOptions: {
       pie: {
@@ -71,19 +72,19 @@ function PieChart(res) {
         data: [
           {
             name: "Sorted",
-            y: 10,
+            y: res?.data?.pending?.length,
           },
           {
-            name: "Mapped",
-            y: 20,
+            name: "Processed",
+            y: res?.data?.processed?.length,
           },
           {
             name: "Misplaced",
-            y: 30,
+            y: res?.data?.misplaced?.length,
           },
           {
             name: "Finalized",
-            y: 40,
+            y: res?.data?.finalized?.length,
           },
           
         ],
