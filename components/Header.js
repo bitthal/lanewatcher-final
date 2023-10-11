@@ -216,8 +216,8 @@ export default function Header() {
 
             <div className="flex gap-4 items-center">
               <p className="w-fit   text-white">
-                Welcome
-                <span className="text-white">&nbsp;&nbsp;{userName}</span>
+                Welcome,
+                <span className="text-white">&nbsp;&nbsp;{userName}!</span>
               </p>
               <i className="text-xl fa-solid fa-user text-white"></i>
             </div>

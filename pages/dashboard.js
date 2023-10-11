@@ -20,6 +20,11 @@ function Dashboard() {
   const [totalStats, setTotalStats] = useState([]);
   const { drpdwnVaue, value } = useContext(value_data);
 
+  // useEffect(() => {
+  //   // Function to fetch data
+  //     console.log(range,'ran')
+  //     fetchData(range); // Fetch data when the component is initially loaded or 'value' changes
+  // }, []);
   useEffect(() => {
     fetchData(range);
   }, [value]);
@@ -69,11 +74,12 @@ function Dashboard() {
     fetchData(date);
   }
   const fetchData = async (date) => {
+    console.log(date,'date',value,drpdwnVaue)
     setLoader(true);
     try {
       const start_date = date?.start?.format("YYYY-MM-DDTHH:mm:ss");
       const end_date = date?.end?.format("YYYY-MM-DDTHH:mm:ss");
-      const site_id = value.site_id ? value.site_id : drpdwnVaue[0].site_id;
+      const site_id = value !== '' ? value.site_id : 'CNP1';
       await axios
         .get(`${process.env.NEXT_PUBLIC_API_URL_DATEFILTER}`, {
           params: {

@@ -9,8 +9,8 @@ import React, {
 import Toaster from "./Toaster";
 import DateTimePicker from "react-tailwindcss-datetimepicker";
 import moment from "moment";
-import Image from "next/image";
-import tag from "/public/tag.svg";
+// import Image from "next/image";
+// import tag from "/public/tag.svg";
 import { value_data } from "@/context/context";
 import axios from "axios";
 export default function Header2({
@@ -37,19 +37,21 @@ export default function Header2({
     useRouter().pathname.replace(/\//, "").slice(1);
   const [showBorder, setShowBorder] = useState(true);
   const inputRef = useRef("");
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState(null);
-  const [selectedLane, setSelectedLane] = useState(null);
-  const [monotainersData, setMonotainersData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [dropdownStates, setDropdownStates] = useState({});
-  const [searchIdValue, setSearchIdValue] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [tempSelectedOptions, setTempSelectedOptions] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [isDropdownOpenLane, setIsDropdownOpenLane] = useState(false);
+  // const [selectedDropdownValue, setSelectedDropdownValue] = useState(null);
+  // const [selectedLane, setSelectedLane] = useState(null);
+  // const [monotainersData, setMonotainersData] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [dropdownStates, setDropdownStates] = useState({});
+  // const [searchIdValue, setSearchIdValue] = useState("");
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [tempSelectedOptions, setTempSelectedOptions] = useState([]);
+  // const [selectedOptions, setSelectedOptions] = useState([]);
+  // const [isDropdownOpenLane, setIsDropdownOpenLane] = useState(false);
   const [error, setErrors] = useState(null);
-  const { laneNames } = useContext(value_data);
+  // const { laneNames } = useContext(value_data);
   const { resetLoader, setResetLoader } = useContext(value_data);
+  const [isClient, setIsClient] = useState(false);
+
   // const [progress, setProgress] = useState(0);
 
   // useEffect(() => {
@@ -74,71 +76,73 @@ export default function Header2({
   };
 
   // const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
-  const fetchAllMonotainers = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL_MONO_ID}?pageNo=20`
-      );
-      const data = await response.json();
-      if (Array.isArray(data.result)) {
-        setMonotainersData(data.result);
-        toggleDropdown();
-      } else {
-        console.error("Invalid data format: data.result is not an array.");
-      }
-    } catch (error) {
-      console.error("Error fetching monotainer data:", error);
-    }
-  };
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prevOpen) => !prevOpen);
-    if (!isDropdownOpen) {
-      setTempSelectedOptions(selectedOptions);
-    }
-  };
-  const handleLaneSelection = (lane) => {
-    setSelectedLane(lane);
-    setIsDropdownOpenLane(false);
-  };
-  const handleDropdownSubmit = () => {
-    console.log(tempSelectedOptions, selectedLane, "ss");
-    setSelectedOptions(tempSelectedOptions);
-    setIsDropdownOpen(false);
-    const camera_id = "C001";
-    const iffinalized = "false";
-    const ifmisplaced = "false";
-    const ifprocessed = "false";
-    const ifstaged = "false";
-    const ifuntagged = "false";
-    const index = 0;
-    const lane_name = selectedLane;
-    const monotainer_id = tempSelectedOptions.join(",");
-    axios
-      .post(`${process.env.NEXT_PUBLIC_TAG_API_URL}`, null, {
-        params: {
-          camera_id,
-          iffinalized,
-          ifmisplaced,
-          ifprocessed,
-          ifstaged,
-          ifuntagged,
-          index,
-          lane_name,
-          monotainer_id,
-        },
-      })
-      .then((response) => {
-        setIsDropdownOpen1(false); // Close the dropdown after submission
-      })
-      .catch((error) => {
-        setErrors("No data available");
-      });
-  };
-  const handleDropdownCancel = () => {
-    setTempSelectedOptions("");
-    setIsDropdownOpen(false);
-  };
-
+  // const fetchAllMonotainers = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_URL_MONO_ID}?pageNo=20`
+  //     );
+  //     const data = await response.json();
+  //     if (Array.isArray(data.result)) {
+  //       setMonotainersData(data.result);
+  //       toggleDropdown();
+  //     } else {
+  //       console.error("Invalid data format: data.result is not an array.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching monotainer data:", error);
+  //   }
+  // };
+  // const toggleDropdown = () => {
+  //   setIsDropdownOpen((prevOpen) => !prevOpen);
+  //   if (!isDropdownOpen) {
+  //     setTempSelectedOptions(selectedOptions);
+  //   }
+  // };
+  // const handleLaneSelection = (lane) => {
+  //   setSelectedLane(lane);
+  //   setIsDropdownOpenLane(false);
+  // };
+  // const handleDropdownSubmit = () => {
+  //   console.log(tempSelectedOptions, selectedLane, "ss");
+  //   setSelectedOptions(tempSelectedOptions);
+  //   setIsDropdownOpen(false);
+  //   const camera_id = "C001";
+  //   const iffinalized = "false";
+  //   const ifmisplaced = "false";
+  //   const ifprocessed = "false";
+  //   const ifstaged = "false";
+  //   const ifuntagged = "false";
+  //   const index = 0;
+  //   const lane_name = selectedLane;
+  //   const monotainer_id = tempSelectedOptions.join(",");
+  //   axios
+  //     .post(`${process.env.NEXT_PUBLIC_TAG_API_URL}`, null, {
+  //       params: {
+  //         camera_id,
+  //         iffinalized,
+  //         ifmisplaced,
+  //         ifprocessed,
+  //         ifstaged,
+  //         ifuntagged,
+  //         index,
+  //         lane_name,
+  //         monotainer_id,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setIsDropdownOpen1(false); // Close the dropdown after submission
+  //     })
+  //     .catch((error) => {
+  //       setErrors("No data available");
+  //     });
+  // };
+  // const handleDropdownCancel = () => {
+  //   setTempSelectedOptions("");
+  //   setIsDropdownOpen(false);
+  // };
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   const setSearchTerm = () => {
     const newValue = inputRef.current.value;
     setUpdated(newValue);
@@ -150,15 +154,15 @@ export default function Header2({
     setSearchTerm(""); // Clear the search term
     // onSearch(""); // Call the onSearch callback with an empty string to reset the search
   };
-  const handleOptionSelection = (value) => {
-    setTempSelectedOptions((prevSelected) => {
-      if (prevSelected.includes(value)) {
-        return prevSelected.filter((option) => option !== value);
-      } else {
-        return [...prevSelected, value];
-      }
-    });
-  };
+  // const handleOptionSelection = (value) => {
+  //   setTempSelectedOptions((prevSelected) => {
+  //     if (prevSelected.includes(value)) {
+  //       return prevSelected.filter((option) => option !== value);
+  //     } else {
+  //       return [...prevSelected, value];
+  //     }
+  //   });
+  // };
   const now = new Date();
   const start = moment(
     new Date(now.getFullYear(), now.getMonth(), now.getDate())
@@ -427,7 +431,7 @@ export default function Header2({
           </button>
           </div>
         )}
-        {router == "Dashboard" && (
+        {router == "Dashboard" && isClient && (
           <div className="flex flex-col lg:flex-row items-center border-0 mb-8 w-full">
             <DateTimePicker
               primaryColor="fuchsia"
