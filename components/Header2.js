@@ -432,7 +432,7 @@ export default function Header2({
           </div>
         )}
         {router == "Dashboard" && isClient && (
-          <div className="flex flex-col lg:flex-row items-center border-0 mb-8 w-full">
+          <div className="flex flex-col lg:flex-row items-center border-0 mb-8 w-full cursor-pointer">
             <DateTimePicker
               primaryColor="fuchsia"
               ranges={ranges}
