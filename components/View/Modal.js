@@ -15,6 +15,7 @@ export default function ModalPopUp({
   AggregatePendingData,
   AggregateRealTimeData,
   AggregateProcessedData,
+  AggregateFinalizedData,
   skeletonLoader,
   finalizedData
 }) {
@@ -535,13 +536,16 @@ export default function ModalPopUp({
                   {/* Add custom-thead class here */}
                   <tr>
                     <th className="px-6 py-3 text-xs   text-left text-white uppercase">
-                      Pending
+                      Sorted
                     </th>
                     <th className="px-6 py-3 text-xs   text-left text-white uppercase">
-                      Real Time
+                      Misplaced
                     </th>
                     <th className="px-6 py-3 text-xs   text-left text-white uppercase">
                       Processed
+                    </th>
+                    <th className="px-6 py-3 text-xs   text-left text-white uppercase">
+                      Finalized
                     </th>
                   </tr>
                 </thead>
@@ -550,7 +554,8 @@ export default function ModalPopUp({
                     length: Math.max(
                       AggregatePendingData.length,
                       AggregateRealTimeData.length,
-                      AggregateProcessedData.length
+                      AggregateProcessedData.length,
+                      AggregateFinalizedData.length
                     ),
                   }).map((_, index) => (
                     <tr key={index}>
@@ -562,6 +567,9 @@ export default function ModalPopUp({
                       </td>
                       <td className="border border-gray-800 px-6 py-2">
                         {AggregateProcessedData[index]?.monotainer_id}
+                      </td>
+                      <td className="border border-gray-800 px-6 py-2">
+                        {AggregateFinalizedData[index]?.monotainer_id}
                       </td>
                     </tr>
                   ))}

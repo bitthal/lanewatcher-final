@@ -141,12 +141,12 @@ function Dashboard() {
         />
         
         <span className="text-xl">Site: {value.site_id?value.site_id:drpdwnVaue[0]?.site_id}</span>
-        {totalLaneCount && totalLaneCount > 0  ?
+        {totalStats[0]?.Total_master_monoids && totalStats[0]?.Total_master_monoids > 0  ?
           
           <div
             className={`flex flex-boxShadow`}
           >
-            <div className={`flex flex-col left-card border rounded-md border-[#cccc] h-[70vh] p-10 m-2 pl-1 overflow-scroll mb-2 xl:h-[80vh] ${searchTerm && filteredData.length == 0 ? 'w-full' : 'w-auto'}`}>
+            <div className={`flex flex-col left-card border rounded-md border-[#cccc] h-[70vh] p-10 m-2 pl-1 overflow-scroll mb-2 xl:h-[80vh] w-full`}>
             
             {
               filteredData.length > 0 ? filteredData?.map((data, index) => (
@@ -155,7 +155,7 @@ function Dashboard() {
                       <PlanogramView data={data} showDashboardView={true} cameraId={totalStats[0].camera_id}/>
                     {/* </div> */}
                     {/* <div className="box-2 border rounded-md border-[##cccc] p-10 m-2"> */}
-                      <PieChart data={data} showDashboardView={true}/>
+                      <PieChart data={data}/>
                     {/* </div> */}
                   </div>
                 )) : 
@@ -163,7 +163,7 @@ function Dashboard() {
                 }
             </div>
             
-            <div className="right-card w-50 m-2 pl-1 xl:h-[80vh] h-[70vh]">
+            <div className="right-card w-25 m-2 pl-1 xl:h-[80vh] h-[70vh]">
               <h1 className="text-center align-center-element">
                 Overall Site Stats
               </h1>
@@ -176,29 +176,29 @@ function Dashboard() {
                         </span>
 
                         <span className="text-cs text-gray-300 w-full">
-                          {data?.Total_candapost_monoid}
+                          {data?.Total_monoid ? data?.Total_monoid : 0}/{data?.Total_master_monoids ? data?.Total_master_monoids : 0}
                         </span>
                       </p>
                     </li>
                     <li className="lists">
                       <p className="flex justify-around">
                         <span className="pr-5 flex align-center-element w-full">
-                          Active Monotainers
+                          Total Active Monotainers
                         </span>
 
                         <span className="text-cs text-gray-300 w-full">
-                          {data.Total_active_Monotainers}
+                          {data.Total_active_Monotainers ? data.Total_active_Monotainers : 0}
                         </span>
                       </p>
                     </li>
                     <li className="lists">
                       <p className="flex justify-around">
                         <span className="pr-5 flex align-center-element w-full">
-                          Misc assets
+                          Total Misc assets
                         </span>
 
                         <span className="text-cs text-gray-300 w-full">
-                          {data.Total_Misc_assets_count}
+                          {data?.Total_Misc_assets_count ? data?.Total_Misc_assets_count : data?.Total_Misc_assets_count}
                         </span>
                       </p>
                     </li>
@@ -208,7 +208,7 @@ function Dashboard() {
                           Total trucks
                         </span>
                         <span className="text-cs text-gray-300 w-full">
-                          {data.Total_No_Of_Trucks}
+                          {data?.Total_No_Of_Trucks ? data?.Total_No_Of_Trucks : 0}
                         </span>
                       </p>
                     </li>
@@ -219,7 +219,7 @@ function Dashboard() {
                         </span>
 
                         <span className="text-cs text-gray-300 w-full">
-                          {data.Total_lanes}
+                          {data?.Total_lanes ? data?.Total_lanes : 0}
                         </span>
                       </p>
                     </li>
@@ -230,7 +230,7 @@ function Dashboard() {
                         </span>
 
                         <span className="text-cs text-gray-300 w-full">
-                          {data.Total_sorted}
+                          {data?.Total_sorted ? data?.Total_sorted : 0} 
                         </span>
                       </p>
                     </li>
@@ -241,7 +241,7 @@ function Dashboard() {
                         </span>
 
                         <span className="text-cs text-gray-300 w-full">
-                          {data.Total_Processed}
+                          {data?.Total_Processed ? data?.Total_Processed : 0}
                         </span>
                       </p>
                     </li>
@@ -252,13 +252,27 @@ function Dashboard() {
                         </span>
 
                         <span className="text-cs text-gray-300 w-full">
-                          {data.Total_finalized}
+                          {data?.Total_finalized ? data?.Total_finalized : 0}
+                        </span>
+                      </p>
+                    </li>
+                    <li className="lists">
+                      <p className="flex justify-around">
+                        <span className="pr-5 flex align-center-element w-full">
+                          Total Misplaced
+                        </span>
+
+                        <span className="text-cs text-gray-300 w-full">
+                          {data.Total_misplaced ? data.Total_misplaced : 0}
                         </span>
                       </p>
                     </li>
                   </ul>
                 ))}
+                {/* <PieChart data={totalStats}/> */}
+
             </div>
+
           </div>
           :
           <div className="flex flex-boxShadow align-center justify-center">

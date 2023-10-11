@@ -67,7 +67,7 @@ function PieChart(res) {
     series: [
       {
         colorByPoint: true,
-        center: [250, 180],
+        center: [280, 180],
         data: [
           {
             name: "Sorted",
@@ -78,13 +78,14 @@ function PieChart(res) {
             y: 20,
           },
           {
-            name: "Missing",
+            name: "Misplaced",
             y: 30,
           },
           {
             name: "Finalized",
             y: 40,
           },
+          
         ],
       },
     ],
@@ -98,7 +99,7 @@ function PieChart(res) {
   }, [res]);
 
   return (
-    <div className="w-auto">
+    <div className="w-auto high-charts">
         <HighchartsReact
           ref={elementRef}
           highcharts={Highcharts}

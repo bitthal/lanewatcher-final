@@ -71,7 +71,7 @@ export default function PlanogramView({
     <Fragment>
       {showDashboardView ? (
         <div
-          className={` px-5 py-5 flex flex-col h-96 gap-8 justify-between w-auto bg-white planogramBox`}
+          className={` px-5 py-5 flex flex-col h-96 gap-8 justify-between w-full bg-white planogramBox`}
         >
           <div className={`flex gap-4 justify-between items-center w-auto`}>
             <svg
@@ -87,7 +87,7 @@ export default function PlanogramView({
               />
             </svg>
 
-            <span className="text-primary2 text-xl">Planogram View</span>
+            <span className="text-primary2 text-xxl">Planogram View</span>
 
             <button onClick={getAlertHandler} className="relative">
               <i className="fa-solid fa-bell text-2xl " />
@@ -115,7 +115,7 @@ export default function PlanogramView({
                 <p className="text-center big-text">
                   {data && data?.pending?.length}
                 </p>
-                <p className="text-center text-xl">Sorted</p>
+                <p className="text-center text-lg">Sorted</p>
               </div>
             </div>
 
@@ -124,16 +124,16 @@ export default function PlanogramView({
                 <p className="text-center big-text">
                   {data && data?.processed?.length}
                 </p>
-                <p className="text-center text-xl">Processed</p>
+                <p className="text-center text-lg">Processed</p>
               </div>
             </div>
 
             <div className="p-2 border rounded-md border-[#434190] py-auto">
               <div className="text-[#434190] relative">
                 <p className="text-center big-text">
-                  {data && data?.misplaced?.length}
+                  {data && data?.misplaced?.length ? data?.misplaced?.length : 0}
                 </p>
-                <p className="text-center text-xl">Misplaced</p>
+                <p className="text-center text-lg">Misplaced</p>
               </div>
             </div>
             <div className="p-2 border rounded-md border-[#434190] py-auto">
@@ -141,7 +141,7 @@ export default function PlanogramView({
                 <p className="text-center big-text">
                   {data && data?.finalized?.length}
                 </p>
-                <p className="text-center text-xl">Finalized</p>
+                <p className="text-center text-lg">Finalized</p>
               </div>
             </div>
           </div>
@@ -277,6 +277,7 @@ export default function PlanogramView({
           AllData={[data]}
           AggregatePendingData={data.pending?.monotainers ? data.pending?.monotainers : data?.pending}
           AggregateRealTimeData={data.real_time_positions?.monotainers ? data.real_time_positions?.monotainers : data?.misplaced}
+          AggregateFinalizedData={data.finalized?.monotainers ? data.finalized?.monotainers : data?.finalized}
           AggregateProcessedData={data.processed?.monotainers ? data.processed?.monotainers : data?.processed}
           modalState={aggregateResult}
           closeModalPopUp={closeModalPopUp}

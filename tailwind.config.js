@@ -48,6 +48,7 @@ module.exports = {
         vh20: "20vh",
       },
       width: {
+        25:'25%',
         90: "22.5rem",
         98: "28rem",
         99: "30rem",
