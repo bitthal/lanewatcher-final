@@ -71,7 +71,7 @@ export default function PlanogramView({
     <Fragment>
       {showDashboardView ? (
         <div
-          className={` px-5 py-5 flex flex-col h-96 gap-8 justify-between w-fit-content bg-white xl:w-full planogramBox`}
+          className={` px-5 py-5 flex flex-col h-96 gap-8 justify-between w-fit-content bg-white xl:w-auto planogramBox`}
         >
           <div className={`flex gap-4 justify-between items-center w-auto`}>
             <svg

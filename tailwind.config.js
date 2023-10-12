@@ -9,11 +9,12 @@ module.exports = {
 
   theme: {
     extend: {
-      screens: {
-        'xl': '1910px',
-      },
       fontFamily: {
+        boxed: ['BoxedFont', 'sans'], // Define a custom font family named 'boxed'
         sans: ["OpenSansExtraBold", "sans-serif"],
+      },
+      screens: {
+        'xl': '992px',
       },
       fontSize: {
         sm: ['14px', '20px'],
@@ -51,10 +52,13 @@ module.exports = {
         vh20: "20vh",
       },
       width: {
-        25:'25%',
+
+        25:'40%',
+        60:'60%',
         90: "22.5rem",
         98: "28rem",
         99: "30rem",
+        100:'100%'
       },
       maxWidth: {
         "8xl": "85rem",

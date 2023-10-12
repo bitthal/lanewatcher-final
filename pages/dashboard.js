@@ -119,19 +119,19 @@ function Dashboard() {
         />
 
         
-        <h1 className="text-xl">Site: {value.site_id?value.site_id:drpdwnVaue[0]?.site_id}</h1>
+        <h1 className="text-primary2 text-xxl w-60 text-center font-boxed font-extrabold">SiteId:{value.site_id?value.site_id:drpdwnVaue[0]?.site_id}</h1>
 
         {totalStats[0]?.Total_master_monoids && totalStats[0]?.Total_master_monoids > 0  ?
           
           <div
             className={`flex flex-boxShadow`}
           >
-            <div className={`flex flex-col left-card border rounded-md border-[#cccc] h-[70vh] p-10 m-2 pl-1 overflow-scroll mb-2 xl:h-[80vh] w-full`}>
+            <div className={`flex flex-col left-card border rounded-md border-[#cccc] h-[70vh] p-10 m-2 pl-1 overflow-scroll mb-2 xl:h-[80vh] w-full 2xl:w-60`}>
             
 
             {
               filteredData.length > 0 ? filteredData?.map((data, index) => (
-                  <div className="flex" key={index}>
+                  <div className="flex m-auto" key={index}>
                     {/* <div className="box-1 border rounded-md border-[##cccc] p-10 m-2"> */}
                       <PlanogramView data={data} showDashboardView={true} cameraId={totalStats[0].camera_id}/>
                     {/* </div> */}

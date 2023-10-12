@@ -240,7 +240,7 @@ export default function Header2({
               <div className="flex-1">
                 <div className="flex items-center w-full">
                   <input
-                    className="flex-1 h-full pr-4 py-2 focus:outline-none block"
+                    className="flex-1 h-full pr-4 py-2 focus:outline-none block text-2xl"
                     placeholder="Enter Montainer/Lane Name:"
                     type="text"
                     id="message"

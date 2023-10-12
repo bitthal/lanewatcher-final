@@ -504,7 +504,7 @@ div#daterangepicker {
 }
 .right-card{
   height: auto;
-  width: 25%;
+  width: 40%;
 }
 
 .left-card{
@@ -539,7 +539,7 @@ div#daterangepicker {
 }
 
 .planogramBox{
-  box-shadow: 2px -1px 5px 0px #cacacd;
+  box-shadow: 0px -1px 5px 0px #cacacd;
 }
 /* Larger font sizes for desktop screens */
 @media (min-width: 2560px) {
@@ -549,7 +549,7 @@ div#daterangepicker {
   }
 
   .align-center-element {
-    font-size: medium;
+    font-size: x-large;
   }
   .lists{
     background: #edededcc;
@@ -569,7 +569,23 @@ div#daterangepicker {
   }
 
   .align-center-element {
-    font-size: medium;
+    font-size: x-large;
+  }
+}
+@media (min-width: 2560px) {
+  .lists{
+    background: #edededcc;
+    box-shadow: 0px 2px 1px 0px #1a1a1b;
+    padding: 10px;
+  }
+  .text-cs {
+    font-size: 45px;
+    line-height: 1.5;
+    color: #0e0e0f;
+  }
+
+  .align-center-element {
+    font-size: x-large;
   }
 }
 
@@ -601,4 +617,10 @@ div#daterangepicker {
 * {
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
+}
+
+div#DateRangePickerChildren {
+  display: flex;
+  cursor: pointer!important;
+  pointer-events: fill!important;
 }
