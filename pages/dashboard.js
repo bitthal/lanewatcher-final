@@ -119,12 +119,13 @@ function Dashboard() {
         />
 
         
-        <h1 className="text-primary2 text-xxl w-60 text-center font-boxed font-extrabold">SiteId:{value.site_id?value.site_id:drpdwnVaue[0]?.site_id}</h1>
+        <h1 className="text-primary2 text-xxl w-60 text-center font-boxed font-extrabold">
+          <span>SITE-ID: &nbsp;{value.site_id?value.site_id:drpdwnVaue[0]?.site_id}</span></h1>
 
         {totalStats[0]?.Total_master_monoids && totalStats[0]?.Total_master_monoids > 0  ?
           
           <div
-            className={`flex flex-boxShadow`}
+            className={`flex flex-boxShadow flex-col md:flex-row`}
           >
             <div className={`flex flex-col left-card border rounded-md border-[#cccc] h-[70vh] p-10 m-2 pl-1 overflow-scroll mb-2 xl:h-[80vh] w-full 2xl:w-60`}>
             

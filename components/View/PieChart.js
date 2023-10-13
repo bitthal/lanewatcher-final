@@ -87,7 +87,7 @@ function PieChart(res) {
           {
             name: "Finalized",
             y: res?.data?.finalized?.length,
-            color:'#0373fc'
+            color:'#2a2e67'
           },
           
         ],
