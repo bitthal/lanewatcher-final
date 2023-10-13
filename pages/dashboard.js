@@ -216,7 +216,7 @@ function Dashboard() {
                         </span>
                       </p>
                     </li>
-                    <li className="lists">
+                    {/* <li className="lists">
                       <p className="flex flex-col xl:flex-col-xl">
                         <span className="flex align-center-element w-full">
                           Total Processed
@@ -226,7 +226,7 @@ function Dashboard() {
                           {data?.Total_Processed ? data?.Total_Processed : 0}
                         </span>
                       </p>
-                    </li>
+                    </li> */}
                     <li className="lists">
                       <p className="flex flex-col xl:flex-col-xl">
                         <span className="flex align-center-element w-full">

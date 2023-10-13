@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
+import Link from "next/link";
 import Leftbar from "@/components/Leftbar";
 import Header2 from "@/components/Header2";
 import View from "@/components/View/View";
-import Custom404 from "./404";
+// import Custom404 from "./404";
 import axios from "axios";
 import { useRouter } from "next/router";
 import withAuth from "@/utils/withAuth";
@@ -122,15 +123,15 @@ const filteredLaneCount = Alldata?.filter((lane) => {
   const fetchData = async () => {
 
     setLoader(true);
-    // try {
-    //   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
-    //   setLoader(false);
-    //   setAlldata(response?.data?.lanes);
-    //   setLaneNames(response?.data?.lanes);
-    // } catch (error) {
-    //   setLoader(false);
-    //   console.error("Error:", error);
-    // }
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
+      setLoader(false);
+      setAlldata(response?.data?.lanes);
+      setLaneNames(response?.data?.lanes);
+    } catch (error) {
+      setLoader(false);
+      console.error("Error:", error);
+    }
   };
 
   useEffect(() => {
@@ -171,9 +172,10 @@ const filteredLaneCount = Alldata?.filter((lane) => {
             />
 
           <div className={`flex flex-col gap-8 mt-5`}>
-            <Custom404/>
-            {/* {searchTerm
-              ? filteredLanes
+            {/* <Custom404/> */}
+            {searchTerm && Alldata
+              ? 
+              filteredLanes
                   ?.sort((a, b) => a.lane_number - b.lane_number)
                   .map((data, index) => (
                     <div className="" key={index}>
@@ -189,7 +191,8 @@ const filteredLaneCount = Alldata?.filter((lane) => {
                       />
                     </div>
                   ))
-              : Alldata?.sort((a, b) => a.lane_number - b.lane_number).map(
+              :  Alldata ? 
+                 Alldata?.sort((a, b) => a.lane_number - b.lane_number).map(
                   (data, index) => (
                     <div className="" key={index}>
                       <View
@@ -203,8 +206,20 @@ const filteredLaneCount = Alldata?.filter((lane) => {
                         showRealTimeView={showRealTimeView ? false : true}
                       />
                     </div>
-                  )
-                )} */}
+                    
+                  ) 
+                ):  
+                <div className="flex flex-col">
+                  <p className="text-center text-xxl m-auto"> No data Available!
+                    </p>
+                     <Link
+                 className="hover:underline hover:text-indigo-800 text-indigo-800 text-center text-xxl m-auto"
+                 href="/dashboard"
+               >
+                 Go to Dashboard Page
+               </Link>
+               </div>
+               }
           </div>
         </div>
       

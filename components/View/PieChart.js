@@ -75,11 +75,6 @@ function PieChart(res) {
             color:'#03a33e'
           },
           {
-            name: "Processed",
-            y: res?.data?.processed?.length,
-            color:'#fcba03'
-          },
-          {
             name: "Misplaced",
             y: res?.data?.misplaced?.length,
             color:'#a3030e'

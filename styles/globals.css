@@ -624,3 +624,19 @@ div#DateRangePickerChildren {
   cursor: pointer!important;
   pointer-events: fill!important;
 }
+
+.ReactModal__Content {
+  transition: all 0.3s ease; /* Add animation to the modal content */
+  transform: scale(0.8);
+  opacity: 0;
+}
+
+.ReactModal__Content--after-open {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.ReactModal__Content--before-close {
+  transform: scale(0.8);
+  opacity: 0;
+}

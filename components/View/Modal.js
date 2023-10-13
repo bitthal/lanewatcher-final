@@ -541,9 +541,9 @@ export default function ModalPopUp({
                     <th className="px-6 py-3 text-xs   text-left text-white uppercase">
                       Misplaced
                     </th>
-                    <th className="px-6 py-3 text-xs   text-left text-white uppercase">
+                    {/* <th className="px-6 py-3 text-xs   text-left text-white uppercase">
                       Processed
-                    </th>
+                    </th> */}
                     <th className="px-6 py-3 text-xs   text-left text-white uppercase">
                       Finalized
                     </th>
@@ -554,7 +554,7 @@ export default function ModalPopUp({
                     length: Math.max(
                       AggregatePendingData.length,
                       AggregateRealTimeData.length,
-                      AggregateProcessedData.length,
+                      // AggregateProcessedData.length,
                       AggregateFinalizedData.length
                     ),
                   }).map((_, index) => (
@@ -565,9 +565,9 @@ export default function ModalPopUp({
                       <td className="border border-gray-800 px-6 py-2">
                         {AggregateRealTimeData[index]?.monotainer_id}
                       </td>
-                      <td className="border border-gray-800 px-6 py-2">
+                      {/* <td className="border border-gray-800 px-6 py-2">
                         {AggregateProcessedData[index]?.monotainer_id}
-                      </td>
+                      </td> */}
                       <td className="border border-gray-800 px-6 py-2">
                         {AggregateFinalizedData[index]?.monotainer_id}
                       </td>

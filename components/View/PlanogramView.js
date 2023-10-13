@@ -119,14 +119,14 @@ export default function PlanogramView({
               </div>
             </div>
 
-            <div className="p-2 border rounded-md border-[#434190] py-auto ">
+            {/* <div className="p-2 border rounded-md border-[#434190] py-auto ">
               <div className=" text-[#434190] relative   ">
                 <p className="text-center big-text">
                   {data && data?.processed?.length}
                 </p>
                 <p className="text-center text-lg">Processed</p>
               </div>
-            </div>
+            </div> */}
 
             <div className="p-2 border rounded-md border-[#434190] py-auto">
               <div className="text-[#434190] relative">
@@ -162,8 +162,7 @@ export default function PlanogramView({
                 className={`${
                   data &&
                   data?.misplaced?.length +
-                    data?.pending?.length +
-                    data?.processed?.length >
+                    data?.pending?.length >
                     0
                     ? ""
                     : "disabled"
@@ -174,8 +173,9 @@ export default function PlanogramView({
                 {data &&
                   data?.misplaced?.length +
                     data?.pending?.length +
-                    data?.finalized?.length +
-                    data?.processed?.length}
+                    data?.finalized?.length
+                    // + data?.processed?.length
+                    }
               </button>
             </div>
           </div>
@@ -279,7 +279,7 @@ export default function PlanogramView({
           AggregatePendingData={data.pending?.monotainers ? data.pending?.monotainers : data?.pending}
           AggregateRealTimeData={data.real_time_positions?.monotainers ? data.real_time_positions?.monotainers : data?.misplaced}
           AggregateFinalizedData={data.finalized?.monotainers ? data.finalized?.monotainers : data?.finalized}
-          AggregateProcessedData={data.processed?.monotainers ? data.processed?.monotainers : data?.processed}
+          // AggregateProcessedData={data.processed?.monotainers ? data.processed?.monotainers : data?.processed}
           modalState={aggregateResult}
           closeModalPopUp={closeModalPopUp}
         ></ModalPopUp>
