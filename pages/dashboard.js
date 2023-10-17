@@ -226,15 +226,10 @@ function Dashboard() {
                               </div>
                               <div className="right-card w-25 m-2 pl-1 xl:h-[80vh] h-[70vh]">
                                 <h1 className="text-xl text-center p-3">
-                                  <span>CNP1: Overall Site Stats</span>
+                                  <span>: Overall Site Stats</span>
                                 </h1>
                                 <table className="w-full border-collapse border border-[#cccc]">
-                                  <thead>
-                                    <tr>
-                                      <th className="text-center text-primary2 text-xl">Category</th>
-                                      <th className="text-center text-primary2 text-xl">Total</th>
-                                    </tr>
-                                  </thead>
+                                  
                                   <tbody>
                                     {/* Skeleton for the table rows */}
                                     <tr className="border border-[#cccc]">
