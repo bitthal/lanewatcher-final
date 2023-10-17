@@ -119,15 +119,17 @@ function Dashboard() {
         />
 
         
-        <h1 className="text-primary2 text-xxl w-60 text-center font-boxed font-extrabold">
-          <span>SITE-ID: &nbsp;{value.site_id?value.site_id:drpdwnVaue[0]?.site_id}</span></h1>
+        {/* <h1 className="text-primary2 text-xxl w-60 text-center font-boxed font-extrabold">
+          </h1> */}
 
         {totalStats[0]?.Total_master_monoids && totalStats[0]?.Total_master_monoids > 0  ?
           
           <div
-            className={`flex flex-boxShadow flex-col md:flex-row`}
+            className={`flex flex-boxShadow flex-col md:flex-row with-lines`}
           >
-            <div className={`flex flex-col left-card border rounded-md border-[#cccc] h-[70vh] p-10 m-2 pl-1 overflow-scroll mb-2 xl:h-[80vh] w-full 2xl:w-60`}>
+            <div className="flex flex-col w-full 2xl:w-60 text-center lg:text-xxl text-xl p-3">
+              <p>Lanewise Stats</p>
+            <div className={`flex flex-col left-card border rounded-md border-[#cccc] h-[70vh] p-10 m-2 pl-1 overflow-scroll mb-2 xl:h-[80vh]`}>
             
 
             {
@@ -144,122 +146,108 @@ function Dashboard() {
                 <div className="w-full"><p className="text-center">No data available</p></div>
                 }
             </div>
-            
-            <div className="right-card w-25 m-2 pl-1 xl:h-[80vh] h-[70vh]">
-            <h1 className="text-xl text-center">
-                Overall Site Stats
-              </h1>
-                {totalStats.map((data, index) => (
-                  <ul key={index}>
-                    <li className="lists">
-                      <p className="flex flex-col xl:flex-col-xl">
-                        <span className="flex align-center-element w-full">
-                          Total Monotainers
-                        </span>
-
-                        <span className="text-cs text-gray-300 w-full">
-                          {data?.Total_monoid ? data?.Total_monoid : 0}/{data?.Total_master_monoids ? data?.Total_master_monoids : 0}
-                        </span>
-                      </p>
-                    </li>
-                    <li className="lists">
-                      <p className="flex flex-col xl:flex-col-xl">
-                        <span className="flex align-center-element w-full">
-                          Total Active Monotainers
-                        </span>
-
-                        <span className="text-cs text-gray-300 w-full">
-                          {data.Total_active_Monotainers ? data.Total_active_Monotainers : 0}
-                        </span>
-                      </p>
-                    </li>
-                    <li className="lists">
-                      <p className="flex flex-col xl:flex-col-xl">
-                        <span className="flex align-center-element w-full">
-                          Total Misc assets
-                        </span>
-
-                        <span className="text-cs text-gray-300 w-full">
-                          {data?.Total_Misc_assets_count ? data?.Total_Misc_assets_count : data?.Total_Misc_assets_count}
-                        </span>
-                      </p>
-                    </li>
-                    <li className="lists">
-                      <p className="flex flex-col xl:flex-col-xl">
-                        <span className="flex align-center-element w-full">
-                          Total trucks
-                        </span>
-                        <span className="text-cs text-gray-300 w-full">
-                          {data?.Total_No_Of_Trucks ? data?.Total_No_Of_Trucks : 0}
-                        </span>
-                      </p>
-                    </li>
-                    <li className="lists">
-                      <p className="flex flex-col xl:flex-col-xl">
-                        <span className="flex align-center-element w-full">
-                          Total lanes
-                        </span>
-
-                        <span className="text-cs text-gray-300 w-full">
-                          {data?.Total_lanes ? data?.Total_lanes : 0}
-                        </span>
-                      </p>
-                    </li>
-                    <li className="lists">
-                      <p className="flex flex-col xl:flex-col-xl">
-                        <span className="flex align-center-element w-full">
-                          Total Sorted
-                        </span>
-
-                        <span className="text-cs text-gray-300 w-full">
-                          {data?.Total_sorted ? data?.Total_sorted : 0} 
-                        </span>
-                      </p>
-                    </li>
-                    {/* <li className="lists">
-                      <p className="flex flex-col xl:flex-col-xl">
-                        <span className="flex align-center-element w-full">
-                          Total Processed
-                        </span>
-
-                        <span className="text-cs text-gray-300 w-full">
-                          {data?.Total_Processed ? data?.Total_Processed : 0}
-                        </span>
-                      </p>
-                    </li> */}
-                    <li className="lists">
-                      <p className="flex flex-col xl:flex-col-xl">
-                        <span className="flex align-center-element w-full">
-                          Total Finalized
-                        </span>
-
-                        <span className="text-cs text-gray-300 w-full">
-                          {data?.Total_finalized ? data?.Total_finalized : 0}
-                        </span>
-                      </p>
-                    </li>
-                    <li className="lists">
-                      <p className="flex flex-col xl:flex-col-xl">
-                        <span className="flex align-center-element w-full">
-                          Total Misplaced
-                        </span>
-
-                        <span className="text-cs text-gray-300 w-full">
-                          {data.Total_misplaced ? data.Total_misplaced : 0}
-                        </span>
-                      </p>
-                    </li>
-                    
-                  </ul>
-                ))}
-                {/* <PieChart data={totalStats}/> */}
-
             </div>
-
+            <div className="right-card w-25 m-2 pl-1 xl:h-[80vh] h-[70vh]">
+              <h1 className="text-xl text-center p-3 lg:text-xxl text-xl">
+                <span>{value.site_id ? value.site_id : drpdwnVaue[0]?.site_id} : </span>Overall Site Stats
+              </h1>
+              <table className="w-full border-collapse border border-[#cccc]">
+                {/* <thead>
+                  <tr className="">
+                    <th className=" text-center text-primary2 lg:text-xxl text-xl">Category</th>
+                    <th className=" text-center text-primary2 lg:text-xxl text-xl">Total</th>
+                  </tr>
+                </thead> */}
+                {totalStats.map((data, index) => (
+                  <tbody key={index}>
+                    <tr className="border border-[#cccc]">
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] lg:text-xl text-md">Total Monotainers</td>
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] text-xl lg:text-xxxl">
+                        {data?.Total_monoid ? data?.Total_monoid : 0}/{data?.Total_master_monoids ? data?.Total_master_monoids : 0}
+                      </td>
+                    </tr>
+                    <tr className="border border-[#cccc]">
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] lg:text-xl text-md">Total Active Monotainers</td>
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] text-xl lg:text-xxxl">
+                        {data.Total_active_Monotainers ? data.Total_active_Monotainers : 0}
+                      </td>
+                    </tr>
+                    <tr className="border border-[#cccc]">
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] lg:text-xl text-md">Total Misc assets</td>
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] text-xl lg:text-xxxl">
+                        {data?.Total_Misc_assets_count ? data?.Total_Misc_assets_count : data?.Total_Misc_assets_count}
+                      </td>
+                    </tr>
+                    <tr className="border border-[#cccc]">
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] lg:text-xl text-md">Total trucks</td>
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] text-xl lg:text-xxxl">
+                        {data?.Total_No_Of_Trucks ? data?.Total_No_Of_Trucks : 0}
+                      </td>
+                    </tr>
+                    <tr className="border border-[#cccc]">
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] lg:text-xl text-md">Total lanes</td>
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] text-xl lg:text-xxxl">
+                        {data?.Total_lanes ? data?.Total_lanes : 0}
+                      </td>
+                    </tr>
+                    <tr className="border border-[#cccc]">
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] lg:text-xl text-md">Total Sorted</td>
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] text-xl lg:text-xxxl">
+                        {data?.Total_sorted ? data?.Total_sorted : 0}
+                      </td>
+                    </tr>
+                    <tr className="border border-[#cccc]">
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] lg:text-xl text-md">Total Finalized</td>
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] text-xl lg:text-xxxl">
+                        {data?.Total_finalized ? data?.Total_finalized : 0}
+                      </td>
+                    </tr>
+                    <tr className="border border-[#cccc]">
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] lg:text-xl text-md">Total Misplaced</td>
+                      <td className="border border-[#cccc] p-2 text-center text-[#434190] text-xl lg:text-xxxl">
+                        {data.Total_misplaced ? data.Total_misplaced : 0}
+                      </td>
+                    </tr>
+                  </tbody>
+                ))}
+              </table>
+            </div>
           </div>
-          :
-          <div className="flex flex-boxShadow align-center justify-center">
-            <p className="text-"center>No data available</p></div>
+                              :
+                              <div className="flex flex-boxShadow flex-col md:flex-row">
+                              <div className="flex flex-col w-full 2xl:w-60 text-center text-xl p-3">
+                                <p>Lanewise Stats</p>
+                                <div className="flex flex-col left-card border rounded-md border-[#cccc] h-[70vh] p-10 m-2 pl-1 overflow-scroll mb-2 xl:h-[80vh]">
+                                  {/* Skeleton for the PlanogramView and PieChart */}
+                                  <div className="skeleton-box"></div>
+                                  <div className="skeleton-box"></div>
+                                  {/* Repeat the above skeleton elements for as many data items as needed */}
+                                </div>
+                              </div>
+                              <div className="right-card w-25 m-2 pl-1 xl:h-[80vh] h-[70vh]">
+                                <h1 className="text-xl text-center p-3">
+                                  <span>CNP1: Overall Site Stats</span>
+                                </h1>
+                                <table className="w-full border-collapse border border-[#cccc]">
+                                  <thead>
+                                    <tr>
+                                      <th className="text-center text-primary2 text-xl">Category</th>
+                                      <th className="text-center text-primary2 text-xl">Total</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {/* Skeleton for the table rows */}
+                                    <tr className="border border-[#cccc]">
+                                      <td className="border border-[#cccc] p-2 text-center text-[#434190]">Total Monotainers</td>
+                                      <td className="border border-[#cccc] p-2 text-center text-[#434190] text-xl">0</td>
+                                    </tr>
+                                    {/* Repeat the above skeleton elements for other table rows */}
+                                    
+                                  </tbody>
+                                </table>
+                              </div>
+                              
+                            </div>
         }
       </div>
     </>

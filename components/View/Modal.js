@@ -12,6 +12,9 @@ export default function ModalPopUp({
   tempName,
   openTableModalBox,
   AllData,
+  pendingID,
+  misplacedID,
+  finalizedID,
   AggregatePendingData,
   AggregateRealTimeData,
   AggregateProcessedData,
@@ -568,6 +571,101 @@ export default function ModalPopUp({
                       {/* <td className="border border-gray-800 px-6 py-2">
                         {AggregateProcessedData[index]?.monotainer_id}
                       </td> */}
+                      <td className="border border-gray-800 px-6 py-2">
+                        {AggregateFinalizedData[index]?.monotainer_id}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+        {pendingID && (
+          <div className="">
+            <h5 className="text-center text-xl mb-2">Sorted ID'S</h5>
+
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-[#2a2e67]">
+                  {/* Add custom-thead class here */}
+                  <tr>
+                    <th className="px-6 py-3 text-xs   text-left text-white uppercase">
+                      Sorted
+                    </th>
+                   
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {Array.from({
+                    length: Math.max(
+                      AggregatePendingData.length,
+                    ),
+                  }).map((_, index) => (
+                    <tr key={index}>
+                      <td className="border border-gray-800 px-4 py-2">
+                        {AggregatePendingData[index]?.monotainer_id}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+        {misplacedID && (
+          <div className="">
+            <h5 className="text-center text-xl mb-2">Misplaced ID'S</h5>
+
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-[#2a2e67]">
+                  {/* Add custom-thead class here */}
+                  <tr>
+                    <th className="px-6 py-3 text-xs   text-left text-white uppercase">
+                      Misplaced
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {Array.from({
+                    length: Math.max(
+                      AggregateRealTimeData.length,
+                    ),
+                  }).map((_, index) => (
+                    <tr key={index}>
+                      <td className="border border-gray-800 px-6 py-2">
+                        {AggregateRealTimeData[index]?.monotainer_id}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+        {finalizedID && (
+          <div className="">
+            <h5 className="text-center text-xl mb-2">Finalized ID'S</h5>
+
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-[#2a2e67]">
+                  {/* Add custom-thead class here */}
+                  <tr>
+                    <th className="px-6 py-3 text-xs   text-left text-white uppercase">
+                      Finalized
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {Array.from({
+                    length: Math.max(
+
+                      AggregateFinalizedData.length
+                    ),
+                  }).map((_, index) => (
+                    <tr key={index}>
                       <td className="border border-gray-800 px-6 py-2">
                         {AggregateFinalizedData[index]?.monotainer_id}
                       </td>

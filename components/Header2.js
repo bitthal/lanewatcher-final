@@ -234,9 +234,9 @@ export default function Header2({
   return (
     <Fragment>
       <div className="mt-5 flex items-center lg:flex-row gap-4 lg:items-center justify-between ">
-        <div className="lg:w-full lg:mb-0">
+        <div className="w-full">
           {showSearchBar && (
-            <div className="border border-gray-300 flex items-center overflow-clip rounded-md px-2 md:px-5 h-10 lg:w-116 z-9">
+            <div className="border border-gray-300 flex items-center overflow-clip rounded-md px-2 md:px-5 h-10 lg:w-116 z-9 h-auto">
               <div className="flex-1">
                 <div className="flex items-center w-full">
                   <input
@@ -432,7 +432,9 @@ export default function Header2({
           </div>
         )}
         {router == "Dashboard" && isClient && (
-          <div className="flex flex-col lg:flex-row items-center border-0 mb-8 w-full cursor-pointer">
+
+          <div className="flex flex-row lg:flex-colborder-0 mb-16 mt-8 w-full cursor-pointer">
+            <p className="mt-2 lg:text-xxl text-xl">Date Range:</p>
             <DateTimePicker
               primaryColor="fuchsia"
               ranges={ranges}

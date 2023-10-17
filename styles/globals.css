@@ -514,7 +514,7 @@ div#daterangepicker {
 }
 
 .lists{
-  background: #edededcc;
+  /* background: #edededcc; */
   box-shadow: 0px 2px 1px 0px #1a1a1b;
   padding: 5px;
 }
@@ -526,7 +526,7 @@ div#daterangepicker {
 .text-cs {
   font-size: 24px;
   line-height: 1;
-  color: #0e0e0f;
+  color: #434190;
 }
 
 .align-center-element {
@@ -545,27 +545,27 @@ div#daterangepicker {
 @media (min-width: 2560px) {
   .text-cs {
     font-size: 65px;
-    color: #0e0e0f;
+    color: #434190;
   }
 
   .align-center-element {
     font-size: x-large;
   }
   .lists{
-    background: #edededcc;
+    /* background: #edededcc; */
     box-shadow: 0px 2px 1px 0px #1a1a1b;
     padding: 15px;
   }
 }
 @media (min-width: 1920px) {
   .lists{
-    background: #edededcc;
+    /* background: #edededcc; */
     box-shadow: 0px 2px 1px 0px #1a1a1b;
     padding: 10px;
   }
   .text-cs {
     font-size: 45px;
-    color: #0e0e0f;
+    color: #434190;
   }
 
   .align-center-element {
@@ -574,14 +574,14 @@ div#daterangepicker {
 }
 @media (min-width: 2560px) {
   .lists{
-    background: #edededcc;
+    /* background: #edededcc; */
     box-shadow: 0px 2px 1px 0px #1a1a1b;
     padding: 10px;
   }
   .text-cs {
     font-size: 45px;
     line-height: 1.5;
-    color: #0e0e0f;
+    color: #434190;
   }
 
   .align-center-element {
@@ -623,6 +623,8 @@ div#DateRangePickerChildren {
   display: flex;
   cursor: pointer!important;
   pointer-events: fill!important;
+  padding-left: 30px;
+    box-shadow: 0px 4px 0px 0px #434190;
 }
 
 .ReactModal__Content {
@@ -640,3 +642,22 @@ div#DateRangePickerChildren {
   transform: scale(0.8);
   opacity: 0;
 }
+
+.skeleton-box {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  height: 100px; /* Adjust the height as needed */
+  margin: 10px; /* Adjust the margin as needed */
+}
+
+@keyframes loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+

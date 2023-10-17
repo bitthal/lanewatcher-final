@@ -18,6 +18,9 @@ export default function PlanogramView({
   const { value } = useContext(value_data);
   const [modalState, setModalOpen] = useState(false);
   const [aggregateResult, setAggregateResult] = useState(false);
+  const [pendingIds,setPendingIds] = useState(false);
+  const [misplacedIds,setMisplacedIds] = useState(false);
+  const [finalizedIds,setFinalizedIds] = useState(false);
   const [skeletonLoader, setLoader] = useState(false);
 
   const router =
@@ -61,19 +64,35 @@ export default function PlanogramView({
   }
   const closeModalPopUp = (data) => {
     setModalOpen(data);
+    setPendingIds(false);
+    setMisplacedIds(false);
+    setFinalizedIds(false);
     setAggregateResult(false);
   };
 
   const showAggregateIds = () => {
     setAggregateResult(true);
   };
+
+  const showPendingIds = () =>{
+    console.log(data,'data')
+    setPendingIds(true);
+  }
+  const showMisplacedIds = () =>{
+    console.log(data,'data')
+    setMisplacedIds(true);
+  }
+  const showFinalizedIds = () =>{
+    console.log(data,'data')
+    setFinalizedIds(true);
+  }
   return (
     <Fragment>
       {showDashboardView ? (
         <div
           className={` px-5 py-5 flex flex-col h-96 gap-8 justify-between w-fit-content bg-white xl:w-auto planogramBox`}
         >
-          <div className={`flex gap-4 justify-between items-center w-auto`}>
+          <div className={`flex gap-4 justify-around items-center w-auto`}>
             <svg
               width="26"
               height="26"
@@ -89,13 +108,13 @@ export default function PlanogramView({
 
             <span className="text-primary2 text-xxl">Planogram View</span>
 
-            <button onClick={getAlertHandler} className="relative">
+            {/* <button onClick={getAlertHandler} className="relative">
               <i className="fa-solid fa-bell text-2xl " />
               <span className=" flex h-3 w-3 absolute top-0 translate-x-1/2 right-0">
                 <span className="animate-ping absolute inline-flex h-full w-auto rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-700"></span>
               </span>
-            </button>
+            </button> */}
           </div>
 
           <div className="flex justify-between gap-4 items-center w-auto">
@@ -112,7 +131,7 @@ export default function PlanogramView({
           <div className="flex gap-4 justify-between items-center w-auto text-xs w-full">
             <div className="p-2 border rounded-md border-[#434190] py-auto">
               <div className=" text-[#434190] relative ">
-                <p className="text-center big-text">
+                <p className={`${data?.pending?.length > 0 ? ' cursor-pointer' : ' disabled' } text-center big-text` } onClick={showPendingIds}>
                   {data && data?.pending?.length}
                 </p>
                 <p className="text-center text-lg">Sorted</p>
@@ -130,7 +149,7 @@ export default function PlanogramView({
 
             <div className="p-2 border rounded-md border-[#434190] py-auto">
               <div className="text-[#434190] relative">
-                <p className="text-center big-text">
+                <p className={`${data?.misplaced?.length > 0 ? ' cursor-pointer' : ' disabled' } text-center big-text` } onClick={showMisplacedIds}>
                   {data && data?.misplaced?.length ? data?.misplaced?.length : 0}
                 </p>
                 <p className="text-center text-lg">Misplaced</p>
@@ -138,7 +157,7 @@ export default function PlanogramView({
             </div>
             <div className="p-2 border rounded-md border-[#434190] py-auto">
               <div className="text-[#434190] relative">
-                <p className="text-center big-text">
+                <p className={`${data?.finalized?.length > 0 ? ' cursor-pointer' : ' disabled' } text-center big-text` } onClick={showFinalizedIds}>
                   {data && data?.finalized?.length}
                 </p>
                 <p className="text-center text-lg">Finalized</p>
@@ -276,11 +295,35 @@ export default function PlanogramView({
       {aggregateResult && (
         <ModalPopUp
           AllData={[data]}
-          AggregatePendingData={data.pending?.monotainers ? data.pending?.monotainers : data?.pending}
-          AggregateRealTimeData={data.real_time_positions?.monotainers ? data.real_time_positions?.monotainers : data?.misplaced}
-          AggregateFinalizedData={data.finalized?.monotainers ? data.finalized?.monotainers : data?.finalized}
+          AggregatePendingData={data.pending ? data.pending : data?.pending}
+          AggregateRealTimeData={data.misplaced ? data.misplaced : data?.misplaced}
+          AggregateFinalizedData={data.finalized ? data.finalized : data?.finalized}
           // AggregateProcessedData={data.processed?.monotainers ? data.processed?.monotainers : data?.processed}
           modalState={aggregateResult}
+          closeModalPopUp={closeModalPopUp}
+        ></ModalPopUp>
+      )}
+      {pendingIds && (
+        <ModalPopUp
+          pendingID={true}
+          AggregatePendingData={data.pending ? data.pending : data?.pending}
+          modalState={pendingIds}
+          closeModalPopUp={closeModalPopUp}
+        ></ModalPopUp>
+      )}
+      {misplacedIds && (
+        <ModalPopUp
+          misplacedID={true}
+          AggregateRealTimeData={data.misplaced ? data.misplaced : data?.misplaced}
+          modalState={misplacedIds}
+          closeModalPopUp={closeModalPopUp}
+        ></ModalPopUp>
+      )}
+      {finalizedIds && (
+        <ModalPopUp
+          finalizedID={true}
+          AggregateFinalizedData={data.finalized ? data.finalized : data?.finalized}
+          modalState={finalizedIds}
           closeModalPopUp={closeModalPopUp}
         ></ModalPopUp>
       )}

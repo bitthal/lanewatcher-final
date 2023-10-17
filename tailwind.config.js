@@ -15,13 +15,15 @@ module.exports = {
       },
       screens: {
         'xl': '992px',
+        'lg': '1560px'
       },
       fontSize: {
-        sm: ['14px', '20px'],
-        base: ['16px', '24px'],
-        lg: ['20px', '28px'],
-        xl: ['24px', '32px'],
-        xxl:['32px', '45px']
+        sm: ['14px', '1'],
+        base: ['16px', '1'],
+        lg: ['20px', '1'],
+        xl: ['24px', '1'],
+        xxl:['32px', '1'],
+        xxxl:['48px', '1']
       },
       colors: {
         primary: "#A30000",
@@ -104,7 +106,10 @@ module.exports = {
     backgroundColor: ["responsive", "hover", "focus", "group-hover"],
     display: ["responsive", "group-hover", "group-focus"],
     extend: {
-      margin: ["last"],
+      margin: {
+        '1/2': '36px', // Custom margin value
+        'custom-margin': '10rem', // Another custom margin value
+      },
       backgroundColor: ["odd"],
     },
   },

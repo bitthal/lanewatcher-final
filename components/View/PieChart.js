@@ -1,113 +1,76 @@
-import React, { useState, useRef, useEffect } from "react";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-import HC_more from "highcharts/highcharts-more";
-import highcharts3d from "highcharts/highcharts-3d";
-import _ from "lodash";
 
+import React from "react";
+import { Pie } from "react-chartjs-2";
+import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 
-function PieChart(res) {
-  HC_more(Highcharts);
-  highcharts3d(Highcharts);
-  console.log(res,'resss')
-  const chartRef = useRef(null);
-  const elementRef = useRef();
-  // Define chartOptions once during component initialization
-  const chartOptions = {
-    credits: { enabled: false },
-    chart: {
-      type: "pie",
-      backgroundColor: 'Transparent',
-      spacingTop: 0,
-      spacingBottom: 0,
-      spacingLeft: 0,
-      spacingRight: 0,
-      animation: true,
-      options3d: {
-        enabled: true,
-        alpha: 5,
-        beta: 0,
-      },
-    },
-    title: { text: "" },
-    accessibility: {
-      point: {
-        valueSuffix: "%",
-      },
-    },
-    tooltip: {
-      pointFormat: "{series.name}: <b>{point.y}</b>",
-    },
-    plotOptions: {
-      pie: {
-        shadow: true,
-        cursor: "pointer",
-        depth: 100,
-        size: "50%",
-        animation: false
-      },
-      series: {
-        allowPointSelect: true,
-        dataLabels: {
-          enabled: true,
-          format: "{point.name}",
-          style: {
-            fontSize: "24px", // Set the desired font size here
-          },
-        },
-        // point: {
-        //   events: {
-        //     select: function () {
-        //       console.log("chart event", chart);
-        //     },
-        //   },
-        // },
-      },
-    },
-    series: [
+Chart.register(ArcElement, Tooltip, Legend);
+
+const PieChart = ({ data }) => {
+  const chartData = {
+    labels: ["Sorted", "Misplaced", "Finalized"],
+    datasets: [
       {
-        colorByPoint: true,
-        center: [280, 180],
-        data: [
-          {
-            name: "Sorted",
-            y: res?.data?.pending?.length,
-            color:'#03a33e'
-          },
-          {
-            name: "Misplaced",
-            y: res?.data?.misplaced?.length,
-            color:'#a3030e'
-          },
-          {
-            name: "Finalized",
-            y: res?.data?.finalized?.length,
-            color:'#2a2e67'
-          },
-          
-        ],
+        data: [data?.pending?.length, data?.misplaced?.length, data?.finalized?.length],
+        backgroundColor: ["#2ab7eb", "#6bc784", "#b8433d"],
+        borderColor: ["#ccc", "#ccc", "#ccc"],
+        borderWidth: 1,
       },
     ],
   };
 
-  useEffect(() => {
-    // Update the chart with new data only when res changes
-    if (chartRef.current) {
-      chartRef.current.update(chartOptions);
-    }
-  }, [res]);
+  const chartOptions = {
+    plugins: {
+      legend: {
+        display: true,
+        position: 'left',
+        labels: {
+          title: {
+            fontSize: '24px', // Adjust the font size as needed
+          },
+          formatter: (legendItem, chartData) => {
+            const dataset = chartData.datasets[0];
+            const total = dataset.data.reduce((a, b) => a + b, 0);
+            const percentage = ((dataset.data[legendItem.index] / total) * 100).toFixed(2) + '%';
+            return `${legendItem.text}: ${percentage}`;
+          },
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) =>
+            `${context.label}: ${context.formattedValue}`,
+        },
+      },
+    },
+    layout: {
+      padding: 20,
+    },
+    responsive: true,
+    maintainAspectRatio: true,
+  };
+  console.log(chartOptions.plugins,'cp',chartOptions.plugins.customTooltip)
+  chartOptions.plugins.tooltip.enabled = true; // Disable default tooltips
+
+  chartOptions.plugins.customTooltip = {
+    // Custom function to display data labels
+    callback: (context) => {
+      const dataset = context.chart.data.datasets[0];
+      const value = dataset.data[context.dataIndex];
+      return `${value}`;
+    },
+  };
+
+  // Apply CSS for a 3D-like effect
+  const chartContainerStyle = {
+    width: '400px',
+    height: '400px',
+  };
 
   return (
-    <div className="w-auto high-charts">
-        <HighchartsReact
-          ref={elementRef}
-          highcharts={Highcharts}
-          allowChartUpdate={true}
-          options={chartOptions}
-          size={screen}
-        />
+    <div style={chartContainerStyle}>
+      <Pie data={chartData} options={chartOptions} />
     </div>
   );
-}
+};
 
 export default PieChart;
