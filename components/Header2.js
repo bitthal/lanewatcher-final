@@ -433,7 +433,7 @@ export default function Header2({
         )}
         {router == "Dashboard" && isClient && (
 
-          <div className="flex flex-row lg:flex-colborder-0 mb-16 mt-8 w-full cursor-pointer">
+          <div className="flex border-0 mb-16 mt-8 w-full cursor-pointer">
             <p className="mt-2 lg:text-xxl text-xl">Date Range:</p>
             <DateTimePicker
               primaryColor="fuchsia"
@@ -464,7 +464,7 @@ export default function Header2({
                 value={`${range.start.format(
                   "DD-MM-YYYY"
                 )} - ${range.end.format("DD-MM-YYYY")}`}
-                className={`w-72 h-full py-2 px-2.5 cursor-pointer text-lg focus-visible:outline-none ${
+                className={`w-72 h-full py-2 cursor-pointer lg:text-lg text-xl focus-visible:outline-none ${
                   showBorder ? "border-0" : "border-0"
                 }`}
                 onClick={() => setShowBorder(!showBorder)} // Toggle the border style

@@ -15,7 +15,7 @@ module.exports = {
       },
       screens: {
         'xl': '992px',
-        'lg': '1560px'
+        'lg': '1920px'
       },
       fontSize: {
         sm: ['14px', '1'],

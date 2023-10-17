@@ -174,9 +174,9 @@ export default function Header() {
         </div> */}
         <div className="flex gap-16 items-center" >
           <Link href="/tracker" className="w-fit text-center text-white  ">
-            <Image src={Logo} width={30} height={30} alt="Logo"/>
+            <Image src={Logo} width={40} height={40} alt="Logo"/>
           </Link>
-          {router !== "404" && <p className="w-fit   text-white">{router}</p>}
+          {router !== "404" && <p className="w-fit text-white lg:text-xxl text-lg">{router}</p>}
         </div>
 
         {router !== "" && (
@@ -184,7 +184,7 @@ export default function Header() {
             {siteId && (
               <select
                 label="Global Site Selection:-"
-                className="w-18 text-white bg-transparent border-b shadow-sm focus:outline-none focus:ring-0 focus:border-transparent focus:border-indigo-600 cursor-pointer"
+                className="w-18 text-white bg-transparent border-b shadow-sm focus:outline-none focus:ring-0 focus:border-transparent focus:border-indigo-600 cursor-pointer lg:text-xxl text-lg"
                 onChange={handleChange}
                 defaultValue={siteId[0].site_id}
               >
@@ -195,7 +195,7 @@ export default function Header() {
                   <option
                     key={option.camera_id}
                     value={index}
-                    className="text-black"
+                    className="text-black lg:text-xxl text-lg"
                   >
                     {option.site_id}
                   </option>
@@ -215,11 +215,11 @@ export default function Header() {
             </div>
 
             <div className="flex gap-4 items-center">
-              <p className="w-fit   text-white">
+              <p className="w-fit text-white lg:text-xxl text-lg">
                 Welcome,
                 <span className="text-white">&nbsp;&nbsp;{userName}!</span>
               </p>
-              <i className="text-xl fa-solid fa-user text-white"></i>
+              <i className="lg:text-xxl text-lg fa-solid fa-user text-white "></i>
             </div>
           </div>
         )}
