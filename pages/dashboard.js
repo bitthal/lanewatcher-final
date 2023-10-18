@@ -149,7 +149,8 @@ function Dashboard() {
             </div>
             <div className="right-card w-25 m-2 pl-1 xl:h-[80vh] h-[70vh]">
               <h1 className="text-xl text-center p-3 lg:text-xxl text-xl">
-                <span>{value.site_id ? value.site_id : drpdwnVaue[0]?.site_id} : </span>Overall Site Stats
+                {/* <span>{value.site_id ? value.site_id : drpdwnVaue[0]?.site_id} : </span> */}
+                Overall Site Stats
               </h1>
               <table className="w-full border-collapse border border-[#cccc]">
                 {/* <thead>

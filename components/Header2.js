@@ -240,7 +240,7 @@ export default function Header2({
               <div className="flex-1">
                 <div className="flex items-center w-full">
                   <input
-                    className="flex-1 h-full pr-4 py-2 focus:outline-none block text-2xl"
+                    className="flex-1 h-full pr-4 py-2 focus:outline-none block lg:text-lg text-sm"
                     placeholder="Enter Montainer/Lane Name:"
                     type="text"
                     id="message"
@@ -262,7 +262,7 @@ export default function Header2({
           )}
 
           {showLaneCount && (
-            <div className="text-xl mt-3 text-center lg:text-left">
+            <div className="lg:text-lg text-sm mt-3 lg:text-left">
               <strong>Lanes</strong> : Showing&nbsp;
               {filteredLaneCount !== totalLaneCount ? (
                 <>
@@ -433,8 +433,8 @@ export default function Header2({
         )}
         {router == "Dashboard" && isClient && (
 
-          <div className="flex border-0 mb-16 mt-8 w-full cursor-pointer">
-            <p className="mt-2 lg:text-xxl text-xl">Date Range:</p>
+          <div className="flex border-0 mb-8 mt-2 lg:mb-12 lg:mt-8 w-full cursor-pointer">
+            <p className="lg:text-xl text-sm lg:mt-0 mt-2">Date Range:</p>
             <DateTimePicker
               primaryColor="fuchsia"
               ranges={ranges}
@@ -464,9 +464,7 @@ export default function Header2({
                 value={`${range.start.format(
                   "DD-MM-YYYY"
                 )} - ${range.end.format("DD-MM-YYYY")}`}
-                className={`w-72 h-full py-2 cursor-pointer lg:text-lg text-xl focus-visible:outline-none ${
-                  showBorder ? "border-0" : "border-0"
-                }`}
+                className={`w-full border-b border-b-2 border-indigo-800 h-full cursor-pointer lg:text-lg text-sm focus-visible:outline-none `}
                 onClick={() => setShowBorder(!showBorder)} // Toggle the border style
               />
             </DateTimePicker>

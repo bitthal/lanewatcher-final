@@ -106,7 +106,7 @@ export default function PlanogramView({
               />
             </svg>
 
-            <span className="text-primary2 text-xxl">Planogram View</span>
+            <span className="text-primary2 lg:text-xl text-base">Planogram View</span>
 
             {/* <button onClick={getAlertHandler} className="relative">
               <i className="fa-solid fa-bell text-2xl " />

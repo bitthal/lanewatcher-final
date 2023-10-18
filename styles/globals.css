@@ -623,8 +623,7 @@ div#DateRangePickerChildren {
   display: flex;
   cursor: pointer!important;
   pointer-events: fill!important;
-  padding-left: 30px;
-    box-shadow: 0px 4px 0px 0px #434190;
+
 }
 
 .ReactModal__Content {
@@ -659,5 +658,10 @@ div#DateRangePickerChildren {
     background-position: 200% 0;
   }
 }
-
+td.border.border-\[\#cccc\].p-2.text-center.text-\[\#434190\].lg\:text-xl.text-md {
+  text-align: left;
+}
+td.border.border-\[\#cccc\].p-2.text-center.text-\[\#434190\].text-xl.lg\:text-xxxl {
+  text-align: left;
+}
 
