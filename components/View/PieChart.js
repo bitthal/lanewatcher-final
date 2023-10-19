@@ -21,7 +21,7 @@ function PieChart({ data }) {
     is3D: true,
     sliceVisibilityThreshold: 0,
     pieSliceText: "value", // Display the values inside the slices
-    pieSliceTextStyle: { fontSize: 16 }, // Set the font size of the values
+    pieSliceTextStyle: { fontSize: 24 }, // Set the font size of the values
   };
 
   return (
@@ -32,6 +32,8 @@ function PieChart({ data }) {
         options={options}
         width={"400px"}
         height={"400px"}
+        legendToggle
+
       />
     </div>
   );
