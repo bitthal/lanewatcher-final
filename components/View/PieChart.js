@@ -1,76 +1,40 @@
-
 import React from "react";
-import { Pie } from "react-chartjs-2";
-import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart } from "react-google-charts";
 
-Chart.register(ArcElement, Tooltip, Legend);
+function PieChart({ data }) {
+  // Prepare the data for the chart
+  const chartData = [
+    ["Status", "Count"],
+    ["Pending", data.pending.length],
+    ["Misplaced", data.misplaced.length],
+    ["Finalized", data.finalized.length],
+  ];
 
-const PieChart = ({ data }) => {
-  const chartData = {
-    labels: ["Sorted", "Misplaced", "Finalized"],
-    datasets: [
-      {
-        data: [data?.pending?.length, data?.misplaced?.length, data?.finalized?.length],
-        backgroundColor: ["#2ab7eb", "#6bc784", "#b8433d"],
-        borderColor: ["#ccc", "#ccc", "#ccc"],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    plugins: {
-      legend: {
-        display: true,
-        position: 'left',
-        labels: {
-          title: {
-            fontSize: '24px', // Adjust the font size as needed
-          },
-          formatter: (legendItem, chartData) => {
-            const dataset = chartData.datasets[0];
-            const total = dataset.data.reduce((a, b) => a + b, 0);
-            const percentage = ((dataset.data[legendItem.index] / total) * 100).toFixed(2) + '%';
-            return `${legendItem.text}: ${percentage}`;
-          },
-        },
-      },
-      tooltip: {
-        callbacks: {
-          label: (context) =>
-            `${context.label}: ${context.formattedValue}`,
-        },
-      },
+  const options = {
+    titleTextStyle: { fontSize: 24 },
+    legend: {
+      position: "top",
+      maxLines: 3,
+      titleTextStyle: { fontSize: 20, fontWeight: 700, fontStyle: "italic" },
+      textStyle: { fontSize: 18 },
     },
-    layout: {
-      padding: 20,
-    },
-    responsive: true,
-    maintainAspectRatio: true,
-  };
-  console.log(chartOptions.plugins,'cp',chartOptions.plugins.customTooltip)
-  chartOptions.plugins.tooltip.enabled = true; // Disable default tooltips
-
-  chartOptions.plugins.customTooltip = {
-    // Custom function to display data labels
-    callback: (context) => {
-      const dataset = context.chart.data.datasets[0];
-      const value = dataset.data[context.dataIndex];
-      return `${value}`;
-    },
-  };
-
-  // Apply CSS for a 3D-like effect
-  const chartContainerStyle = {
-    width: '400px',
-    height: '400px',
+    is3D: true,
+    sliceVisibilityThreshold: 0,
+    pieSliceText: "value", // Display the values inside the slices
+    pieSliceTextStyle: { fontSize: 16 }, // Set the font size of the values
   };
 
   return (
-    <div style={chartContainerStyle}>
-      <Pie data={chartData} options={chartOptions} />
+    <div style={{ marginLeft: "25px" }}>
+      <Chart
+        chartType="PieChart"
+        data={chartData}
+        options={options}
+        width={"400px"}
+        height={"400px"}
+      />
     </div>
   );
-};
+}
 
 export default PieChart;
