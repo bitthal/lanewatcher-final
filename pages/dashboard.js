@@ -174,8 +174,8 @@ function Dashboard() {
           <div
           className={`flex flex-boxShadow flex-col md:flex-row with-lines`}
         >
-          <div className="flex flex-col w-full 2xl:w-60 text-center lg:text-xxl text-xl p-3">
-            <p>Lanewise Stats</p>
+          <div className="flex flex-col w-full 2xl:w-60 text-center p-5">
+            <p className="lg:text-xxl text-xl">Lanewise Stats</p>
             <div
               className={`flex flex-col left-card border rounded-md border-[#cccc] h-[70vh] p-10 m-2 pl-1 overflow-scroll mb-2 xl:h-[80vh]`}
             >

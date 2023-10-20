@@ -5,7 +5,7 @@ function PieChart({ data }) {
   // Prepare the data for the chart
   const chartData = [
     ["Status", "Count"],
-    ["Pending", data.pending.length],
+    ["Sorted", data.pending.length],
     ["Misplaced", data.misplaced.length],
     ["Finalized", data.finalized.length],
   ];
