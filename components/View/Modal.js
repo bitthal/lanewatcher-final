@@ -109,7 +109,7 @@ export default function ModalPopUp({
         {alertsTableData && (
           
           <div className="overflow-y-auto">
-            <h5 className="text-center text-xl mb-2">Active Alerts</h5>
+            <h5 className="text-center text-xl mb-2 mt-2">Active Alerts</h5>
             <div className="overflow-y-auto border">
               {alertsTableData && (
                 <table className="min-w-full divide-y divide-gray-200 border-collapse border border-black">
@@ -531,7 +531,7 @@ export default function ModalPopUp({
         )}
         {AllData && (
           <div className="">
-            <h5 className="text-center text-xl mb-2">Total Aggregate ID'S</h5>
+            <h5 className="text-center text-xl mb-2 mt-2">Total Aggregate ID'S</h5>
 
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
@@ -583,7 +583,7 @@ export default function ModalPopUp({
         )}
         {pendingID && (
           <div className="">
-            <h5 className="text-center text-xl mb-2">Sorted ID'S</h5>
+            <h5 className="text-center text-xl mb-2 mt-2">Sorted ID'S</h5>
 
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
@@ -615,7 +615,7 @@ export default function ModalPopUp({
         )}
         {misplacedID && (
           <div className="">
-            <h5 className="text-center text-xl mb-2">Misplaced ID'S</h5>
+            <h5 className="text-center text-xl mb-2 mt-2">Misplaced ID'S</h5>
 
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
@@ -646,7 +646,7 @@ export default function ModalPopUp({
         )}
         {finalizedID && (
           <div className="">
-            <h5 className="text-center text-xl mb-2">Finalized ID'S</h5>
+            <h5 className="text-center text-xl mb-2 mt-2">Finalized ID'S</h5>
 
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">

@@ -271,15 +271,15 @@ export default function Header2({
                       {filteredLaneCount ? filteredLaneCount : 0}
                     </span>
                     &nbsp;
-                    {filteredLaneCount === 1 ? "lane" : "lanes"}
+                    {/* {filteredLaneCount < 2 ? "lane" : "lanes"} */}
                   </span>
                   &nbsp;of&nbsp;
-                  <span className="inline-flex relative">
-                    <span className="bg-white text-indigo-700 flex items-center left-1 text-xl">
+                  <span className="inline-block relative">
+                    <span className="bg-white text-indigo-700 flex items-center justify-center left-1 text-xl">
                       {totalLaneCount ? totalLaneCount : 0}
                     </span>
-                    &nbsp; lanes
                   </span>
+                  &nbsp;total lanes
                 </>
               ) : (
                 <>

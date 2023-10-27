@@ -130,8 +130,8 @@ export default function PlanogramView({
           </div>
           <div className="flex gap-4 justify-between items-center w-auto text-xs w-full">
             <div className="p-2 border rounded-md border-[#434190] py-auto">
-              <div className=" text-[#434190] relative ">
-                <p className={`${data?.pending?.length > 0 ? ' cursor-pointer' : ' disabled' } text-center big-text` } onClick={showPendingIds}>
+              <div className={`${data?.pending?.length > 0 ? ' cursor-pointer' : ' disabled' } text-[#434190] relative`}  onClick={showPendingIds}>
+                <p className={`${data?.pending?.length > 0 ? ' cursor-pointer' : ' disabled' } text-center big-text` } >
                   {data && data?.pending?.length}
                 </p>
                 <p className="text-center text-lg">Sorted</p>
