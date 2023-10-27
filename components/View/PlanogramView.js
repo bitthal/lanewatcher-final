@@ -75,16 +75,16 @@ export default function PlanogramView({
   };
 
   const showPendingIds = () =>{
-    console.log(data,'data')
-    setPendingIds(true);
+    const ids = data.pending.length > 0 ? true : false;
+    setPendingIds(ids);
   }
   const showMisplacedIds = () =>{
-    console.log(data,'data')
-    setMisplacedIds(true);
+    const ids = data.misplaced.length > 0 ? true : false;
+    setMisplacedIds(ids);
   }
   const showFinalizedIds = () =>{
-    console.log(data,'data')
-    setFinalizedIds(true);
+    const ids = data.finalized.length > 0 ? true : false;
+    setFinalizedIds(ids);
   }
   return (
     <Fragment>
@@ -129,13 +129,13 @@ export default function PlanogramView({
             </span>
           </div>
           <div className="flex gap-4 justify-between items-center w-auto text-xs w-full">
-            <div className="p-2 border rounded-md border-[#434190] py-auto">
-              <div className={`${data?.pending?.length > 0 ? ' cursor-pointer' : ' disabled' } text-[#434190] relative`}  onClick={showPendingIds}>
-                <p className={`${data?.pending?.length > 0 ? ' cursor-pointer' : ' disabled' } text-center big-text` } >
+            <div className="p-2 border rounded-md border-[#434190] py-auto text-[#434190]" onClick={showPendingIds}>
+              <div className={`${data?.pending?.length > 0 ? ' cursor-pointer' : ' disabled' }  relative`}>
+                <p className={`text-center big-text` } >
                   {data && data?.pending?.length}
                 </p>
-                <p className="text-center text-lg">Sorted</p>
               </div>
+              <p className="text-center text-lg">Sorted</p>
             </div>
 
             {/* <div className="p-2 border rounded-md border-[#434190] py-auto ">
@@ -147,21 +147,21 @@ export default function PlanogramView({
               </div>
             </div> */}
 
-            <div className="p-2 border rounded-md border-[#434190] py-auto">
-              <div className="text-[#434190] relative">
-                <p className={`${data?.misplaced?.length > 0 ? ' cursor-pointer' : ' disabled' } text-center big-text` } onClick={showMisplacedIds}>
+            <div className="p-2 border rounded-md border-[#434190] py-auto text-[#434190]" onClick={showMisplacedIds}>
+              <div className={`${data?.misplaced?.length > 0 ? ' cursor-pointer' : ' disabled' }  relative`} >
+                <p className={`text-center big-text` }>
                   {data && data?.misplaced?.length ? data?.misplaced?.length : 0}
                 </p>
-                <p className="text-center text-lg">Misplaced</p>
               </div>
+              <p className="text-center text-lg">Misplaced</p>
             </div>
-            <div className="p-2 border rounded-md border-[#434190] py-auto">
-              <div className="text-[#434190] relative">
-                <p className={`${data?.finalized?.length > 0 ? ' cursor-pointer' : ' disabled' } text-center big-text` } onClick={showFinalizedIds}>
+            <div className={`p-2 border rounded-md border-[#434190] py-auto text-[#434190]`} onClick={showFinalizedIds}>
+              <div className={`${data?.finalized?.length > 0 ? ' cursor-pointer' : ' disabled' }  relative`} >
+                <p className={`text-center big-text`} >
                   {data && data?.finalized?.length}
                 </p>
-                <p className="text-center text-lg">Finalized</p>
               </div>
+              <p className="text-center text-lg">Finalized</p>
             </div>
           </div>
 
